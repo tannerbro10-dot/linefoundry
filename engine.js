@@ -4,6 +4,7 @@ const path = require('path');
 const ROOT = __dirname;
 const INPUT = path.join(ROOT, 'public-signals.json');
 const CACHE = path.join(ROOT, 'engine-cache.json');
+const STATIC_INPUT = require('./public-signals.json');
 
 const QUALITY = {
   HIGH: 0.9,
@@ -115,10 +116,7 @@ function buildConsensus(input) {
 }
 
 function refresh() {
-  const input = readJson(INPUT, {
-    sources: [],
-    signals: []
-  });
+ const input=STATIC_INPUT;
 
   const board = {
     mode: 'public-consensus',
