@@ -1,6 +1,10 @@
 let board = null;
 let experts = null;
 let results = null;
+let liveResults = {};
+
+const WORKER_URL =
+  'https://old-mouse-660a.tannerbro10.workers.dev/';
 
 let locked = JSON.parse(
   localStorage.getItem('lf_consensus_locked') || '[]'
@@ -15,24 +19,45 @@ function save() {
   );
 }
 
+
+// ============================================================
+// LOAD LINEFOUNDRY DATA
+// ============================================================
+
 async function load() {
   try {
-    const [signalsData, expertsData, resultsData] = await Promise.all([
-      fetch('/public-signals.json').then(r => {
-        if (!r.ok) throw new Error('Could not load public-signals.json');
-        return r.json();
-      }),
+    const [signalsData, expertsData, resultsData] =
+      await Promise.all([
+        fetch('/public-signals.json').then(r => {
+          if (!r.ok) {
+            throw new Error(
+              'Could not load public-signals.json'
+            );
+          }
 
-      fetch('/analyst-profiles.json').then(r => {
-        if (!r.ok) throw new Error('Could not load analyst-profiles.json');
-        return r.json();
-      }),
+          return r.json();
+        }),
 
-      fetch('/results-ledger.json').then(r => {
-        if (!r.ok) throw new Error('Could not load results-ledger.json');
-        return r.json();
-      })
-    ]);
+        fetch('/analyst-profiles.json').then(r => {
+          if (!r.ok) {
+            throw new Error(
+              'Could not load analyst-profiles.json'
+            );
+          }
+
+          return r.json();
+        }),
+
+        fetch('/results-ledger.json').then(r => {
+          if (!r.ok) {
+            throw new Error(
+              'Could not load results-ledger.json'
+            );
+          }
+
+          return r.json();
+        })
+      ]);
 
     const d = signalsData;
 
@@ -44,9 +69,10 @@ async function load() {
       sources: d.sources || [],
 
       props: (d.signals || []).map(s => {
-        const source = (d.sources || []).find(
-          x => x.id === s.sourceId
-        );
+        const source =
+          (d.sources || []).find(
+            x => x.id === s.sourceId
+          );
 
         return {
           id: s.id,
@@ -77,8 +103,14 @@ async function load() {
 
     render();
 
+    // Immediately get live ESPN data.
+    await loadLiveResults();
+
   } catch (err) {
-    console.error('LineFoundry data load failed:', err);
+    console.error(
+      'LineFoundry data load failed:',
+      err
+    );
 
     if ($('#propCards')) {
       $('#propCards').innerHTML = `
@@ -91,32 +123,373 @@ async function load() {
   }
 }
 
-function getResult(id) {
-  if (!results) return 'PENDING';
 
-  if (results.results && results.results[id]) {
+// ============================================================
+// LOAD LIVE ESPN RESULTS FROM CLOUDFLARE WORKER
+// ============================================================
+
+async function loadLiveResults() {
+  try {
+    const response = await fetch(
+      `${WORKER_URL}?_=${Date.now()}`,
+      {
+        cache: 'no-store'
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Worker returned ${response.status}`
+      );
+    }
+
+    const data = await response.json();
+
+    if (!data.success) {
+      throw new Error(
+        data.error || 'Worker returned an error'
+      );
+    }
+
+    liveResults = {};
+
+    (data.results || []).forEach(result => {
+      if (result.id) {
+        liveResults[result.id] = result;
+      }
+    });
+
+    board.liveUpdatedAt =
+      data.updatedAt ||
+      new Date().toISOString();
+
+    render();
+
+    console.log(
+      'LineFoundry live results updated:',
+      data
+    );
+
+  } catch (err) {
+    console.error(
+      'LineFoundry live data failed:',
+      err
+    );
+  }
+}
+
+
+// ============================================================
+// AUTOMATIC LIVE REFRESH
+// ============================================================
+//
+// ESPN / Cloudflare Worker gets checked every 60 seconds.
+// ============================================================
+
+setInterval(
+  loadLiveResults,
+  60000
+);
+
+
+// ============================================================
+// GET RESULT
+// ============================================================
+
+function getResult(id) {
+  const live = liveResults[id];
+
+  if (live) {
+    return formatLiveResult(live);
+  }
+
+  if (!results) {
+    return 'PENDING';
+  }
+
+  if (
+    results.results &&
+    results.results[id]
+  ) {
     return results.results[id];
   }
 
-  const pick = (results.picks || []).find(
-    p => p.id === id
-  );
+  const pick =
+    (results.picks || []).find(
+      p => p.id === id
+    );
 
   return pick?.result || 'PENDING';
 }
 
-function label(p) {
-  return `${p.side} ${p.line == null ? 'TD' : p.line} ${p.market}`;
+
+// ============================================================
+// FORMAT LIVE RESULT
+// ============================================================
+
+function formatLiveResult(result) {
+
+  // Player's game hasn't been resolved.
+  if (
+    result.status === 'GAME_NOT_FOUND'
+  ) {
+    return 'Not Available';
+  }
+
+  if (
+    result.status === 'MARKET_NOT_FOUND'
+  ) {
+    return 'Not Available';
+  }
+
+  if (
+    result.status === 'ERROR'
+  ) {
+    return 'Not Available';
+  }
+
+  // Anytime TD
+  if (
+    result.market === 'Anytime TD'
+  ) {
+    if (result.status === 'HIT') {
+      return 'HIT';
+    }
+
+    if (result.status === 'MISS') {
+      return 'MISS';
+    }
+
+    if (result.status === 'LIVE') {
+      return 'LIVE';
+    }
+
+    return 'PENDING';
+  }
+
+  // Normal statistical markets
+  if (
+    result.status === 'HIT'
+  ) {
+    return `HIT — ${formatNumber(
+      result.currentValue
+    )}`;
+  }
+
+  if (
+    result.status === 'MISS'
+  ) {
+    return `MISS — ${formatNumber(
+      result.currentValue
+    )}`;
+  }
+
+  if (
+    result.status === 'LIVE'
+  ) {
+    return `LIVE — ${formatNumber(
+      result.currentValue
+    )}`;
+  }
+
+  return result.status || 'PENDING';
 }
 
+
+// ============================================================
+// RESULT DETAILS
+// ============================================================
+
+function getResultDetails(id) {
+  const live = liveResults[id];
+
+  if (!live) {
+    return null;
+  }
+
+  if (
+    live.status === 'GAME_NOT_FOUND' ||
+    live.status === 'MARKET_NOT_FOUND' ||
+    live.status === 'ERROR'
+  ) {
+    return null;
+  }
+
+  return live;
+}
+
+
+// ============================================================
+// FORMAT NUMBER
+// ============================================================
+
+function formatNumber(value) {
+  if (
+    value === null ||
+    value === undefined
+  ) {
+    return '—';
+  }
+
+  return Number.isInteger(Number(value))
+    ? String(value)
+    : Number(value).toFixed(1);
+}
+
+
+// ============================================================
+// LABEL
+// ============================================================
+
+function label(p) {
+  return `${p.side} ${
+    p.line == null
+      ? 'TD'
+      : p.line
+  } ${p.market}`;
+}
+
+
+// ============================================================
+// LIVE STATUS DISPLAY
+// ============================================================
+
+function liveStatus(p) {
+  const live =
+    getResultDetails(p.id);
+
+  if (!live) {
+    return '';
+  }
+
+  // Anytime TD
+  if (
+    p.market === 'Anytime TD'
+  ) {
+    if (
+      live.status === 'HIT'
+    ) {
+      return `
+        <div class="live-stat">
+          <strong>BET HIT</strong>
+        </div>
+      `;
+    }
+
+    if (
+      live.status === 'MISS'
+    ) {
+      return `
+        <div class="live-stat">
+          <strong>BET MISS</strong>
+        </div>
+      `;
+    }
+
+    if (
+      live.status === 'LIVE'
+    ) {
+      return `
+        <div class="live-stat">
+          <strong>LIVE</strong>
+        </div>
+      `;
+    }
+
+    return '';
+  }
+
+  if (
+    live.status === 'HIT'
+  ) {
+    return `
+      <div class="live-stat">
+        <strong>
+          ${formatNumber(live.currentValue)}
+          — BET HIT
+        </strong>
+      </div>
+    `;
+  }
+
+  if (
+    live.status === 'MISS'
+  ) {
+    return `
+      <div class="live-stat">
+        <strong>
+          ${formatNumber(live.currentValue)}
+          — BET MISS
+        </strong>
+      </div>
+    `;
+  }
+
+  if (
+    live.status === 'LIVE'
+  ) {
+    const needed =
+      live.remaining;
+
+    if (
+      needed !== null &&
+      needed !== undefined
+    ) {
+      return `
+        <div class="live-stat">
+          <strong>
+            LIVE — ${formatNumber(
+              live.currentValue
+            )} yards
+          </strong>
+
+          <span>
+            ${formatNumber(
+              needed
+            )} needed
+          </span>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="live-stat">
+        <strong>
+          LIVE — ${formatNumber(
+            live.currentValue
+          )}
+        </strong>
+      </div>
+    `;
+  }
+
+  return '';
+}
+
+
+// ============================================================
+// PROP CARD
+// ============================================================
+
 function card(p) {
-  const lockedPick = locked.includes(p.id);
-  const result = getResult(p.id);
+  const lockedPick =
+    locked.includes(p.id);
+
+  const result =
+    getResult(p.id);
+
+  const live =
+    getResultDetails(p.id);
 
   return `
-    <article class="prop ${lockedPick ? 'locked' : ''}">
+    <article class="prop ${
+      lockedPick
+        ? 'locked'
+        : ''
+    }">
 
       <div class="prop-top">
+
         <div class="game">
           NFL • WEEK ${board.week}
         </div>
@@ -124,11 +497,16 @@ function card(p) {
         <div class="grade">
           ${p.consensusScore}/100
         </div>
+
       </div>
 
       <h3>
         ${p.player} — ${label(p)}
       </h3>
+
+      ${
+        liveStatus(p)
+      }
 
       <div class="metrics">
 
@@ -155,20 +533,35 @@ function card(p) {
       </div>
 
       <div class="analyst-list">
+
         ${p.analysts.map(a => `
           <div>
-            <strong>${a.name}</strong>
-            <span>${a.outlet || ''}</span>
+
+            <strong>
+              ${a.name}
+            </strong>
+
+            <span>
+              ${a.outlet || ''}
+            </span>
 
             ${
               a.url
-                ? `<a href="${a.url}" target="_blank" rel="noopener">
-                     Source ↗
-                   </a>`
+                ? `
+                  <a
+                    href="${a.url}"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Source ↗
+                  </a>
+                `
                 : ''
             }
+
           </div>
         `).join('')}
+
       </div>
 
       <p class="why">
@@ -176,32 +569,51 @@ function card(p) {
       </p>
 
       <div class="card-actions">
+
         <span class="lock-status">
-          ${lockedPick ? '🔒 Locked' : '🟢 Open'}
+          ${
+            lockedPick
+              ? '🔒 Locked'
+              : '🟢 Open'
+          }
         </span>
+
       </div>
 
     </article>
   `;
 }
 
+
+// ============================================================
+// RENDER
+// ============================================================
+
 function render() {
-  const props = board?.props || [];
+  const props =
+    board?.props || [];
 
   const filter =
-    $('#confidenceFilter')?.value || 'ALL';
+    $('#confidenceFilter')?.value ||
+    'ALL';
 
-  const filteredProps = props.filter(
-    p => filter === 'ALL' || p.confidence === filter
-  );
+  const filteredProps =
+    props.filter(
+      p =>
+        filter === 'ALL' ||
+        p.confidence === filter
+    );
 
   if ($('#propCards')) {
     $('#propCards').innerHTML =
-      filteredProps.map(card).join('');
+      filteredProps
+        .map(card)
+        .join('');
   }
 
   if ($('#pickCount')) {
-    $('#pickCount').textContent = locked.length;
+    $('#pickCount').textContent =
+      locked.length;
   }
 
   if ($('#sourceCount')) {
@@ -216,54 +628,82 @@ function render() {
 
   if ($('#lastRefresh')) {
     $('#lastRefresh').textContent =
-      board?.refreshedAt
-        ? new Date(board.refreshedAt).toLocaleString()
-        : 'not run';
+      board?.liveUpdatedAt
+        ? new Date(
+            board.liveUpdatedAt
+          ).toLocaleString()
+        : board?.refreshedAt
+          ? new Date(
+              board.refreshedAt
+            ).toLocaleString()
+          : 'not run';
   }
 
   if ($('#sourceRows')) {
     $('#sourceRows').innerHTML =
-      (board?.sources || []).map(s => `
-        <tr>
-          <td>
-            <strong>${s.analyst}</strong>
-          </td>
+      (board?.sources || [])
+        .map(s => `
+          <tr>
 
-          <td>${s.outlet}</td>
+            <td>
+              <strong>
+                ${s.analyst}
+              </strong>
+            </td>
 
-          <td>
-            ${Math.round((s.quality || 0) * 100)}/100
-          </td>
+            <td>
+              ${s.outlet}
+            </td>
 
-          <td>${s.verification}</td>
+            <td>
+              ${Math.round(
+                (s.quality || 0) * 100
+              )}/100
+            </td>
 
-          <td>
-            <a
-              href="${s.url}"
-              target="_blank"
-              rel="noopener"
-            >
-              Open source ↗
-            </a>
-          </td>
-        </tr>
-      `).join('');
+            <td>
+              ${s.verification}
+            </td>
+
+            <td>
+
+              <a
+                href="${s.url}"
+                target="_blank"
+                rel="noopener"
+              >
+                Open source ↗
+              </a>
+
+            </td>
+
+          </tr>
+        `)
+        .join('');
   }
 
-  const es = experts?.experts || [];
+  const es =
+    experts?.experts || [];
 
   if ($('#expertRows')) {
     $('#expertRows').innerHTML =
       es.map(e => {
-        const t = e.tracked || {};
+
+        const t =
+          e.tracked || {};
 
         const wl =
-          `${t.wins || 0}-${t.losses || 0}`;
+          `${t.wins || 0}-${
+            t.losses || 0
+          }`;
 
         const roi =
           e.roi == null
             ? '—'
-            : `${(e.roi * 100).toFixed(1)}%`;
+            : `${
+                (e.roi * 100)
+                  .toFixed(1)
+              }%`;
 
         const status =
           t.picks >= 50
@@ -274,90 +714,140 @@ function render() {
 
         return `
           <tr>
+
             <td>
-              <strong>${e.name}</strong>
+              <strong>
+                ${e.name}
+              </strong>
             </td>
 
-            <td>${e.outlet}</td>
-
-            <td>${t.picks || 0}</td>
-
-            <td>${wl}</td>
-
-            <td>${(t.units || 0).toFixed(2)}u</td>
-
-            <td>${roi}</td>
+            <td>
+              ${e.outlet}
+            </td>
 
             <td>
-              <span class="status ${status.toLowerCase()}">
+              ${t.picks || 0}
+            </td>
+
+            <td>
+              ${wl}
+            </td>
+
+            <td>
+              ${(t.units || 0)
+                .toFixed(2)}u
+            </td>
+
+            <td>
+              ${roi}
+            </td>
+
+            <td>
+
+              <span class="status ${
+                status.toLowerCase()
+              }">
+
                 ${status}
+
               </span>
+
             </td>
+
           </tr>
         `;
+
       }).join('');
   }
 
-  const r = experts?.record || {};
+  const r =
+    experts?.record || {};
 
   if ($('#wins')) {
-    $('#wins').textContent = r.wins || 0;
+    $('#wins').textContent =
+      r.wins || 0;
   }
 
   if ($('#losses')) {
-    $('#losses').textContent = r.losses || 0;
+    $('#losses').textContent =
+      r.losses || 0;
   }
 
   if ($('#units')) {
     $('#units').textContent =
-      `${Number(r.units || 0).toFixed(2)}u`;
+      `${Number(
+        r.units || 0
+      ).toFixed(2)}u`;
   }
 
   if ($('#roi')) {
     $('#roi').textContent =
       r.roi == null
         ? '—'
-        : `${(r.roi * 100).toFixed(1)}%`;
+        : `${(
+            r.roi * 100
+          ).toFixed(1)}%`;
   }
 }
 
-$('#confidenceFilter')?.addEventListener(
-  'change',
-  render
-);
 
-$('#refreshBoard')?.addEventListener(
-  'click',
-  load
-);
+// ============================================================
+// EVENTS
+// ============================================================
 
-$('#howItWorks')?.addEventListener(
-  'click',
-  () =>
-    $('#howModal').setAttribute(
-      'aria-hidden',
-      'false'
-    )
-);
+$('#confidenceFilter')
+  ?.addEventListener(
+    'change',
+    render
+  );
 
-$('#closeHow')?.addEventListener(
-  'click',
-  () =>
-    $('#howModal').setAttribute(
-      'aria-hidden',
-      'true'
-    )
-);
+$('#refreshBoard')
+  ?.addEventListener(
+    'click',
+    async () => {
+      await load();
+    }
+  );
 
-document
-  .querySelector('.modal-backdrop')
+$('#howItWorks')
   ?.addEventListener(
     'click',
     () =>
-      $('#howModal').setAttribute(
-        'aria-hidden',
-        'true'
-      )
+      $('#howModal')
+        .setAttribute(
+          'aria-hidden',
+          'false'
+        )
   );
+
+$('#closeHow')
+  ?.addEventListener(
+    'click',
+    () =>
+      $('#howModal')
+        .setAttribute(
+          'aria-hidden',
+          'true'
+        )
+  );
+
+document
+  .querySelector(
+    '.modal-backdrop'
+  )
+  ?.addEventListener(
+    'click',
+    () =>
+      $('#howModal')
+        .setAttribute(
+          'aria-hidden',
+          'true'
+        )
+  );
+
+
+// ============================================================
+// INITIAL LOAD
+// ============================================================
 
 load();
