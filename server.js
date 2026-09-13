@@ -1,6 +1,9 @@
 const express = require('express');
 const path = require('path');
 
+const { refresh } = require('./engine');
+const { buildExpertBoard } = require('./expert-engine');
+
 const app = express();
 
 app.use(express.json());
@@ -25,7 +28,6 @@ app.get('/api/health', (req, res) => {
 // Public consensus engine
 app.get('/api/engine', (req, res) => {
   try {
-    const { refresh } = require('./engine');
     res.json(refresh());
   } catch (e) {
     res.status(500).json({
@@ -38,7 +40,6 @@ app.get('/api/engine', (req, res) => {
 // Expert leaderboard
 app.get('/api/experts', (req, res) => {
   try {
-    const { buildExpertBoard } = require('./expert-engine');
     res.json(buildExpertBoard());
   } catch (e) {
     res.status(500).json({
@@ -64,6 +65,7 @@ module.exports = app;
 
 if (require.main === module) {
   const port = process.env.PORT || 3000;
+
   app.listen(port, () => {
     console.log(`LineFoundry running on ${port}`);
   });
