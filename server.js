@@ -1,0 +1,12 @@
+const express=require('express');
+const app=express();
+const { refresh }=require('./engine');
+const { buildExpertBoard }=require('./expert-engine');
+app.use(express.json());
+app.use(express.static(__dirname));
+app.get('/api/health',(req,res)=>res.json({ok:true,app:'LineFoundry',version:'6.1.0',engineMode:'public-consensus'}));
+app.get('/api/engine',(req,res)=>{try{res.json(refresh())}catch(e){res.status(500).json({ok:false,error:e.message})}});
+app.get('/api/experts',(req,res)=>{try{res.json(buildExpertBoard())}catch(e){res.status(500).json({ok:false,error:e.message})}});
+app.get('/api/refresh-status',(req,res)=>{try{res.json(require('./refresh-state.json'))}catch{res.json({mode:'public-consensus'})}});
+app.post('/api/engine/refresh',(req,res)=>{try{res.json(refresh())}catch(e){res.status(500).json({ok:false,error:e.message})}});
+app.listen(process.env.PORT||3000,()=>console.log(`LineFoundry running on ${process.env.PORT||3000}`));

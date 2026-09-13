@@ -1,0 +1,11 @@
+{
+  "policy": "No historical record is claimed until LineFoundry independently tracks and settles the analyst's published picks. Publicly reported records are shown separately from LineFoundry-tracked records.",
+  "analysts": [
+    {"id":"erich-richter-nypost","name":"Erich Richter","outlet":"NY Post","specialties":["NFL props"],"publicRecord":null,"tracked":{"picks":0,"wins":0,"losses":0,"pushes":0,"units":0},"status":"TRACKING"},
+    {"id":"adam-schein-nypost","name":"Adam Schein","outlet":"NY Post","specialties":["NFL","same-game parlays","player props"],"publicRecord":null,"tracked":{"picks":0,"wins":0,"losses":0,"pushes":0,"units":0},"status":"TRACKING"},
+    {"id":"sean-treppedi-nypost","name":"Sean Treppedi","outlet":"NY Post","specialties":["NFL props"],"publicRecord":null,"tracked":{"picks":0,"wins":0,"losses":0,"pushes":0,"units":0},"status":"TRACKING"},
+    {"id":"adam-burke-vsin","name":"Adam Burke","outlet":"VSiN","specialties":["NFL props"],"publicRecord":null,"tracked":{"picks":0,"wins":0,"losses":0,"pushes":0,"units":0},"status":"TRACKING"},
+    {"id":"zachary-cohen-vsin","name":"Zachary Cohen","outlet":"VSiN","specialties":["NFL props"],"publicRecord":null,"tracked":{"picks":0,"wins":0,"losses":0,"pushes":0,"units":0},"status":"TRACKING"},
+    {"id":"kody-malstrom-talksport","name":"Kody Malstrom","outlet":"TalkSport","specialties":["NFL props"],"publicRecord":null,"tracked":{"picks":0,"wins":0,"losses":0,"pushes":0,"units":0},"status":"TRACKING"}
+  ]
+}

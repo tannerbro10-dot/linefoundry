@@ -1,0 +1,14 @@
+{
+  "name": "linefoundry",
+  "version": "4.0.0",
+  "private": true,
+  "description": "Transparent NFL prop consensus tracker",
+  "scripts": {
+    "start": "node server.js",
+    "refresh": "node refresh.js",
+    "engine": "node engine.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

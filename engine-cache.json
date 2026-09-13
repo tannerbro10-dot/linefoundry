@@ -1,0 +1,259 @@
+{
+  "mode": "public-consensus",
+  "provider": "curated public sources",
+  "week": 1,
+  "season": 2026,
+  "refreshedAt": "2026-09-13T16:13:57.501Z",
+  "sources": [
+    {
+      "id": "erich-richter-nypost",
+      "analyst": "Erich Richter",
+      "outlet": "NY Post",
+      "quality": 0.9,
+      "verification": "reported",
+      "url": "https://nypost.com/2026/09/13/betting/week-1-nfl-player-props-picks-best-bets-omarion-hampton-breece-hall/"
+    },
+    {
+      "id": "adam-schein-nypost",
+      "analyst": "Adam Schein",
+      "outlet": "NY Post",
+      "quality": 0.82,
+      "verification": "reported",
+      "url": "https://nypost.com/2026/09/13/betting/adam-schein-reveals-his-favorite-week-1-nfl-slate-parlay-target-these-jets-and-chargers-bets/"
+    },
+    {
+      "id": "sean-treppedi-nypost",
+      "analyst": "Sean Treppedi",
+      "outlet": "NY Post",
+      "quality": 0.82,
+      "verification": "reported",
+      "url": "https://nypost.com/2026/09/13/betting/saints-vs-lions-prediction-odds-best-bets-expect-a-week-1-offensive-explosion/"
+    },
+    {
+      "id": "adam-burke-vsin",
+      "analyst": "Adam Burke",
+      "outlet": "VSiN",
+      "quality": 0.88,
+      "verification": "reported",
+      "url": "https://vsin.com/nfl/nfl-player-prop-bets-for-week-1-from-adam-burke/"
+    },
+    {
+      "id": "zachary-cohen-vsin",
+      "analyst": "Zachary Cohen",
+      "outlet": "VSiN",
+      "quality": 0.86,
+      "verification": "reported",
+      "url": "https://vsin.com/nfl/expert-nfl-picks-week-1-best-bets-predictions-and-player-props-from-zachary-cohen/"
+    },
+    {
+      "id": "kody-malstrom-talksport",
+      "analyst": "Kody Malstrom",
+      "outlet": "TalkSport",
+      "quality": 0.74,
+      "verification": "reported",
+      "url": "https://talksport.com/us/4574199/nfl-prop-bets-september-13-2026/"
+    }
+  ],
+  "props": [
+    {
+      "id": "CONS-T21hcmlvbiBIYW1w",
+      "player": "Omarion Hampton",
+      "market": "Anytime TD",
+      "side": "YES",
+      "line": null,
+      "analystCount": 1,
+      "consensusScore": 67,
+      "confidence": "EARLY",
+      "analysts": [
+        {
+          "name": "Erich Richter",
+          "sourceId": "erich-richter-nypost",
+          "note": "TD scorer pick.",
+          "url": "https://nypost.com/2026/09/13/betting/week-1-nfl-player-props-picks-best-bets-omarion-hampton-breece-hall/",
+          "outlet": "NY Post"
+        }
+      ],
+      "rationale": "One tracked source currently supports this direction; treat as an early signal until more sources agree."
+    },
+    {
+      "id": "CONS-QnJlZWNlIEhhbGx8",
+      "player": "Breece Hall",
+      "market": "Anytime TD",
+      "side": "YES",
+      "line": null,
+      "analystCount": 1,
+      "consensusScore": 67,
+      "confidence": "EARLY",
+      "analysts": [
+        {
+          "name": "Erich Richter",
+          "sourceId": "erich-richter-nypost",
+          "note": "TD scorer pick.",
+          "url": "https://nypost.com/2026/09/13/betting/week-1-nfl-player-props-picks-best-bets-omarion-hampton-breece-hall/",
+          "outlet": "NY Post"
+        }
+      ],
+      "rationale": "One tracked source currently supports this direction; treat as an early signal until more sources agree."
+    },
+    {
+      "id": "CONS-SnV3YW4gSm9obnNv",
+      "player": "Juwan Johnson",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 41.5,
+      "analystCount": 1,
+      "consensusScore": 66,
+      "confidence": "EARLY",
+      "analysts": [
+        {
+          "name": "Adam Burke",
+          "sourceId": "adam-burke-vsin",
+          "note": "Over 41.5 receiving yards.",
+          "url": "https://vsin.com/nfl/nfl-player-prop-bets-for-week-1-from-adam-burke/",
+          "outlet": "VSiN"
+        }
+      ],
+      "rationale": "One tracked source currently supports this direction; treat as an early signal until more sources agree."
+    },
+    {
+      "id": "CONS-QnVja3kgSXJ2aW5n",
+      "player": "Bucky Irving",
+      "market": "Rushing Attempts",
+      "side": "OVER",
+      "line": 14.5,
+      "analystCount": 1,
+      "consensusScore": 66,
+      "confidence": "EARLY",
+      "analysts": [
+        {
+          "name": "Adam Burke",
+          "sourceId": "adam-burke-vsin",
+          "note": "Over 14.5 rushing attempts.",
+          "url": "https://vsin.com/nfl/nfl-player-prop-bets-for-week-1-from-adam-burke/",
+          "outlet": "VSiN"
+        }
+      ],
+      "rationale": "One tracked source currently supports this direction; treat as an early signal until more sources agree."
+    },
+    {
+      "id": "CONS-SmFjb2J5IEJyaXNz",
+      "player": "Jacoby Brissett",
+      "market": "Completions",
+      "side": "UNDER",
+      "line": 22.5,
+      "analystCount": 1,
+      "consensusScore": 66,
+      "confidence": "EARLY",
+      "analysts": [
+        {
+          "name": "Adam Burke",
+          "sourceId": "adam-burke-vsin",
+          "note": "Under 22.5 completions.",
+          "url": "https://vsin.com/nfl/nfl-player-prop-bets-for-week-1-from-adam-burke/",
+          "outlet": "VSiN"
+        }
+      ],
+      "rationale": "One tracked source currently supports this direction; treat as an early signal until more sources agree."
+    },
+    {
+      "id": "CONS-R2VubyBTbWl0aHxJ",
+      "player": "Geno Smith",
+      "market": "Interceptions",
+      "side": "OVER",
+      "line": 0.5,
+      "analystCount": 1,
+      "consensusScore": 65,
+      "confidence": "EARLY",
+      "analysts": [
+        {
+          "name": "Zachary Cohen",
+          "sourceId": "zachary-cohen-vsin",
+          "note": "Over 0.5 interceptions.",
+          "url": "https://vsin.com/nfl/expert-nfl-picks-week-1-best-bets-predictions-and-player-props-from-zachary-cohen/",
+          "outlet": "VSiN"
+        }
+      ],
+      "rationale": "One tracked source currently supports this direction; treat as an early signal until more sources agree."
+    },
+    {
+      "id": "CONS-R2FycmV0dCBXaWxz",
+      "player": "Garrett Wilson",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 50,
+      "analystCount": 1,
+      "consensusScore": 62,
+      "confidence": "EARLY",
+      "analysts": [
+        {
+          "name": "Adam Schein",
+          "sourceId": "adam-schein-nypost",
+          "note": "50+ receiving yards used as SGP leg.",
+          "url": "https://nypost.com/2026/09/13/betting/adam-schein-reveals-his-favorite-week-1-nfl-slate-parlay-target-these-jets-and-chargers-bets/",
+          "outlet": "NY Post"
+        }
+      ],
+      "rationale": "One tracked source currently supports this direction; treat as an early signal until more sources agree."
+    },
+    {
+      "id": "CONS-T21hcmlvbiBIYW1w",
+      "player": "Omarion Hampton",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 70,
+      "analystCount": 1,
+      "consensusScore": 62,
+      "confidence": "EARLY",
+      "analysts": [
+        {
+          "name": "Adam Schein",
+          "sourceId": "adam-schein-nypost",
+          "note": "70+ rushing yards used as SGP leg.",
+          "url": "https://nypost.com/2026/09/13/betting/adam-schein-reveals-his-favorite-week-1-nfl-slate-parlay-target-these-jets-and-chargers-bets/",
+          "outlet": "NY Post"
+        }
+      ],
+      "rationale": "One tracked source currently supports this direction; treat as an early signal until more sources agree."
+    },
+    {
+      "id": "CONS-SmFtZXNvbiBXaWxs",
+      "player": "Jameson Williams",
+      "market": "Receptions",
+      "side": "OVER",
+      "line": 3.5,
+      "analystCount": 1,
+      "consensusScore": 62,
+      "confidence": "EARLY",
+      "analysts": [
+        {
+          "name": "Sean Treppedi",
+          "sourceId": "sean-treppedi-nypost",
+          "note": "Over 3.5 receptions.",
+          "url": "https://nypost.com/2026/09/13/betting/saints-vs-lions-prediction-odds-best-bets-expect-a-week-1-offensive-explosion/",
+          "outlet": "NY Post"
+        }
+      ],
+      "rationale": "One tracked source currently supports this direction; treat as an early signal until more sources agree."
+    },
+    {
+      "id": "CONS-SmF2b250ZSBXaWxs",
+      "player": "Javonte Williams",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 73.5,
+      "analystCount": 1,
+      "consensusScore": 57,
+      "confidence": "EARLY",
+      "analysts": [
+        {
+          "name": "Kody Malstrom",
+          "sourceId": "kody-malstrom-talksport",
+          "note": "Over 73.5 rushing yards.",
+          "url": "https://talksport.com/us/4574199/nfl-prop-bets-september-13-2026/",
+          "outlet": "TalkSport"
+        }
+      ],
+      "rationale": "One tracked source currently supports this direction; treat as an early signal until more sources agree."
+    }
+  ]
+}

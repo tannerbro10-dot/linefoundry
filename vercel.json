@@ -1,0 +1,6 @@
+{
+  "version": 2,
+  "builds": [{"src":"index.html","use":"@vercel/static"},{"src":"api/*.js","use":"@vercel/node"}],
+  "routes": [{"src":"/api/(.*)","dest":"/api/$1.js"},{"src":"/(.*)","dest":"/$1"}],
+  "crons": [{"path":"/api/engine","schedule":"*/30 * * * *"}]
+}

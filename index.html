@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LineFoundry — NFL Prop Market Intelligence</title>
+<meta name="description" content="LineFoundry compares NFL prop consensus, model signals and sportsbook prices with transparent results tracking.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#home" aria-label="LineFoundry home"><span class="brand-mark">LF</span><span>LINEFOUNDRY</span></a>
+    <nav aria-label="Primary navigation">
+      <a href="#home">Home</a><a href="#nfl">NFL</a><a href="#props">Props</a><a href="#experts">Experts</a><a href="#consensus">Consensus</a><a href="#results">Results</a><a href="#method">Methodology</a><a href="#about">About</a>
+    </nav>
+    <div class="live-nav"><span class="dot"></span> PUBLIC CONSENSUS</div>
+  </div>
+</header>
+<main id="home" class="wrap">
+<section class="hero">
+  <div>
+    <p class="eyebrow">NFL MARKET INTELLIGENCE • 2026</p>
+    <h1>Find the edge.<br><em>Then find the best price.</em></h1>
+    <p class="sub">LineFoundry tracks what reputable NFL betting analysts like, weighs the sources, and surfaces where independent opinions agree — without requiring a sportsbook odds API.</p>
+    <div class="hero-actions"><a class="primary-btn" href="#props">View Top Props <span>→</span></a><button class="secondary-btn" id="howItWorks">How It Works</button></div>
+    <div class="badges"><span class="pill">🔒 Timestamped record</span><span class="pill">📊 Public results</span><span class="pill">👥 Expert consensus</span><span class="pill">🆓 No odds API required</span></div>
+  </div>
+  <div class="hero-card"><div class="live"><span class="dot"></span> DATA STATUS</div><div class="version">PUBLIC</div><p>Curated public analyst signals are being tracked. No sportsbook odds are represented as live.</p><div class="refresh">Source check: <span id="lastRefresh">checking…</span></div><a class="text-link" href="#method">See methodology →</a></div>
+</section>
+
+<section id="nfl" class="section-block">
+  <div class="section-head"><div><p class="eyebrow">NFL • WEEK 1</p><h2>NFL Expert Board</h2><p class="muted">The first version focuses on one question: what do credible analysts like?</p></div><button class="secondary-btn" id="refreshBoard">Refresh board</button></div>
+  <div class="feature-strip"><div><b id="signalCount">0</b><span>Tracked signals</span></div><div><b id="sourceCount">0</b><span>Public sources</span></div><div><b>Consensus</b><span>Source quality + agreement</span></div><div><b>Record</b><span>Locked picks stay public</span></div></div>
+</section>
+
+<section id="props" class="section-block">
+  <div class="section-head"><div><p class="eyebrow">PLAYER PROPS</p><h2>Top Expert Signals</h2><p class="muted">These are analyst opinions, not LineFoundry guarantees. More independent agreement raises confidence.</p></div><div class="toolbar"><label>Confidence <select id="confidenceFilter"><option value="ALL">All</option><option value="HIGH">High</option><option value="MEDIUM">Medium</option><option value="EARLY">Early</option></select></label></div></div>
+  <div class="cards" id="propCards"></div>
+</section>
+
+<section id="consensus" class="section-block">
+  <div class="section-head"><div><p class="eyebrow">HOW WE SCORE SOURCES</p><h2>Consensus, Not Hype</h2><p class="muted">A single famous analyst is a signal. Multiple independent sources agreeing is stronger.</p></div></div>
+  <div class="method-grid"><div><b>1</b><h3>Identify the pick</h3><p>Player, market, side and the line the analyst actually referenced.</p></div><div><b>2</b><h3>Grade the source</h3><p>Long-term track record, specialization and whether the pick can be verified.</p></div><div><b>3</b><h3>Find agreement</h3><p>Group matching player/market/side signals from independent sources.</p></div><div><b>4</b><h3>Publish confidence</h3><p>Early, Medium or High based on source quality and independent agreement.</p></div></div>
+</section>
+
+<section id="experts" class="section-block">
+  <div class="section-head"><div><p class="eyebrow">EXPERT TRACKING</p><h2>Who is actually good?</h2><p class="muted">We separate published reputation from LineFoundry's own tracked record. No analyst gets a winning percentage until we capture and settle enough picks ourselves.</p></div></div>
+  <div class="table-wrap"><table><thead><tr><th>Analyst</th><th>Outlet</th><th>Tracked</th><th>W-L</th><th>Units</th><th>ROI</th><th>Status</th></tr></thead><tbody id="expertRows"></tbody></table></div>
+  <div class="table-wrap source-table"><table><thead><tr><th>Current Source</th><th>Outlet</th><th>Evidence</th><th>Verification</th><th>Source</th></tr></thead><tbody id="sourceRows"></tbody></table></div>
+</section>
+
+<section id="results" class="results section-block"><div><p class="eyebrow">ACCOUNTABILITY</p><h2>Public Results</h2><p>Official picks are frozen at the exact line and price published. Wins, losses, units and ROI remain visible — including the misses.</p><div class="ledger-note"><b>Rule:</b> a moving line can change the recommendation, but it can never rewrite a historical pick.</div></div><div class="record"><div><b id="wins">0</b><span>Wins</span></div><div><b id="losses">0</b><span>Losses</span></div><div><b id="units">0.00u</b><span>Units</span></div><div><b id="roi">—</b><span>ROI</span></div></div><p class="muted small">LineFoundry tracked record starts at 0–0. Analyst records shown above only include picks captured and settled by LineFoundry.</p></section>
+
+<section id="method" class="method section-block"><p class="eyebrow">THE FRAMEWORK</p><h2>LineFoundry Methodology</h2><div class="method-grid"><div><b>25%</b><h3>Handicapper quality</h3><p>Long-term ROI, sample size, NFL-specific and prop-specific performance.</p></div><div><b>20%</b><h3>Independent consensus</h3><p>Agreement among reputable sources, weighted by source quality.</p></div><div><b>20%</b><h3>Model edge</h3><p>Projection versus line, usage, matchup, injuries and game script.</p></div><div><b>25%</b><h3>Sportsbook value</h3><p>Implied probability, estimated probability, EV and line sensitivity.</p></div><div><b>10%</b><h3>Market context</h3><p>Movement and cross-book price/line differences.</p></div></div><div class="formula"><b>Core rule:</b> Most likely to hit ≠ best bet. The recommendation must survive the <em>price</em>.</div></section>
+
+<section id="about" class="about section-block"><div><p class="eyebrow">ABOUT LINEFOUNDRY</p><h2>Independent. Transparent. Price-aware.</h2><p class="muted">LineFoundry is being built as an independent NFL prop analytics product. The first public-data version makes expert opinions and the evidence behind them visible before we add any paid market feed.</p></div><div class="about-grid"><div><b>Independent</b><span>Not affiliated with any sportsbook.</span></div><div><b>Transparent</b><span>Official picks are locked and results stay public.</span></div><div><b>Consensus-first</b><span>Agreement is separated from hype and single-source opinions.</span></div><div><b>Expandable</b><span>Authorized market data can be added later without rebuilding the core.</span></div></div></section>
+
+<footer><div><p>For informational and entertainment purposes only. No bet is guaranteed. Gambling involves risk.</p><p>LineFoundry is independent and is not affiliated with any sportsbook, analyst, outlet or publisher. Source content remains with its respective owner.</p></div><p>© 2026 LineFoundry • <span id="pickCount">0</span> tracked picks</p></footer>
+</main>
+<div class="modal" id="howModal" aria-hidden="true"><div class="modal-backdrop" data-close="1"></div><div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="howTitle"><button class="modal-close" id="closeHow" aria-label="Close">×</button><p class="eyebrow">HOW IT WORKS</p><h2 id="howTitle">From signal to official pick</h2><div class="steps"><div><b>01</b><strong>Find the prop</strong><span>Collect reputable analyst and model signals.</span></div><div><b>02</b><strong>Compare prices</strong><span>Check the same prop across available books.</span></div><div><b>03</b><strong>Score the edge</strong><span>Combine consensus, probability, price and market context.</span></div><div><b>04</b><strong>Lock the pick</strong><span>Freeze the line, odds and timestamp.</span></div><div><b>05</b><strong>Track the result</strong><span>Settle the pick and keep the record public.</span></div></div></div></div>
+<script src="app.js"></script>
+<script>fetch('/api/refresh-status').then(r=>r.json()).then(x=>{document.getElementById('lastRefresh').textContent=x.refreshedAt?new Date(x.refreshedAt).toLocaleString():'not run yet'}).catch(()=>document.getElementById('lastRefresh').textContent='local/demo mode');</script>
+</body></html>
