@@ -1,21 +1,355 @@
-const fallback = [
-  {id:'CONS-1',player:'Omarion Hampton',market:'Anytime TD',side:'YES',line:null,analystCount:1,consensusScore:71,confidence:'EARLY',analysts:[{name:'Erich Richter',outlet:'NY Post',url:'https://nypost.com/2026/09/13/betting/week-1-nfl-player-props-picks-best-bets-omarion-hampton-breece-hall/'}],rationale:'One tracked source currently supports this direction; treat as an early signal until more sources agree.'},
-  {id:'CONS-2',player:'Breece Hall',market:'Anytime TD',side:'YES',line:null,analystCount:1,consensusScore:71,confidence:'EARLY',analysts:[{name:'Erich Richter',outlet:'NY Post',url:'https://nypost.com/2026/09/13/betting/week-1-nfl-player-props-picks-best-bets-omarion-hampton-breece-hall/'}],rationale:'One tracked source currently supports this direction; treat as an early signal until more sources agree.'},
-  {id:'CONS-3',player:'Omarion Hampton',market:'Rushing Yards',side:'OVER',line:70,analystCount:1,consensusScore:71,confidence:'EARLY',analysts:[{name:'Adam Schein',outlet:'NY Post',url:'https://nypost.com/2026/09/13/betting/adam-schein-reveals-his-favorite-week-1-nfl-slate-parlay-target-these-jets-and-chargers-bets/'}],rationale:'One tracked source currently supports this direction; treat as an early signal until more sources agree.'},
-  {id:'CONS-4',player:'Garrett Wilson',market:'Receiving Yards',side:'OVER',line:50,analystCount:1,consensusScore:71,confidence:'EARLY',analysts:[{name:'Adam Schein',outlet:'NY Post',url:'https://nypost.com/2026/09/13/betting/adam-schein-reveals-his-favorite-week-1-nfl-slate-parlay-target-these-jets-and-chargers-bets/'}],rationale:'One tracked source currently supports this direction; treat as an early signal until more sources agree.'},
-  {id:'CONS-5',player:'Jameson Williams',market:'Receptions',side:'OVER',line:3.5,analystCount:1,consensusScore:71,confidence:'EARLY',analysts:[{name:'Sean Treppedi',outlet:'NY Post',url:'https://nypost.com/2026/09/13/betting/saints-vs-lions-prediction-odds-best-bets-expect-a-week-1-offensive-explosion/'}],rationale:'One tracked source currently supports this direction; treat as an early signal until more sources agree.'},
-  {id:'CONS-6',player:'Juwan Johnson',market:'Receiving Yards',side:'OVER',line:41.5,analystCount:1,consensusScore:71,confidence:'EARLY',analysts:[{name:'Adam Burke',outlet:'VSiN',url:'https://vsin.com/nfl/nfl-player-prop-bets-for-week-1-from-adam-burke/'}],rationale:'One tracked source currently supports this direction; treat as an early signal until more sources agree.'},
-  {id:'CONS-7',player:'Bucky Irving',market:'Rushing Attempts',side:'OVER',line:14.5,analystCount:1,consensusScore:71,confidence:'EARLY',analysts:[{name:'Adam Burke',outlet:'VSiN',url:'https://vsin.com/nfl/nfl-player-prop-bets-for-week-1-from-adam-burke/'}],rationale:'One tracked source currently supports this direction; treat as an early signal until more sources agree.'},
-  {id:'CONS-8',player:'Jacoby Brissett',market:'Completions',side:'UNDER',line:22.5,analystCount:1,consensusScore:71,confidence:'EARLY',analysts:[{name:'Adam Burke',outlet:'VSiN',url:'https://vsin.com/nfl/nfl-player-prop-bets-for-week-1-from-adam-burke/'}],rationale:'One tracked source currently supports this direction; treat as an early signal until more sources agree.'},
-  {id:'CONS-9',player:'Geno Smith',market:'Interceptions',side:'OVER',line:0.5,analystCount:1,consensusScore:70,confidence:'EARLY',analysts:[{name:'Zachary Cohen',outlet:'VSiN',url:'https://vsin.com/nfl/expert-nfl-picks-week-1-best-bets-predictions-and-player-props-from-zachary-cohen/'}],rationale:'One tracked source currently supports this direction; treat as an early signal until more sources agree.'},
-  {id:'CONS-10',player:'Javonte Williams',market:'Rushing Yards',side:'OVER',line:73.5,analystCount:1,consensusScore:67,confidence:'EARLY',analysts:[{name:'Kody Malstrom',outlet:'TalkSport',url:'https://talksport.com/us/4574199/nfl-prop-bets-september-13-2026/'}],rationale:'One tracked source currently supports this direction; treat as an early signal until more sources agree.'}
-];
-let board=null, experts=null, locked=JSON.parse(localStorage.getItem('lf_consensus_locked')||'[]');
-const $=s=>document.querySelector(s);
-function save(){localStorage.setItem('lf_consensus_locked',JSON.stringify(locked));}
-function load(){const d={"week":1,"season":2026,"sources":[{"id":"src-erich","analyst":"Erich Richter","outlet":"NY Post","quality":0.9,"verification":"Published","url":"https://nypost.com/2026/09/13/betting/week-1-nfl-player-props-picks-best-bets-omarion-hampton-breece-hall/"},{"id":"src-schein","analyst":"Adam Schein","outlet":"NY Post","quality":0.9,"verification":"Published","url":"https://nypost.com/2026/09/13/betting/adam-schein-reveals-his-favorite-week-1-nfl-slate-parlay-target-these-jets-and-chargers-bets/"},{"id":"src-treppedi","analyst":"Sean Treppedi","outlet":"NY Post","quality":0.85,"verification":"Published","url":"https://nypost.com/2026/09/13/betting/saints-vs-lions-prediction-odds-best-bets-expect-a-week-1-offensive-explosion/"},{"id":"src-burke","analyst":"Adam Burke","outlet":"VSiN","quality":0.9,"verification":"Published","url":"https://vsin.com/nfl/nfl-player-prop-bets-for-week-1-from-adam-burke/"},{"id":"src-cohen","analyst":"Zachary Cohen","outlet":"VSiN","quality":0.9,"verification":"Published","url":"https://vsin.com/nfl/expert-nfl-picks-week-1-best-bets-predictions-and-player-props-from-zachary-cohen/"},{"id":"src-malstrom","analyst":"Kody Malstrom","outlet":"TalkSport","quality":0.8,"verification":"Published","url":"https://talksport.com/us/4574199/nfl-prop-bets-september-13-2026/"}],"signals":[{"id":"CONS-1","player":"Omarion Hampton","market":"Anytime TD","side":"YES","line":null,"analyst":"Erich Richter","sourceId":"src-erich","note":"Anytime touchdown"},{"id":"CONS-2","player":"Breece Hall","market":"Anytime TD","side":"YES","line":null,"analyst":"Erich Richter","sourceId":"src-erich","note":"Anytime touchdown"},{"id":"CONS-3","player":"Omarion Hampton","market":"Rushing Yards","side":"OVER","line":70,"analyst":"Adam Schein","sourceId":"src-schein","note":"Over 70 rushing yards"},{"id":"CONS-4","player":"Garrett Wilson","market":"Receiving Yards","side":"OVER","line":50,"analyst":"Adam Schein","sourceId":"src-schein","note":"Over 50 receiving yards"},{"id":"CONS-5","player":"Jameson Williams","market":"Receptions","side":"OVER","line":3.5,"analyst":"Sean Treppedi","sourceId":"src-treppedi","note":"Over 3.5 receptions"},{"id":"CONS-6","player":"Juwan Johnson","market":"Receiving Yards","side":"OVER","line":41.5,"analyst":"Adam Burke","sourceId":"src-burke","note":"Over 41.5 receiving yards"},{"id":"CONS-7","player":"Bucky Irving","market":"Rushing Attempts","side":"OVER","line":14.5,"analyst":"Adam Burke","sourceId":"src-burke","note":"Over 14.5 rushing attempts"},{"id":"CONS-8","player":"Jacoby Brissett","market":"Completions","side":"UNDER","line":22.5,"analyst":"Adam Burke","sourceId":"src-burke","note":"Under 22.5 completions"},{"id":"CONS-9","player":"Geno Smith","market":"Interceptions","side":"OVER","line":0.5,"analyst":"Zachary Cohen","sourceId":"src-cohen","note":"Over 0.5 interceptions"},{"id":"CONS-10","player":"Javonte Williams","market":"Rushing Yards","side":"OVER","line":73.5,"analyst":"Kody Malstrom","sourceId":"src-malstrom","note":"Over 73.5 rushing yards"}]};const e={"record":{"wins":0,"losses":0,"units":0,"roi":null},"experts":[]};board={mode:'public-consensus',week:d.week,season:d.season,refreshedAt:new Date().toISOString(),sources:d.sources,props:d.signals.map(s=>({id:s.id,player:s.player,market:s.market,side:s.side,line:s.line,analystCount:1,consensusScore:71,confidence:'EARLY',analysts:[{name:s.analyst,sourceId:s.sourceId,note:s.note,url:d.sources.find(x=>x.id===s.sourceId)?.url,outlet:d.sources.find(x=>x.id===s.sourceId)?.outlet}],rationale:s.note})),};experts=e;render()}function label(p){return `${p.side} ${p.line==null?'TD':p.line} ${p.market}`}
-function card(p){const lockedPick=locked.includes(p.id);return `<article class="prop ${lockedPick?'locked':''}"><div class="prop-top"><div class="game">NFL • WEEK ${board.week}</div><div class="grade">${p.consensusScore}/100</div></div><h3>${p.player} — ${label(p)}</h3><div class="metrics"><div class="metric"><b>${p.analystCount}</b><span>Sources</span></div><div class="metric"><b>${p.confidence}</b><span>Confidence</span></div><div class="metric"><b>${p.consensusScore}</b><span>Consensus</span></div><div class="metric"><b>${lockedPick?'LOCKED':'OPEN'}</b><span>Status</span></div></div><div class="analyst-list">${p.analysts.map(a=>`<div><strong>${a.name}</strong><span>${a.outlet}</span>${a.url?`<a href="${a.url}" target="_blank" rel="noopener">Source ↗</a>`:''}</div>`).join('')}</div><p class="why">${p.rationale}</p><div class="card-actions"><button onclick="lockPick('${p.id}')">${lockedPick?'🔒 Locked':'Lock consensus'}</button></div></article>`}
-window.lockPick=id=>{if(!locked.includes(id)){locked.push(id);save();render()}};
-function render(){const props=board?.props||[];const f=$('#confidenceFilter')?.value||'ALL';$('#propCards').innerHTML=props.filter(p=>f==='ALL'||p.confidence===f).map(card).join('');$('#pickCount').textContent=locked.length;$('#sourceCount').textContent=board?.sources?.length||0;$('#signalCount').textContent=props.length;$('#lastRefresh').textContent=board?.refreshedAt?new Date(board.refreshedAt).toLocaleString():'not run';$('#sourceRows').innerHTML=(board?.sources||[]).map(s=>`<tr><td><strong>${s.analyst}</strong></td><td>${s.outlet}</td><td>${Math.round((s.quality||0)*100)}/100</td><td>${s.verification}</td><td><a href="${s.url}" target="_blank" rel="noopener">Open source ↗</a></td></tr>`).join(''); const es=experts?.experts||[]; $('#expertRows').innerHTML=es.map(e=>{const t=e.tracked||{}; const wl=`${t.wins||0}-${t.losses||0}`; const roi=e.roi==null?'—':`${(e.roi*100).toFixed(1)}%`; const status=t.picks>=50?'RANKED':t.picks>0?'TRACKING':'NEW'; return `<tr><td><strong>${e.name}</strong></td><td>${e.outlet}</td><td>${t.picks||0}</td><td>${wl}</td><td>${(t.units||0).toFixed(2)}u</td><td>${roi}</td><td><span class="status ${status.toLowerCase()}">${status}</span></td></tr>`}).join(''); const r=experts?.record||{}; $('#wins').textContent=r.wins||0; $('#losses').textContent=r.losses||0; $('#units').textContent=`${Number(r.units||0).toFixed(2)}u`; $('#roi').textContent=r.roi==null?'—':`${(r.roi*100).toFixed(1)}%`;}
-$('#confidenceFilter')?.addEventListener('change',render);$('#refreshBoard')?.addEventListener('click',load);$('#howItWorks')?.addEventListener('click',()=>$('#howModal').setAttribute('aria-hidden','false'));$('#closeHow')?.addEventListener('click',()=>$('#howModal').setAttribute('aria-hidden','true'));document.querySelector('.modal-backdrop')?.addEventListener('click',()=>$('#howModal').setAttribute('aria-hidden','true'));
+let board = null;
+let experts = null;
+let results = null;
+
+let locked = JSON.parse(
+  localStorage.getItem('lf_consensus_locked') || '[]'
+);
+
+const $ = s => document.querySelector(s);
+
+function save() {
+  localStorage.setItem(
+    'lf_consensus_locked',
+    JSON.stringify(locked)
+  );
+}
+
+async function load() {
+  try {
+    const [signalsData, expertsData, resultsData] = await Promise.all([
+      fetch('/public-signals.json').then(r => {
+        if (!r.ok) throw new Error('Could not load public-signals.json');
+        return r.json();
+      }),
+
+      fetch('/analyst-profiles.json').then(r => {
+        if (!r.ok) throw new Error('Could not load analyst-profiles.json');
+        return r.json();
+      }),
+
+      fetch('/results-ledger.json').then(r => {
+        if (!r.ok) throw new Error('Could not load results-ledger.json');
+        return r.json();
+      })
+    ]);
+
+    const d = signalsData;
+
+    board = {
+      mode: 'public-consensus',
+      week: d.week,
+      season: d.season,
+      refreshedAt: new Date().toISOString(),
+      sources: d.sources || [],
+
+      props: (d.signals || []).map(s => {
+        const source = (d.sources || []).find(
+          x => x.id === s.sourceId
+        );
+
+        return {
+          id: s.id,
+          player: s.player,
+          market: s.market,
+          side: s.side,
+          line: s.line,
+          analystCount: 1,
+          consensusScore: 71,
+          confidence: 'EARLY',
+
+          analysts: [{
+            name: s.analyst,
+            sourceId: s.sourceId,
+            note: s.note,
+            url: source?.url,
+            outlet: source?.outlet
+          }],
+
+          rationale: s.note
+        };
+      })
+    };
+
+    experts = expertsData;
+    results = resultsData;
+
+    render();
+
+  } catch (err) {
+    console.error('LineFoundry data load failed:', err);
+
+    const propCards = $('#propCards');
+
+    if (propCards) {
+      propCards.innerHTML = `
+        <div class="empty-state">
+          <h3>Unable to load LineFoundry data</h3>
+          <p>Please refresh the page and try again.</p>
+        </div>
+      `;
+    }
+  }
+}
+
+function label(p) {
+  return `${p.side} ${p.line == null ? 'TD' : p.line} ${p.market}`;
+}
+
+function card(p) {
+  const lockedPick = locked.includes(p.id);
+
+  return `
+    <article class="prop ${lockedPick ? 'locked' : ''}">
+      <div class="prop-top">
+        <div class="game">
+          NFL • WEEK ${board.week}
+        </div>
+
+        <div class="grade">
+          ${p.consensusScore}/100
+        </div>
+      </div>
+
+      <h3>
+        ${p.player} — ${label(p)}
+      </h3>
+
+      <div class="metrics">
+        <div class="metric">
+          <b>${p.analystCount}</b>
+          <span>Sources</span>
+        </div>
+
+        <div class="metric">
+          <b>${p.confidence}</b>
+          <span>Confidence</span>
+        </div>
+
+        <div class="metric">
+          <b>${p.consensusScore}</b>
+          <span>Consensus</span>
+        </div>
+
+        <div class="metric">
+          <b>${lockedPick ? 'LOCKED' : 'OPEN'}</b>
+          <span>Status</span>
+        </div>
+      </div>
+
+      <div class="analyst-list">
+        ${p.analysts.map(a => `
+          <div>
+            <strong>${a.name}</strong>
+            <span>${a.outlet || ''}</span>
+
+            ${
+              a.url
+                ? `<a href="${a.url}" target="_blank" rel="noopener">
+                     Source ↗
+                   </a>`
+                : ''
+            }
+          </div>
+        `).join('')}
+      </div>
+
+      <p class="why">
+        ${p.rationale}
+      </p>
+
+      <div class="card-actions">
+        <button onclick="lockPick('${p.id}')">
+          ${lockedPick ? '🔒 Locked' : 'Lock consensus'}
+        </button>
+      </div>
+    </article>
+  `;
+}
+
+window.lockPick = id => {
+  if (!locked.includes(id)) {
+    locked.push(id);
+    save();
+    render();
+  }
+};
+
+function render() {
+  const props = board?.props || [];
+
+  const filter =
+    $('#confidenceFilter')?.value || 'ALL';
+
+  const filteredProps = props.filter(
+    p => filter === 'ALL' || p.confidence === filter
+  );
+
+  if ($('#propCards')) {
+    $('#propCards').innerHTML =
+      filteredProps.map(card).join('');
+  }
+
+  if ($('#pickCount')) {
+    $('#pickCount').textContent = locked.length;
+  }
+
+  if ($('#sourceCount')) {
+    $('#sourceCount').textContent =
+      board?.sources?.length || 0;
+  }
+
+  if ($('#signalCount')) {
+    $('#signalCount').textContent =
+      props.length;
+  }
+
+  if ($('#lastRefresh')) {
+    $('#lastRefresh').textContent =
+      board?.refreshedAt
+        ? new Date(board.refreshedAt).toLocaleString()
+        : 'not run';
+  }
+
+  if ($('#sourceRows')) {
+    $('#sourceRows').innerHTML =
+      (board?.sources || []).map(s => `
+        <tr>
+          <td>
+            <strong>${s.analyst}</strong>
+          </td>
+
+          <td>${s.outlet}</td>
+
+          <td>
+            ${Math.round((s.quality || 0) * 100)}/100
+          </td>
+
+          <td>${s.verification}</td>
+
+          <td>
+            <a
+              href="${s.url}"
+              target="_blank"
+              rel="noopener"
+            >
+              Open source ↗
+            </a>
+          </td>
+        </tr>
+      `).join('');
+  }
+
+  const es = experts?.experts || [];
+
+  if ($('#expertRows')) {
+    $('#expertRows').innerHTML =
+      es.map(e => {
+        const t = e.tracked || {};
+
+        const wl =
+          `${t.wins || 0}-${t.losses || 0}`;
+
+        const roi =
+          e.roi == null
+            ? '—'
+            : `${(e.roi * 100).toFixed(1)}%`;
+
+        const status =
+          t.picks >= 50
+            ? 'RANKED'
+            : t.picks > 0
+              ? 'TRACKING'
+              : 'NEW';
+
+        return `
+          <tr>
+            <td>
+              <strong>${e.name}</strong>
+            </td>
+
+            <td>${e.outlet}</td>
+
+            <td>${t.picks || 0}</td>
+
+            <td>${wl}</td>
+
+            <td>${(t.units || 0).toFixed(2)}u</td>
+
+            <td>${roi}</td>
+
+            <td>
+              <span class="status ${status.toLowerCase()}">
+                ${status}
+              </span>
+            </td>
+          </tr>
+        `;
+      }).join('');
+  }
+
+  const r = experts?.record || {};
+
+  if ($('#wins')) {
+    $('#wins').textContent =
+      r.wins || 0;
+  }
+
+  if ($('#losses')) {
+    $('#losses').textContent =
+      r.losses || 0;
+  }
+
+  if ($('#units')) {
+    $('#units').textContent =
+      `${Number(r.units || 0).toFixed(2)}u`;
+  }
+
+  if ($('#roi')) {
+    $('#roi').textContent =
+      r.roi == null
+        ? '—'
+        : `${(r.roi * 100).toFixed(1)}%`;
+  }
+}
+
+$('#confidenceFilter')?.addEventListener(
+  'change',
+  render
+);
+
+$('#refreshBoard')?.addEventListener(
+  'click',
+  load
+);
+
+$('#howItWorks')?.addEventListener(
+  'click',
+  () =>
+    $('#howModal').setAttribute(
+      'aria-hidden',
+      'false'
+    )
+);
+
+$('#closeHow')?.addEventListener(
+  'click',
+  () =>
+    $('#howModal').setAttribute(
+      'aria-hidden',
+      'true'
+    )
+);
+
+document
+  .querySelector('.modal-backdrop')
+  ?.addEventListener(
+    'click',
+    () =>
+      $('#howModal').setAttribute(
+        'aria-hidden',
+        'true'
+      )
+  );
+
 load();
