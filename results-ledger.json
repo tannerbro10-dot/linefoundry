@@ -1,1 +1,106 @@
-{"picks":[]}
+{
+  "season": 2026,
+  "week": 1,
+  "picks": [
+    {
+      "id": "CONS-1",
+      "player": "Omarion Hampton",
+      "market": "Anytime TD",
+      "side": "YES",
+      "line": null,
+      "analyst": "Erich Richter",
+      "outlet": "NY Post",
+      "result": "PENDING"
+    },
+    {
+      "id": "CONS-2",
+      "player": "Breece Hall",
+      "market": "Anytime TD",
+      "side": "YES",
+      "line": null,
+      "analyst": "Erich Richter",
+      "outlet": "NY Post",
+      "result": "PENDING"
+    },
+    {
+      "id": "CONS-3",
+      "player": "Omarion Hampton",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 70,
+      "analyst": "Adam Schein",
+      "outlet": "NY Post",
+      "result": "PENDING"
+    },
+    {
+      "id": "CONS-4",
+      "player": "Garrett Wilson",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 50,
+      "analyst": "Adam Schein",
+      "outlet": "NY Post",
+      "result": "PENDING"
+    },
+    {
+      "id": "CONS-5",
+      "player": "Jameson Williams",
+      "market": "Receptions",
+      "side": "OVER",
+      "line": 3.5,
+      "analyst": "Sean Treppedi",
+      "outlet": "NY Post",
+      "result": "PENDING"
+    },
+    {
+      "id": "CONS-6",
+      "player": "Juwan Johnson",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 41.5,
+      "analyst": "Adam Burke",
+      "outlet": "VSiN",
+      "result": "PENDING"
+    },
+    {
+      "id": "CONS-7",
+      "player": "Bucky Irving",
+      "market": "Rushing Attempts",
+      "side": "OVER",
+      "line": 14.5,
+      "analyst": "Adam Burke",
+      "outlet": "VSiN",
+      "result": "PENDING"
+    },
+    {
+      "id": "CONS-8",
+      "player": "Jacoby Brissett",
+      "market": "Completions",
+      "side": "UNDER",
+      "line": 22.5,
+      "analyst": "Adam Burke",
+      "outlet": "VSiN",
+      "result": "PENDING"
+    },
+    {
+      "id": "CONS-9",
+      "player": "Geno Smith",
+      "market": "Interceptions",
+      "side": "OVER",
+      "line": 0.5,
+      "analyst": "Zachary Cohen",
+      "outlet": "VSiN",
+      "result": "PENDING"
+    },
+    {
+      "id": "CONS-10",
+      "player": "Javonte Williams",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 73.5,
+      "analyst": "Kody Malstrom",
+      "outlet": "TalkSport",
+      "result": "PENDING"
+    }
+  ]
+}
