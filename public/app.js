@@ -54,6 +54,7 @@ async function load() {
           market: s.market,
           side: s.side,
           line: s.line,
+          analyst: s.analyst,
           analystCount: 1,
           consensusScore: 71,
           confidence: 'EARLY',
@@ -79,10 +80,8 @@ async function load() {
   } catch (err) {
     console.error('LineFoundry data load failed:', err);
 
-    const propCards = $('#propCards');
-
-    if (propCards) {
-      propCards.innerHTML = `
+    if ($('#propCards')) {
+      $('#propCards').innerHTML = `
         <div class="empty-state">
           <h3>Unable to load LineFoundry data</h3>
           <p>Please refresh the page and try again.</p>
@@ -92,15 +91,31 @@ async function load() {
   }
 }
 
+function getResult(id) {
+  if (!results) return 'PENDING';
+
+  if (results.results && results.results[id]) {
+    return results.results[id];
+  }
+
+  const pick = (results.picks || []).find(
+    p => p.id === id
+  );
+
+  return pick?.result || 'PENDING';
+}
+
 function label(p) {
   return `${p.side} ${p.line == null ? 'TD' : p.line} ${p.market}`;
 }
 
 function card(p) {
   const lockedPick = locked.includes(p.id);
+  const result = getResult(p.id);
 
   return `
     <article class="prop ${lockedPick ? 'locked' : ''}">
+
       <div class="prop-top">
         <div class="game">
           NFL • WEEK ${board.week}
@@ -116,6 +131,7 @@ function card(p) {
       </h3>
 
       <div class="metrics">
+
         <div class="metric">
           <b>${p.analystCount}</b>
           <span>Sources</span>
@@ -132,9 +148,10 @@ function card(p) {
         </div>
 
         <div class="metric">
-          <b>${lockedPick ? 'LOCKED' : 'OPEN'}</b>
-          <span>Status</span>
+          <b>${result}</b>
+          <span>Result</span>
         </div>
+
       </div>
 
       <div class="analyst-list">
@@ -159,21 +176,14 @@ function card(p) {
       </p>
 
       <div class="card-actions">
-        <button onclick="lockPick('${p.id}')">
-          ${lockedPick ? '🔒 Locked' : 'Lock consensus'}
-        </button>
+        <span class="lock-status">
+          ${lockedPick ? '🔒 Locked' : '🟢 Open'}
+        </span>
       </div>
+
     </article>
   `;
 }
-
-window.lockPick = id => {
-  if (!locked.includes(id)) {
-    locked.push(id);
-    save();
-    render();
-  }
-};
 
 function render() {
   const props = board?.props || [];
@@ -291,13 +301,11 @@ function render() {
   const r = experts?.record || {};
 
   if ($('#wins')) {
-    $('#wins').textContent =
-      r.wins || 0;
+    $('#wins').textContent = r.wins || 0;
   }
 
   if ($('#losses')) {
-    $('#losses').textContent =
-      r.losses || 0;
+    $('#losses').textContent = r.losses || 0;
   }
 
   if ($('#units')) {
