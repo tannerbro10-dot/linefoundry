@@ -159,8 +159,6 @@ async function loadLiveResults() {
       }
     });
 
-    // Only update the board timestamp/render if the board
-    // already exists. The live data itself is still retained.
     if (board) {
       board.liveUpdatedAt =
         data.updatedAt ||
@@ -187,8 +185,6 @@ async function loadLiveResults() {
 // AUTOMATIC LIVE REFRESH
 // ============================================================
 
-// ESPN / Cloudflare Worker gets checked every 60 seconds.
-
 setInterval(
   loadLiveResults,
   60000
@@ -207,7 +203,7 @@ function getResult(id) {
   }
 
   if (!results) {
-    return 'PENDING';
+    return '—';
   }
 
   if (
@@ -222,7 +218,7 @@ function getResult(id) {
       p => p.id === id
     );
 
-  return pick?.result || 'PENDING';
+  return pick?.result || '—';
 }
 
 
@@ -232,7 +228,6 @@ function getResult(id) {
 
 function formatLiveResult(result) {
 
-  // Player's game hasn't been resolved.
   if (
     result.status === 'GAME_NOT_FOUND'
   ) {
@@ -251,7 +246,6 @@ function formatLiveResult(result) {
     return 'Not Available';
   }
 
-  // Anytime TD
   if (
     result.market === 'Anytime TD'
   ) {
@@ -270,7 +264,6 @@ function formatLiveResult(result) {
     return 'PENDING';
   }
 
-  // Normal statistical markets
   if (
     result.status === 'HIT'
   ) {
@@ -354,6 +347,62 @@ function label(p) {
 
 
 // ============================================================
+// LIVE FIELD
+// ============================================================
+
+function liveField(p) {
+  const live = getResultDetails(p.id);
+
+  if (!live) {
+    return {
+      value: '—',
+      status: 'Waiting for live data'
+    };
+  }
+
+  if (live.status === 'HIT') {
+    return {
+      value: formatNumber(live.currentValue),
+      status: 'BET HIT'
+    };
+  }
+
+  if (live.status === 'MISS') {
+    return {
+      value: formatNumber(live.currentValue),
+      status: 'BET MISS'
+    };
+  }
+
+  if (live.status === 'LIVE') {
+    return {
+      value: formatNumber(live.currentValue),
+      status: 'LIVE'
+    };
+  }
+
+  if (live.status === 'MARKET_NOT_FOUND') {
+    return {
+      value: '—',
+      status: 'Market unavailable'
+    };
+  }
+
+  if (live.status === 'GAME_NOT_FOUND') {
+    return {
+      value: '—',
+      status: 'Game unavailable'
+    };
+  }
+
+  return {
+    value: '—',
+    status: live.status || 'Waiting for live data'
+  };
+}
+
+
+// ============================================================
 // LIVE STATUS DISPLAY
 // ============================================================
 
@@ -365,7 +414,6 @@ function liveStatus(p) {
     return '';
   }
 
-  // Anytime TD
   if (
     p.market === 'Anytime TD'
   ) {
@@ -484,6 +532,9 @@ function card(p) {
   const live =
     getResultDetails(p.id);
 
+  const liveFieldData =
+    liveField(p);
+
   return `
     <article class="prop ${
       lockedPick
@@ -506,6 +557,16 @@ function card(p) {
       <h3>
         ${p.player} — ${label(p)}
       </h3>
+
+      <div class="live-stat">
+        <strong>
+          Live Result: ${liveFieldData.value}
+        </strong>
+
+        <span>
+          ${liveFieldData.status}
+        </span>
+      </div>
 
       ${
         liveStatus(p)
@@ -856,8 +917,7 @@ document
 load();
 
 // Trigger the live Worker independently 1.5 seconds
-// after page load. This ensures live ESPN data is requested
-// even if something interferes with the normal initial load.
+// after page load.
 
 setTimeout(
   loadLiveResults,
