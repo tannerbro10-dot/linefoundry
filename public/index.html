@@ -1,340 +1,1811 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <title>LineFoundry — Find the edge. Then find the best price.</title>
-  <meta
-    name="description"
-    content="NFL expert consensus, player props, betting insights and tracked results."
-  />
+<title>LineFoundry — NFL Prop Market Intelligence</title>
 
-  <link rel="stylesheet" href="styles.css" />
+<meta name="description" content="LineFoundry compares NFL prop consensus, model signals and sportsbook prices with transparent results tracking.">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root{
+  --bg:#07090d;
+  --surface:#0d1118;
+  --surface2:#111722;
+  --surface3:#151c28;
+  --text:#f4f7fb;
+  --muted:#8e9aaa;
+  --line:#232c3a;
+  --green:#7df2b2;
+  --green2:#1e9f68;
+  --yellow:#ffd166;
+  --red:#ff7b7b;
+  --blue:#78a9ff;
+  --max:1240px
+}
+
+*{
+  box-sizing:border-box
+}
+
+html{
+  scroll-behavior:smooth
+}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 80% -10%,rgba(70,111,255,.12),transparent 28%),
+    radial-gradient(circle at 10% 0%,rgba(54,214,135,.08),transparent 25%),
+    var(--bg);
+  color:var(--text);
+  font:14px/1.55 'DM Sans',system-ui,sans-serif
+}
+
+.wrap{
+  width:min(var(--max),calc(100% - 36px));
+  margin:auto
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(7,9,13,.78);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.07)
+}
+
+.nav{
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#fff;
+  text-decoration:none;
+  font:700 15px 'Space Grotesk';
+  letter-spacing:.08em
+}
+
+.brand-mark{
+  width:30px;
+  height:30px;
+  border-radius:9px;
+  background:linear-gradient(135deg,var(--green),#5cc9ff);
+  display:grid;
+  place-items:center;
+  color:#071018;
+  font-weight:900
+}
+
+.brand span{
+  color:var(--green)
+}
+
+nav{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap
+}
+
+nav a{
+  color:var(--muted);
+  text-decoration:none;
+  font-weight:600
+}
+
+nav a:hover{
+  color:#fff
+}
+
+.hero{
+  padding:76px 0 42px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 360px;
+  gap:28px;
+  align-items:end
+}
+
+.eyebrow{
+  font-size:10px;
+  letter-spacing:.2em;
+  font-weight:800;
+  color:var(--green);
+  margin:0 0 10px;
+  text-transform:uppercase
+}
+
+.hero h1{
+  font:700 clamp(44px,6.5vw,78px)/.96 'Space Grotesk';
+  letter-spacing:-.055em;
+  margin:0 0 24px;
+  max-width:900px
+}
+
+.hero h1 em{
+  font-style:normal;
+  color:#9ca9b8
+}
+
+.sub{
+  max-width:760px;
+  color:var(--muted);
+  font-size:18px
+}
+
+.badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:24px
+}
+
+.pill{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.025);
+  border-radius:999px;
+  padding:7px 11px;
+  color:#c8d1dc;
+  font-size:12px
+}
+
+.hero-card{
+  padding:25px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:linear-gradient(160deg,#131b27,#0c1118);
+  box-shadow:0 25px 80px rgba(0,0,0,.3)
+}
+
+.live{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--green);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.15em
+}
+
+.dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 0 5px rgba(125,242,178,.08)
+}
+
+.version{
+  font:700 52px 'Space Grotesk';
+  margin:12px 0 3px
+}
+
+.refresh{
+  color:var(--muted);
+  font-size:12px
+}
+
+.section{
+  padding:35px 0
+}
+
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:end;
+  margin-bottom:18px
+}
+
+.section h2{
+  font:700 32px 'Space Grotesk';
+  letter-spacing:-.035em;
+  margin:0
+}
+
+.muted{
+  color:var(--muted)
+}
+
+.toolbar{
+  display:flex;
+  gap:8px;
+  align-items:center
+}
+
+select,
+button{
+  font:inherit;
+  background:#0b1017;
+  color:#eaf0f5;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:9px 12px
+}
+
+button{
+  cursor:pointer;
+  font-weight:700
+}
+
+button:hover{
+  border-color:#4a5a6c;
+  background:#121923
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:15px
+}
+
+.prop{
+  background:linear-gradient(180deg,#111823,#0c1118);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:20px;
+  transition:.2s transform,.2s border-color
+}
+
+.prop:hover{
+  transform:translateY(-2px);
+  border-color:#344254
+}
+
+.prop.locked{
+  border-color:rgba(125,242,178,.45);
+  box-shadow:inset 0 0 0 1px rgba(125,242,178,.05)
+}
+
+.prop-top{
+  display:flex;
+  justify-content:space-between;
+  gap:12px
+}
+
+.game{
+  font-size:10px;
+  color:#748295;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-weight:700
+}
+
+.grade{
+  padding:5px 9px;
+  border-radius:8px;
+  background:rgba(125,242,178,.1);
+  color:var(--green);
+  font-weight:900;
+  font-size:12px
+}
+
+.prop h3{
+  font:600 20px 'Space Grotesk';
+  margin:14px 0 6px;
+  letter-spacing:-.02em
+}
+
+.price{
+  color:#aab6c4;
+  font-size:12px
+}
+
+.price strong{
+  color:#fff
+}
+
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+  margin:16px 0
+}
+
+.metric{
+  background:#0a0f16;
+  border:1px solid #1b2430;
+  border-radius:11px;
+  padding:11px;
+  min-height:65px
+}
+
+.metric b{
+  display:block;
+  font-size:14px;
+  line-height:1.15
+}
+
+.metric span{
+  display:block;
+  color:#718094;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-top:5px
+}
+
+/* LIVE STAT */
+
+.live-stat{
+  margin:12px 0 14px;
+  padding:14px 16px;
+  border:1px solid rgba(125,242,178,.22);
+  border-radius:12px;
+  background:rgba(125,242,178,.055);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px
+}
+
+.live-stat strong{
+  color:var(--green);
+  font:700 16px 'Space Grotesk'
+}
+
+.live-stat span{
+  color:#aeb9c5;
+  font-size:12px;
+  font-weight:700
+}
+
+.live-stat.pending{
+  border-color:#27313e;
+  background:#0a0f16
+}
+
+.live-stat.pending strong{
+  color:#8e9aaa
+}
+
+.live-stat.hit{
+  border-color:rgba(125,242,178,.4);
+  background:rgba(125,242,178,.09)
+}
+
+.live-stat.miss{
+  border-color:rgba(255,123,123,.3);
+  background:rgba(255,123,123,.06)
+}
+
+.live-stat.miss strong{
+  color:var(--red)
+}
+
+.live-stat.na{
+  border-color:#27313e;
+  background:#0a0f16
+}
+
+.live-stat.na strong{
+  color:#8e9aaa
+}
+
+.price-band{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:4px
+}
+
+.price-band div{
+  background:#0a0f16;
+  border:1px solid #1b2430;
+  border-radius:11px;
+  padding:10px 12px;
+  font-size:10px;
+  color:#718094;
+  text-transform:uppercase;
+  letter-spacing:.08em
+}
+
+.price-band b{
+  display:block;
+  color:#fff;
+  font-size:13px;
+  letter-spacing:0;
+  text-transform:none;
+  margin-top:2px
+}
+
+.why{
+  color:#aeb9c5;
+  font-size:12px;
+  min-height:42px
+}
+
+.card-actions{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin-top:13px
+}
+
+.source{
+  color:var(--green);
+  text-decoration:none;
+  font-size:11px;
+  font-weight:700;
+  margin-right:auto
+}
+
+.source:hover{
+  text-decoration:underline
+}
+
+.analyst-list{
+  display:grid;
+  gap:8px;
+  margin-top:12px
+}
+
+.analyst-list>div{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:7px;
+  font-size:11px
+}
+
+.analyst-list strong{
+  color:#fff
+}
+
+.analyst-list span{
+  color:#718094
+}
+
+.analyst-list a{
+  color:var(--green);
+  text-decoration:none;
+  font-weight:700
+}
+
+.analyst-list a:hover{
+  text-decoration:underline
+}
+
+.results{
+  margin:28px 0 54px;
+  padding:26px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:linear-gradient(135deg,#101722,#0b1017);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px
+}
+
+.results h2{
+  font:700 30px 'Space Grotesk';
+  margin:0 0 8px
+}
+
+.ledger-note{
+  margin-top:16px;
+  border-left:3px solid var(--green);
+  background:#0a1118;
+  padding:11px 13px;
+  color:#b7c3ce;
+  font-size:12px
+}
+
+.record{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px
+}
+
+.record div{
+  background:#090e14;
+  border:1px solid #1a232f;
+  border-radius:13px;
+  padding:17px
+}
+
+.record b{
+  font:700 29px 'Space Grotesk';
+  display:block
+}
+
+.record span{
+  color:#718094;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.08em
+}
+
+.table-wrap{
+  overflow:auto;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:#0c1118;
+  margin-top:17px
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:900px
+}
+
+th,
+td{
+  text-align:left;
+  padding:14px;
+  border-bottom:1px solid #1a232f
+}
+
+th{
+  font-size:9px;
+  color:#718094;
+  text-transform:uppercase;
+  letter-spacing:.12em
+}
+
+td{
+  font-size:12px;
+  color:#b8c3ce
+}
+
+.weight{
+  font-weight:800
+}
+
+.method{
+  margin:54px 0;
+  padding:28px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:#0c1118
+}
+
+.method h2{
+  font:700 30px 'Space Grotesk';
+  margin:0
+}
+
+.method-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:9px;
+  margin-top:18px
+}
+
+.method-grid>div{
+  background:#090e14;
+  border:1px solid #1a232f;
+  border-radius:13px;
+  padding:16px
+}
+
+.method-grid b{
+  font:700 23px 'Space Grotesk';
+  color:var(--green)
+}
+
+.method-grid h3{
+  font-size:14px;
+  margin:7px 0
+}
+
+.method-grid p{
+  font-size:11px;
+  color:#718094;
+  margin:0
+}
+
+.formula{
+  margin-top:12px;
+  padding:14px;
+  border-radius:12px;
+  background:rgba(125,242,178,.06);
+  border:1px solid rgba(125,242,178,.12);
+  font-size:12px
+}
+
+.formula em{
+  color:var(--green);
+  font-style:normal
+}
+
+footer{
+  border-top:1px solid #161e29;
+  padding:28px 0 55px;
+  color:#68778a;
+  font-size:11px;
+  display:flex;
+  justify-content:space-between;
+  gap:20px
+}
+
+.status-badge{
+  display:inline-flex;
+  align-items:center;
+  border-radius:999px;
+  padding:4px 8px;
+  background:#101821;
+  color:#aeb9c5;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase
+}
+
+.live-nav{
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.12em;
+  color:var(--green);
+  display:flex;
+  align-items:center;
+  gap:7px
+}
+
+.book-tabs{
+  display:flex;
+  gap:8px;
+  margin:18px 0 12px;
+  flex-wrap:wrap
+}
+
+.book-tab{
+  padding:10px 15px;
+  border-radius:12px;
+  font-weight:800;
+  color:#aeb9c5
+}
+
+.book-tab.active{
+  color:#071018;
+  background:var(--green);
+  border-color:var(--green)
+}
+
+.book-tab.dk.active{
+  background:#4d7cff;
+  color:#fff
+}
+
+.book-tab.fd.active{
+  background:#6f5cff;
+  color:#fff
+}
+
+.book-tab.mgm.active{
+  background:#f0b429;
+  color:#17120a
+}
+
+.books-section{
+  margin:20px 0 54px
+}
+
+.book-table-wrap{
+  overflow:auto;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:#0c1118
+}
+
+.book-table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:950px
+}
+
+.book-table th,
+.book-table td{
+  padding:15px;
+  border-bottom:1px solid #1a232f;
+  text-align:left
+}
+
+.book-table th{
+  font-size:9px;
+  color:#718094;
+  text-transform:uppercase;
+  letter-spacing:.12em
+}
+
+.book-table td{
+  font-size:12px
+}
+
+.book-table td:first-child{
+  min-width:210px
+}
+
+.book-table td:first-child small,
+.book-cell small,
+.book-table td:last-child small{
+  display:block;
+  color:#718094;
+  margin-top:3px
+}
+
+.book-cell{
+  position:relative
+}
+
+.book-cell b{
+  font-size:15px;
+  margin-right:5px
+}
+
+.book-cell strong{
+  color:#dbe4ec
+}
+
+.book-cell.best{
+  background:rgba(125,242,178,.065)
+}
+
+.book-cell em{
+  display:block;
+  color:var(--green);
+  font-size:8px;
+  font-style:normal;
+  font-weight:900;
+  letter-spacing:.1em;
+  margin-top:4px
+}
+
+.book-name{
+  display:block;
+  color:#718094;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-bottom:2px
+}
+
+.best-pill{
+  display:inline-flex;
+  padding:6px 9px;
+  border-radius:8px;
+  background:rgba(125,242,178,.1);
+  color:var(--green);
+  font-weight:900
+}
+
+.tiny-note{
+  font-size:10px;
+  color:#647286;
+  margin-top:9px
+}
+
+.book-mini{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  margin:8px 0 3px
+}
+
+.book-chip{
+  padding:5px 7px;
+  border-radius:7px;
+  background:#090e14;
+  border:1px solid #1a232f;
+  color:#8c99a8;
+  font-size:9px
+}
+
+.book-chip b{
+  margin-right:3px;
+  color:#d7e0e8
+}
+
+.book-chip.dk b{
+  color:#6f92ff
+}
+
+.book-chip.fd b{
+  color:#9588ff
+}
+
+.book-chip.mgm b{
+  color:#f2c14c
+}
+
+.hero-actions{
+  display:flex;
+  gap:10px;
+  margin-top:24px
+}
+
+.primary-btn,
+.secondary-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:800;
+  padding:11px 15px
+}
+
+.primary-btn{
+  background:var(--green);
+  color:#071018;
+  border:1px solid var(--green)
+}
+
+.primary-btn:hover{
+  background:#9af7c6
+}
+
+.secondary-btn{
+  background:#0b1017;
+  color:#eaf0f5;
+  border:1px solid var(--line)
+}
+
+.hero-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:24px
+}
+
+.hero-stat{
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:rgba(255,255,255,.025)
+}
+
+.hero-stat b{
+  font:700 20px 'Space Grotesk';
+  display:block
+}
+
+.hero-stat span{
+  font-size:9px;
+  color:#718094;
+  text-transform:uppercase;
+  letter-spacing:.1em
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  display:grid;
+  place-items:center;
+  z-index:100;
+  visibility:hidden;
+  opacity:0;
+  transition:.18s
+}
+
+.modal[aria-hidden="false"]{
+  visibility:visible;
+  opacity:1
+}
+
+.modal-backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(7px)
+}
+
+.modal-panel{
+  position:relative;
+  width:min(620px,calc(100% - 30px));
+  max-height:85vh;
+  overflow:auto;
+  padding:27px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:#0d131c;
+  box-shadow:0 30px 100px rgba(0,0,0,.5)
+}
+
+.modal-panel h2{
+  font:700 30px 'Space Grotesk';
+  margin:0
+}
+
+.modal-close{
+  position:absolute;
+  right:15px;
+  top:12px;
+  border:0;
+  background:transparent;
+  font-size:28px;
+  color:#93a1b1;
+  padding:4px 8px
+}
+
+.steps{
+  display:grid;
+  gap:9px;
+  margin-top:20px
+}
+
+.steps>div{
+  display:grid;
+  grid-template-columns:42px 1fr;
+  column-gap:12px;
+  row-gap:2px;
+  padding:13px;
+  border:1px solid #1b2633;
+  border-radius:12px;
+  background:#090f16
+}
+
+.steps b{
+  grid-row:1 / span 2;
+  color:var(--green);
+  font:700 15px 'Space Grotesk'
+}
+
+.steps strong{
+  font-size:14px
+}
+
+.steps span{
+  font-size:11px;
+  color:var(--muted)
+}
+
+.lock-status{
+  display:inline-flex;
+  align-items:center;
+  padding:7px 10px;
+  border-radius:9px;
+  background:#101821;
+  color:#aeb9c5;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.06em;
+  text-transform:uppercase
+}
+
+.prop.locked .lock-status{
+  background:rgba(125,242,178,.08);
+  color:var(--green)
+}
+
+.small{
+  font-size:.82rem
+}
+
+.source-table{
+  margin-top:18px
+}
+
+.status{
+  display:inline-flex;
+  padding:4px 8px;
+  border-radius:999px;
+  font-size:.7rem;
+  font-weight:800;
+  letter-spacing:.05em
+}
+
+.status.new{
+  background:#26303a;
+  color:#aeb9c3
+}
+
+.status.tracking{
+  background:#263a2f;
+  color:#9ee7b7
+}
+
+.status.ranked{
+  background:#173c2a;
+  color:#62e6a0
+}
+
+@media(max-width:1000px){
+
+  nav{
+    gap:11px
+  }
+
+  .feature-strip{
+    grid-template-columns:repeat(2,1fr)
+  }
+
+  .about{
+    grid-template-columns:1fr
+  }
+
+}
+
+@media(max-width:900px){
+
+  .hero,
+  .results{
+    grid-template-columns:1fr
+  }
+
+  .cards{
+    grid-template-columns:1fr
+  }
+
+  .method-grid{
+    grid-template-columns:repeat(2,1fr)
+  }
+
+  .metrics{
+    grid-template-columns:repeat(2,1fr)
+  }
+
+  .section-head{
+    align-items:start;
+    flex-direction:column
+  }
+
+  .toolbar{
+    width:100%
+  }
+
+  .toolbar select{
+    flex:1
+  }
+
+  .hero-actions{
+    flex-wrap:wrap
+  }
+
+  .primary-btn,
+  .secondary-btn{
+    flex:1
+  }
+
+  .feature-strip{
+    grid-template-columns:1fr 1fr
+  }
+
+}
+
+@media(max-width:520px){
+
+  .wrap{
+    width:min(100% - 22px,var(--max))
+  }
+
+  .hero{
+    padding-top:45px
+  }
+
+  .hero h1{
+    font-size:45px
+  }
+
+  .sub{
+    font-size:15px
+  }
+
+  .method-grid{
+    grid-template-columns:1fr
+  }
+
+  .cards{
+    gap:10px
+  }
+
+  .prop{
+    padding:16px
+  }
+
+  .prop h3{
+    font-size:18px
+  }
+
+  .record{
+    grid-template-columns:1fr 1fr
+  }
+
+  footer{
+    flex-direction:column
+  }
+
+  .feature-strip,
+  .about-grid{
+    grid-template-columns:1fr
+  }
+
+  .hero-actions{
+    display:grid
+  }
+
+  .primary-btn,
+  .secondary-btn{
+    width:100%
+  }
+
+  .live-stat{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:4px
+  }
+
+}
+</style>
 </head>
 
 <body>
 
-  <!-- =========================
-       HEADER / NAVIGATION
-  ========================== -->
-  <header class="site-header">
-    <div class="container nav-wrap">
+<header>
 
-      <a href="#" class="brand">
-        <span class="brand-mark">LF</span>
-        <span class="brand-name">LineFoundry</span>
-      </a>
+<div class="wrap nav">
 
-      <nav class="main-nav">
-        <a href="#" class="active">Home</a>
-        <a href="#nfl">NFL</a>
-        <a href="#props">Props</a>
-        <a href="#experts">Experts</a>
-        <a href="#consensus">Consensus</a>
-        <a href="#results">Results</a>
-        <a href="#methodology">Methodology</a>
-        <a href="#about">About</a>
-      </nav>
-
-      <button
-        class="mobile-menu-btn"
-        type="button"
-        aria-label="Open menu"
-      >
-        ☰
-      </button>
+<a class="brand" href="#home" aria-label="LineFoundry home">
+<span class="brand-mark">LF</span>
+<span>LINEFOUNDRY</span>
+</a>
 
-    </div>
-  </header>
+<nav aria-label="Primary navigation">
+<a href="#home">Home</a>
+<a href="#nfl">NFL</a>
+<a href="#props">Props</a>
+<a href="#experts">Experts</a>
+<a href="#consensus">Consensus</a>
+<a href="#results">Results</a>
+<a href="#method">Methodology</a>
+<a href="#about">About</a>
+</nav>
 
-
-  <!-- =========================
-       HERO
-  ========================== -->
-  <main>
-
-    <section class="hero">
-      <div class="container hero-inner">
-
-        <div class="hero-copy">
+<div class="live-nav">
+<span class="dot"></span>
+PUBLIC CONSENSUS
+</div>
 
-          <div class="eyebrow">
-            NFL BETTING INTELLIGENCE
-          </div>
-
-          <h1>
-            Find the edge.<br />
-            Then find the best price.
-          </h1>
-
-          <p>
-            LineFoundry brings together trusted NFL betting experts,
-            tracks their picks, and finds where the smartest analysts agree.
-          </p>
-
-          <div class="hero-actions">
-            <a href="#props" class="btn btn-primary">
-              Explore NFL Picks
-            </a>
-
-            <button
-              type="button"
-              class="btn btn-secondary"
-              id="howItWorksBtn"
-            >
-              How It Works
-            </button>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- =========================
-         NFL PICKS
-    ========================== -->
-    <section class="section" id="props">
-
-      <div class="container">
-
-        <!-- Clean section heading -->
-        <div class="section-head picks-head">
-
-          <div class="section-title-wrap">
-            <h2>NFL PICKS</h2>
-            <p>Expert consensus and tracked player props</p>
-          </div>
-
-        </div>
-
-
-        <!-- Search + Filters are injected here by app.js -->
-        <div id="propsToolbar"></div>
-
-
-        <!-- Prop cards / week sections -->
-        <div class="cards" id="propCards"></div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         OTHER SITE SECTIONS
-         Existing functionality can
-         continue to populate these.
-    ========================== -->
-
-    <section class="section" id="experts">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>EXPERTS</h2>
-            <p>Trusted NFL analysts and their tracked performance.</p>
-          </div>
-        </div>
-
-        <div id="expertsContent"></div>
-      </div>
-    </section>
-
-
-    <section class="section" id="consensus">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>CONSENSUS</h2>
-            <p>See where multiple experts agree on the same player prop.</p>
-          </div>
-        </div>
-
-        <div id="consensusContent"></div>
-      </div>
-    </section>
-
-
-    <section class="section" id="results">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>RESULTS</h2>
-            <p>Track how LineFoundry picks perform over time.</p>
-          </div>
-        </div>
-
-        <div id="resultsContent"></div>
-      </div>
-    </section>
-
-
-    <section class="section" id="methodology">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>METHODOLOGY</h2>
-            <p>How LineFoundry evaluates expert picks and consensus.</p>
-          </div>
-        </div>
-
-        <div class="content-card">
-          <p>
-            LineFoundry focuses on transparent expert consensus rather than
-            invented probabilities or unsupported projections. Picks are
-            attributed to their original sources and tracked against actual
-            game results.
-          </p>
-        </div>
-      </div>
-    </section>
-
-
-    <section class="section" id="about">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>ABOUT LINEFOUNDRY</h2>
-            <p>Find the edge. Then find the best price.</p>
-          </div>
-        </div>
-
-        <div class="content-card">
-          <p>
-            LineFoundry is built to make NFL player-prop research easier by
-            bringing expert opinions, consensus signals and tracked results
-            into one place.
-          </p>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-
-  <!-- =========================
-       HOW IT WORKS MODAL
-  ========================== -->
-  <div
-    class="modal"
-    id="howItWorksModal"
-    aria-hidden="true"
-  >
-
-    <div class="modal-overlay" data-close-modal></div>
-
-    <div
-      class="modal-content"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="howItWorksTitle"
-    >
-
-      <button
-        type="button"
-        class="modal-close"
-        data-close-modal
-        aria-label="Close"
-      >
-        ×
-      </button>
-
-      <div class="eyebrow">
-        LINEFOUNDRY
-      </div>
-
-      <h2 id="howItWorksTitle">
-        How It Works
-      </h2>
-
-      <p>
-        LineFoundry collects publicly available NFL betting picks from
-        established analysts and organizes them into a single research board.
-      </p>
-
-      <p>
-        When multiple experts make the same player-prop selection,
-        LineFoundry identifies that agreement as consensus.
-      </p>
-
-      <p>
-        Picks are then tracked against the actual game results so the
-        performance of each signal can be evaluated over time.
-      </p>
-
-      <div class="modal-actions">
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-close-modal
-        >
-          Got It
-        </button>
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- =========================
-       FOOTER
-  ========================== -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-
-      <div>
-        <strong>LineFoundry</strong>
-        <span>Find the edge. Then find the best price.</span>
-      </div>
-
-      <div class="footer-links">
-        <a href="#methodology">Methodology</a>
-        <a href="#about">About</a>
-      </div>
-
-    </div>
-  </footer>
-
-
-  <!-- =========================
-       SCRIPTS
-  ========================== -->
-  <script src="app.js"></script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-
-      const modal = document.getElementById('howItWorksModal');
-      const openBtn = document.getElementById('howItWorksBtn');
-
-      if (openBtn && modal) {
-        openBtn.addEventListener('click', () => {
-          modal.classList.add('open');
-          modal.setAttribute('aria-hidden', 'false');
-        });
-      }
-
-      document.querySelectorAll('[data-close-modal]').forEach(button => {
-        button.addEventListener('click', () => {
-          if (!modal) return;
-
-          modal.classList.remove('open');
-          modal.setAttribute('aria-hidden', 'true');
-        });
-      });
-
-      document.addEventListener('keydown', event => {
-        if (event.key === 'Escape' && modal) {
-          modal.classList.remove('open');
-          modal.setAttribute('aria-hidden', 'true');
-        }
-      });
-
-    });
-  </script>
+</div>
+
+</header>
+
+
+<main id="home" class="wrap">
+
+
+<section class="hero">
+
+<div>
+
+<p class="eyebrow">
+NFL MARKET INTELLIGENCE • 2026
+</p>
+
+<h1>
+Find the edge.<br>
+<em>Then find the best price.</em>
+</h1>
+
+<p class="sub">
+LineFoundry tracks what reputable NFL betting analysts like,
+weighs the sources, and surfaces where independent opinions
+agree — without requiring a sportsbook odds API.
+</p>
+
+<div class="badges">
+
+<span class="pill">NFL Player Props</span>
+<span class="pill">Expert Consensus</span>
+<span class="pill">Transparent Tracking</span>
+<span class="pill">Public Results</span>
+
+</div>
+
+
+<div class="hero-actions">
+
+<a class="primary-btn" href="#props">
+Explore Props →
+</a>
+
+<button class="secondary-btn" id="howItWorks">
+How It Works
+</button>
+
+</div>
+
+
+<div class="hero-stats">
+
+<div class="hero-stat">
+<b id="signalCount">0</b>
+<span>Tracked Signals</span>
+</div>
+
+<div class="hero-stat">
+<b id="sourceCount">0</b>
+<span>Public Sources</span>
+</div>
+
+<div class="hero-stat">
+<b id="lastRefresh">—</b>
+<span>Last Refresh</span>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="hero-card">
+
+<div class="live">
+<span class="dot"></span>
+LIVE BOARD
+</div>
+
+<div class="version">
+WEEK 1
+</div>
+
+<div class="refresh">
+Curated public NFL analyst signals
+</div>
+
+<p class="muted">
+Consensus is built from independently published analyst
+opinions. Official picks automatically lock at game kickoff.
+</p>
+
+</div>
+
+</section>
+
+
+
+<section id="nfl" class="section">
+
+<div class="section-head">
+
+<div>
+
+<p class="eyebrow">
+NFL • WEEK 1
+</p>
+
+<h2>
+NFL Expert Board
+</h2>
+
+<p class="muted">
+The first version focuses on one question:
+what do credible analysts like?
+</p>
+
+</div>
+
+<button class="secondary-btn" id="refreshBoard">
+Refresh board
+</button>
+
+</div>
+
+
+<div class="feature-strip">
+
+<div>
+<b id="signalCount2">0</b>
+<span>Tracked signals</span>
+</div>
+
+<div>
+<b id="sourceCount2">0</b>
+<span>Public sources</span>
+</div>
+
+<div>
+<b>Consensus</b>
+<span>Source quality + agreement</span>
+</div>
+
+<div>
+<b>Record</b>
+<span>Locked picks stay public</span>
+</div>
+
+</div>
+
+</section>
+
+
+
+<section id="props" class="section">
+
+<div class="section-head">
+
+<div>
+
+<p class="eyebrow">
+PLAYER PROPS
+</p>
+
+<h2>
+Top Expert Signals
+</h2>
+
+<p class="muted">
+These are analyst opinions, not LineFoundry guarantees.
+More independent agreement raises confidence.
+</p>
+
+</div>
+
+
+<div class="toolbar">
+
+<label>
+Confidence
+
+<select id="confidenceFilter">
+
+<option value="ALL">
+All
+</option>
+
+<option value="HIGH">
+High
+</option>
+
+<option value="MEDIUM">
+Medium
+</option>
+
+<option value="EARLY">
+Early
+</option>
+
+</select>
+
+</label>
+
+</div>
+
+</div>
+
+
+<div class="cards" id="propCards"></div>
+
+</section>
+
+
+
+<section id="consensus" class="section">
+
+<div class="section-head">
+
+<div>
+
+<p class="eyebrow">
+HOW WE SCORE SOURCES
+</p>
+
+<h2>
+Consensus, Not Hype
+</h2>
+
+<p class="muted">
+A single famous analyst is a signal.
+Multiple independent sources agreeing is stronger.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="method-grid">
+
+<div>
+<b>1</b>
+<h3>Identify the pick</h3>
+<p>
+Player, market, side and the line the analyst actually referenced.
+</p>
+</div>
+
+<div>
+<b>2</b>
+<h3>Grade the source</h3>
+<p>
+Long-term track record, specialization and whether the pick can be verified.
+</p>
+</div>
+
+<div>
+<b>3</b>
+<h3>Find agreement</h3>
+<p>
+Group matching player/market/side signals from independent sources.
+</p>
+</div>
+
+<div>
+<b>4</b>
+<h3>Publish confidence</h3>
+<p>
+Early, Medium or High based on source quality and independent agreement.
+</p>
+</div>
+
+<div>
+<b>5</b>
+<h3>Lock at kickoff</h3>
+<p>
+The official pick freezes automatically when the player's game begins.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+
+<section id="experts" class="section">
+
+<div class="section-head">
+
+<div>
+
+<h2>
+Expert Tracking
+</h2>
+
+<p class="muted">
+LineFoundry tracks these analysts over time.
+Rankings and winning percentages appear as results accumulate
+from independently tracked picks.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Analyst</th>
+<th>Outlet</th>
+<th>Tracked</th>
+<th>W-L</th>
+<th>Units</th>
+<th>ROI</th>
+<th>Status</th>
+</tr>
+
+</thead>
+
+<tbody id="expertRows"></tbody>
+
+</table>
+
+</div>
+
+
+
+<div class="table-wrap source-table">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Current Source</th>
+<th>Outlet</th>
+<th>Evidence</th>
+<th>Verification</th>
+<th>Source</th>
+</tr>
+
+</thead>
+
+<tbody id="sourceRows"></tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+
+<section id="results" class="results section-block">
+
+<div>
+
+<p class="eyebrow">
+ACCOUNTABILITY
+</p>
+
+<h2>
+Public Results
+</h2>
+
+<p>
+Official picks are frozen at the exact line and timestamp
+captured before kickoff. Wins, losses, units and ROI remain
+visible — including the misses.
+</p>
+
+<div class="ledger-note">
+
+<b>Rule:</b>
+a moving line can change the recommendation before kickoff,
+but it can never rewrite a historical pick after kickoff.
+
+</div>
+
+</div>
+
+
+<div class="record">
+
+<div>
+<b id="wins">0</b>
+<span>Wins</span>
+</div>
+
+<div>
+<b id="losses">0</b>
+<span>Losses</span>
+</div>
+
+<div>
+<b id="units">0.00u</b>
+<span>Units</span>
+</div>
+
+<div>
+<b id="roi">—</b>
+<span>ROI</span>
+</div>
+
+</div>
+
+
+<p class="muted small">
+LineFoundry tracked record starts at 0–0.
+Analyst records shown above only include picks captured
+and settled by LineFoundry.
+</p>
+
+</section>
+
+
+
+<section id="method" class="method section-block">
+
+<p class="eyebrow">
+THE FRAMEWORK
+</p>
+
+<h2>
+LineFoundry Methodology
+</h2>
+
+
+<div class="method-grid">
+
+<div>
+<b>25%</b>
+<h3>Handicapper quality</h3>
+<p>
+Long-term ROI, sample size, NFL-specific and prop-specific performance.
+</p>
+</div>
+
+<div>
+<b>20%</b>
+<h3>Independent consensus</h3>
+<p>
+Agreement among reputable sources, weighted by source quality.
+</p>
+</div>
+
+<div>
+<b>20%</b>
+<h3>Model edge</h3>
+<p>
+Projection versus line, usage, matchup, injuries and game script.
+</p>
+</div>
+
+<div>
+<b>25%</b>
+<h3>Sportsbook value</h3>
+<p>
+Implied probability, estimated probability, EV and line sensitivity.
+</p>
+</div>
+
+<div>
+<b>10%</b>
+<h3>Market context</h3>
+<p>
+Movement and cross-book price/line differences.
+</p>
+</div>
+
+</div>
+
+
+<div class="formula">
+
+<b>Core rule:</b>
+Most likely to hit ≠ best bet.
+The recommendation must survive the <em>price</em>.
+
+</div>
+
+</section>
+
+
+
+<section id="about" class="about section-block">
+
+<div>
+
+<p class="eyebrow">
+ABOUT LINEFOUNDRY
+</p>
+
+<h2>
+Independent. Transparent. Price-aware.
+</h2>
+
+<p class="muted">
+LineFoundry is being built as an independent NFL prop analytics
+product. The first public-data version makes expert opinions
+and the evidence behind them visible before we add any paid market feed.
+</p>
+
+</div>
+
+
+<div class="about-grid">
+
+<div>
+<b>Independent</b>
+<span>Not affiliated with any sportsbook.</span>
+</div>
+
+<div>
+<b>Transparent</b>
+<span>Official picks are locked and results stay public.</span>
+</div>
+
+<div>
+<b>Consensus-first</b>
+<span>Agreement is separated from hype and single-source opinions.</span>
+</div>
+
+<div>
+<b>Expandable</b>
+<span>Authorized market data can be added later without rebuilding the core.</span>
+</div>
+
+</div>
+
+</section>
+
+
+
+<footer>
+
+<div>
+
+<p>
+For informational and entertainment purposes only.
+No bet is guaranteed. Gambling involves risk.
+</p>
+
+<p>
+LineFoundry is independent and is not affiliated with any
+sportsbook, analyst, outlet or publisher.
+Source content remains with its respective owner.
+</p>
+
+</div>
+
+
+<p>
+© 2026 LineFoundry •
+<span id="pickCount">0</span>
+tracked picks
+</p>
+
+</footer>
+
+</main>
+
+
+
+<div class="modal" id="howModal" aria-hidden="true">
+
+<div class="modal-backdrop" data-close="1"></div>
+
+
+<div
+class="modal-panel"
+role="dialog"
+aria-modal="true"
+aria-labelledby="howTitle"
+>
+
+<button
+class="modal-close"
+id="closeHow"
+aria-label="Close"
+>
+×
+</button>
+
+<p class="eyebrow">
+HOW IT WORKS
+</p>
+
+<h2 id="howTitle">
+From signal to official pick
+</h2>
+
+
+<div class="steps">
+
+<div>
+<b>01</b>
+<strong>Find the prop</strong>
+<span>Collect reputable analyst and model signals.</span>
+</div>
+
+<div>
+<b>02</b>
+<strong>Compare prices</strong>
+<span>Check the same prop across available books.</span>
+</div>
+
+<div>
+<b>03</b>
+<strong>Score the edge</strong>
+<span>Combine consensus, probability, price and market context.</span>
+</div>
+
+<div>
+<b>04</b>
+<strong>Automatic lock</strong>
+<span>Freeze the pick automatically when the player's game begins.</span>
+</div>
+
+<div>
+<b>05</b>
+<strong>Track the result</strong>
+<span>Settle the pick and keep the record public.</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script src="/app.js"></script>
 
 </body>
 </html>
