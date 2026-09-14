@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-09-13T15:00:00Z",
+  "refreshedAt": "2026-09-14T20:00:00Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -50,6 +50,38 @@
       "quality": 0.74,
       "verification": "reported",
       "url": "https://talksport.com/us/4574199/nfl-prop-bets-september-13-2026/"
+    },
+    {
+      "id": "sean-koerner-action-network",
+      "analyst": "Sean Koerner",
+      "outlet": "Action Network",
+      "quality": 0.9,
+      "verification": "reported",
+      "url": "https://www.actionnetwork.com/nfl/nfl-props-week-1-daniel-jones-dandre-swift-braelon-allen-more"
+    },
+    {
+      "id": "nick-giffen-action-network",
+      "analyst": "Nick Giffen",
+      "outlet": "Action Network",
+      "quality": 0.9,
+      "verification": "reported",
+      "url": "https://www.actionnetwork.com/nfl/player-props-for-nfl-week-1-baker-mayfield-deshaun-watson-more"
+    },
+    {
+      "id": "josh-shepardson-sharp",
+      "analyst": "Josh Shepardson",
+      "outlet": "Sharp Football Analysis",
+      "quality": 0.86,
+      "verification": "reported",
+      "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/"
+    },
+    {
+      "id": "doug-kralstein-sportsline",
+      "analyst": "Doug Kralstein",
+      "outlet": "SportsLine",
+      "quality": 0.9,
+      "verification": "reported",
+      "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-parlays-props-best-bets/"
     }
   ],
   "signals": [
@@ -152,6 +184,130 @@
       "analyst": "Kody Malstrom",
       "sourceId": "kody-malstrom-talksport",
       "note": "Over 73.5 rushing yards."
+    },
+
+    {
+      "id": "andrei-iosivas-receptions-sean-koerner",
+      "player": "Andrei Iosivas",
+      "market": "Receptions",
+      "side": "UNDER",
+      "line": 1.5,
+      "analyst": "Sean Koerner",
+      "sourceId": "sean-koerner-action-network",
+      "note": "Under 1.5 receptions."
+    },
+    {
+      "id": "braelon-allen-rushing-yards-sean-koerner",
+      "player": "Braelon Allen",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 17.5,
+      "analyst": "Sean Koerner",
+      "sourceId": "sean-koerner-action-network",
+      "note": "Over 17.5 rushing yards."
+    },
+    {
+      "id": "dandre-swift-rushing-attempts-sean-koerner",
+      "player": "D'Andre Swift",
+      "market": "Rushing Attempts",
+      "side": "UNDER",
+      "line": 14.5,
+      "analyst": "Sean Koerner",
+      "sourceId": "sean-koerner-action-network",
+      "note": "Under 14.5 rushing attempts."
+    },
+    {
+      "id": "daniel-jones-completions-sean-koerner",
+      "player": "Daniel Jones",
+      "market": "Completions",
+      "side": "OVER",
+      "line": 21.5,
+      "analyst": "Sean Koerner",
+      "sourceId": "sean-koerner-action-network",
+      "note": "Over 21.5 pass completions."
+    },
+    {
+      "id": "cooper-rush-completions-sean-koerner",
+      "player": "Cooper Rush",
+      "market": "Completions",
+      "side": "UNDER",
+      "line": 18.5,
+      "analyst": "Sean Koerner",
+      "sourceId": "sean-koerner-action-network",
+      "note": "Under 18.5 pass completions."
+    },
+    {
+      "id": "tyler-shough-rushing-yards-sean-koerner",
+      "player": "Tyler Shough",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 16.5,
+      "analyst": "Sean Koerner",
+      "sourceId": "sean-koerner-action-network",
+      "note": "Over 16.5 rushing yards."
+    },
+
+    {
+      "id": "baker-mayfield-interceptions-nick-giffen",
+      "player": "Baker Mayfield",
+      "market": "Interceptions",
+      "side": "OVER",
+      "line": 0.5,
+      "analyst": "Nick Giffen",
+      "sourceId": "nick-giffen-action-network",
+      "note": "Over 0.5 interceptions."
+    },
+    {
+      "id": "deshaun-watson-rushing-yards-nick-giffen",
+      "player": "Deshaun Watson",
+      "market": "Rushing Yards",
+      "side": "UNDER",
+      "line": 19.5,
+      "analyst": "Nick Giffen",
+      "sourceId": "nick-giffen-action-network",
+      "note": "Under 19.5 rushing yards."
+    },
+
+    {
+      "id": "christian-watson-receiving-yards-josh-shepardson",
+      "player": "Christian Watson",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 55.5,
+      "analyst": "Josh Shepardson",
+      "sourceId": "josh-shepardson-sharp",
+      "note": "Over 55.5 receiving yards."
+    },
+    {
+      "id": "juwan-johnson-receiving-yards-josh-shepardson",
+      "player": "Juwan Johnson",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 41.5,
+      "analyst": "Josh Shepardson",
+      "sourceId": "josh-shepardson-sharp",
+      "note": "Over 41.5 receiving yards."
+    },
+    {
+      "id": "chase-brown-receiving-yards-josh-shepardson",
+      "player": "Chase Brown",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 23.5,
+      "analyst": "Josh Shepardson",
+      "sourceId": "josh-shepardson-sharp",
+      "note": "Over 23.5 receiving yards."
+    },
+
+    {
+      "id": "jalen-hurts-rushing-attempts-doug-kralstein",
+      "player": "Jalen Hurts",
+      "market": "Rushing Attempts",
+      "side": "OVER",
+      "line": 6.5,
+      "analyst": "Doug Kralstein",
+      "sourceId": "doug-kralstein-sportsline",
+      "note": "Over 6.5 carries."
     }
   ]
 }
