@@ -10,7 +10,13 @@ let locked = JSON.parse(
   localStorage.getItem('lf_consensus_locked') || '[]'
 );
 
-const $ = s => document.querySelector(s);
+const $ = selector =>
+  document.querySelector(selector);
+
+
+/* ============================================================
+   STORAGE
+============================================================ */
 
 function save() {
   localStorage.setItem(
@@ -20,18 +26,28 @@ function save() {
 }
 
 
-// ============================================================
-// CONSENSUS ENGINE
-// ============================================================
+/* ============================================================
+   CONSENSUS HELPERS
+============================================================ */
 
 function normalizeSide(side) {
-  const value = String(side || '').toUpperCase();
+  const value = String(side || '')
+    .trim()
+    .toUpperCase();
 
-  if (value === 'YES' || value === 'OVER') {
+  if (
+    value === 'YES' ||
+    value === 'OVER' ||
+    value === 'O'
+  ) {
     return 'OVER';
   }
 
-  if (value === 'NO' || value === 'UNDER') {
+  if (
+    value === 'NO' ||
+    value === 'UNDER' ||
+    value === 'U'
+  ) {
     return 'UNDER';
   }
 
@@ -40,26 +56,27 @@ function normalizeSide(side) {
 
 
 function consensusKey(signal) {
-  return `${String(
-    signal.player || ''
-  ).trim().toLowerCase()}::${String(
-    signal.market || ''
-  ).trim().toLowerCase()}`;
+  return [
+    String(signal.player || '')
+      .trim()
+      .toLowerCase(),
+    String(signal.market || '')
+      .trim()
+      .toLowerCase()
+  ].join('|');
 }
 
 
 function consensusStrength(
-  agreeCount,
-  disagreeCount
+  total,
+  agree,
+  disagree
 ) {
-  const total =
-    agreeCount + disagreeCount;
-
   if (total <= 1) {
     return 'SINGLE';
   }
 
-  if (agreeCount === disagreeCount) {
+  if (agree === disagree) {
     return 'SPLIT';
   }
 
@@ -79,17 +96,27 @@ function consensusStrength(
 }
 
 
-function consensusLabel(value) {
-  const labels = {
-    SINGLE: 'Single Source',
-    EMERGING: 'Emerging Consensus',
-    MODERATE: 'Moderate Consensus',
-    STRONG: 'Strong Consensus',
-    HEAVY: 'Heavy Consensus',
-    SPLIT: 'Split'
-  };
+function consensusLabel(strength) {
+  switch (strength) {
+    case 'HEAVY':
+      return 'Heavy';
 
-  return labels[value] || 'Single Source';
+    case 'STRONG':
+      return 'Strong';
+
+    case 'MODERATE':
+      return 'Moderate';
+
+    case 'EMERGING':
+      return 'Emerging';
+
+    case 'SPLIT':
+      return 'Split';
+
+    case 'SINGLE':
+    default:
+      return 'Single Source';
+  }
 }
 
 
@@ -100,8 +127,7 @@ function buildConsensusProps(
   const groups = new Map();
 
   (signals || []).forEach(signal => {
-    const key =
-      consensusKey(signal);
+    const key = consensusKey(signal);
 
     if (!groups.has(key)) {
       groups.set(key, []);
@@ -110,188 +136,246 @@ function buildConsensusProps(
     groups.get(key).push(signal);
   });
 
-  return Array.from(
-    groups.values()
-  ).map(group => {
+  return Array.from(groups.values()).map(group => {
+    const first = group[0];
 
-    const directions = {
-      OVER: [],
-      UNDER: []
-    };
+    const normalized = group.map(signal => ({
+      ...signal,
+      normalizedSide:
+        normalizeSide(signal.side)
+    }));
 
-    group.forEach(signal => {
-      const direction =
-        normalizeSide(signal.side);
-
-      if (!directions[direction]) {
-        directions[direction] = [];
-      }
-
-      directions[direction].push(signal);
-    });
-
-    const overCount =
-      directions.OVER?.length || 0;
-
-    const underCount =
-      directions.UNDER?.length || 0;
-
-    const total =
-      group.length;
-
-    const majorityDirection =
-      overCount > underCount
-        ? 'OVER'
-        : underCount > overCount
-          ? 'UNDER'
-          : normalizeSide(
-              group[0]?.side
-            );
-
-    const agreeCount =
-      majorityDirection === 'OVER'
-        ? overCount
-        : underCount;
-
-    const disagreeCount =
-      total - agreeCount;
-
-    const majorityGroup =
-      group.filter(
+    const overSignals =
+      normalized.filter(
         signal =>
-          normalizeSide(
-            signal.side
-          ) === majorityDirection
+          signal.normalizedSide === 'OVER'
       );
 
-    const representative =
-      majorityGroup[0] ||
-      group[0];
+    const underSignals =
+      normalized.filter(
+        signal =>
+          signal.normalizedSide === 'UNDER'
+      );
 
-    const analysts =
-      group.map(signal => {
+    const unknownSignals =
+      normalized.filter(
+        signal =>
+          signal.normalizedSide !== 'OVER' &&
+          signal.normalizedSide !== 'UNDER'
+      );
 
-        const source =
-          (sources || []).find(
-            item =>
-              item.id ===
-              signal.sourceId
-          );
+    let majoritySide = normalizeSide(
+      first.side
+    );
 
-        return {
-          name: signal.analyst,
-          sourceId: signal.sourceId,
-          note: signal.note,
-          url: source?.url,
-          outlet: source?.outlet,
-          side: normalizeSide(
-            signal.side
-          ),
-          line: signal.line,
-          signalId: signal.id
-        };
-      });
+    let agreeCount = 1;
+    let disagreeCount = 0;
 
-    const lines =
-      majorityGroup
-        .map(
+    if (
+      overSignals.length >
+      underSignals.length
+    ) {
+      majoritySide = 'OVER';
+      agreeCount = overSignals.length;
+      disagreeCount = underSignals.length;
+    } else if (
+      underSignals.length >
+      overSignals.length
+    ) {
+      majoritySide = 'UNDER';
+      agreeCount = underSignals.length;
+      disagreeCount = overSignals.length;
+    } else if (
+      overSignals.length ===
+        underSignals.length &&
+      overSignals.length > 0
+    ) {
+      majoritySide =
+        normalizeSide(first.side);
+
+      agreeCount =
+        normalized.filter(
           signal =>
-            Number(signal.line)
-        )
-        .filter(
-          Number.isFinite
-        )
-        .sort(
-          (a, b) => a - b
-        );
+            signal.normalizedSide ===
+            majoritySide
+        ).length;
 
-    const lineLow =
-      lines.length
-        ? lines[0]
-        : null;
+      disagreeCount =
+        normalized.filter(
+          signal =>
+            signal.normalizedSide !==
+            majoritySide
+        ).length;
+    } else {
+      majoritySide =
+        normalizeSide(first.side);
 
-    const lineHigh =
-      lines.length
-        ? lines[lines.length - 1]
-        : null;
+      agreeCount = normalized.length;
+      disagreeCount = 0;
+    }
+
+    const total =
+      normalized.length;
 
     const strength =
       consensusStrength(
+        total,
         agreeCount,
         disagreeCount
       );
 
+    const majoritySignals =
+      normalized.filter(
+        signal =>
+          signal.normalizedSide ===
+          majoritySide
+      );
+
+    const lineValues =
+      majoritySignals
+        .map(signal => signal.line)
+        .filter(
+          line =>
+            line !== null &&
+            line !== undefined &&
+            line !== ''
+        )
+        .map(Number)
+        .filter(Number.isFinite);
+
+    let line = first.line;
+
+    let lineRange = null;
+
+    if (lineValues.length > 0) {
+      const minLine =
+        Math.min(...lineValues);
+
+      const maxLine =
+        Math.max(...lineValues);
+
+      line = minLine;
+
+      if (minLine !== maxLine) {
+        lineRange =
+          `${formatNumber(minLine)}–${formatNumber(maxLine)}`;
+      }
+    }
+
+    const analysts =
+      normalized.map(signal => {
+        const source =
+          (sources || []).find(
+            source =>
+              source.id === signal.sourceId
+          );
+
+        return {
+          name:
+            signal.analyst ||
+            'Unknown analyst',
+
+          sourceId:
+            signal.sourceId,
+
+          note:
+            signal.note || '',
+
+          url:
+            source?.url,
+
+          outlet:
+            source?.outlet ||
+            source?.name ||
+            '',
+
+          side:
+            normalizeSide(signal.side),
+
+          line:
+            signal.line
+        };
+      });
+
+    const consensusDisplay =
+      disagreeCount === 0
+        ? `${agreeCount} ${majoritySide}`
+        : `${agreeCount}/${total} ${majoritySide}`;
+
+    let rationale = '';
+
+    if (total === 1) {
+      rationale =
+        'One tracked expert currently supports this direction. No opposing pick found.';
+    } else if (disagreeCount === 0) {
+      rationale =
+        `${agreeCount} independent experts currently agree on this direction.`;
+    } else {
+      rationale =
+        `${agreeCount} experts support ${majoritySide} while ${disagreeCount} support the opposite direction.`;
+    }
+
+    if (unknownSignals.length > 0) {
+      rationale +=
+        ` ${unknownSignals.length} signal${unknownSignals.length === 1 ? '' : 's'} could not be assigned to an over/under direction.`;
+    }
+
     return {
-      id: representative.id,
+      id:
+        majoritySignals[0]?.id ||
+        first.id,
 
       player:
-        representative.player,
+        first.player,
 
       market:
-        representative.market,
+        first.market,
 
       side:
-        representative.side,
+        majoritySide,
 
-      line:
-        representative.line,
+      line,
+
+      lineRange,
 
       analyst:
-        representative.analyst,
+        majoritySignals[0]?.analyst ||
+        first.analyst,
 
       analystCount:
         total,
-
-      consensusScore:
-        null,
-
-      consensusPercent:
-        total
-          ? Math.round(
-              (agreeCount / total) *
-                100
-            )
-          : 0,
-
-      consensusDisplay:
-        disagreeCount > 0
-          ? `${agreeCount}/${total} ${majorityDirection}`
-          : `${agreeCount} ${majorityDirection}`,
 
       agreeCount,
 
       disagreeCount,
 
-      overCount,
+      totalSources:
+        total,
 
-      underCount,
-
-      consensusDirection:
-        majorityDirection,
+      consensusDisplay,
 
       consensusStrength:
         strength,
 
-      consensusStrengthLabel:
-        consensusLabel(
-          strength
-        ),
-
-      hasDisagreement:
-        disagreeCount > 0,
-
-      lineLow,
-
-      lineHigh,
+      consensusLabel:
+        consensusLabel(strength),
 
       analysts,
 
-      rationale:
-        representative.note
+      rationale,
+
+      sourceIds:
+        normalized.map(
+          signal => signal.sourceId
+        )
     };
   });
 }
 
+
+/* ============================================================
+   CONSENSUS FILTER
+============================================================ */
 
 function configureConsensusFilter() {
   const filter =
@@ -301,21 +385,8 @@ function configureConsensusFilter() {
     return;
   }
 
-  if (filter.parentElement) {
-    const firstTextNode =
-      Array.from(
-        filter.parentElement.childNodes
-      ).find(
-        node =>
-          node.nodeType ===
-          Node.TEXT_NODE
-      );
-
-    if (firstTextNode) {
-      firstTextNode.textContent =
-        'Consensus Strength ';
-    }
-  }
+  const currentValue =
+    filter.value;
 
   filter.innerHTML = `
     <option value="ALL">
@@ -346,115 +417,170 @@ function configureConsensusFilter() {
       Split
     </option>
   `;
+
+  filter.value =
+    currentValue || 'ALL';
+
+  const label =
+    filter.closest('label');
+
+  if (label) {
+    const textNodes =
+      Array.from(label.childNodes);
+
+    textNodes.forEach(node => {
+      if (
+        node.nodeType ===
+        Node.TEXT_NODE
+      ) {
+        node.textContent =
+          'Consensus Strength';
+      }
+    });
+  }
 }
 
 
-// ============================================================
-// CONSENSUS STYLES
-// ============================================================
+/* ============================================================
+   CONSENSUS STYLES
+============================================================ */
 
 function installConsensusStyles() {
-  if (
-    $('#linefoundryConsensusStyles')
-  ) {
+  if ($('#lfConsensusStyles')) {
     return;
   }
 
   const style =
-    document.createElement(
-      'style'
-    );
+    document.createElement('style');
 
   style.id =
-    'linefoundryConsensusStyles';
+    'lfConsensusStyles';
 
   style.textContent = `
     .consensus-summary {
-      margin: 12px 0 4px;
-      padding: 12px 13px;
-      border: 1px solid #1b2a35;
-      border-radius: 11px;
-      background: rgba(125,242,178,.045);
+      margin: 12px 0 14px;
+      padding: 13px 15px;
+      border: 1px solid #27313e;
+      border-radius: 12px;
+      background: #0a0f16;
     }
 
     .consensus-summary strong {
       display: block;
-      font-size: 12px;
-      color: #f4f7fb;
+      color: #f2f5f8;
+      font-size: 13px;
+      line-height: 1.45;
     }
 
-    .consensus-summary span,
-    .consensus-summary small {
+    .consensus-summary span {
       display: block;
       margin-top: 4px;
       color: #8e9aaa;
-      font-size: 10px;
+      font-size: 12px;
+      line-height: 1.45;
     }
 
-    .consensus-summary small {
-      color: #718094;
+    .consensus-summary.heavy,
+    .consensus-summary.strong {
+      border-color: rgba(125,242,178,.25);
+    }
+
+    .consensus-summary.heavy strong,
+    .consensus-summary.strong strong {
+      color: #7df2b2;
+    }
+
+    .consensus-summary.split {
+      border-color: rgba(255,193,93,.25);
+    }
+
+    .consensus-summary.split strong {
+      color: #ffc15d;
+    }
+
+    .consensus-direction {
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    .analyst-side {
+      font-size: 11px;
+      font-weight: 800;
+      margin-left: 6px;
+      color: #7df2b2;
+    }
+
+    .analyst-side.under {
+      color: #ff9a9a;
     }
   `;
 
-  document.head.appendChild(
-    style
-  );
+  document.head.appendChild(style);
 }
 
 
-// ============================================================
-// LOAD LINEFOUNDRY DATA
-// ============================================================
+/* ============================================================
+   LOAD LINEFOUNDRY DATA
+============================================================ */
 
 async function load() {
   try {
-
     const [
-      signalsData,
-      expertsData,
-      resultsData
+      signalsResponse,
+      expertsResponse,
+      resultsResponse
     ] = await Promise.all([
+      fetch(
+        '/public-signals.json?_=' +
+          Date.now(),
+        {
+          cache: 'no-store'
+        }
+      ),
 
       fetch(
-        '/public-signals.json'
-      ).then(r => {
-
-        if (!r.ok) {
-          throw new Error(
-            'Could not load public-signals.json'
-          );
+        '/analyst-profiles.json?_=' +
+          Date.now(),
+        {
+          cache: 'no-store'
         }
-
-        return r.json();
-      }),
+      ),
 
       fetch(
-        '/analyst-profiles.json'
-      ).then(r => {
-
-        if (!r.ok) {
-          throw new Error(
-            'Could not load analyst-profiles.json'
-          );
+        '/results-ledger.json?_=' +
+          Date.now(),
+        {
+          cache: 'no-store'
         }
-
-        return r.json();
-      }),
-
-      fetch(
-        '/results-ledger.json'
-      ).then(r => {
-
-        if (!r.ok) {
-          throw new Error(
-            'Could not load results-ledger.json'
-          );
-        }
-
-        return r.json();
-      })
-
+      )
     ]);
+
+    if (!signalsResponse.ok) {
+      throw new Error(
+        `public-signals.json returned ${signalsResponse.status}`
+      );
+    }
+
+    if (!expertsResponse.ok) {
+      throw new Error(
+        `analyst-profiles.json returned ${expertsResponse.status}`
+      );
+    }
+
+    if (!resultsResponse.ok) {
+      throw new Error(
+        `results-ledger.json returned ${resultsResponse.status}`
+      );
+    }
+
+    const signalsData =
+      await signalsResponse.json();
+
+    const expertsData =
+      await expertsResponse.json();
+
+    const resultsData =
+      await resultsResponse.json();
 
     const d =
       signalsData;
@@ -472,6 +598,9 @@ async function load() {
       refreshedAt:
         new Date().toISOString(),
 
+      liveUpdatedAt:
+        null,
+
       sources:
         d.sources || [],
 
@@ -488,19 +617,20 @@ async function load() {
     results =
       resultsData;
 
+    configureConsensusFilter();
+    installConsensusStyles();
+
     render();
 
     await loadLiveResults();
 
   } catch (err) {
-
     console.error(
       'LineFoundry data load failed:',
       err
     );
 
     if ($('#propCards')) {
-
       $('#propCards').innerHTML = `
         <div class="empty-state">
           <h3>
@@ -517,24 +647,22 @@ async function load() {
 }
 
 
-// ============================================================
-// LOAD LIVE ESPN RESULTS
-// FROM CLOUDFLARE WORKER
-// ============================================================
+/* ============================================================
+   LOAD LIVE RESULTS FROM CLOUDFLARE WORKER
+============================================================ */
 
 async function loadLiveResults() {
   try {
-
     const response =
       await fetch(
         `${WORKER_URL}?_=${Date.now()}`,
         {
+          method: 'GET',
           cache: 'no-store'
         }
       );
 
     if (!response.ok) {
-
       throw new Error(
         `Worker returned ${response.status}`
       );
@@ -544,35 +672,29 @@ async function loadLiveResults() {
       await response.json();
 
     if (!data.success) {
-
       throw new Error(
         data.error ||
-        'Worker returned an error'
+          'Worker returned an error'
       );
     }
 
     liveResults = {};
 
-    (
-      data.results || []
-    ).forEach(result => {
-
-      if (result.id) {
-
-        liveResults[
-          result.id
-        ] = result;
-      }
-    });
+    (data.results || [])
+      .forEach(result => {
+        if (result.id) {
+          liveResults[result.id] =
+            result;
+        }
+      });
 
     if (board) {
-
       board.liveUpdatedAt =
         data.updatedAt ||
         new Date().toISOString();
-
-      render();
     }
+
+    render();
 
     console.log(
       'LineFoundry live results updated:',
@@ -580,18 +702,22 @@ async function loadLiveResults() {
     );
 
   } catch (err) {
-
     console.error(
       'LineFoundry live data failed:',
       err
     );
+
+    /*
+      Worker failure should never
+      break the static board.
+    */
   }
 }
 
 
-// ============================================================
-// AUTOMATIC LIVE REFRESH
-// ============================================================
+/* ============================================================
+   AUTOMATIC LIVE REFRESH
+============================================================ */
 
 setInterval(
   loadLiveResults,
@@ -599,31 +725,26 @@ setInterval(
 );
 
 
-// ============================================================
-// GET RESULT
-// ============================================================
+/* ============================================================
+   GET RESULT
+============================================================ */
 
 function getResult(id) {
-
   const live =
     liveResults[id];
 
   if (live) {
-
-    return formatLiveResult(
-      live
-    );
+    return formatLiveResult(live);
   }
 
   if (!results) {
-    return '—';
+    return 'PENDING';
   }
 
   if (
     results.results &&
     results.results[id]
   ) {
-
     return results.results[id];
   }
 
@@ -635,40 +756,28 @@ function getResult(id) {
 
   return (
     pick?.result ||
-    '—'
+    'PENDING'
   );
 }
 
 
-// ============================================================
-// FORMAT LIVE RESULT
-// ============================================================
+/* ============================================================
+   FORMAT LIVE RESULT
+============================================================ */
 
-function formatLiveResult(
-  result
-) {
-
-  if (
-    result.status ===
-    'GAME_NOT_FOUND'
-  ) {
-
-    return 'Not Available';
+function formatLiveResult(result) {
+  if (!result) {
+    return 'PENDING';
   }
 
   if (
     result.status ===
-    'MARKET_NOT_FOUND'
-  ) {
-
-    return 'Not Available';
-  }
-
-  if (
+      'GAME_NOT_FOUND' ||
     result.status ===
-    'ERROR'
+      'MARKET_NOT_FOUND' ||
+    result.status ===
+      'ERROR'
   ) {
-
     return 'Not Available';
   }
 
@@ -676,24 +785,20 @@ function formatLiveResult(
     result.market ===
     'Anytime TD'
   ) {
-
     if (
-      result.status ===
-      'HIT'
+      result.status === 'HIT'
     ) {
       return 'HIT';
     }
 
     if (
-      result.status ===
-      'MISS'
+      result.status === 'MISS'
     ) {
       return 'MISS';
     }
 
     if (
-      result.status ===
-      'LIVE'
+      result.status === 'LIVE'
     ) {
       return 'LIVE';
     }
@@ -702,39 +807,27 @@ function formatLiveResult(
   }
 
   if (
-    result.status ===
-    'HIT'
+    result.status === 'HIT'
   ) {
-
-    return `HIT — ${
-      formatNumber(
-        result.currentValue
-      )
-    }`;
+    return `HIT — ${formatNumber(
+      result.currentValue
+    )}`;
   }
 
   if (
-    result.status ===
-    'MISS'
+    result.status === 'MISS'
   ) {
-
-    return `MISS — ${
-      formatNumber(
-        result.currentValue
-      )
-    }`;
+    return `MISS — ${formatNumber(
+      result.currentValue
+    )}`;
   }
 
   if (
-    result.status ===
-    'LIVE'
+    result.status === 'LIVE'
   ) {
-
-    return `LIVE — ${
-      formatNumber(
-        result.currentValue
-      )
-    }`;
+    return `LIVE — ${formatNumber(
+      result.currentValue
+    )}`;
   }
 
   return (
@@ -744,12 +837,11 @@ function formatLiveResult(
 }
 
 
-// ============================================================
-// RESULT DETAILS
-// ============================================================
+/* ============================================================
+   RESULT DETAILS
+============================================================ */
 
 function getResultDetails(id) {
-
   const live =
     liveResults[id];
 
@@ -765,7 +857,6 @@ function getResultDetails(id) {
     live.status ===
       'ERROR'
   ) {
-
     return null;
   }
 
@@ -773,402 +864,273 @@ function getResultDetails(id) {
 }
 
 
-// ============================================================
-// FORMAT NUMBER
-// ============================================================
+/* ============================================================
+   FORMAT NUMBER
+============================================================ */
 
-function formatNumber(
-  value
-) {
-
+function formatNumber(value) {
   if (
     value === null ||
-    value === undefined
+    value === undefined ||
+    value === ''
   ) {
-
     return '—';
   }
 
-  return Number.isInteger(
-    Number(value)
-  )
+  const number =
+    Number(value);
 
-    ? String(value)
+  if (
+    !Number.isFinite(number)
+  ) {
+    return '—';
+  }
 
-    : Number(value).toFixed(
-        1
-      );
+  return Number.isInteger(number)
+    ? String(number)
+    : number.toFixed(1);
 }
 
 
-// ============================================================
-// LABEL
-// ============================================================
+/* ============================================================
+   PROP LABEL
+============================================================ */
 
 function label(p) {
+  const side =
+    p.side === 'OVER'
+      ? 'OVER'
+      : p.side === 'UNDER'
+        ? 'UNDER'
+        : p.side;
 
-  return `${p.side} ${
-    p.line == null
-      ? 'TD'
-      : p.line
-  } ${p.market}`;
+  if (
+    p.line === null ||
+    p.line === undefined
+  ) {
+    if (
+      p.market === 'Anytime TD'
+    ) {
+      return `${side} Anytime TD`;
+    }
+
+    return `${side} ${p.market}`;
+  }
+
+  return `${side} ${formatNumber(
+    p.line
+  )} ${p.market}`;
 }
 
 
-// ============================================================
-// LIVE FIELD
-// ============================================================
-
-function liveField(p) {
-
-  const live =
-    getResultDetails(p.id);
-
-  if (!live) {
-
-    return {
-      value: '—',
-      status:
-        'Waiting for live data'
-    };
-  }
-
-  if (
-    live.status ===
-    'HIT'
-  ) {
-
-    return {
-      value:
-        formatNumber(
-          live.currentValue
-        ),
-
-      status:
-        'BET HIT'
-    };
-  }
-
-  if (
-    live.status ===
-    'MISS'
-  ) {
-
-    return {
-      value:
-        formatNumber(
-          live.currentValue
-        ),
-
-      status:
-        'BET MISS'
-    };
-  }
-
-  if (
-    live.status ===
-    'LIVE'
-  ) {
-
-    return {
-      value:
-        formatNumber(
-          live.currentValue
-        ),
-
-      status:
-        'LIVE'
-    };
-  }
-
-  if (
-    live.status ===
-    'MARKET_NOT_FOUND'
-  ) {
-
-    return {
-      value: '—',
-      status:
-        'Market unavailable'
-    };
-  }
-
-  if (
-    live.status ===
-    'GAME_NOT_FOUND'
-  ) {
-
-    return {
-      value: '—',
-      status:
-        'Game unavailable'
-    };
-  }
-
-  return {
-    value: '—',
-    status:
-      live.status ||
-      'Waiting for live data'
-  };
-}
-
-
-// ============================================================
-// LIVE STATUS DISPLAY
-// ============================================================
+/* ============================================================
+   LIVE STATUS DISPLAY
+============================================================ */
 
 function liveStatus(p) {
-
   const live =
     getResultDetails(p.id);
 
   if (!live) {
-
-    return `
-      <div class="live-stat">
-
-        <strong>
-          Live Result: —
-        </strong>
-
-        <span>
-          Waiting for live data
-        </span>
-
-      </div>
-    `;
+    return '';
   }
+
+  /* Anytime TD */
 
   if (
     p.market ===
     'Anytime TD'
   ) {
-
     if (
-      live.status ===
-      'HIT'
+      live.status === 'HIT'
     ) {
-
       return `
-        <div class="live-stat">
-
+        <div class="live-stat hit">
           <strong>
-            Live Result: BET HIT
+            BET HIT
           </strong>
 
           <span>
             Touchdown recorded
           </span>
-
         </div>
       `;
     }
 
     if (
-      live.status ===
-      'MISS'
+      live.status === 'MISS'
     ) {
-
       return `
-        <div class="live-stat">
-
+        <div class="live-stat miss">
           <strong>
-            Live Result: BET MISS
+            BET MISS
           </strong>
 
           <span>
             No touchdown recorded
           </span>
-
         </div>
       `;
     }
 
     if (
-      live.status ===
-      'LIVE'
+      live.status === 'LIVE'
     ) {
-
       return `
-        <div class="live-stat">
-
+        <div class="live-stat pending">
           <strong>
-            Live Result: LIVE
+            LIVE
           </strong>
 
           <span>
             Game in progress
           </span>
+        </div>
+      `;
+    }
 
+    return '';
+  }
+
+
+  /* Statistical markets */
+
+  if (
+    live.status === 'HIT'
+  ) {
+    return `
+      <div class="live-stat hit">
+        <strong>
+          ${formatNumber(
+            live.currentValue
+          )}
+          — BET HIT
+        </strong>
+
+        <span>
+          Final result
+        </span>
+      </div>
+    `;
+  }
+
+
+  if (
+    live.status === 'MISS'
+  ) {
+    return `
+      <div class="live-stat miss">
+        <strong>
+          ${formatNumber(
+            live.currentValue
+          )}
+          — BET MISS
+        </strong>
+
+        <span>
+          Final result
+        </span>
+      </div>
+    `;
+  }
+
+
+  if (
+    live.status === 'LIVE'
+  ) {
+    const needed =
+      live.remaining;
+
+    if (
+      needed !== null &&
+      needed !== undefined
+    ) {
+      return `
+        <div class="live-stat pending">
+          <strong>
+            LIVE —
+            ${formatNumber(
+              live.currentValue
+            )}
+          </strong>
+
+          <span>
+            ${formatNumber(
+              needed
+            )}
+            needed
+          </span>
         </div>
       `;
     }
 
     return `
-      <div class="live-stat">
-
+      <div class="live-stat pending">
         <strong>
-          Live Result: —
+          LIVE —
+          ${formatNumber(
+            live.currentValue
+          )}
         </strong>
-
-        <span>
-          ${
-            live.status ||
-            'Waiting for live data'
-          }
-        </span>
-
       </div>
     `;
   }
 
-  if (
-    live.status ===
-    'HIT'
-  ) {
-
-    return `
-      <div class="live-stat">
-
-        <strong>
-          Live Result:
-          ${
-            formatNumber(
-              live.currentValue
-            )
-          }
-          — BET HIT
-        </strong>
-
-        <span>
-          Line:
-          ${
-            formatNumber(
-              live.line
-            )
-          }
-        </span>
-
-      </div>
-    `;
-  }
-
-  if (
-    live.status ===
-    'MISS'
-  ) {
-
-    return `
-      <div class="live-stat">
-
-        <strong>
-          Live Result:
-          ${
-            formatNumber(
-              live.currentValue
-            )
-          }
-          — BET MISS
-        </strong>
-
-        <span>
-          Line:
-          ${
-            formatNumber(
-              live.line
-            )
-          }
-        </span>
-
-      </div>
-    `;
-  }
-
-  if (
-    live.status ===
-    'LIVE'
-  ) {
-
-    const needed =
-      live.remaining;
-
-    return `
-      <div class="live-stat">
-
-        <strong>
-          Live Result:
-          ${
-            formatNumber(
-              live.currentValue
-            )
-          }
-          — LIVE
-        </strong>
-
-        <span>
-
-          ${
-            needed !== null &&
-            needed !== undefined
-
-              ? `${
-                  formatNumber(
-                    needed
-                  )
-                } needed`
-
-              : 'Game in progress'
-          }
-
-        </span>
-
-      </div>
-    `;
-  }
-
-  return `
-    <div class="live-stat">
-
-      <strong>
-        Live Result: —
-      </strong>
-
-      <span>
-        ${
-          live.status ||
-          'Waiting for live data'
-        }
-      </span>
-
-    </div>
-  `;
+  return '';
 }
 
 
-// ============================================================
-// PROP CARD
-// ============================================================
+/* ============================================================
+   PROP CARD
+============================================================ */
 
 function card(p) {
-
   const lockedPick =
     locked.includes(p.id);
 
+  const result =
+    getResult(p.id);
+
+  const strengthClass =
+    String(
+      p.consensusStrength ||
+        'single'
+    ).toLowerCase();
+
+  const disagreementText =
+    p.disagreeCount > 0
+      ? `${p.agreeCount} ${p.side} experts • ${p.disagreeCount} opposing`
+      : `${p.agreeCount} ${p.side} expert${p.agreeCount === 1 ? '' : 's'} • No opposing pick found`;
+
+  const directionPercent =
+    p.totalSources > 0
+      ? Math.round(
+          (
+            p.agreeCount /
+            p.totalSources
+          ) * 100
+        )
+      : 0;
+
+  const lineText =
+    p.lineRange
+      ? `Referenced lines: ${p.lineRange}`
+      : p.line !== null &&
+          p.line !== undefined
+        ? `Referenced line: ${formatNumber(p.line)}`
+        : 'Anytime touchdown market';
+
   return `
-    <article
-      class="prop ${
-        lockedPick
-          ? 'locked'
-          : ''
-      }"
-    >
+    <article class="prop ${
+      lockedPick
+        ? 'locked'
+        : ''
+    }">
 
       <div class="prop-top">
 
         <div class="game">
-          NFL • WEEK
-          ${board.week}
+          NFL • WEEK ${board.week}
         </div>
 
         <div class="grade">
@@ -1179,35 +1141,17 @@ function card(p) {
 
 
       <h3>
-        ${
-          p.player
-        } —
-
-        ${
-          p.consensusDirection
-        }
-
-        ${
-          p.line == null
-            ? ''
-            : p.line
-        }
-
-        ${
-          p.market
-        }
+        ${p.player} —
+        ${label(p)}
       </h3>
 
 
-      ${
-        liveStatus(p)
-      }
+      ${liveStatus(p)}
 
 
       <div class="metrics">
 
         <div class="metric">
-
           <b>
             ${p.agreeCount}
           </b>
@@ -1215,12 +1159,10 @@ function card(p) {
           <span>
             Agree
           </span>
-
         </div>
 
 
         <div class="metric">
-
           <b>
             ${p.disagreeCount}
           </b>
@@ -1228,140 +1170,71 @@ function card(p) {
           <span>
             Disagree
           </span>
-
         </div>
 
 
         <div class="metric">
-
           <b>
-            ${p.analystCount}
+            ${p.totalSources}
           </b>
 
           <span>
             Experts
           </span>
-
         </div>
 
 
         <div class="metric">
-
           <b>
-            ${
-              p.consensusStrengthLabel
-            }
+            ${p.consensusLabel}
           </b>
 
           <span>
             Strength
           </span>
-
         </div>
 
       </div>
 
 
-      <div class="consensus-summary">
+      <div class="consensus-summary ${strengthClass}">
 
         <strong>
-          ${
-            p.agreeCount
-          }
-
-          ${
-            p.consensusDirection
-          }
-
-          expert${
-            p.agreeCount === 1
-              ? ''
-              : 's'
-          }
+          ${disagreementText}
         </strong>
 
-
         <span>
-
-          ${
-            p.disagreeCount > 0
-
-              ? `${
-                  p.disagreeCount
-                }
-
-                ${
-                  p.consensusDirection ===
-                  'OVER'
-                    ? 'UNDER'
-                    : 'OVER'
-                }
-
-                expert${
-                  p.disagreeCount === 1
-                    ? ''
-                    : 's'
-                }
-
-                •
-                ${
-                  p.consensusPercent
-                }%
-                direction consensus`
-
-              : 'No opposing pick found'
-          }
-
+          ${directionPercent}% direction consensus
+          •
+          ${lineText}
         </span>
-
-
-        ${
-          p.lineLow !== null &&
-          p.lineHigh !== null
-
-            ? `
-              <small>
-
-                ${
-                  p.lineLow ===
-                  p.lineHigh
-
-                    ? `Line:
-                       ${
-                         formatNumber(
-                           p.lineLow
-                         )
-                       }`
-
-                    : `Majority line range:
-                       ${
-                         formatNumber(
-                           p.lineLow
-                         )
-                       }
-                       –
-                       ${
-                         formatNumber(
-                           p.lineHigh
-                         )
-                       }`
-                }
-
-              </small>
-            `
-
-            : ''
-        }
 
       </div>
 
 
       <div class="analyst-list">
 
-        ${
-          p.analysts
-            .map(a => `
+        ${p.analysts
+          .map(a => {
+            const side =
+              normalizeSide(
+                a.side
+              );
 
+            const sideClass =
+              side === 'UNDER'
+                ? 'under'
+                : '';
+
+            const line =
+              a.line !== null &&
+              a.line !== undefined
+                ? ` ${formatNumber(
+                    a.line
+                  )}`
+                : '';
+
+            return `
               <div>
 
                 <strong>
@@ -1369,45 +1242,33 @@ function card(p) {
                 </strong>
 
                 <span>
-                  ${
-                    a.outlet || ''
-                  }
-
-                  •
-
-                  ${
-                    a.side
-                  }
-
-                  ${
-                    a.line == null
-                      ? ''
-                      : a.line
-                  }
+                  ${a.outlet || ''}
                 </span>
 
+                <span
+                  class="analyst-side ${sideClass}"
+                >
+                  ${side}${line}
+                </span>
 
                 ${
                   a.url
-
                     ? `
                       <a
                         href="${a.url}"
                         target="_blank"
-                        rel="noopener"
+                        rel="noopener noreferrer"
                       >
                         Source ↗
                       </a>
                     `
-
                     : ''
                 }
 
               </div>
-
-            `)
-            .join('')
-        }
+            `;
+          })
+          .join('')}
 
       </div>
 
@@ -1419,9 +1280,7 @@ function card(p) {
 
       <div class="card-actions">
 
-        <span
-          class="lock-status"
-        >
+        <span class="lock-status">
 
           ${
             lockedPick
@@ -1431,6 +1290,20 @@ function card(p) {
 
         </span>
 
+
+        ${
+          lockedPick
+            ? ''
+            : `
+              <button
+                class="secondary-btn"
+                onclick="lockPick('${p.id}')"
+              >
+                Lock Pick
+              </button>
+            `
+        }
+
       </div>
 
     </article>
@@ -1438,30 +1311,55 @@ function card(p) {
 }
 
 
-// ============================================================
-// RENDER
-// ============================================================
+/* ============================================================
+   LOCK PICK
+============================================================ */
+
+window.lockPick =
+  function(id) {
+    if (
+      locked.includes(id)
+    ) {
+      return;
+    }
+
+    locked.push(id);
+
+    save();
+
+    render();
+  };
+
+
+/* ============================================================
+   RENDER
+============================================================ */
 
 function render() {
-
   const props =
     board?.props || [];
 
   const filter =
-    $('#confidenceFilter')?.value ||
+    $('#confidenceFilter')
+      ?.value ||
     'ALL';
 
   const filteredProps =
-    props.filter(
-      p =>
-        filter === 'ALL' ||
+    props.filter(p => {
+      if (
+        filter === 'ALL'
+      ) {
+        return true;
+      }
+
+      return (
         p.consensusStrength ===
-          filter
-    );
+        filter
+      );
+    });
 
 
   if ($('#propCards')) {
-
     $('#propCards').innerHTML =
       filteredProps
         .map(card)
@@ -1470,157 +1368,151 @@ function render() {
 
 
   if ($('#pickCount')) {
-
     $('#pickCount').textContent =
       locked.length;
   }
 
 
   if ($('#sourceCount')) {
-
     $('#sourceCount').textContent =
       board?.sources?.length ||
       0;
   }
 
 
-  if ($('#signalCount')) {
+  if ($('#sourceCount2')) {
+    $('#sourceCount2').textContent =
+      board?.sources?.length ||
+      0;
+  }
 
+
+  if ($('#signalCount')) {
     $('#signalCount').textContent =
       props.length;
   }
 
 
-  if ($('#lastRefresh')) {
+  if ($('#signalCount2')) {
+    $('#signalCount2').textContent =
+      props.length;
+  }
 
+
+  if ($('#lastRefresh')) {
     $('#lastRefresh').textContent =
       board?.liveUpdatedAt
-
         ? new Date(
             board.liveUpdatedAt
           ).toLocaleString()
-
         : board?.refreshedAt
-
           ? new Date(
               board.refreshedAt
             ).toLocaleString()
-
           : 'not run';
   }
 
 
-  if ($('#sourceRows')) {
+  /* ----------------------------------------------------------
+     SOURCE TABLE
+  ---------------------------------------------------------- */
 
+  if ($('#sourceRows')) {
     $('#sourceRows').innerHTML =
       (board?.sources || [])
-        .map(s => `
-
+        .map(source => `
           <tr>
 
             <td>
               <strong>
-                ${s.analyst}
+                ${source.analyst || ''}
               </strong>
             </td>
 
             <td>
-              ${s.outlet}
+              ${source.outlet || ''}
+            </td>
+
+            <td>
+              ${Math.round(
+                (source.quality || 0) *
+                100
+              )}/100
+            </td>
+
+            <td>
+              ${source.verification || ''}
             </td>
 
             <td>
               ${
-                Math.round(
-                  (s.quality || 0) *
-                  100
-                )
-              }/100
-            </td>
-
-            <td>
-              ${s.verification}
-            </td>
-
-            <td>
-
-              <a
-                href="${s.url}"
-                target="_blank"
-                rel="noopener"
-              >
-                Open source ↗
-              </a>
-
+                source.url
+                  ? `
+                    <a
+                      href="${source.url}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Open source ↗
+                    </a>
+                  `
+                  : ''
+              }
             </td>
 
           </tr>
-
         `)
         .join('');
   }
 
 
-  const es =
-    experts?.experts ||
-    [];
+  /* ----------------------------------------------------------
+     EXPERT TABLE
+  ---------------------------------------------------------- */
 
+  const expertList =
+    experts?.experts || [];
 
   if ($('#expertRows')) {
-
     $('#expertRows').innerHTML =
-      es
-        .map(e => {
-
-          const t =
-            e.tracked ||
+      expertList
+        .map(expert => {
+          const tracked =
+            expert.tracked ||
             {};
 
           const wl =
-            `${t.wins || 0}-${
-              t.losses || 0
-            }`;
+            `${tracked.wins || 0}-${tracked.losses || 0}`;
 
           const roi =
-            e.roi == null
-
+            expert.roi == null
               ? '—'
-
-              : `${
-                  (
-                    e.roi *
-                    100
-                  ).toFixed(1)
-                }%`;
-
+              : `${(
+                  expert.roi * 100
+                ).toFixed(1)}%`;
 
           const status =
-            t.picks >= 50
-
+            tracked.picks >= 50
               ? 'RANKED'
-
-              : t.picks > 0
-
+              : tracked.picks > 0
                 ? 'TRACKING'
-
                 : 'NEW';
 
-
           return `
-
             <tr>
 
               <td>
                 <strong>
-                  ${e.name}
+                  ${expert.name || ''}
                 </strong>
               </td>
 
               <td>
-                ${e.outlet}
+                ${expert.outlet || ''}
               </td>
 
               <td>
-                ${t.picks || 0}
+                ${tracked.picks || 0}
               </td>
 
               <td>
@@ -1628,11 +1520,8 @@ function render() {
               </td>
 
               <td>
-                ${
-                  (
-                    t.units || 0
-                  ).toFixed(2)
-                }u
+                ${(tracked.units || 0)
+                  .toFixed(2)}u
               </td>
 
               <td>
@@ -1640,74 +1529,59 @@ function render() {
               </td>
 
               <td>
-
                 <span
-                  class="status ${
-                    status.toLowerCase()
-                  }"
+                  class="status ${status.toLowerCase()}"
                 >
-
                   ${status}
-
                 </span>
-
               </td>
 
             </tr>
-
           `;
-
         })
         .join('');
   }
 
 
-  const r =
+  /* ----------------------------------------------------------
+     OVERALL RECORD
+  ---------------------------------------------------------- */
+
+  const record =
     experts?.record ||
     {};
 
-
   if ($('#wins')) {
-
     $('#wins').textContent =
-      r.wins || 0;
+      record.wins || 0;
   }
-
 
   if ($('#losses')) {
-
     $('#losses').textContent =
-      r.losses || 0;
+      record.losses || 0;
   }
 
-
   if ($('#units')) {
-
     $('#units').textContent =
       `${Number(
-        r.units || 0
+        record.units || 0
       ).toFixed(2)}u`;
   }
 
-
   if ($('#roi')) {
-
     $('#roi').textContent =
-      r.roi == null
-
+      record.roi == null
         ? '—'
-
         : `${(
-            r.roi *
-            100
+            record.roi * 100
           ).toFixed(1)}%`;
   }
 }
 
 
-// ============================================================
-// EVENTS
-// ============================================================
+/* ============================================================
+   EVENTS
+============================================================ */
 
 $('#confidenceFilter')
   ?.addEventListener(
@@ -1728,24 +1602,26 @@ $('#refreshBoard')
 $('#howItWorks')
   ?.addEventListener(
     'click',
-    () =>
+    () => {
       $('#howModal')
-        .setAttribute(
+        ?.setAttribute(
           'aria-hidden',
           'false'
-        )
+        );
+    }
   );
 
 
 $('#closeHow')
   ?.addEventListener(
     'click',
-    () =>
+    () => {
       $('#howModal')
-        .setAttribute(
+        ?.setAttribute(
           'aria-hidden',
           'true'
-        )
+        );
+    }
   );
 
 
@@ -1755,30 +1631,20 @@ document
   )
   ?.addEventListener(
     'click',
-    () =>
+    () => {
       $('#howModal')
-        .setAttribute(
+        ?.setAttribute(
           'aria-hidden',
           'true'
-        )
+        );
+    }
   );
 
 
-// ============================================================
-// INITIAL LOAD
-// ============================================================
+/* ============================================================
+   INITIAL LOAD
+============================================================ */
 
 installConsensusStyles();
 
-configureConsensusFilter();
-
 load();
-
-
-// Trigger the live Worker independently
-// 1.5 seconds after page load.
-
-setTimeout(
-  loadLiveResults,
-  1500
-);
