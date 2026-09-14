@@ -19,48 +19,45 @@ function save() {
   );
 }
 
+
 // ============================================================
 // LOAD LINEFOUNDRY DATA
 // ============================================================
 
 async function load() {
   try {
-    const [signalsResponse, expertsResponse, resultsResponse] =
+    const [signalsData, expertsData, resultsData] =
       await Promise.all([
-        fetch('/public-signals.json?_=' + Date.now(), {
-          cache: 'no-store'
+        fetch('/public-signals.json').then(r => {
+          if (!r.ok) {
+            throw new Error(
+              'Could not load public-signals.json'
+            );
+          }
+
+          return r.json();
         }),
 
-        fetch('/analyst-profiles.json?_=' + Date.now(), {
-          cache: 'no-store'
+        fetch('/analyst-profiles.json').then(r => {
+          if (!r.ok) {
+            throw new Error(
+              'Could not load analyst-profiles.json'
+            );
+          }
+
+          return r.json();
         }),
 
-        fetch('/results-ledger.json?_=' + Date.now(), {
-          cache: 'no-store'
+        fetch('/results-ledger.json').then(r => {
+          if (!r.ok) {
+            throw new Error(
+              'Could not load results-ledger.json'
+            );
+          }
+
+          return r.json();
         })
       ]);
-
-    if (!signalsResponse.ok) {
-      throw new Error(
-        `public-signals.json returned ${signalsResponse.status}`
-      );
-    }
-
-    if (!expertsResponse.ok) {
-      throw new Error(
-        `analyst-profiles.json returned ${expertsResponse.status}`
-      );
-    }
-
-    if (!resultsResponse.ok) {
-      throw new Error(
-        `results-ledger.json returned ${resultsResponse.status}`
-      );
-    }
-
-    const signalsData = await signalsResponse.json();
-    const expertsData = await expertsResponse.json();
-    const resultsData = await resultsResponse.json();
 
     const d = signalsData;
 
@@ -69,7 +66,6 @@ async function load() {
       week: d.week,
       season: d.season,
       refreshedAt: new Date().toISOString(),
-      liveUpdatedAt: null,
       sources: d.sources || [],
 
       props: (d.signals || []).map(s => {
@@ -86,10 +82,6 @@ async function load() {
           line: s.line,
           analyst: s.analyst,
           analystCount: 1,
-
-          // IMPORTANT:
-          // This is the existing site's consensus display.
-          // We are NOT inventing a new model probability.
           consensusScore: 71,
           confidence: 'EARLY',
 
@@ -111,7 +103,7 @@ async function load() {
 
     render();
 
-    // Get live ESPN data immediately.
+    // Immediately get live ESPN data.
     await loadLiveResults();
 
   } catch (err) {
@@ -131,8 +123,9 @@ async function load() {
   }
 }
 
+
 // ============================================================
-// LOAD LIVE RESULTS FROM CLOUDFLARE WORKER
+// LOAD LIVE ESPN RESULTS FROM CLOUDFLARE WORKER
 // ============================================================
 
 async function loadLiveResults() {
@@ -140,7 +133,6 @@ async function loadLiveResults() {
     const response = await fetch(
       `${WORKER_URL}?_=${Date.now()}`,
       {
-        method: 'GET',
         cache: 'no-store'
       }
     );
@@ -167,13 +159,15 @@ async function loadLiveResults() {
       }
     });
 
+    // Only update the board timestamp/render if the board
+    // already exists. The live data itself is still retained.
     if (board) {
       board.liveUpdatedAt =
         data.updatedAt ||
         new Date().toISOString();
-    }
 
-    render();
+      render();
+    }
 
     console.log(
       'LineFoundry live results updated:',
@@ -185,22 +179,21 @@ async function loadLiveResults() {
       'LineFoundry live data failed:',
       err
     );
-
-    // IMPORTANT:
-    // A Worker failure should NOT break the main site.
-    // The existing static board remains visible.
   }
 }
+
 
 // ============================================================
 // AUTOMATIC LIVE REFRESH
 // ============================================================
 
-// Check the Cloudflare Worker every 60 seconds.
+// ESPN / Cloudflare Worker gets checked every 60 seconds.
+
 setInterval(
   loadLiveResults,
   60000
 );
+
 
 // ============================================================
 // GET RESULT
@@ -232,21 +225,27 @@ function getResult(id) {
   return pick?.result || 'PENDING';
 }
 
+
 // ============================================================
 // FORMAT LIVE RESULT
 // ============================================================
 
 function formatLiveResult(result) {
 
-  if (!result) {
-    return 'PENDING';
+  // Player's game hasn't been resolved.
+  if (
+    result.status === 'GAME_NOT_FOUND'
+  ) {
+    return 'Not Available';
   }
 
-  // These are internal Worker states.
-  // The public site should simply say Not Available.
   if (
-    result.status === 'GAME_NOT_FOUND' ||
-    result.status === 'MARKET_NOT_FOUND' ||
+    result.status === 'MARKET_NOT_FOUND'
+  ) {
+    return 'Not Available';
+  }
+
+  if (
     result.status === 'ERROR'
   ) {
     return 'Not Available';
@@ -272,19 +271,25 @@ function formatLiveResult(result) {
   }
 
   // Normal statistical markets
-  if (result.status === 'HIT') {
+  if (
+    result.status === 'HIT'
+  ) {
     return `HIT — ${formatNumber(
       result.currentValue
     )}`;
   }
 
-  if (result.status === 'MISS') {
+  if (
+    result.status === 'MISS'
+  ) {
     return `MISS — ${formatNumber(
       result.currentValue
     )}`;
   }
 
-  if (result.status === 'LIVE') {
+  if (
+    result.status === 'LIVE'
+  ) {
     return `LIVE — ${formatNumber(
       result.currentValue
     )}`;
@@ -292,6 +297,7 @@ function formatLiveResult(result) {
 
   return result.status || 'PENDING';
 }
+
 
 // ============================================================
 // RESULT DETAILS
@@ -315,6 +321,7 @@ function getResultDetails(id) {
   return live;
 }
 
+
 // ============================================================
 // FORMAT NUMBER
 // ============================================================
@@ -322,22 +329,16 @@ function getResultDetails(id) {
 function formatNumber(value) {
   if (
     value === null ||
-    value === undefined ||
-    value === ''
+    value === undefined
   ) {
     return '—';
   }
 
-  const number = Number(value);
-
-  if (!Number.isFinite(number)) {
-    return '—';
-  }
-
-  return Number.isInteger(number)
-    ? String(number)
-    : number.toFixed(1);
+  return Number.isInteger(Number(value))
+    ? String(value)
+    : Number(value).toFixed(1);
 }
+
 
 // ============================================================
 // LABEL
@@ -350,6 +351,7 @@ function label(p) {
       : p.line
   } ${p.market}`;
 }
+
 
 // ============================================================
 // LIVE STATUS DISPLAY
@@ -367,7 +369,6 @@ function liveStatus(p) {
   if (
     p.market === 'Anytime TD'
   ) {
-
     if (
       live.status === 'HIT'
     ) {
@@ -401,7 +402,6 @@ function liveStatus(p) {
     return '';
   }
 
-  // BET HIT
   if (
     live.status === 'HIT'
   ) {
@@ -415,7 +415,6 @@ function liveStatus(p) {
     `;
   }
 
-  // BET MISS
   if (
     live.status === 'MISS'
   ) {
@@ -429,7 +428,6 @@ function liveStatus(p) {
     `;
   }
 
-  // GAME IN PROGRESS
   if (
     live.status === 'LIVE'
   ) {
@@ -445,7 +443,7 @@ function liveStatus(p) {
           <strong>
             LIVE — ${formatNumber(
               live.currentValue
-            )}
+            )} yards
           </strong>
 
           <span>
@@ -471,6 +469,7 @@ function liveStatus(p) {
   return '';
 }
 
+
 // ============================================================
 // PROP CARD
 // ============================================================
@@ -481,6 +480,9 @@ function card(p) {
 
   const result =
     getResult(p.id);
+
+  const live =
+    getResultDetails(p.id);
 
   return `
     <article class="prop ${
@@ -505,7 +507,9 @@ function card(p) {
         ${p.player} — ${label(p)}
       </h3>
 
-      ${liveStatus(p)}
+      ${
+        liveStatus(p)
+      }
 
       <div class="metrics">
 
@@ -582,6 +586,7 @@ function card(p) {
     </article>
   `;
 }
+
 
 // ============================================================
 // RENDER
@@ -664,6 +669,7 @@ function render() {
             </td>
 
             <td>
+
               <a
                 href="${s.url}"
                 target="_blank"
@@ -671,6 +677,7 @@ function render() {
               >
                 Open source ↗
               </a>
+
             </td>
 
           </tr>
@@ -739,11 +746,15 @@ function render() {
             </td>
 
             <td>
+
               <span class="status ${
                 status.toLowerCase()
               }">
+
                 ${status}
+
               </span>
+
             </td>
 
           </tr>
@@ -782,6 +793,7 @@ function render() {
   }
 }
 
+
 // ============================================================
 // EVENTS
 // ============================================================
@@ -805,7 +817,7 @@ $('#howItWorks')
     'click',
     () =>
       $('#howModal')
-        ?.setAttribute(
+        .setAttribute(
           'aria-hidden',
           'false'
         )
@@ -816,7 +828,7 @@ $('#closeHow')
     'click',
     () =>
       $('#howModal')
-        ?.setAttribute(
+        .setAttribute(
           'aria-hidden',
           'true'
         )
@@ -830,14 +842,24 @@ document
     'click',
     () =>
       $('#howModal')
-        ?.setAttribute(
+        .setAttribute(
           'aria-hidden',
           'true'
         )
   );
+
 
 // ============================================================
 // INITIAL LOAD
 // ============================================================
 
 load();
+
+// Trigger the live Worker independently 1.5 seconds
+// after page load. This ensures live ESPN data is requested
+// even if something interferes with the normal initial load.
+
+setTimeout(
+  loadLiveResults,
+  1500
+);
