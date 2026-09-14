@@ -10,13 +10,7 @@ let locked = JSON.parse(
   localStorage.getItem('lf_consensus_locked') || '[]'
 );
 
-const $ = selector =>
-  document.querySelector(selector);
-
-
-/* ============================================================
-   STORAGE
-============================================================ */
+const $ = s => document.querySelector(s);
 
 function save() {
   localStorage.setItem(
@@ -26,28 +20,21 @@ function save() {
 }
 
 
-/* ============================================================
-   CONSENSUS HELPERS
-============================================================ */
+// ============================================================
+// CONSENSUS ENGINE
+// ============================================================
 
 function normalizeSide(side) {
-  const value = String(side || '')
-    .trim()
-    .toUpperCase();
+  const value =
+    String(side || '')
+      .trim()
+      .toUpperCase();
 
-  if (
-    value === 'YES' ||
-    value === 'OVER' ||
-    value === 'O'
-  ) {
+  if (value === 'YES' || value === 'OVER') {
     return 'OVER';
   }
 
-  if (
-    value === 'NO' ||
-    value === 'UNDER' ||
-    value === 'U'
-  ) {
+  if (value === 'NO' || value === 'UNDER') {
     return 'UNDER';
   }
 
@@ -60,6 +47,7 @@ function consensusKey(signal) {
     String(signal.player || '')
       .trim()
       .toLowerCase(),
+
     String(signal.market || '')
       .trim()
       .toLowerCase()
@@ -97,28 +85,22 @@ function consensusStrength(
 
 
 function consensusLabel(strength) {
-  switch (strength) {
-    case 'HEAVY':
-      return 'Heavy';
+  const labels = {
+    HEAVY: 'HEAVY',
+    STRONG: 'STRONG',
+    MODERATE: 'MODERATE',
+    EMERGING: 'EMERGING',
+    SINGLE: 'SINGLE SOURCE',
+    SPLIT: 'SPLIT'
+  };
 
-    case 'STRONG':
-      return 'Strong';
-
-    case 'MODERATE':
-      return 'Moderate';
-
-    case 'EMERGING':
-      return 'Emerging';
-
-    case 'SPLIT':
-      return 'Split';
-
-    case 'SINGLE':
-    default:
-      return 'Single Source';
-  }
+  return labels[strength] || strength;
 }
 
+
+// ============================================================
+// BUILD CONSENSUS CARDS
+// ============================================================
 
 function buildConsensusProps(
   signals,
@@ -126,7 +108,7 @@ function buildConsensusProps(
 ) {
   const groups = new Map();
 
-  (signals || []).forEach(signal => {
+  signals.forEach(signal => {
     const key = consensusKey(signal);
 
     if (!groups.has(key)) {
@@ -137,193 +119,169 @@ function buildConsensusProps(
   });
 
   return Array.from(groups.values()).map(group => {
+
     const first = group[0];
 
-    const normalized = group.map(signal => ({
-      ...signal,
-      normalizedSide:
-        normalizeSide(signal.side)
-    }));
-
     const overSignals =
-      normalized.filter(
+      group.filter(
         signal =>
-          signal.normalizedSide === 'OVER'
+          normalizeSide(signal.side) === 'OVER'
       );
 
     const underSignals =
-      normalized.filter(
+      group.filter(
         signal =>
-          signal.normalizedSide === 'UNDER'
+          normalizeSide(signal.side) === 'UNDER'
       );
 
-    const unknownSignals =
-      normalized.filter(
-        signal =>
-          signal.normalizedSide !== 'OVER' &&
-          signal.normalizedSide !== 'UNDER'
-      );
+    const over = overSignals.length;
+    const under = underSignals.length;
 
-    let majoritySide = normalizeSide(
-      first.side
-    );
+    const total = group.length;
 
-    let agreeCount = 1;
-    let disagreeCount = 0;
+    let majoritySide;
+    let agree;
+    let disagree;
 
-    if (
-      overSignals.length >
-      underSignals.length
-    ) {
+    if (over > under) {
       majoritySide = 'OVER';
-      agreeCount = overSignals.length;
-      disagreeCount = underSignals.length;
-    } else if (
-      underSignals.length >
-      overSignals.length
-    ) {
-      majoritySide = 'UNDER';
-      agreeCount = underSignals.length;
-      disagreeCount = overSignals.length;
-    } else if (
-      overSignals.length ===
-        underSignals.length &&
-      overSignals.length > 0
-    ) {
-      majoritySide =
-        normalizeSide(first.side);
-
-      agreeCount =
-        normalized.filter(
-          signal =>
-            signal.normalizedSide ===
-            majoritySide
-        ).length;
-
-      disagreeCount =
-        normalized.filter(
-          signal =>
-            signal.normalizedSide !==
-            majoritySide
-        ).length;
-    } else {
-      majoritySide =
-        normalizeSide(first.side);
-
-      agreeCount = normalized.length;
-      disagreeCount = 0;
+      agree = over;
+      disagree = under;
     }
+    else if (under > over) {
+      majoritySide = 'UNDER';
+      agree = under;
+      disagree = over;
+    }
+    else {
+      majoritySide =
+        normalizeSide(first.side);
 
-    const total =
-      normalized.length;
+      agree = over;
+      disagree = under;
+    }
 
     const strength =
       consensusStrength(
         total,
-        agreeCount,
-        disagreeCount
+        agree,
+        disagree
       );
 
+    const percent =
+      total > 0
+        ? Math.round(
+            (agree / total) * 100
+          )
+        : 0;
+
+    const analysts =
+      group.map(signal => {
+
+        const source =
+          sources.find(
+            item =>
+              item.id === signal.sourceId
+          );
+
+        return {
+          name: signal.analyst,
+          outlet: source?.outlet || '',
+          sourceId: signal.sourceId,
+          url: source?.url || '',
+          note: signal.note || '',
+          side: normalizeSide(signal.side),
+          line: signal.line
+        };
+      });
+
     const majoritySignals =
-      normalized.filter(
+      group.filter(
         signal =>
-          signal.normalizedSide ===
+          normalizeSide(signal.side) ===
           majoritySide
       );
 
-    const lineValues =
+    const majorityLines =
       majoritySignals
         .map(signal => signal.line)
         .filter(
           line =>
             line !== null &&
-            line !== undefined &&
-            line !== ''
+            line !== undefined
         )
         .map(Number)
         .filter(Number.isFinite);
 
-    let line = first.line;
+    const allLines =
+      group
+        .map(signal => signal.line)
+        .filter(
+          line =>
+            line !== null &&
+            line !== undefined
+        )
+        .map(Number)
+        .filter(Number.isFinite);
 
-    let lineRange = null;
+    const uniqueLines =
+      [...new Set(allLines)]
+        .sort((a, b) => a - b);
 
-    if (lineValues.length > 0) {
-      const minLine =
-        Math.min(...lineValues);
+    let line =
+      majorityLines.length
+        ? majorityLines[0]
+        : first.line;
 
-      const maxLine =
-        Math.max(...lineValues);
+    let lineDisplay = '';
 
-      line = minLine;
-
-      if (minLine !== maxLine) {
-        lineRange =
-          `${formatNumber(minLine)}–${formatNumber(maxLine)}`;
-      }
+    if (uniqueLines.length === 1) {
+      lineDisplay =
+        String(uniqueLines[0]);
+    }
+    else if (uniqueLines.length > 1) {
+      lineDisplay =
+        `${uniqueLines[0]}–${uniqueLines[uniqueLines.length - 1]}`;
     }
 
-    const analysts =
-      normalized.map(signal => {
-        const source =
-          (sources || []).find(
-            source =>
-              source.id === signal.sourceId
-          );
-
-        return {
-          name:
-            signal.analyst ||
-            'Unknown analyst',
-
-          sourceId:
-            signal.sourceId,
-
-          note:
-            signal.note || '',
-
-          url:
-            source?.url,
-
-          outlet:
-            source?.outlet ||
-            source?.name ||
-            '',
-
-          side:
-            normalizeSide(signal.side),
-
-          line:
-            signal.line
-        };
-      });
-
-    const consensusDisplay =
-      disagreeCount === 0
-        ? `${agreeCount} ${majoritySide}`
-        : `${agreeCount}/${total} ${majoritySide}`;
-
-    let rationale = '';
+    let consensusDisplay;
 
     if (total === 1) {
-      rationale =
-        'One tracked expert currently supports this direction. No opposing pick found.';
-    } else if (disagreeCount === 0) {
-      rationale =
-        `${agreeCount} independent experts currently agree on this direction.`;
-    } else {
-      rationale =
-        `${agreeCount} experts support ${majoritySide} while ${disagreeCount} support the opposite direction.`;
+      consensusDisplay =
+        `1 ${majoritySide}`;
+    }
+    else {
+      consensusDisplay =
+        `${agree}/${total} ${majoritySide}`;
     }
 
-    if (unknownSignals.length > 0) {
-      rationale +=
-        ` ${unknownSignals.length} signal${unknownSignals.length === 1 ? '' : 's'} could not be assigned to an over/under direction.`;
+    let rationale;
+
+    if (total === 1) {
+
+      rationale =
+        'One tracked source currently supports this direction; treat it as an early signal until more sources agree.';
+
+    }
+    else if (over === under) {
+
+      rationale =
+        `${over} OVER expert${over === 1 ? '' : 's'} and ${under} UNDER expert${under === 1 ? '' : 's'} — the sources are split.`;
+
+    }
+    else {
+
+      rationale =
+        `${agree} ${majoritySide} expert${agree === 1 ? '' : 's'} • ${disagree} opposing expert${disagree === 1 ? '' : 's'} • ${percent}% direction consensus.`;
+
     }
 
     return {
+
       id:
-        majoritySignals[0]?.id ||
-        first.id,
+        `CONS-${group
+          .map(signal => signal.id)
+          .join('-')}`,
 
       player:
         first.player,
@@ -334,59 +292,65 @@ function buildConsensusProps(
       side:
         majoritySide,
 
-      line,
+      line:
+        line,
 
-      lineRange,
+      lineDisplay:
+        lineDisplay,
 
       analyst:
         majoritySignals[0]?.analyst ||
         first.analyst,
 
+      analysts:
+        analysts,
+
       analystCount:
         total,
 
-      agreeCount,
-
-      disagreeCount,
-
-      totalSources:
+      experts:
         total,
 
-      consensusDisplay,
+      agree:
+        agree,
+
+      disagree:
+        disagree,
+
+      percent:
+        percent,
+
+      consensusScore:
+        percent,
 
       consensusStrength:
         strength,
 
-      consensusLabel:
+      consensusDisplay:
+        consensusDisplay,
+
+      confidence:
         consensusLabel(strength),
 
-      analysts,
-
-      rationale,
-
-      sourceIds:
-        normalized.map(
-          signal => signal.sourceId
-        )
+      rationale:
+        rationale
     };
   });
 }
 
 
-/* ============================================================
-   CONSENSUS FILTER
-============================================================ */
+// ============================================================
+// CONSENSUS FILTER
+// ============================================================
 
 function configureConsensusFilter() {
+
   const filter =
     $('#confidenceFilter');
 
   if (!filter) {
     return;
   }
-
-  const currentValue =
-    filter.value;
 
   filter.innerHTML = `
     <option value="ALL">
@@ -418,196 +382,118 @@ function configureConsensusFilter() {
     </option>
   `;
 
-  filter.value =
-    currentValue || 'ALL';
+  const parent =
+    filter.parentElement;
 
-  const label =
-    filter.closest('label');
-
-  if (label) {
-    const textNodes =
-      Array.from(label.childNodes);
-
-    textNodes.forEach(node => {
-      if (
-        node.nodeType ===
-        Node.TEXT_NODE
-      ) {
-        node.textContent =
-          'Consensus Strength';
-      }
-    });
-  }
-}
-
-
-/* ============================================================
-   CONSENSUS STYLES
-============================================================ */
-
-function installConsensusStyles() {
-  if ($('#lfConsensusStyles')) {
+  if (!parent) {
     return;
   }
 
-  const style =
-    document.createElement('style');
+  const label =
+    parent.querySelector('label');
 
-  style.id =
-    'lfConsensusStyles';
-
-  style.textContent = `
-    .consensus-summary {
-      margin: 12px 0 14px;
-      padding: 13px 15px;
-      border: 1px solid #27313e;
-      border-radius: 12px;
-      background: #0a0f16;
-    }
-
-    .consensus-summary strong {
-      display: block;
-      color: #f2f5f8;
-      font-size: 13px;
-      line-height: 1.45;
-    }
-
-    .consensus-summary span {
-      display: block;
-      margin-top: 4px;
-      color: #8e9aaa;
-      font-size: 12px;
-      line-height: 1.45;
-    }
-
-    .consensus-summary.heavy,
-    .consensus-summary.strong {
-      border-color: rgba(125,242,178,.25);
-    }
-
-    .consensus-summary.heavy strong,
-    .consensus-summary.strong strong {
-      color: #7df2b2;
-    }
-
-    .consensus-summary.split {
-      border-color: rgba(255,193,93,.25);
-    }
-
-    .consensus-summary.split strong {
-      color: #ffc15d;
-    }
-
-    .consensus-direction {
-      font-weight: 800;
-      letter-spacing: .02em;
-    }
-
-    .analyst-side {
-      font-size: 11px;
-      font-weight: 800;
-      margin-left: 6px;
-      color: #7df2b2;
-    }
-
-    .analyst-side.under {
-      color: #ff9a9a;
-    }
-  `;
-
-  document.head.appendChild(style);
+  if (label) {
+    label.textContent =
+      'Consensus Strength';
+  }
 }
 
 
-/* ============================================================
-   LOAD LINEFOUNDRY DATA
-============================================================ */
+// ============================================================
+// LOAD LINEFOUNDRY DATA
+// ============================================================
 
 async function load() {
+
   try {
+
     const [
-      signalsResponse,
-      expertsResponse,
-      resultsResponse
-    ] = await Promise.all([
-      fetch(
-        '/public-signals.json?_=' +
-          Date.now(),
-        {
-          cache: 'no-store'
-        }
-      ),
+      signalsData,
+      expertsData,
+      resultsData
+    ] =
+      await Promise.all([
 
-      fetch(
-        '/analyst-profiles.json?_=' +
-          Date.now(),
-        {
-          cache: 'no-store'
-        }
-      ),
+        fetch(
+          '/public-signals.json',
+          {
+            cache: 'no-store'
+          }
+        ).then(response => {
 
-      fetch(
-        '/results-ledger.json?_=' +
-          Date.now(),
-        {
-          cache: 'no-store'
-        }
-      )
-    ]);
+          if (!response.ok) {
+            throw new Error(
+              'Could not load public-signals.json'
+            );
+          }
 
-    if (!signalsResponse.ok) {
-      throw new Error(
-        `public-signals.json returned ${signalsResponse.status}`
-      );
-    }
+          return response.json();
+        }),
 
-    if (!expertsResponse.ok) {
-      throw new Error(
-        `analyst-profiles.json returned ${expertsResponse.status}`
-      );
-    }
+        fetch(
+          '/analyst-profiles.json',
+          {
+            cache: 'no-store'
+          }
+        ).then(response => {
 
-    if (!resultsResponse.ok) {
-      throw new Error(
-        `results-ledger.json returned ${resultsResponse.status}`
-      );
-    }
+          if (!response.ok) {
+            throw new Error(
+              'Could not load analyst-profiles.json'
+            );
+          }
 
-    const signalsData =
-      await signalsResponse.json();
+          return response.json();
+        }),
 
-    const expertsData =
-      await expertsResponse.json();
+        fetch(
+          '/results-ledger.json',
+          {
+            cache: 'no-store'
+          }
+        ).then(response => {
 
-    const resultsData =
-      await resultsResponse.json();
+          if (!response.ok) {
+            throw new Error(
+              'Could not load results-ledger.json'
+            );
+          }
 
-    const d =
-      signalsData;
+          return response.json();
+        })
+
+      ]);
+
+    const signals =
+      signalsData.signals || [];
+
+    const sources =
+      signalsData.sources || [];
 
     board = {
+
       mode:
         'public-consensus',
 
       week:
-        d.week,
+        signalsData.week,
 
       season:
-        d.season,
+        signalsData.season,
 
       refreshedAt:
         new Date().toISOString(),
 
-      liveUpdatedAt:
-        null,
-
       sources:
-        d.sources || [],
+        sources,
+
+      rawSignals:
+        signals,
 
       props:
         buildConsensusProps(
-          d.signals || [],
-          d.sources || []
+          signals,
+          sources
         )
     };
 
@@ -618,21 +504,24 @@ async function load() {
       resultsData;
 
     configureConsensusFilter();
-    installConsensusStyles();
 
     render();
 
     await loadLiveResults();
 
-  } catch (err) {
+  }
+  catch (error) {
+
     console.error(
       'LineFoundry data load failed:',
-      err
+      error
     );
 
     if ($('#propCards')) {
+
       $('#propCards').innerHTML = `
         <div class="empty-state">
+
           <h3>
             Unable to load LineFoundry data
           </h3>
@@ -640,6 +529,7 @@ async function load() {
           <p>
             Please refresh the page and try again.
           </p>
+
         </div>
       `;
     }
@@ -647,22 +537,24 @@ async function load() {
 }
 
 
-/* ============================================================
-   LOAD LIVE RESULTS FROM CLOUDFLARE WORKER
-============================================================ */
+// ============================================================
+// LOAD LIVE ESPN RESULTS
+// ============================================================
 
 async function loadLiveResults() {
+
   try {
+
     const response =
       await fetch(
         `${WORKER_URL}?_=${Date.now()}`,
         {
-          method: 'GET',
           cache: 'no-store'
         }
       );
 
     if (!response.ok) {
+
       throw new Error(
         `Worker returned ${response.status}`
       );
@@ -672,9 +564,10 @@ async function loadLiveResults() {
       await response.json();
 
     if (!data.success) {
+
       throw new Error(
         data.error ||
-          'Worker returned an error'
+        'Worker returned an error'
       );
     }
 
@@ -682,42 +575,43 @@ async function loadLiveResults() {
 
     (data.results || [])
       .forEach(result => {
+
         if (result.id) {
+
           liveResults[result.id] =
             result;
         }
+
       });
 
     if (board) {
+
       board.liveUpdatedAt =
         data.updatedAt ||
         new Date().toISOString();
-    }
 
-    render();
+      render();
+    }
 
     console.log(
       'LineFoundry live results updated:',
       data
     );
 
-  } catch (err) {
+  }
+  catch (error) {
+
     console.error(
       'LineFoundry live data failed:',
-      err
+      error
     );
-
-    /*
-      Worker failure should never
-      break the static board.
-    */
   }
 }
 
 
-/* ============================================================
-   AUTOMATIC LIVE REFRESH
-============================================================ */
+// ============================================================
+// AUTOMATIC LIVE REFRESH
+// ============================================================
 
 setInterval(
   loadLiveResults,
@@ -725,407 +619,288 @@ setInterval(
 );
 
 
-/* ============================================================
-   GET RESULT
-============================================================ */
+// ============================================================
+// RESULT HELPERS
+// ============================================================
 
-function getResult(id) {
-  const live =
-    liveResults[id];
+function getSignalIdsForProp(prop) {
 
-  if (live) {
-    return formatLiveResult(live);
+  if (!board?.rawSignals) {
+    return [];
   }
 
-  if (!results) {
-    return 'PENDING';
-  }
+  return board.rawSignals
+    .filter(signal => {
 
-  if (
-    results.results &&
-    results.results[id]
-  ) {
-    return results.results[id];
-  }
+      if (
+        signal.player !== prop.player
+      ) {
+        return false;
+      }
 
-  const pick =
-    (results.picks || [])
-      .find(
-        p => p.id === id
+      if (
+        signal.market !== prop.market
+      ) {
+        return false;
+      }
+
+      return prop.analysts.some(
+        analyst =>
+          analyst.sourceId ===
+          signal.sourceId
       );
-
-  return (
-    pick?.result ||
-    'PENDING'
-  );
+    })
+    .map(
+      signal => signal.id
+    );
 }
 
 
-/* ============================================================
-   FORMAT LIVE RESULT
-============================================================ */
+function getLiveMatches(prop) {
 
-function formatLiveResult(result) {
-  if (!result) {
+  return getSignalIdsForProp(prop)
+    .map(
+      id =>
+        liveResults[id]
+    )
+    .filter(Boolean);
+}
+
+
+function getResult(prop) {
+
+  const matches =
+    getLiveMatches(prop);
+
+  if (!matches.length) {
     return 'PENDING';
   }
 
+  const hits =
+    matches.filter(
+      result =>
+        result.status === 'HIT'
+    ).length;
+
+  const misses =
+    matches.filter(
+      result =>
+        result.status === 'MISS'
+    ).length;
+
   if (
-    result.status ===
-      'GAME_NOT_FOUND' ||
-    result.status ===
-      'MARKET_NOT_FOUND' ||
-    result.status ===
-      'ERROR'
+    hits &&
+    !misses
   ) {
-    return 'Not Available';
+    return 'HIT';
   }
 
   if (
-    result.market ===
-    'Anytime TD'
+    misses &&
+    !hits
   ) {
-    if (
-      result.status === 'HIT'
-    ) {
-      return 'HIT';
-    }
-
-    if (
-      result.status === 'MISS'
-    ) {
-      return 'MISS';
-    }
-
-    if (
-      result.status === 'LIVE'
-    ) {
-      return 'LIVE';
-    }
-
-    return 'PENDING';
+    return 'MISS';
   }
 
   if (
-    result.status === 'HIT'
+    hits ||
+    misses
   ) {
-    return `HIT — ${formatNumber(
-      result.currentValue
-    )}`;
+    return `${hits} HIT • ${misses} MISS`;
   }
 
-  if (
-    result.status === 'MISS'
-  ) {
-    return `MISS — ${formatNumber(
-      result.currentValue
-    )}`;
-  }
-
-  if (
-    result.status === 'LIVE'
-  ) {
-    return `LIVE — ${formatNumber(
-      result.currentValue
-    )}`;
-  }
-
-  return (
-    result.status ||
-    'PENDING'
-  );
+  return 'LIVE';
 }
 
 
-/* ============================================================
-   RESULT DETAILS
-============================================================ */
+function getResultDetails(prop) {
 
-function getResultDetails(id) {
-  const live =
-    liveResults[id];
+  const matches =
+    getLiveMatches(prop);
 
-  if (!live) {
+  if (!matches.length) {
     return null;
   }
 
-  if (
-    live.status ===
-      'GAME_NOT_FOUND' ||
-    live.status ===
-      'MARKET_NOT_FOUND' ||
-    live.status ===
-      'ERROR'
-  ) {
-    return null;
-  }
-
-  return live;
+  return matches;
 }
 
 
-/* ============================================================
-   FORMAT NUMBER
-============================================================ */
+// ============================================================
+// FORMAT NUMBER
+// ============================================================
 
 function formatNumber(value) {
+
   if (
     value === null ||
-    value === undefined ||
-    value === ''
+    value === undefined
   ) {
     return '—';
   }
 
-  const number =
-    Number(value);
-
-  if (
-    !Number.isFinite(number)
-  ) {
-    return '—';
-  }
-
-  return Number.isInteger(number)
-    ? String(number)
-    : number.toFixed(1);
+  return Number.isInteger(
+    Number(value)
+  )
+    ? String(value)
+    : Number(value).toFixed(1);
 }
 
 
-/* ============================================================
-   PROP LABEL
-============================================================ */
+// ============================================================
+// LIVE STATUS
+// ============================================================
 
-function label(p) {
-  const side =
-    p.side === 'OVER'
-      ? 'OVER'
-      : p.side === 'UNDER'
-        ? 'UNDER'
-        : p.side;
+function liveStatus(prop) {
 
-  if (
-    p.line === null ||
-    p.line === undefined
-  ) {
-    if (
-      p.market === 'Anytime TD'
-    ) {
-      return `${side} Anytime TD`;
-    }
+  const matches =
+    getResultDetails(prop);
 
-    return `${side} ${p.market}`;
+  if (!matches?.length) {
+    return '';
   }
 
-  return `${side} ${formatNumber(
-    p.line
-  )} ${p.market}`;
-}
+  const hits =
+    matches.filter(
+      result =>
+        result.status === 'HIT'
+    );
 
+  const misses =
+    matches.filter(
+      result =>
+        result.status === 'MISS'
+    );
 
-/* ============================================================
-   LIVE STATUS DISPLAY
-============================================================ */
-
-function liveStatus(p) {
   const live =
-    getResultDetails(p.id);
-
-  if (!live) {
-    return '';
-  }
-
-  /* Anytime TD */
+    matches.find(
+      result =>
+        result.status === 'LIVE'
+    );
 
   if (
-    p.market ===
-    'Anytime TD'
+    hits.length &&
+    !misses.length
   ) {
-    if (
-      live.status === 'HIT'
-    ) {
-      return `
-        <div class="live-stat hit">
-          <strong>
-            BET HIT
-          </strong>
 
-          <span>
-            Touchdown recorded
-          </span>
-        </div>
-      `;
-    }
-
-    if (
-      live.status === 'MISS'
-    ) {
-      return `
-        <div class="live-stat miss">
-          <strong>
-            BET MISS
-          </strong>
-
-          <span>
-            No touchdown recorded
-          </span>
-        </div>
-      `;
-    }
-
-    if (
-      live.status === 'LIVE'
-    ) {
-      return `
-        <div class="live-stat pending">
-          <strong>
-            LIVE
-          </strong>
-
-          <span>
-            Game in progress
-          </span>
-        </div>
-      `;
-    }
-
-    return '';
-  }
-
-
-  /* Statistical markets */
-
-  if (
-    live.status === 'HIT'
-  ) {
     return `
       <div class="live-stat hit">
         <strong>
-          ${formatNumber(
-            live.currentValue
-          )}
-          — BET HIT
+          ${hits.length}
+          BET${hits.length === 1 ? '' : 'S'}
+          HIT
         </strong>
-
-        <span>
-          Final result
-        </span>
       </div>
     `;
   }
 
-
   if (
-    live.status === 'MISS'
+    misses.length &&
+    !hits.length
   ) {
+
     return `
       <div class="live-stat miss">
         <strong>
-          ${formatNumber(
-            live.currentValue
-          )}
-          — BET MISS
+          ${misses.length}
+          BET${misses.length === 1 ? '' : 'S'}
+          MISS
         </strong>
-
-        <span>
-          Final result
-        </span>
       </div>
     `;
   }
 
-
-  if (
-    live.status === 'LIVE'
-  ) {
-    const needed =
-      live.remaining;
-
-    if (
-      needed !== null &&
-      needed !== undefined
-    ) {
-      return `
-        <div class="live-stat pending">
-          <strong>
-            LIVE —
-            ${formatNumber(
-              live.currentValue
-            )}
-          </strong>
-
-          <span>
-            ${formatNumber(
-              needed
-            )}
-            needed
-          </span>
-        </div>
-      `;
-    }
+  if (live) {
 
     return `
       <div class="live-stat pending">
         <strong>
-          LIVE —
-          ${formatNumber(
-            live.currentValue
-          )}
+          LIVE
         </strong>
       </div>
     `;
   }
 
-  return '';
+  return `
+    <div class="live-stat pending">
+      <strong>
+        ${hits.length} HIT •
+        ${misses.length} MISS
+      </strong>
+    </div>
+  `;
 }
 
 
-/* ============================================================
-   PROP CARD
-============================================================ */
+// ============================================================
+// CARD
+// ============================================================
 
-function card(p) {
+function card(prop) {
+
   const lockedPick =
-    locked.includes(p.id);
+    locked.includes(prop.id);
 
   const result =
-    getResult(p.id);
+    getResult(prop);
 
-  const strengthClass =
-    String(
-      p.consensusStrength ||
-        'single'
-    ).toLowerCase();
+  const sideClass =
+    prop.side === 'UNDER'
+      ? 'consensus-under'
+      : 'consensus-over';
 
-  const disagreementText =
-    p.disagreeCount > 0
-      ? `${p.agreeCount} ${p.side} experts • ${p.disagreeCount} opposing`
-      : `${p.agreeCount} ${p.side} expert${p.agreeCount === 1 ? '' : 's'} • No opposing pick found`;
+  const analysts =
+    prop.analysts
+      .map(analyst => {
 
-  const directionPercent =
-    p.totalSources > 0
-      ? Math.round(
-          (
-            p.agreeCount /
-            p.totalSources
-          ) * 100
-        )
-      : 0;
+        return `
+          <div>
 
-  const lineText =
-    p.lineRange
-      ? `Referenced lines: ${p.lineRange}`
-      : p.line !== null &&
-          p.line !== undefined
-        ? `Referenced line: ${formatNumber(p.line)}`
-        : 'Anytime touchdown market';
+            <strong>
+              ${analyst.name}
+            </strong>
+
+            <span>
+              ${analyst.outlet || ''}
+              —
+              ${analyst.side || ''}
+              ${
+                analyst.line !== null &&
+                analyst.line !== undefined
+                  ? ` ${analyst.line}`
+                  : ''
+              }
+            </span>
+
+            ${
+              analyst.url
+                ? `
+                  <a
+                    href="${analyst.url}"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Source ↗
+                  </a>
+                `
+                : ''
+            }
+
+          </div>
+        `;
+
+      })
+      .join('');
 
   return `
-    <article class="prop ${
-      lockedPick
-        ? 'locked'
-        : ''
-    }">
+
+    <article
+      class="prop ${
+        lockedPick
+          ? 'locked'
+          : ''
+      }"
+    >
 
       <div class="prop-top">
 
@@ -1134,79 +909,152 @@ function card(p) {
         </div>
 
         <div class="grade">
-          ${p.consensusDisplay}
+          ${prop.consensusDisplay}
         </div>
 
       </div>
 
 
       <h3>
-        ${p.player} —
-        ${label(p)}
+
+        ${prop.player}
+
+        —
+
+        <span
+          class="${sideClass}"
+        >
+          ${prop.side}
+        </span>
+
+        ${
+          prop.line !== null &&
+          prop.line !== undefined
+            ? ` ${prop.line}`
+            : ''
+        }
+
+        ${prop.market}
+
       </h3>
 
 
-      ${liveStatus(p)}
+      ${liveStatus(prop)}
 
 
       <div class="metrics">
 
         <div class="metric">
+
           <b>
-            ${p.agreeCount}
+            ${prop.agree}
           </b>
 
           <span>
             Agree
           </span>
+
         </div>
 
 
         <div class="metric">
+
           <b>
-            ${p.disagreeCount}
+            ${prop.disagree}
           </b>
 
           <span>
             Disagree
           </span>
+
         </div>
 
 
         <div class="metric">
+
           <b>
-            ${p.totalSources}
+            ${prop.experts}
           </b>
 
           <span>
             Experts
           </span>
+
         </div>
 
 
         <div class="metric">
+
           <b>
-            ${p.consensusLabel}
+            ${consensusLabel(
+              prop.consensusStrength
+            )}
           </b>
 
           <span>
             Strength
           </span>
+
         </div>
 
       </div>
 
 
-      <div class="consensus-summary ${strengthClass}">
+      <div class="consensus-summary">
 
         <strong>
-          ${disagreementText}
+
+          ${prop.agree}
+
+          ${prop.side}
+
+          expert${prop.agree === 1 ? '' : 's'}
+
+          ${
+            prop.disagree > 0
+              ? `
+                •
+                ${prop.disagree}
+                ${
+                  prop.side === 'OVER'
+                    ? 'UNDER'
+                    : 'OVER'
+                }
+                expert${
+                  prop.disagree === 1
+                    ? ''
+                    : 's'
+                }
+              `
+              : `
+                • No opposing pick found
+              `
+          }
+
         </strong>
 
+
         <span>
-          ${directionPercent}% direction consensus
-          •
-          ${lineText}
+
+          ${
+            prop.experts === 1
+              ? 'Single-source signal'
+              : `${prop.percent}% direction consensus`
+          }
+
+          ${
+            prop.lineDisplay
+              ? `
+                • Published line${
+                  prop.lineDisplay.includes('–')
+                    ? ' range'
+                    : ''
+                }:
+                ${prop.lineDisplay}
+              `
+              : ''
+          }
+
         </span>
 
       </div>
@@ -1214,67 +1062,15 @@ function card(p) {
 
       <div class="analyst-list">
 
-        ${p.analysts
-          .map(a => {
-            const side =
-              normalizeSide(
-                a.side
-              );
-
-            const sideClass =
-              side === 'UNDER'
-                ? 'under'
-                : '';
-
-            const line =
-              a.line !== null &&
-              a.line !== undefined
-                ? ` ${formatNumber(
-                    a.line
-                  )}`
-                : '';
-
-            return `
-              <div>
-
-                <strong>
-                  ${a.name}
-                </strong>
-
-                <span>
-                  ${a.outlet || ''}
-                </span>
-
-                <span
-                  class="analyst-side ${sideClass}"
-                >
-                  ${side}${line}
-                </span>
-
-                ${
-                  a.url
-                    ? `
-                      <a
-                        href="${a.url}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Source ↗
-                      </a>
-                    `
-                    : ''
-                }
-
-              </div>
-            `;
-          })
-          .join('')}
+        ${analysts}
 
       </div>
 
 
       <p class="why">
-        ${p.rationale}
+
+        ${prop.rationale}
+
       </p>
 
 
@@ -1290,147 +1086,111 @@ function card(p) {
 
         </span>
 
-
-        ${
-          lockedPick
-            ? ''
-            : `
-              <button
-                class="secondary-btn"
-                onclick="lockPick('${p.id}')"
-              >
-                Lock Pick
-              </button>
-            `
-        }
-
       </div>
 
     </article>
+
   `;
 }
 
 
-/* ============================================================
-   LOCK PICK
-============================================================ */
-
-window.lockPick =
-  function(id) {
-    if (
-      locked.includes(id)
-    ) {
-      return;
-    }
-
-    locked.push(id);
-
-    save();
-
-    render();
-  };
-
-
-/* ============================================================
-   RENDER
-============================================================ */
+// ============================================================
+// RENDER
+// ============================================================
 
 function render() {
+
   const props =
     board?.props || [];
 
   const filter =
-    $('#confidenceFilter')
-      ?.value ||
+    $('#confidenceFilter')?.value ||
     'ALL';
 
   const filteredProps =
-    props.filter(p => {
-      if (
-        filter === 'ALL'
-      ) {
-        return true;
-      }
+    props.filter(prop => {
 
       return (
-        p.consensusStrength ===
-        filter
+        filter === 'ALL' ||
+        prop.consensusStrength ===
+          filter
       );
+
     });
 
 
   if ($('#propCards')) {
+
     $('#propCards').innerHTML =
       filteredProps
         .map(card)
         .join('');
+
   }
 
 
   if ($('#pickCount')) {
+
     $('#pickCount').textContent =
       locked.length;
+
   }
 
 
   if ($('#sourceCount')) {
+
     $('#sourceCount').textContent =
-      board?.sources?.length ||
-      0;
-  }
+      board?.sources?.length || 0;
 
-
-  if ($('#sourceCount2')) {
-    $('#sourceCount2').textContent =
-      board?.sources?.length ||
-      0;
   }
 
 
   if ($('#signalCount')) {
+
     $('#signalCount').textContent =
       props.length;
-  }
 
-
-  if ($('#signalCount2')) {
-    $('#signalCount2').textContent =
-      props.length;
   }
 
 
   if ($('#lastRefresh')) {
+
     $('#lastRefresh').textContent =
+
       board?.liveUpdatedAt
+
         ? new Date(
             board.liveUpdatedAt
           ).toLocaleString()
+
         : board?.refreshedAt
+
           ? new Date(
               board.refreshedAt
             ).toLocaleString()
+
           : 'not run';
+
   }
 
 
-  /* ----------------------------------------------------------
-     SOURCE TABLE
-  ---------------------------------------------------------- */
-
   if ($('#sourceRows')) {
+
     $('#sourceRows').innerHTML =
+
       (board?.sources || [])
         .map(source => `
+
           <tr>
 
             <td>
               <strong>
-                ${source.analyst || ''}
+                ${source.analyst}
               </strong>
             </td>
 
             <td>
-              ${source.outlet || ''}
+              ${source.outlet}
             </td>
 
             <td>
@@ -1441,48 +1201,62 @@ function render() {
             </td>
 
             <td>
-              ${source.verification || ''}
+              ${source.verification}
             </td>
 
             <td>
+
               ${
                 source.url
                   ? `
                     <a
                       href="${source.url}"
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel="noopener"
                     >
                       Open source ↗
                     </a>
                   `
                   : ''
               }
+
             </td>
 
           </tr>
+
         `)
         .join('');
+
   }
 
-
-  /* ----------------------------------------------------------
-     EXPERT TABLE
-  ---------------------------------------------------------- */
 
   const expertList =
     experts?.experts || [];
 
+
   if ($('#expertRows')) {
+
     $('#expertRows').innerHTML =
+
       expertList
         .map(expert => {
-          const tracked =
-            expert.tracked ||
-            {};
 
-          const wl =
-            `${tracked.wins || 0}-${tracked.losses || 0}`;
+          const tracked =
+            expert.tracked || {};
+
+          const wins =
+            tracked.wins || 0;
+
+          const losses =
+            tracked.losses || 0;
+
+          const picks =
+            tracked.picks || 0;
+
+          const units =
+            Number(
+              tracked.units || 0
+            );
 
           const roi =
             expert.roi == null
@@ -1492,36 +1266,36 @@ function render() {
                 ).toFixed(1)}%`;
 
           const status =
-            tracked.picks >= 50
+            picks >= 50
               ? 'RANKED'
-              : tracked.picks > 0
+              : picks > 0
                 ? 'TRACKING'
                 : 'NEW';
 
           return `
+
             <tr>
 
               <td>
                 <strong>
-                  ${expert.name || ''}
+                  ${expert.name}
                 </strong>
               </td>
 
               <td>
-                ${expert.outlet || ''}
+                ${expert.outlet}
               </td>
 
               <td>
-                ${tracked.picks || 0}
+                ${picks}
               </td>
 
               <td>
-                ${wl}
+                ${wins}-${losses}
               </td>
 
               <td>
-                ${(tracked.units || 0)
-                  .toFixed(2)}u
+                ${units.toFixed(2)}u
               </td>
 
               <td>
@@ -1529,59 +1303,76 @@ function render() {
               </td>
 
               <td>
+
                 <span
-                  class="status ${status.toLowerCase()}"
+                  class="status ${
+                    status.toLowerCase()
+                  }"
                 >
                   ${status}
                 </span>
+
               </td>
 
             </tr>
+
           `;
+
         })
         .join('');
+
   }
 
-
-  /* ----------------------------------------------------------
-     OVERALL RECORD
-  ---------------------------------------------------------- */
 
   const record =
-    experts?.record ||
-    {};
+    experts?.record || {};
+
 
   if ($('#wins')) {
+
     $('#wins').textContent =
       record.wins || 0;
+
   }
+
 
   if ($('#losses')) {
+
     $('#losses').textContent =
       record.losses || 0;
+
   }
 
+
   if ($('#units')) {
+
     $('#units').textContent =
       `${Number(
         record.units || 0
       ).toFixed(2)}u`;
+
   }
 
+
   if ($('#roi')) {
+
     $('#roi').textContent =
+
       record.roi == null
+
         ? '—'
+
         : `${(
             record.roi * 100
           ).toFixed(1)}%`;
+
   }
 }
 
 
-/* ============================================================
-   EVENTS
-============================================================ */
+// ============================================================
+// EVENTS
+// ============================================================
 
 $('#confidenceFilter')
   ?.addEventListener(
@@ -1594,7 +1385,9 @@ $('#refreshBoard')
   ?.addEventListener(
     'click',
     async () => {
+
       await load();
+
     }
   );
 
@@ -1603,11 +1396,13 @@ $('#howItWorks')
   ?.addEventListener(
     'click',
     () => {
+
       $('#howModal')
         ?.setAttribute(
           'aria-hidden',
           'false'
         );
+
     }
   );
 
@@ -1616,11 +1411,13 @@ $('#closeHow')
   ?.addEventListener(
     'click',
     () => {
+
       $('#howModal')
         ?.setAttribute(
           'aria-hidden',
           'true'
         );
+
     }
   );
 
@@ -1632,19 +1429,24 @@ document
   ?.addEventListener(
     'click',
     () => {
+
       $('#howModal')
         ?.setAttribute(
           'aria-hidden',
           'true'
         );
+
     }
   );
 
 
-/* ============================================================
-   INITIAL LOAD
-============================================================ */
-
-installConsensusStyles();
+// ============================================================
+// INITIAL LOAD
+// ============================================================
 
 load();
+
+setTimeout(
+  loadLiveResults,
+  1500
+);
