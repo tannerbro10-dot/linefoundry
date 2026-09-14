@@ -12,6 +12,11 @@ let locked = JSON.parse(
 
 const $ = s => document.querySelector(s);
 
+
+// ============================================================
+// SAVE
+// ============================================================
+
 function save() {
   localStorage.setItem(
     'lf_consensus_locked',
@@ -21,14 +26,13 @@ function save() {
 
 
 // ============================================================
-// CONSENSUS ENGINE
+// HELPERS
 // ============================================================
 
 function normalizeSide(side) {
-  const value =
-    String(side || '')
-      .trim()
-      .toUpperCase();
+  const value = String(side || '')
+    .trim()
+    .toUpperCase();
 
   if (value === 'YES' || value === 'OVER') {
     return 'OVER';
@@ -42,15 +46,52 @@ function normalizeSide(side) {
 }
 
 
+function normalizeText(value) {
+  return String(value || '')
+    .trim()
+    .toLowerCase();
+}
+
+
+function formatNumber(value) {
+  if (
+    value === null ||
+    value === undefined ||
+    value === ''
+  ) {
+    return '—';
+  }
+
+  const number = Number(value);
+
+  if (!Number.isFinite(number)) {
+    return String(value);
+  }
+
+  return Number.isInteger(number)
+    ? String(number)
+    : number.toFixed(1);
+}
+
+
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+
+// ============================================================
+// CONSENSUS ENGINE
+// ============================================================
+
 function consensusKey(signal) {
   return [
-    String(signal.player || '')
-      .trim()
-      .toLowerCase(),
-
-    String(signal.market || '')
-      .trim()
-      .toLowerCase()
+    normalizeText(signal.player),
+    normalizeText(signal.market)
   ].join('|');
 }
 
@@ -99,6 +140,56 @@ function consensusLabel(strength) {
 
 
 // ============================================================
+// WEEK HELPERS
+// ============================================================
+
+function getSignalWeek(signal) {
+  if (
+    signal.week !== null &&
+    signal.week !== undefined &&
+    signal.week !== ''
+  ) {
+    return Number(signal.week);
+  }
+
+  return Number(board?.week || 1);
+}
+
+
+function getAvailableWeeks() {
+  const weeks = new Set();
+
+  (board?.rawSignals || []).forEach(signal => {
+    const week = getSignalWeek(signal);
+
+    if (Number.isFinite(week)) {
+      weeks.add(week);
+    }
+  });
+
+  if (
+    board?.week !== null &&
+    board?.week !== undefined
+  ) {
+    weeks.add(Number(board.week));
+  }
+
+  return [...weeks].sort((a, b) => a - b);
+}
+
+
+function currentWeek() {
+  const weeks = getAvailableWeeks();
+
+  if (!weeks.length) {
+    return Number(board?.week || 1);
+  }
+
+  return Math.max(...weeks);
+}
+
+
+// ============================================================
 // BUILD CONSENSUS CARDS
 // ============================================================
 
@@ -119,7 +210,6 @@ function buildConsensusProps(
   });
 
   return Array.from(groups.values()).map(group => {
-
     const first = group[0];
 
     const overSignals =
@@ -136,7 +226,6 @@ function buildConsensusProps(
 
     const over = overSignals.length;
     const under = underSignals.length;
-
     const total = group.length;
 
     let majoritySide;
@@ -161,6 +250,11 @@ function buildConsensusProps(
       disagree = under;
     }
 
+    const percent =
+      total > 0
+        ? Math.round((agree / total) * 100)
+        : 0;
+
     const strength =
       consensusStrength(
         total,
@@ -168,16 +262,8 @@ function buildConsensusProps(
         disagree
       );
 
-    const percent =
-      total > 0
-        ? Math.round(
-            (agree / total) * 100
-          )
-        : 0;
-
     const analysts =
       group.map(signal => {
-
         const source =
           sources.find(
             item =>
@@ -191,7 +277,9 @@ function buildConsensusProps(
           url: source?.url || '',
           note: signal.note || '',
           side: normalizeSide(signal.side),
-          line: signal.line
+          line: signal.line,
+          week: getSignalWeek(signal),
+          signalId: signal.id
         };
       });
 
@@ -208,7 +296,8 @@ function buildConsensusProps(
         .filter(
           line =>
             line !== null &&
-            line !== undefined
+            line !== undefined &&
+            line !== ''
         )
         .map(Number)
         .filter(Number.isFinite);
@@ -219,7 +308,8 @@ function buildConsensusProps(
         .filter(
           line =>
             line !== null &&
-            line !== undefined
+            line !== undefined &&
+            line !== ''
         )
         .map(Number)
         .filter(Number.isFinite);
@@ -244,40 +334,27 @@ function buildConsensusProps(
         `${uniqueLines[0]}–${uniqueLines[uniqueLines.length - 1]}`;
     }
 
-    let consensusDisplay;
-
-    if (total === 1) {
-      consensusDisplay =
-        `1 ${majoritySide}`;
-    }
-    else {
-      consensusDisplay =
-        `${agree}/${total} ${majoritySide}`;
-    }
-
     let rationale;
 
     if (total === 1) {
-
       rationale =
         'One tracked source currently supports this direction; treat it as an early signal until more sources agree.';
-
     }
     else if (over === under) {
-
       rationale =
         `${over} OVER expert${over === 1 ? '' : 's'} and ${under} UNDER expert${under === 1 ? '' : 's'} — the sources are split.`;
-
     }
     else {
-
       rationale =
         `${agree} ${majoritySide} expert${agree === 1 ? '' : 's'} • ${disagree} opposing expert${disagree === 1 ? '' : 's'} • ${percent}% direction consensus.`;
-
     }
 
-    return {
+    const weeks =
+      [...new Set(
+        group.map(signal => getSignalWeek(signal))
+      )].sort((a, b) => a - b);
 
+    return {
       id:
         `CONS-${group
           .map(signal => signal.id)
@@ -327,24 +404,276 @@ function buildConsensusProps(
         strength,
 
       consensusDisplay:
-        consensusDisplay,
+        total === 1
+          ? `1 ${majoritySide}`
+          : `${agree}/${total} ${majoritySide}`,
 
       confidence:
         consensusLabel(strength),
 
       rationale:
-        rationale
+        rationale,
+
+      weeks:
+        weeks,
+
+      week:
+        weeks.length
+          ? weeks[0]
+          : Number(board?.week || 1)
     };
   });
 }
 
 
 // ============================================================
-// CONSENSUS FILTER
+// FILTER UI
 // ============================================================
 
-function configureConsensusFilter() {
+function ensureFilterUI() {
+  const cards =
+    $('#propCards');
 
+  if (!cards) {
+    return;
+  }
+
+  let container =
+    $('#lfFilters');
+
+  if (!container) {
+    container =
+      document.createElement('div');
+
+    container.id = 'lfFilters';
+
+    cards.parentNode.insertBefore(
+      container,
+      cards
+    );
+  }
+
+  container.innerHTML = `
+    <div class="lf-filter-row">
+
+      <div class="lf-filter">
+        <label for="lfPlayerSearch">
+          Player
+        </label>
+
+        <input
+          id="lfPlayerSearch"
+          type="search"
+          placeholder="Search player..."
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="lf-filter">
+        <label for="lfWeekFilter">
+          Week
+        </label>
+
+        <select id="lfWeekFilter">
+          <option value="ALL">
+            All Weeks
+          </option>
+        </select>
+      </div>
+
+      <div class="lf-filter">
+        <label for="lfMarketFilter">
+          Market
+        </label>
+
+        <select id="lfMarketFilter">
+          <option value="ALL">
+            All Markets
+          </option>
+        </select>
+      </div>
+
+      <div class="lf-filter">
+        <label for="lfOutcomeFilter">
+          Outcome
+        </label>
+
+        <select id="lfOutcomeFilter">
+          <option value="ALL">
+            All Outcomes
+          </option>
+          <option value="PENDING">
+            Pending / Live
+          </option>
+          <option value="HIT">
+            Bet Hit
+          </option>
+          <option value="MISS">
+            Bet Miss
+          </option>
+        </select>
+      </div>
+
+      <div class="lf-filter">
+        <label for="lfConsensusFilter">
+          Consensus
+        </label>
+
+        <select id="lfConsensusFilter">
+          <option value="ALL">
+            All Consensus
+          </option>
+          <option value="2">
+            2+ Experts
+          </option>
+          <option value="3">
+            3+ Experts
+          </option>
+          <option value="4">
+            4+ Experts
+          </option>
+        </select>
+      </div>
+
+      <button
+        type="button"
+        id="lfClearFilters"
+        class="lf-clear-filters"
+      >
+        Clear
+      </button>
+
+    </div>
+  `;
+
+  populateFilterOptions();
+
+  $('#lfPlayerSearch')
+    ?.addEventListener(
+      'input',
+      render
+    );
+
+  $('#lfWeekFilter')
+    ?.addEventListener(
+      'change',
+      render
+    );
+
+  $('#lfMarketFilter')
+    ?.addEventListener(
+      'change',
+      render
+    );
+
+  $('#lfOutcomeFilter')
+    ?.addEventListener(
+      'change',
+      render
+    );
+
+  $('#lfConsensusFilter')
+    ?.addEventListener(
+      'change',
+      render
+    );
+
+  $('#lfClearFilters')
+    ?.addEventListener(
+      'click',
+      () => {
+        if ($('#lfPlayerSearch')) {
+          $('#lfPlayerSearch').value = '';
+        }
+
+        if ($('#lfWeekFilter')) {
+          $('#lfWeekFilter').value = 'ALL';
+        }
+
+        if ($('#lfMarketFilter')) {
+          $('#lfMarketFilter').value = 'ALL';
+        }
+
+        if ($('#lfOutcomeFilter')) {
+          $('#lfOutcomeFilter').value = 'ALL';
+        }
+
+        if ($('#lfConsensusFilter')) {
+          $('#lfConsensusFilter').value = 'ALL';
+        }
+
+        render();
+      }
+    );
+}
+
+
+function populateFilterOptions() {
+  const weekFilter =
+    $('#lfWeekFilter');
+
+  const marketFilter =
+    $('#lfMarketFilter');
+
+  if (!weekFilter || !marketFilter) {
+    return;
+  }
+
+  const currentWeekNumber =
+    currentWeek();
+
+  const weeks =
+    getAvailableWeeks();
+
+  weekFilter.innerHTML = `
+    <option value="ALL">
+      All Weeks
+    </option>
+
+    ${weeks
+      .map(week => `
+        <option value="${week}">
+          Week ${week}
+        </option>
+      `)
+      .join('')}
+  `;
+
+  if (weeks.includes(currentWeekNumber)) {
+    weekFilter.value =
+      String(currentWeekNumber);
+  }
+
+  const markets =
+    [...new Set(
+      (board?.props || [])
+        .map(prop => prop.market)
+        .filter(Boolean)
+    )]
+      .sort(
+        (a, b) =>
+          String(a).localeCompare(
+            String(b)
+          )
+      );
+
+  marketFilter.innerHTML = `
+    <option value="ALL">
+      All Markets
+    </option>
+
+    ${markets
+      .map(market => `
+        <option value="${escapeHtml(market)}">
+          ${escapeHtml(market)}
+        </option>
+      `)
+      .join('')}
+  `;
+}
+
+
+function configureLegacyConfidenceFilter() {
   const filter =
     $('#confidenceFilter');
 
@@ -385,42 +714,39 @@ function configureConsensusFilter() {
   const parent =
     filter.parentElement;
 
-  if (!parent) {
-    return;
-  }
-
   const label =
-    parent.querySelector('label');
+    parent?.querySelector('label');
 
   if (label) {
     label.textContent =
       'Consensus Strength';
   }
+
+  filter.addEventListener(
+    'change',
+    render
+  );
 }
 
 
 // ============================================================
-// LOAD LINEFOUNDRY DATA
+// LOAD DATA
 // ============================================================
 
 async function load() {
-
   try {
-
     const [
       signalsData,
       expertsData,
       resultsData
     ] =
       await Promise.all([
-
         fetch(
           '/public-signals.json',
           {
             cache: 'no-store'
           }
         ).then(response => {
-
           if (!response.ok) {
             throw new Error(
               'Could not load public-signals.json'
@@ -436,7 +762,6 @@ async function load() {
             cache: 'no-store'
           }
         ).then(response => {
-
           if (!response.ok) {
             throw new Error(
               'Could not load analyst-profiles.json'
@@ -452,7 +777,6 @@ async function load() {
             cache: 'no-store'
           }
         ).then(response => {
-
           if (!response.ok) {
             throw new Error(
               'Could not load results-ledger.json'
@@ -461,7 +785,6 @@ async function load() {
 
           return response.json();
         })
-
       ]);
 
     const signals =
@@ -471,7 +794,6 @@ async function load() {
       signalsData.sources || [];
 
     board = {
-
       mode:
         'public-consensus',
 
@@ -503,22 +825,21 @@ async function load() {
     results =
       resultsData;
 
-    configureConsensusFilter();
+    ensureFilterUI();
+
+    configureLegacyConfidenceFilter();
 
     render();
 
     await loadLiveResults();
-
   }
   catch (error) {
-
     console.error(
       'LineFoundry data load failed:',
       error
     );
 
     if ($('#propCards')) {
-
       $('#propCards').innerHTML = `
         <div class="empty-state">
 
@@ -542,9 +863,7 @@ async function load() {
 // ============================================================
 
 async function loadLiveResults() {
-
   try {
-
     const response =
       await fetch(
         `${WORKER_URL}?_=${Date.now()}`,
@@ -554,7 +873,6 @@ async function loadLiveResults() {
       );
 
     if (!response.ok) {
-
       throw new Error(
         `Worker returned ${response.status}`
       );
@@ -564,7 +882,6 @@ async function loadLiveResults() {
       await response.json();
 
     if (!data.success) {
-
       throw new Error(
         data.error ||
         'Worker returned an error'
@@ -575,17 +892,13 @@ async function loadLiveResults() {
 
     (data.results || [])
       .forEach(result => {
-
         if (result.id) {
-
           liveResults[result.id] =
             result;
         }
-
       });
 
     if (board) {
-
       board.liveUpdatedAt =
         data.updatedAt ||
         new Date().toISOString();
@@ -597,10 +910,8 @@ async function loadLiveResults() {
       'LineFoundry live results updated:',
       data
     );
-
   }
   catch (error) {
-
     console.error(
       'LineFoundry live data failed:',
       error
@@ -624,40 +935,49 @@ setInterval(
 // ============================================================
 
 function getSignalIdsForProp(prop) {
-
   if (!board?.rawSignals) {
     return [];
   }
 
+  const analystIds =
+    new Set(
+      prop.analysts
+        .map(
+          analyst =>
+            analyst.sourceId
+        )
+        .filter(Boolean)
+    );
+
   return board.rawSignals
     .filter(signal => {
-
       if (
-        signal.player !== prop.player
+        normalizeText(signal.player) !==
+        normalizeText(prop.player)
       ) {
         return false;
       }
 
       if (
-        signal.market !== prop.market
+        normalizeText(signal.market) !==
+        normalizeText(prop.market)
       ) {
         return false;
       }
 
-      return prop.analysts.some(
-        analyst =>
-          analyst.sourceId ===
-          signal.sourceId
-      );
+      if (
+        !analystIds.has(signal.sourceId)
+      ) {
+        return false;
+      }
+
+      return true;
     })
-    .map(
-      signal => signal.id
-    );
+    .map(signal => signal.id);
 }
 
 
 function getLiveMatches(prop) {
-
   return getSignalIdsForProp(prop)
     .map(
       id =>
@@ -668,96 +988,11 @@ function getLiveMatches(prop) {
 
 
 function getResult(prop) {
-
   const matches =
     getLiveMatches(prop);
 
   if (!matches.length) {
     return 'PENDING';
-  }
-
-  const hits =
-    matches.filter(
-      result =>
-        result.status === 'HIT'
-    ).length;
-
-  const misses =
-    matches.filter(
-      result =>
-        result.status === 'MISS'
-    ).length;
-
-  if (
-    hits &&
-    !misses
-  ) {
-    return 'HIT';
-  }
-
-  if (
-    misses &&
-    !hits
-  ) {
-    return 'MISS';
-  }
-
-  if (
-    hits ||
-    misses
-  ) {
-    return `${hits} HIT • ${misses} MISS`;
-  }
-
-  return 'LIVE';
-}
-
-
-function getResultDetails(prop) {
-
-  const matches =
-    getLiveMatches(prop);
-
-  if (!matches.length) {
-    return null;
-  }
-
-  return matches;
-}
-
-
-// ============================================================
-// FORMAT NUMBER
-// ============================================================
-
-function formatNumber(value) {
-
-  if (
-    value === null ||
-    value === undefined
-  ) {
-    return '—';
-  }
-
-  return Number.isInteger(
-    Number(value)
-  )
-    ? String(value)
-    : Number(value).toFixed(1);
-}
-
-
-// ============================================================
-// LIVE STATUS
-// ============================================================
-
-function liveStatus(prop) {
-
-  const matches =
-    getResultDetails(prop);
-
-  if (!matches?.length) {
-    return '';
   }
 
   const hits =
@@ -778,45 +1013,203 @@ function liveStatus(prop) {
         result.status === 'LIVE'
     );
 
-  if (
-    hits.length &&
-    !misses.length
-  ) {
-
-    return `
-      <div class="live-stat hit">
-        <strong>
-          ${hits.length}
-          BET${hits.length === 1 ? '' : 'S'}
-          HIT
-        </strong>
-      </div>
-    `;
+  if (hits.length && !misses.length) {
+    return 'HIT';
   }
 
-  if (
-    misses.length &&
-    !hits.length
-  ) {
-
-    return `
-      <div class="live-stat miss">
-        <strong>
-          ${misses.length}
-          BET${misses.length === 1 ? '' : 'S'}
-          MISS
-        </strong>
-      </div>
-    `;
+  if (misses.length && !hits.length) {
+    return 'MISS';
   }
 
   if (live) {
+    return 'LIVE';
+  }
 
+  if (hits.length || misses.length) {
+    return 'LIVE';
+  }
+
+  return 'PENDING';
+}
+
+
+// ============================================================
+// ACTUAL STAT
+// ============================================================
+
+function extractActualValue(result) {
+  if (!result) {
+    return null;
+  }
+
+  const possibleValues = [
+    result.actual,
+    result.actualValue,
+    result.value,
+    result.stat,
+    result.playerStat,
+    result.finalStat,
+    result.currentStat,
+    result.yards,
+    result.total
+  ];
+
+  for (const value of possibleValues) {
+    if (
+      value !== null &&
+      value !== undefined &&
+      value !== '' &&
+      Number.isFinite(Number(value))
+    ) {
+      return Number(value);
+    }
+  }
+
+  return null;
+}
+
+
+function getActualValue(prop) {
+  const matches =
+    getLiveMatches(prop);
+
+  if (!matches.length) {
+    return null;
+  }
+
+  const values =
+    matches
+      .map(extractActualValue)
+      .filter(
+        value =>
+          value !== null &&
+          value !== undefined
+      );
+
+  if (!values.length) {
+    return null;
+  }
+
+  /*
+   * Consensus picks represent one underlying player prop.
+   * When multiple analysts have the same prop, they should
+   * display the same actual player statistic rather than
+   * showing a count of results.
+   */
+  return values[0];
+}
+
+
+function marketActualLabel(market) {
+  const value =
+    normalizeText(market);
+
+  if (
+    value.includes('receiving') ||
+    value.includes('rushing') ||
+    value.includes('passing')
+  ) {
+    return 'YARDS ACTUAL';
+  }
+
+  if (
+    value.includes('reception')
+  ) {
+    return 'RECEPTIONS ACTUAL';
+  }
+
+  if (
+    value.includes('attempt')
+  ) {
+    return 'ATTEMPTS ACTUAL';
+  }
+
+  if (
+    value.includes('interception')
+  ) {
+    return 'INTERCEPTIONS ACTUAL';
+  }
+
+  if (
+    value.includes('touchdown')
+  ) {
+    return 'TOUCHDOWNS ACTUAL';
+  }
+
+  return 'ACTUAL';
+}
+
+
+// ============================================================
+// RESULT DISPLAY
+// ============================================================
+
+function liveStatus(prop) {
+  const result =
+    getResult(prop);
+
+  const actual =
+    getActualValue(prop);
+
+  if (result === 'HIT') {
+    return `
+      <div class="live-stat hit">
+        <strong>
+          BET HIT
+        </strong>
+
+        ${
+          actual !== null
+            ? `
+              <span class="actual-stat">
+                ${formatNumber(actual)}
+                ${marketActualLabel(prop.market)}
+              </span>
+            `
+            : ''
+        }
+      </div>
+    `;
+  }
+
+  if (result === 'MISS') {
+    return `
+      <div class="live-stat miss">
+        <strong>
+          BET MISS
+        </strong>
+
+        ${
+          actual !== null
+            ? `
+              <span class="actual-stat">
+                ${formatNumber(actual)}
+                ${marketActualLabel(prop.market)}
+              </span>
+            `
+            : ''
+        }
+      </div>
+    `;
+  }
+
+  if (result === 'LIVE') {
     return `
       <div class="live-stat pending">
         <strong>
           LIVE
         </strong>
+
+        ${
+          actual !== null
+            ? `
+              <span class="actual-stat">
+                ${formatNumber(actual)}
+                ${marketActualLabel(prop.market)}
+              </span>
+            `
+            : ''
+        }
       </div>
     `;
   }
@@ -824,11 +1217,163 @@ function liveStatus(prop) {
   return `
     <div class="live-stat pending">
       <strong>
-        ${hits.length} HIT •
-        ${misses.length} MISS
+        PENDING
       </strong>
     </div>
   `;
+}
+
+
+// ============================================================
+// FILTER LOGIC
+// ============================================================
+
+function propMatchesFilters(prop) {
+  const playerSearch =
+    normalizeText(
+      $('#lfPlayerSearch')?.value
+    );
+
+  const weekFilter =
+    $('#lfWeekFilter')?.value ||
+    'ALL';
+
+  const marketFilter =
+    $('#lfMarketFilter')?.value ||
+    'ALL';
+
+  const outcomeFilter =
+    $('#lfOutcomeFilter')?.value ||
+    'ALL';
+
+  const consensusFilter =
+    $('#lfConsensusFilter')?.value ||
+    'ALL';
+
+  const legacyFilter =
+    $('#confidenceFilter')?.value ||
+    'ALL';
+
+  if (
+    playerSearch &&
+    !normalizeText(prop.player)
+      .includes(playerSearch)
+  ) {
+    return false;
+  }
+
+  if (
+    marketFilter !== 'ALL' &&
+    String(prop.market) !==
+      String(marketFilter)
+  ) {
+    return false;
+  }
+
+  if (weekFilter !== 'ALL') {
+    const week =
+      Number(weekFilter);
+
+    if (
+      !prop.weeks.includes(week)
+    ) {
+      return false;
+    }
+  }
+
+  const outcome =
+    getResult(prop);
+
+  if (outcomeFilter === 'HIT') {
+    if (outcome !== 'HIT') {
+      return false;
+    }
+  }
+
+  if (outcomeFilter === 'MISS') {
+    if (outcome !== 'MISS') {
+      return false;
+    }
+  }
+
+  if (outcomeFilter === 'PENDING') {
+    if (
+      outcome !== 'PENDING' &&
+      outcome !== 'LIVE'
+    ) {
+      return false;
+    }
+  }
+
+  if (consensusFilter !== 'ALL') {
+    const minimum =
+      Number(consensusFilter);
+
+    if (
+      prop.experts < minimum
+    ) {
+      return false;
+    }
+  }
+
+  if (
+    legacyFilter !== 'ALL' &&
+    prop.consensusStrength !==
+      legacyFilter
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
+
+// ============================================================
+// SORT
+// ============================================================
+
+function sortProps(props) {
+  return [...props].sort(
+    (a, b) => {
+
+      /*
+       * Primary:
+       * most experts first
+       */
+      if (
+        b.experts !==
+        a.experts
+      ) {
+        return (
+          b.experts -
+          a.experts
+        );
+      }
+
+      /*
+       * Secondary:
+       * strongest direction consensus
+       */
+      if (
+        b.percent !==
+        a.percent
+      ) {
+        return (
+          b.percent -
+          a.percent
+        );
+      }
+
+      /*
+       * Tertiary:
+       * player name
+       */
+      return String(a.player)
+        .localeCompare(
+          String(b.player)
+        );
+    }
+  );
 }
 
 
@@ -837,12 +1382,8 @@ function liveStatus(prop) {
 // ============================================================
 
 function card(prop) {
-
   const lockedPick =
     locked.includes(prop.id);
-
-  const result =
-    getResult(prop);
 
   const sideClass =
     prop.side === 'UNDER'
@@ -851,49 +1392,55 @@ function card(prop) {
 
   const analysts =
     prop.analysts
-      .map(analyst => {
+      .map(analyst => `
+        <div class="analyst-source">
 
-        return `
-          <div>
+          <strong>
+            ${escapeHtml(
+              analyst.name
+            )}
+          </strong>
 
-            <strong>
-              ${analyst.name}
-            </strong>
-
-            <span>
-              ${analyst.outlet || ''}
-              —
-              ${analyst.side || ''}
-              ${
-                analyst.line !== null &&
-                analyst.line !== undefined
-                  ? ` ${analyst.line}`
-                  : ''
-              }
-            </span>
+          <span>
+            ${escapeHtml(
+              analyst.outlet || ''
+            )}
+            —
+            ${escapeHtml(
+              analyst.side || ''
+            )}
 
             ${
-              analyst.url
+              analyst.line !== null &&
+              analyst.line !== undefined
                 ? `
-                  <a
-                    href="${analyst.url}"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    Source ↗
-                  </a>
+                  ${formatNumber(
+                    analyst.line
+                  )}
                 `
                 : ''
             }
+          </span>
 
-          </div>
-        `;
+          ${
+            analyst.url
+              ? `
+                <a
+                  href="${analyst.url}"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Source ↗
+                </a>
+              `
+              : ''
+          }
 
-      })
+        </div>
+      `)
       .join('');
 
   return `
-
     <article
       class="prop ${
         lockedPick
@@ -905,11 +1452,13 @@ function card(prop) {
       <div class="prop-top">
 
         <div class="game">
-          NFL • WEEK ${board.week}
+          NFL • WEEK ${prop.week}
         </div>
 
         <div class="grade">
-          ${prop.consensusDisplay}
+          ${escapeHtml(
+            prop.consensusDisplay
+          )}
         </div>
 
       </div>
@@ -917,24 +1466,34 @@ function card(prop) {
 
       <h3>
 
-        ${prop.player}
+        ${escapeHtml(
+          prop.player
+        )}
 
         —
 
         <span
           class="${sideClass}"
         >
-          ${prop.side}
+          ${escapeHtml(
+            prop.side
+          )}
         </span>
 
         ${
           prop.line !== null &&
           prop.line !== undefined
-            ? ` ${prop.line}`
+            ? `
+              ${formatNumber(
+                prop.line
+              )}
+            `
             : ''
         }
 
-        ${prop.market}
+        ${escapeHtml(
+          prop.market
+        )}
 
       </h3>
 
@@ -986,13 +1545,11 @@ function card(prop) {
         <div class="metric">
 
           <b>
-            ${consensusLabel(
-              prop.consensusStrength
-            )}
+            ${prop.percent}%
           </b>
 
           <span>
-            Strength
+            Consensus
           </span>
 
         </div>
@@ -1006,7 +1563,9 @@ function card(prop) {
 
           ${prop.agree}
 
-          ${prop.side}
+          ${escapeHtml(
+            prop.side
+          )}
 
           expert${prop.agree === 1 ? '' : 's'}
 
@@ -1015,11 +1574,13 @@ function card(prop) {
               ? `
                 •
                 ${prop.disagree}
+
                 ${
                   prop.side === 'OVER'
                     ? 'UNDER'
                     : 'OVER'
                 }
+
                 expert${
                   prop.disagree === 1
                     ? ''
@@ -1050,7 +1611,9 @@ function card(prop) {
                     ? ' range'
                     : ''
                 }:
-                ${prop.lineDisplay}
+                ${escapeHtml(
+                  prop.lineDisplay
+                )}
               `
               : ''
           }
@@ -1069,7 +1632,9 @@ function card(prop) {
 
       <p class="why">
 
-        ${prop.rationale}
+        ${escapeHtml(
+          prop.rationale
+        )}
 
       </p>
 
@@ -1089,7 +1654,153 @@ function card(prop) {
       </div>
 
     </article>
+  `;
+}
 
+
+// ============================================================
+// WEEK SUMMARY
+// ============================================================
+
+function weekSummary(props) {
+  const hits =
+    props.filter(
+      prop =>
+        getResult(prop) === 'HIT'
+    ).length;
+
+  const misses =
+    props.filter(
+      prop =>
+        getResult(prop) === 'MISS'
+    ).length;
+
+  const live =
+    props.filter(
+      prop =>
+        getResult(prop) === 'LIVE'
+    ).length;
+
+  const pending =
+    props.filter(
+      prop =>
+        getResult(prop) === 'PENDING'
+    ).length;
+
+  const settled =
+    hits + misses;
+
+  const percentage =
+    settled > 0
+      ? Math.round(
+          (hits / settled) * 100
+        )
+      : null;
+
+  return `
+    <span class="lf-week-summary">
+
+      ${props.length}
+      pick${props.length === 1 ? '' : 's'}
+
+      ${
+        settled
+          ? ` • ${hits} hit${hits === 1 ? '' : 's'}`
+          : ''
+      }
+
+      ${
+        misses
+          ? ` • ${misses} miss${misses === 1 ? '' : 'es'}`
+          : ''
+      }
+
+      ${
+        live
+          ? ` • ${live} live`
+          : ''
+      }
+
+      ${
+        pending
+          ? ` • ${pending} pending`
+          : ''
+      }
+
+      ${
+        percentage !== null
+          ? ` • ${percentage}%`
+          : ''
+      }
+
+    </span>
+  `;
+}
+
+
+// ============================================================
+// WEEK SECTION
+// ============================================================
+
+function weekSection(
+  week,
+  props,
+  expanded
+) {
+  const sorted =
+    sortProps(props);
+
+  const status =
+    Number(week) ===
+    currentWeek()
+      ? 'CURRENT'
+      : (
+        props.some(
+          prop =>
+            getResult(prop) ===
+            'PENDING' ||
+            getResult(prop) ===
+            'LIVE'
+        )
+          ? 'IN PROGRESS'
+          : 'COMPLETE'
+      );
+
+  return `
+    <details
+      class="lf-week-section"
+      data-week="${week}"
+      ${expanded ? 'open' : ''}
+    >
+
+      <summary>
+
+        <div class="lf-week-heading">
+
+          <strong>
+            WEEK ${week}
+          </strong>
+
+          <span class="lf-week-status">
+            ${status}
+          </span>
+
+          ${weekSummary(props)}
+
+        </div>
+
+      </summary>
+
+
+      <div class="cards lf-week-cards">
+
+        ${sorted
+          .map(card)
+          .join('')}
+
+      </div>
+
+    </details>
   `;
 }
 
@@ -1099,273 +1810,348 @@ function card(prop) {
 // ============================================================
 
 function render() {
+  if (!board) {
+    return;
+  }
 
-  const props =
-    board?.props || [];
+  ensureFilterUI();
 
-  const filter =
-    $('#confidenceFilter')?.value ||
-    'ALL';
+  const allProps =
+    board.props || [];
 
   const filteredProps =
-    props.filter(prop => {
+    allProps.filter(
+      prop =>
+        propMatchesFilters(prop)
+    );
 
-      return (
-        filter === 'ALL' ||
-        prop.consensusStrength ===
-          filter
+  const sorted =
+    sortProps(filteredProps);
+
+  /*
+   * Determine which weeks should be displayed.
+   *
+   * If the Week filter is set to a specific week,
+   * only that week is rendered.
+   *
+   * Otherwise all available weeks are grouped.
+   */
+  const weekFilter =
+    $('#lfWeekFilter')?.value ||
+    'ALL';
+
+  let weeks =
+    getAvailableWeeks();
+
+  if (weekFilter !== 'ALL') {
+    weeks =
+      weeks.filter(
+        week =>
+          String(week) ===
+          String(weekFilter)
       );
+  }
 
-    });
+  const container =
+    $('#propCards');
 
+  if (container) {
 
-  if ($('#propCards')) {
+    if (!sorted.length) {
+      container.innerHTML = `
+        <div class="empty-state">
 
-    $('#propCards').innerHTML =
-      filteredProps
-        .map(card)
-        .join('');
+          <h3>
+            No picks match your filters
+          </h3>
 
+          <p>
+            Try clearing a filter or searching for another player.
+          </p>
+
+        </div>
+      `;
+    }
+    else {
+
+      const sections =
+        weeks
+          .map(week => {
+
+            const weekProps =
+              sorted.filter(
+                prop =>
+                  prop.weeks.includes(
+                    Number(week)
+                  )
+              );
+
+            if (!weekProps.length) {
+              return '';
+            }
+
+            /*
+             * Current week is open by default.
+             * If the user explicitly selected a week,
+             * that selected week opens.
+             */
+            const expanded =
+              weekFilter !== 'ALL'
+                ? true
+                : Number(week) ===
+                  currentWeek();
+
+            return weekSection(
+              week,
+              weekProps,
+              expanded
+            );
+          })
+          .filter(Boolean)
+          .join('');
+
+      container.innerHTML =
+        sections;
+    }
   }
 
 
   if ($('#pickCount')) {
-
     $('#pickCount').textContent =
       locked.length;
-
   }
 
 
   if ($('#sourceCount')) {
-
     $('#sourceCount').textContent =
       board?.sources?.length || 0;
-
   }
 
 
   if ($('#signalCount')) {
-
     $('#signalCount').textContent =
-      props.length;
-
+      allProps.length;
   }
 
 
   if ($('#lastRefresh')) {
-
     $('#lastRefresh').textContent =
-
       board?.liveUpdatedAt
-
         ? new Date(
             board.liveUpdatedAt
           ).toLocaleString()
-
         : board?.refreshedAt
-
           ? new Date(
               board.refreshedAt
             ).toLocaleString()
-
           : 'not run';
-
   }
 
 
-  if ($('#sourceRows')) {
+  renderSources();
 
-    $('#sourceRows').innerHTML =
+  renderExperts();
 
-      (board?.sources || [])
-        .map(source => `
+  renderRecord();
+}
 
+
+// ============================================================
+// SOURCE TABLE
+// ============================================================
+
+function renderSources() {
+  if (!$('#sourceRows')) {
+    return;
+  }
+
+  $('#sourceRows').innerHTML =
+    (board?.sources || [])
+      .map(source => `
+        <tr>
+
+          <td>
+            <strong>
+              ${escapeHtml(
+                source.analyst
+              )}
+            </strong>
+          </td>
+
+          <td>
+            ${escapeHtml(
+              source.outlet
+            )}
+          </td>
+
+          <td>
+            ${Math.round(
+              (source.quality || 0) *
+              100
+            )}/100
+          </td>
+
+          <td>
+            ${escapeHtml(
+              source.verification
+            )}
+          </td>
+
+          <td>
+
+            ${
+              source.url
+                ? `
+                  <a
+                    href="${source.url}"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Open source ↗
+                  </a>
+                `
+                : ''
+            }
+
+          </td>
+
+        </tr>
+      `)
+      .join('');
+}
+
+
+// ============================================================
+// EXPERT TABLE
+// ============================================================
+
+function renderExperts() {
+  const expertList =
+    experts?.experts || [];
+
+  if (!$('#expertRows')) {
+    return;
+  }
+
+  $('#expertRows').innerHTML =
+    expertList
+      .map(expert => {
+
+        const tracked =
+          expert.tracked || {};
+
+        const wins =
+          tracked.wins || 0;
+
+        const losses =
+          tracked.losses || 0;
+
+        const picks =
+          tracked.picks || 0;
+
+        const units =
+          Number(
+            tracked.units || 0
+          );
+
+        const roi =
+          expert.roi == null
+            ? '—'
+            : `${(
+                expert.roi * 100
+              ).toFixed(1)}%`;
+
+        const status =
+          picks >= 50
+            ? 'RANKED'
+            : picks > 0
+              ? 'TRACKING'
+              : 'NEW';
+
+        return `
           <tr>
 
             <td>
               <strong>
-                ${source.analyst}
+                ${escapeHtml(
+                  expert.name
+                )}
               </strong>
             </td>
 
             <td>
-              ${source.outlet}
+              ${escapeHtml(
+                expert.outlet
+              )}
             </td>
 
             <td>
-              ${Math.round(
-                (source.quality || 0) *
-                100
-              )}/100
+              ${picks}
             </td>
 
             <td>
-              ${source.verification}
+              ${wins}-${losses}
+            </td>
+
+            <td>
+              ${units.toFixed(2)}u
+            </td>
+
+            <td>
+              ${roi}
             </td>
 
             <td>
 
-              ${
-                source.url
-                  ? `
-                    <a
-                      href="${source.url}"
-                      target="_blank"
-                      rel="noopener"
-                    >
-                      Open source ↗
-                    </a>
-                  `
-                  : ''
-              }
+              <span
+                class="status ${
+                  status.toLowerCase()
+                }"
+              >
+                ${status}
+              </span>
 
             </td>
 
           </tr>
-
-        `)
-        .join('');
-
-  }
-
-
-  const expertList =
-    experts?.experts || [];
+        `;
+      })
+      .join('');
+}
 
 
-  if ($('#expertRows')) {
+// ============================================================
+// OVERALL RECORD
+// ============================================================
 
-    $('#expertRows').innerHTML =
-
-      expertList
-        .map(expert => {
-
-          const tracked =
-            expert.tracked || {};
-
-          const wins =
-            tracked.wins || 0;
-
-          const losses =
-            tracked.losses || 0;
-
-          const picks =
-            tracked.picks || 0;
-
-          const units =
-            Number(
-              tracked.units || 0
-            );
-
-          const roi =
-            expert.roi == null
-              ? '—'
-              : `${(
-                  expert.roi * 100
-                ).toFixed(1)}%`;
-
-          const status =
-            picks >= 50
-              ? 'RANKED'
-              : picks > 0
-                ? 'TRACKING'
-                : 'NEW';
-
-          return `
-
-            <tr>
-
-              <td>
-                <strong>
-                  ${expert.name}
-                </strong>
-              </td>
-
-              <td>
-                ${expert.outlet}
-              </td>
-
-              <td>
-                ${picks}
-              </td>
-
-              <td>
-                ${wins}-${losses}
-              </td>
-
-              <td>
-                ${units.toFixed(2)}u
-              </td>
-
-              <td>
-                ${roi}
-              </td>
-
-              <td>
-
-                <span
-                  class="status ${
-                    status.toLowerCase()
-                  }"
-                >
-                  ${status}
-                </span>
-
-              </td>
-
-            </tr>
-
-          `;
-
-        })
-        .join('');
-
-  }
-
-
+function renderRecord() {
   const record =
     experts?.record || {};
 
-
   if ($('#wins')) {
-
     $('#wins').textContent =
       record.wins || 0;
-
   }
-
 
   if ($('#losses')) {
-
     $('#losses').textContent =
       record.losses || 0;
-
   }
 
-
   if ($('#units')) {
-
     $('#units').textContent =
       `${Number(
         record.units || 0
       ).toFixed(2)}u`;
-
   }
 
-
   if ($('#roi')) {
-
     $('#roi').textContent =
-
       record.roi == null
-
         ? '—'
-
         : `${(
             record.roi * 100
           ).toFixed(1)}%`;
-
   }
 }
 
@@ -1374,20 +2160,11 @@ function render() {
 // EVENTS
 // ============================================================
 
-$('#confidenceFilter')
-  ?.addEventListener(
-    'change',
-    render
-  );
-
-
 $('#refreshBoard')
   ?.addEventListener(
     'click',
     async () => {
-
       await load();
-
     }
   );
 
@@ -1396,13 +2173,11 @@ $('#howItWorks')
   ?.addEventListener(
     'click',
     () => {
-
       $('#howModal')
         ?.setAttribute(
           'aria-hidden',
           'false'
         );
-
     }
   );
 
@@ -1411,13 +2186,11 @@ $('#closeHow')
   ?.addEventListener(
     'click',
     () => {
-
       $('#howModal')
         ?.setAttribute(
           'aria-hidden',
           'true'
         );
-
     }
   );
 
@@ -1429,13 +2202,11 @@ document
   ?.addEventListener(
     'click',
     () => {
-
       $('#howModal')
         ?.setAttribute(
           'aria-hidden',
           'true'
         );
-
     }
   );
 
