@@ -407,114 +407,105 @@ function liveField(p) {
 // ============================================================
 
 function liveStatus(p) {
-  const live =
-    getResultDetails(p.id);
+  const live = getResultDetails(p.id);
 
+  // ALWAYS show the live-data field.
+  // If no live data exists yet, show a clear placeholder.
   if (!live) {
-    return '';
-  }
-
-  if (
-    p.market === 'Anytime TD'
-  ) {
-    if (
-      live.status === 'HIT'
-    ) {
-      return `
-        <div class="live-stat">
-          <strong>BET HIT</strong>
-        </div>
-      `;
-    }
-
-    if (
-      live.status === 'MISS'
-    ) {
-      return `
-        <div class="live-stat">
-          <strong>BET MISS</strong>
-        </div>
-      `;
-    }
-
-    if (
-      live.status === 'LIVE'
-    ) {
-      return `
-        <div class="live-stat">
-          <strong>LIVE</strong>
-        </div>
-      `;
-    }
-
-    return '';
-  }
-
-  if (
-    live.status === 'HIT'
-  ) {
     return `
       <div class="live-stat">
-        <strong>
-          ${formatNumber(live.currentValue)}
-          — BET HIT
-        </strong>
+        <strong>Live Result: —</strong>
+        <span>Waiting for live data</span>
       </div>
     `;
   }
 
-  if (
-    live.status === 'MISS'
-  ) {
-    return `
-      <div class="live-stat">
-        <strong>
-          ${formatNumber(live.currentValue)}
-          — BET MISS
-        </strong>
-      </div>
-    `;
-  }
+  // Anytime TD
+  if (p.market === 'Anytime TD') {
 
-  if (
-    live.status === 'LIVE'
-  ) {
-    const needed =
-      live.remaining;
-
-    if (
-      needed !== null &&
-      needed !== undefined
-    ) {
+    if (live.status === 'HIT') {
       return `
         <div class="live-stat">
-          <strong>
-            LIVE — ${formatNumber(
-              live.currentValue
-            )} yards
-          </strong>
+          <strong>Live Result: BET HIT</strong>
+          <span>Touchdown recorded</span>
+        </div>
+      `;
+    }
 
-          <span>
-            ${formatNumber(
-              needed
-            )} needed
-          </span>
+    if (live.status === 'MISS') {
+      return `
+        <div class="live-stat">
+          <strong>Live Result: BET MISS</strong>
+          <span>No touchdown recorded</span>
+        </div>
+      `;
+    }
+
+    if (live.status === 'LIVE') {
+      return `
+        <div class="live-stat">
+          <strong>Live Result: LIVE</strong>
+          <span>Game in progress</span>
         </div>
       `;
     }
 
     return `
       <div class="live-stat">
-        <strong>
-          LIVE — ${formatNumber(
-            live.currentValue
-          )}
-        </strong>
+        <strong>Live Result: —</strong>
+        <span>${live.status || 'Waiting for live data'}</span>
       </div>
     `;
   }
 
-  return '';
+  // Normal statistical markets
+  if (live.status === 'HIT') {
+    return `
+      <div class="live-stat">
+        <strong>
+          Live Result: ${formatNumber(live.currentValue)} — BET HIT
+        </strong>
+        <span>Line: ${formatNumber(live.line)}</span>
+      </div>
+    `;
+  }
+
+  if (live.status === 'MISS') {
+    return `
+      <div class="live-stat">
+        <strong>
+          Live Result: ${formatNumber(live.currentValue)} — BET MISS
+        </strong>
+        <span>Line: ${formatNumber(live.line)}</span>
+      </div>
+    `;
+  }
+
+  if (live.status === 'LIVE') {
+    const needed = live.remaining;
+
+    return `
+      <div class="live-stat">
+        <strong>
+          Live Result: ${formatNumber(live.currentValue)} — LIVE
+        </strong>
+        <span>
+          ${
+            needed !== null && needed !== undefined
+              ? `${formatNumber(needed)} needed`
+              : 'Game in progress'
+          }
+        </span>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="live-stat">
+      <strong>Live Result: —</strong>
+      <span>${live.status || 'Waiting for live data'}</span>
+    </div>
+  `;
 }
 
 
