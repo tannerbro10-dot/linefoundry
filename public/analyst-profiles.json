@@ -1,11 +1,256 @@
 {
   "policy": "No historical record is claimed until LineFoundry independently tracks and settles the analyst's published picks. Publicly reported records are shown separately from LineFoundry-tracked records.",
   "analysts": [
-    {"id":"erich-richter-nypost","name":"Erich Richter","outlet":"NY Post","specialties":["NFL props"],"publicRecord":null,"tracked":{"picks":0,"wins":0,"losses":0,"pushes":0,"units":0},"status":"TRACKING"},
-    {"id":"adam-schein-nypost","name":"Adam Schein","outlet":"NY Post","specialties":["NFL","same-game parlays","player props"],"publicRecord":null,"tracked":{"picks":0,"wins":0,"losses":0,"pushes":0,"units":0},"status":"TRACKING"},
-    {"id":"sean-treppedi-nypost","name":"Sean Treppedi","outlet":"NY Post","specialties":["NFL props"],"publicRecord":null,"tracked":{"picks":0,"wins":0,"losses":0,"pushes":0,"units":0},"status":"TRACKING"},
-    {"id":"adam-burke-vsin","name":"Adam Burke","outlet":"VSiN","specialties":["NFL props"],"publicRecord":null,"tracked":{"picks":0,"wins":0,"losses":0,"pushes":0,"units":0},"status":"TRACKING"},
-    {"id":"zachary-cohen-vsin","name":"Zachary Cohen","outlet":"VSiN","specialties":["NFL props"],"publicRecord":null,"tracked":{"picks":0,"wins":0,"losses":0,"pushes":0,"units":0},"status":"TRACKING"},
-    {"id":"kody-malstrom-talksport","name":"Kody Malstrom","outlet":"TalkSport","specialties":["NFL props"],"publicRecord":null,"tracked":{"picks":0,"wins":0,"losses":0,"pushes":0,"units":0},"status":"TRACKING"}
+    {
+      "id": "erich-richter-nypost",
+      "name": "Erich Richter",
+      "outlet": "NY Post",
+      "specialties": ["NFL props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "adam-schein-nypost",
+      "name": "Adam Schein",
+      "outlet": "NY Post",
+      "specialties": ["NFL", "same-game parlays", "player props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "sean-treppedi-nypost",
+      "name": "Sean Treppedi",
+      "outlet": "NY Post",
+      "specialties": ["NFL props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+
+    {
+      "id": "adam-burke-vsin",
+      "name": "Adam Burke",
+      "outlet": "VSiN",
+      "specialties": ["NFL props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "zachary-cohen-vsin",
+      "name": "Zachary Cohen",
+      "outlet": "VSiN",
+      "specialties": ["NFL props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "steve-makinen-vsin",
+      "name": "Steve Makinen",
+      "outlet": "VSiN",
+      "specialties": ["NFL betting", "analytics", "betting splits"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "matt-youmans-vsin",
+      "name": "Matt Youmans",
+      "outlet": "VSiN",
+      "specialties": ["NFL betting", "player props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "dave-tuley-vsin",
+      "name": "Dave Tuley",
+      "outlet": "VSiN",
+      "specialties": ["NFL betting", "NFL picks"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "wes-reynolds-vsin",
+      "name": "Wes Reynolds",
+      "outlet": "VSiN",
+      "specialties": ["NFL betting", "NFL picks"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "tyler-shoemaker-vsin",
+      "name": "Tyler Shoemaker",
+      "outlet": "VSiN",
+      "specialties": ["NFL betting", "NFL models"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+
+    {
+      "id": "sean-koerner-action-network",
+      "name": "Sean Koerner",
+      "outlet": "Action Network",
+      "specialties": ["NFL props", "NFL analytics"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "nick-giffen-action-network",
+      "name": "Nick Giffen",
+      "outlet": "Action Network",
+      "specialties": ["NFL props", "NFL betting"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "brandon-anderson-action-network",
+      "name": "Brandon Anderson",
+      "outlet": "Action Network",
+      "specialties": ["NFL props", "NFL betting"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "gilles-gallant-action-network",
+      "name": "Gilles Gallant",
+      "outlet": "Action Network",
+      "specialties": ["NFL props", "NFL betting"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "sam-farley-action-network",
+      "name": "Sam Farley",
+      "outlet": "Action Network",
+      "specialties": ["NFL props", "NFL betting"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "grant-neiffer-action-network",
+      "name": "Grant Neiffer",
+      "outlet": "Action Network",
+      "specialties": ["NFL props", "NFL betting"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+
+    {
+      "id": "doug-kralstein-sportsline",
+      "name": "Doug Kralstein",
+      "outlet": "SportsLine",
+      "specialties": ["NFL props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "sia-nejad-sportsline",
+      "name": "Sia Nejad",
+      "outlet": "SportsLine",
+      "specialties": ["NFL props", "NFL betting"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+
+    {
+      "id": "steven-cheah-barstool",
+      "name": "Steven Cheah",
+      "outlet": "Barstool Sports",
+      "specialties": ["NFL props", "fantasy football"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "dave-portnoy-barstool",
+      "name": "Dave Portnoy",
+      "outlet": "Barstool Sports",
+      "specialties": ["NFL betting", "player props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "brandon-walker-barstool",
+      "name": "Brandon Walker",
+      "outlet": "Barstool Sports",
+      "specialties": ["NFL betting"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+
+    {
+      "id": "andrew-erickson-fantasypros",
+      "name": "Andrew Erickson",
+      "outlet": "FantasyPros",
+      "specialties": ["NFL", "player props", "fantasy football"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "chris-welsh-fantasypros",
+      "name": "Chris Welsh",
+      "outlet": "FantasyPros",
+      "specialties": ["NFL", "player props", "fantasy football"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+
+    {
+      "id": "josh-shepardson-sharp",
+      "name": "Josh Shepardson",
+      "outlet": "Sharp Football Analysis",
+      "specialties": ["NFL props", "NFL analytics"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+
+    {
+      "id": "peter-alexis-oddschecker",
+      "name": "Peter Alexis",
+      "outlet": "OddsChecker",
+      "specialties": ["NFL props", "NFL betting"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "oliver-leonard-oddschecker",
+      "name": "Oliver Leonard",
+      "outlet": "OddsChecker",
+      "specialties": ["NFL betting", "NFL props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+
+    {
+      "id": "kody-malstrom-talksport",
+      "name": "Kody Malstrom",
+      "outlet": "TalkSport",
+      "specialties": ["NFL props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    }
   ]
 }
