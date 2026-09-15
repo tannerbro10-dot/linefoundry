@@ -219,10 +219,78 @@ function injectBoardStyles() {
       padding: 0 14px;
       border: 1px solid rgba(255,255,255,.09);
       border-radius: 12px;
-      background: rgba(255,255,255,.035);
-      color: inherit;
+      background: #111820;
+      color: #f5f7fa;
       font: inherit;
       cursor: pointer;
+      color-scheme: dark;
+    }
+
+    .lf-market-filter option {
+      background: #111820;
+      color: #f5f7fa;
+    }
+
+
+    /* ========================================================
+       MARKET WEEK SECTIONS
+       ======================================================== */
+
+    .lf-market-week-section {
+      margin-bottom: 24px;
+    }
+
+    .lf-market-week-section > summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: 14px;
+    }
+
+    .lf-market-week-section > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .lf-market-week-heading {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 9px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 12px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .lf-market-week-heading::after {
+      content: '▸';
+      margin-left: auto;
+      color: rgba(255,255,255,.4);
+      font-size: 12px;
+      transition: transform .15s ease;
+    }
+
+    .lf-market-week-section[open]
+      .lf-market-week-heading::after {
+      transform: rotate(90deg);
+    }
+
+    .lf-market-week-heading strong {
+      font-size: 13px;
+    }
+
+    .lf-market-week-status {
+      padding: 3px 7px;
+      border-radius: 6px;
+      background: rgba(255,255,255,.06);
+      font-size: 9px;
+      font-weight: 750;
+      letter-spacing: .06em;
+    }
+
+    .lf-market-week-summary {
+      color: rgba(255,255,255,.46);
+      font-size: 11px;
     }
 
 
@@ -356,6 +424,21 @@ function injectBoardStyles() {
       height: 1px;
       margin: 8px 0 10px;
       background: rgba(255,255,255,.07);
+    }
+
+    .lf-market-result {
+      margin-top: 7px;
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: .025em;
+    }
+
+    .lf-market-result.actual {
+      color: rgba(255,255,255,.72);
+    }
+
+    .lf-market-result.live {
+      color: rgba(104,235,171,.95);
     }
 
     .lf-market-bottom {
@@ -496,7 +579,7 @@ function injectBoardStyles() {
 
 
     /* ========================================================
-       WEEK SECTIONS
+       EXPERT WEEK SECTIONS
        ======================================================== */
 
     .lf-week-section {
@@ -523,6 +606,20 @@ function injectBoardStyles() {
       border: 1px solid rgba(255,255,255,.07);
       border-radius: 12px;
       background: rgba(255,255,255,.025);
+    }
+
+    .lf-week-section > summary
+      .lf-week-heading::after {
+      content: '▸';
+      margin-left: auto;
+      color: rgba(255,255,255,.4);
+      font-size: 12px;
+      transition: transform .15s ease;
+    }
+
+    .lf-week-section[open]
+      .lf-week-heading::after {
+      transform: rotate(90deg);
     }
 
     .lf-week-status {
@@ -887,7 +984,7 @@ function buildConsensusProps(
 
 
 // ============================================================
-// RESULTS
+// EXPERT RESULTS
 // ============================================================
 
 function resultForSignal(
@@ -994,20 +1091,6 @@ function actualLabel(
 
   if (
     market.includes(
-      'receiv'
-    ) ||
-    market.includes(
-      'rushing'
-    ) ||
-    market.includes(
-      'passing'
-    )
-  ) {
-    return 'YARDS ACTUAL';
-  }
-
-  if (
-    market.includes(
       'reception'
     )
   ) {
@@ -1039,6 +1122,20 @@ function actualLabel(
     )
   ) {
     return 'TOUCHDOWNS ACTUAL';
+  }
+
+  if (
+    market.includes(
+      'receiv'
+    ) ||
+    market.includes(
+      'rushing'
+    ) ||
+    market.includes(
+      'passing'
+    )
+  ) {
+    return 'YARDS ACTUAL';
   }
 
   return 'ACTUAL';
@@ -1476,7 +1573,7 @@ function card(
 
 
 // ============================================================
-// WEEK SUMMARY
+// EXPERT WEEK SUMMARY
 // ============================================================
 
 function weekSummary(
@@ -1577,7 +1674,7 @@ function weekSummary(
 
 
 // ============================================================
-// WEEK SECTION
+// EXPERT WEEK SECTION
 // ============================================================
 
 function weekSection(
@@ -1971,6 +2068,196 @@ function marketType(
 
 
 // ============================================================
+// MARKET ACTUAL RESULT
+// ============================================================
+
+function marketActualValue(
+  market
+) {
+
+  const candidates = [
+
+    market?.actual,
+    market?.actualValue,
+    market?.result?.actual,
+    market?.result?.actualValue,
+    market?.result?.value,
+    market?.results?.actual,
+    market?.results?.actualValue,
+    market?.finalStat,
+    market?.currentStat,
+    market?.currentValue
+
+  ];
+
+  for (
+    const value of candidates
+  ) {
+
+    if (
+      value !== null &&
+      value !== undefined &&
+      value !== ''
+    ) {
+      return value;
+    }
+
+  }
+
+  return null;
+}
+
+function marketIsLive(
+  market
+) {
+
+  const status =
+    String(
+      market?.status ||
+      market?.event?.status ||
+      ''
+    ).toLowerCase();
+
+  return (
+    status.includes('live') ||
+    status.includes('progress')
+  );
+
+}
+
+function marketActualLabel(
+  market,
+  value
+) {
+
+  const name =
+    marketName(
+      market
+    ).toLowerCase();
+
+  const formatted =
+    formatNumber(
+      value
+    );
+
+  if (
+    name.includes(
+      'anytime touchdown'
+    ) ||
+    name.includes(
+      'touchdown'
+    )
+  ) {
+
+    return `
+      ${formatted} TD
+      ACTUAL
+    `;
+
+  }
+
+  if (
+    name.includes(
+      'reception'
+    )
+  ) {
+
+    return `
+      ${formatted}
+      RECEPTIONS ACTUAL
+    `;
+
+  }
+
+  if (
+    name.includes(
+      'attempt'
+    )
+  ) {
+
+    return `
+      ${formatted}
+      ATTEMPTS ACTUAL
+    `;
+
+  }
+
+  if (
+    name.includes(
+      'interception'
+    )
+  ) {
+
+    return `
+      ${formatted}
+      INTERCEPTIONS ACTUAL
+    `;
+
+  }
+
+  return `
+    ${formatted}
+    YARDS ACTUAL
+  `;
+
+}
+
+function marketResultMarkup(
+  market
+) {
+
+  const actual =
+    marketActualValue(
+      market
+    );
+
+  if (
+    actual !== null
+  ) {
+
+    return `
+      <div
+        class="
+          lf-market-result
+          actual
+        "
+      >
+        ${escapeHtml(
+          marketActualLabel(
+            market,
+            actual
+          )
+        )}
+      </div>
+    `;
+
+  }
+
+  if (
+    marketIsLive(
+      market
+    )
+  ) {
+
+    return `
+      <div
+        class="
+          lf-market-result
+          live
+        "
+      >
+        LIVE
+      </div>
+    `;
+
+  }
+
+  return '';
+
+}
+
+
+// ============================================================
 // MARKET CARD
 // ============================================================
 
@@ -2195,6 +2482,10 @@ function marketCard(
 
       </div>
 
+      ${marketResultMarkup(
+        market
+      )}
+
       <div
         class="lf-market-divider"
       ></div>
@@ -2229,6 +2520,350 @@ function marketCard(
 
     </article>
   `;
+}
+
+
+// ============================================================
+// MARKET WEEK SUMMARY
+// ============================================================
+
+function marketWeekSummary(
+  markets
+) {
+
+  const actual =
+    markets.filter(
+      market =>
+        marketActualValue(
+          market
+        ) !== null
+    ).length;
+
+  const live =
+    markets.filter(
+      market =>
+        marketIsLive(
+          market
+        )
+    ).length;
+
+  return `
+    <span
+      class="
+        lf-market-week-summary
+      "
+    >
+
+      ${markets.length}
+      market${
+        markets.length === 1
+          ? ''
+          : 's'
+      }
+
+      ${
+        actual
+          ? ` • ${actual} final`
+          : ''
+      }
+
+      ${
+        live
+          ? ` • ${live} live`
+          : ''
+      }
+
+    </span>
+  `;
+
+}
+
+
+// ============================================================
+// MARKET WEEK SECTION
+// ============================================================
+
+function marketWeekSection(
+  week,
+  markets,
+  expanded
+) {
+
+  const status =
+    Number(week) ===
+    currentWeek()
+      ? 'CURRENT'
+      : (
+          markets.some(
+            market =>
+              marketIsLive(
+                market
+              )
+          )
+            ? 'IN PROGRESS'
+            : 'UPCOMING'
+        );
+
+  return `
+    <details
+      class="
+        lf-market-week-section
+      "
+      data-market-week="${week}"
+      ${expanded ? 'open' : ''}
+    >
+
+      <summary>
+
+        <div
+          class="
+            lf-market-week-heading
+          "
+        >
+
+          <strong>
+            WEEK ${week}
+          </strong>
+
+          <span
+            class="
+              lf-market-week-status
+            "
+          >
+            ${status}
+          </span>
+
+          ${marketWeekSummary(
+            markets
+          )}
+
+        </div>
+
+      </summary>
+
+      <div
+        class="lf-market-grid"
+      >
+
+        ${markets
+          .map(
+            (
+              market,
+              index
+            ) =>
+              marketCard(
+                market,
+                index
+              )
+          )
+          .join('')}
+
+      </div>
+
+    </details>
+  `;
+}
+
+
+// ============================================================
+// MARKET RENDER
+// ============================================================
+
+function renderMarkets() {
+
+  const container =
+    $('#marketCards');
+
+  if (!container) {
+    return;
+  }
+
+  const markets =
+    Array.isArray(
+      marketData?.markets
+    )
+      ? marketData.markets
+      : [];
+
+  const search =
+    (
+      $('#lfMarketSearch')
+        ?.value ||
+      ''
+    )
+      .trim()
+      .toLowerCase();
+
+  const selectedMarket =
+    (
+      $('#lfMarketType')
+        ?.value ||
+      'ALL'
+    )
+      .trim();
+
+  const filtered =
+    markets.filter(
+      market => {
+
+        const player =
+          marketPlayerName(
+            market
+          );
+
+        const name =
+          marketName(
+            market
+          );
+
+        const game =
+          gameDescription(
+            market
+          );
+
+        const haystack =
+          [
+            player,
+            name,
+            game
+          ]
+            .join(' ')
+            .toLowerCase();
+
+        if (
+          search &&
+          !haystack.includes(
+            search
+          )
+        ) {
+          return false;
+        }
+
+        if (
+          selectedMarket !==
+          'ALL' &&
+          name
+            .trim()
+            .toLowerCase() !==
+            selectedMarket
+              .trim()
+              .toLowerCase()
+        ) {
+          return false;
+        }
+
+        return true;
+
+      }
+    );
+
+  if (!filtered.length) {
+
+    container.innerHTML = `
+      <div
+        class="lf-market-empty"
+      >
+        No markets match your search.
+      </div>
+    `;
+
+    return;
+  }
+
+  const grouped =
+    new Map();
+
+  filtered.forEach(
+    market => {
+
+      const week =
+        marketWeek(
+          market
+        ) ||
+        1;
+
+      if (
+        !grouped.has(
+          week
+        )
+      ) {
+
+        grouped.set(
+          week,
+          []
+        );
+
+      }
+
+      grouped
+        .get(week)
+        .push(market);
+
+    }
+  );
+
+  const weeks =
+    Array.from(
+      grouped.keys()
+    )
+      .sort(
+        (a, b) =>
+          b - a
+      );
+
+  container.innerHTML =
+    weeks
+      .map(
+        week =>
+          marketWeekSection(
+            week,
+            grouped.get(
+              week
+            ),
+            Number(week) ===
+              currentWeek()
+          )
+      )
+      .join('');
+
+  container
+    .querySelectorAll(
+      '[data-market-details]'
+    )
+    .forEach(
+      button => {
+
+        button.addEventListener(
+          'click',
+          () => {
+
+            const id =
+              button.dataset
+                .marketDetails;
+
+            const market =
+              markets.find(
+                item =>
+                  String(
+                    item.id
+                  ) ===
+                  String(id)
+              );
+
+            if (market) {
+
+              openMarketDetails(
+                market
+              );
+
+            }
+
+          }
+        );
+
+      }
+    );
+
 }
 
 
@@ -2486,6 +3121,11 @@ function openMarketDetails(
     type ===
     'yes_no';
 
+  const actual =
+    marketActualValue(
+      market
+    );
+
   const modal =
     document.createElement(
       'div'
@@ -2655,6 +3295,50 @@ function openMarketDetails(
       </div>
 
 
+      ${
+        actual !== null
+          ? `
+            <div
+              class="
+                lf-market-detail-section
+              "
+            >
+
+              <h4>
+                Actual
+              </h4>
+
+              <div
+                class="lf-market-book"
+              >
+
+                <strong
+                  class="
+                    lf-market-book-name
+                  "
+                >
+                  Final Result
+                </strong>
+
+                <span>
+                  ${escapeHtml(
+                    marketActualLabel(
+                      market,
+                      actual
+                    )
+                  )}
+                </span>
+
+                <span></span>
+
+              </div>
+
+            </div>
+          `
+          : ''
+      }
+
+
       <div
         class="
           lf-market-detail-section
@@ -2794,164 +3478,6 @@ function openMarketDetails(
 
 
 // ============================================================
-// MARKET RENDER
-// ============================================================
-
-function renderMarkets() {
-
-  const container =
-    $('#marketCards');
-
-  if (!container) {
-    return;
-  }
-
-  const markets =
-    Array.isArray(
-      marketData?.markets
-    )
-      ? marketData.markets
-      : [];
-
-  const search =
-    (
-      $('#lfMarketSearch')
-        ?.value ||
-      ''
-    )
-      .trim()
-      .toLowerCase();
-
-  const selectedMarket =
-    (
-      $('#lfMarketType')
-        ?.value ||
-      'ALL'
-    )
-      .trim();
-
-  const filtered =
-    markets.filter(
-      market => {
-
-        const player =
-          marketPlayerName(
-            market
-          );
-
-        const name =
-          marketName(
-            market
-          );
-
-        const game =
-          gameDescription(
-            market
-          );
-
-        const haystack =
-          [
-            player,
-            name,
-            game
-          ]
-            .join(' ')
-            .toLowerCase();
-
-        if (
-          search &&
-          !haystack.includes(
-            search
-          )
-        ) {
-          return false;
-        }
-
-        if (
-          selectedMarket !==
-          'ALL'
-        ) {
-
-          if (
-            name
-              .trim()
-              .toLowerCase() !==
-            selectedMarket
-              .trim()
-              .toLowerCase()
-          ) {
-            return false;
-          }
-
-        }
-
-        return true;
-
-      }
-    );
-
-  if (!filtered.length) {
-
-    container.innerHTML = `
-      <div
-        class="lf-market-empty"
-      >
-        No markets match your search.
-      </div>
-    `;
-
-    return;
-  }
-
-  container.innerHTML =
-    filtered
-      .map(
-        marketCard
-      )
-      .join('');
-
-  container
-    .querySelectorAll(
-      '[data-market-details]'
-    )
-    .forEach(
-      button => {
-
-        button.addEventListener(
-          'click',
-          () => {
-
-            const id =
-              button.dataset
-                .marketDetails;
-
-            const market =
-              markets.find(
-                item =>
-                  String(
-                    item.id
-                  ) ===
-                  String(id)
-              );
-
-            if (market) {
-
-              openMarketDetails(
-                market
-              );
-
-            }
-
-          }
-        );
-
-      }
-    );
-
-}
-
-
-// ============================================================
 // MARKET UI
 // ============================================================
 
@@ -3029,7 +3555,6 @@ function configureMarketUI() {
 
     <div
       id="marketCards"
-      class="lf-market-grid"
     >
 
       <div
@@ -3105,6 +3630,7 @@ function populateMarketTypes() {
       );
 
   select.innerHTML = `
+
     <option value="ALL">
       All Markets
     </option>
@@ -3126,6 +3652,7 @@ function populateMarketTypes() {
         )
         .join('')
     }
+
   `;
 
 }
