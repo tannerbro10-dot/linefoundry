@@ -4063,29 +4063,31 @@ function injectBoardStyles() {
        EXPERT BOARD
        ======================================================== */
 
-    #propCards {
-      width: 100%;
-    }
+ #propCards {
+  width: 100%;
+  max-width: none;
+}
 
+  #propCards .cards {
+  width: 100%;
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0,1fr));
+  gap: 15px;
+}
 
-    #propCards .cards {
-      display: grid;
-      grid-template-columns:
-        repeat(3, minmax(0,1fr));
-      gap: 15px;
-    }
+#propCards .cards {
+  width: 100%;
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0,1fr));
+  gap: 15px;
+}
 
-
-    .lf-week-section {
-      width: 100%;
-      margin: 0 0 14px;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background:
-        rgba(13,17,24,.72);
-      overflow: hidden;
-    }
-
+#propCards .lf-week-section {
+  width: 100%;
+  max-width: none;
+}
 
     .lf-week-section > summary {
       list-style: none;
