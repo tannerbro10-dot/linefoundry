@@ -189,6 +189,28 @@ function injectBoardStyles() {
       color: #75efb4;
     }
 
+    /* EXPERT BOARD — FULL WIDTH */
+#propCards,
+#propCards .lf-week-section,
+#propCards .lf-week-cards,
+#propCards .cards {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+#propCards .cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+#propCards .prop {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
     .lf-week-summary {
       margin-left: auto;
       color: #8193a7;
