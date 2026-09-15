@@ -211,6 +211,34 @@ function injectBoardStyles() {
   box-sizing: border-box;
 }
 
+/* FORCE EXPERT BOARD TO USE FULL CONTENT WIDTH */
+#propCards {
+  display: block !important;
+  width: 100% !important;
+  max-width: none !important;
+}
+
+#propCards .lf-week-section {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+#propCards .lf-week-cards {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+#propCards .cards {
+  width: 100% !important;
+  max-width: none !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+#propCards .prop {
+  width: 100% !important;
+  max-width: none !important;
+}
+
     .lf-week-summary {
       margin-left: auto;
       color: #8193a7;
