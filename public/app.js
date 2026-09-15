@@ -1,27 +1,79 @@
 // ============================================================
-// LINEFOUNDRY — MERGED APP.JS
-// Expert Signals + Consensus + Live Results + The Market
+// LINEFOUNDRY APP
 // ============================================================
 
 let board = null;
 let experts = null;
 let results = null;
+
 let liveResults = {};
-let markets = [];
+let marketData = [];
+let marketResults = {};
 
 const WORKER_URL =
   'https://old-mouse-660a.tannerbro10.workers.dev/';
+
+const SIGNALS_URL =
+  '/public-signals.json';
+
+const EXPERTS_URL =
+  '/analyst-profiles.json';
+
+const RESULTS_URL =
+  '/results-ledger.json';
+
+const MARKET_DATA_URL =
+  'https://raw.githubusercontent.com/tannerbro10-dot/linefoundry/main/market-data.json';
 
 let locked = JSON.parse(
   localStorage.getItem('lf_consensus_locked') || '[]'
 );
 
-const $ = s => document.querySelector(s);
+const $ = selector =>
+  document.querySelector(selector);
 
 
 // ============================================================
-// STORAGE
+// BASIC HELPERS
 // ============================================================
+
+function escapeHtml(value) {
+  if (
+    value === null ||
+    value === undefined
+  ) {
+    return '';
+  }
+
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+
+function formatNumber(value) {
+  if (
+    value === null ||
+    value === undefined ||
+    value === ''
+  ) {
+    return '—';
+  }
+
+  const number = Number(value);
+
+  if (!Number.isFinite(number)) {
+    return String(value);
+  }
+
+  return Number.isInteger(number)
+    ? String(number)
+    : number.toFixed(1);
+}
+
 
 function save() {
   localStorage.setItem(
@@ -31,105 +83,753 @@ function save() {
 }
 
 
-// ============================================================
-// CONSENSUS HELPERS
-// ============================================================
-
-function normalizeSide(side) {
-
-  const value =
-    String(side || '')
-      .trim()
-      .toUpperCase();
-
+function normalizeWeek(value) {
   if (
-    value === 'YES' ||
-    value === 'OVER'
+    value === null ||
+    value === undefined
   ) {
-    return 'OVER';
+    return 1;
   }
 
-  if (
-    value === 'NO' ||
-    value === 'UNDER'
-  ) {
-    return 'UNDER';
-  }
+  const match =
+    String(value).match(/\d+/);
 
-  return value;
+  return match
+    ? Number(match[0])
+    : Number(value) || 1;
 }
 
 
-function consensusKey(signal) {
+function currentWeek() {
+  // Week 1 remains current through Monday Night Football.
+  const now = new Date();
 
-  return [
-    String(
-      signal.player ||
-      signal.playerName ||
-      ''
-    )
-      .trim()
-      .toLowerCase(),
+  const kickoff =
+    new Date(
+      '2026-09-15T00:15:00Z'
+    );
 
-    String(
-      signal.market ||
-      ''
-    )
-      .trim()
-      .toLowerCase()
-  ].join('|');
-
-}
-
-
-function consensusStrength(
-  total,
-  agree,
-  disagree
-) {
-
-  if (total <= 1) {
-    return 'SINGLE';
+  if (now <= kickoff) {
+    return 1;
   }
 
-  if (agree === disagree) {
-    return 'SPLIT';
-  }
-
-  if (total === 2) {
-    return 'EMERGING';
-  }
-
-  if (total <= 4) {
-    return 'MODERATE';
-  }
-
-  if (total <= 6) {
-    return 'STRONG';
-  }
-
-  return 'HEAVY';
-}
-
-
-function consensusLabel(strength) {
-
-  const labels = {
-    HEAVY: 'Heavy',
-    STRONG: 'Strong',
-    MODERATE: 'Moderate',
-    EMERGING: 'Emerging',
-    SINGLE: 'Single Source',
-    SPLIT: 'Split'
-  };
-
-  return labels[strength] || strength;
-
+  return 2;
 }
 
 
 // ============================================================
-// BUILD CONSENSUS
+// CSS SAFETY NET
+// ============================================================
+// This restores the original .prop/.cards styling even if
+// an older stylesheet is cached or missing the newer rules.
+// ============================================================
+
+function injectBoardStyles() {
+
+  if ($('#linefoundryBoardStyles')) {
+    return;
+  }
+
+  const style =
+    document.createElement('style');
+
+  style.id =
+    'linefoundryBoardStyles';
+
+  style.textContent = `
+
+    /* =========================
+       EXPERT BOARD
+       ========================= */
+
+    #propCards {
+      width: 100%;
+    }
+
+    .lf-week-section {
+      width: 100%;
+      margin: 0 0 22px;
+      border: 1px solid rgba(120,150,175,.20);
+      border-radius: 14px;
+      background: rgba(10,16,22,.55);
+      overflow: hidden;
+    }
+
+    .lf-week-section > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 20px 22px;
+      background: rgba(17,25,34,.78);
+      border-bottom: 1px solid rgba(120,150,175,.12);
+    }
+
+    .lf-week-section > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .lf-week-heading {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .lf-week-heading strong {
+      font-size: 19px;
+      letter-spacing: .04em;
+    }
+
+    .lf-week-status {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .10em;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: rgba(109,240,177,.10);
+      color: #75efb4;
+    }
+
+    .lf-week-summary {
+      margin-left: auto;
+      color: #8193a7;
+      font-size: 12px;
+    }
+
+    .lf-week-cards {
+      padding: 22px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .prop {
+      min-width: 0;
+      padding: 22px;
+      border-radius: 14px;
+      border: 1px solid rgba(120,150,175,.20);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(18,28,38,.96),
+          rgba(9,15,21,.96)
+        );
+      box-shadow:
+        0 14px 35px rgba(0,0,0,.18);
+    }
+
+    .prop:hover {
+      border-color:
+        rgba(117,239,180,.32);
+    }
+
+    .prop.locked {
+      border-color:
+        rgba(117,239,180,.28);
+    }
+
+    .prop-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .prop-top .game {
+      color: #7f91a4;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .10em;
+    }
+
+    .grade {
+      color: #75efb4;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .prop h3 {
+      margin: 0 0 15px;
+      font-size: 21px;
+      line-height: 1.25;
+      color: #f3f7fb;
+    }
+
+    .consensus-over {
+      color: #75efb4;
+    }
+
+    .consensus-under {
+      color: #ff9c9c;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns:
+        repeat(4, minmax(0,1fr));
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    .metric {
+      padding: 11px 8px;
+      text-align: center;
+      border-radius: 9px;
+      background: rgba(255,255,255,.035);
+      border: 1px solid rgba(255,255,255,.055);
+    }
+
+    .metric b {
+      display: block;
+      color: #eef5fb;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .metric span {
+      display: block;
+      color: #73879b;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .consensus-summary {
+      padding: 13px 15px;
+      margin: 14px 0;
+      border-radius: 10px;
+      background: rgba(117,239,180,.055);
+      border: 1px solid rgba(117,239,180,.10);
+    }
+
+    .consensus-summary strong {
+      display: block;
+      color: #dce8f1;
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+
+    .consensus-summary span {
+      color: #8093a7;
+      font-size: 11px;
+    }
+
+    .analyst-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .analyst-source {
+      display: grid;
+      grid-template-columns:
+        minmax(120px,auto)
+        1fr
+        auto;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 11px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.025);
+    }
+
+    .analyst-source strong {
+      color: #e9f1f7;
+      font-size: 12px;
+    }
+
+    .analyst-source span {
+      color: #75899d;
+      font-size: 11px;
+    }
+
+    .analyst-source a {
+      color: #75efb4;
+      font-size: 10px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .why {
+      color: #8497aa;
+      font-size: 12px;
+      line-height: 1.55;
+      margin: 16px 0;
+    }
+
+    .card-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.055);
+    }
+
+    .lock-status {
+      color: #7e91a5;
+      font-size: 11px;
+    }
+
+    .live-stat {
+      margin: 10px 0 15px;
+      padding: 13px 15px;
+      border-radius: 9px;
+      background: rgba(117,239,180,.07);
+      border: 1px solid rgba(117,239,180,.15);
+    }
+
+    .live-stat strong {
+      display: block;
+      color: #75efb4;
+      font-size: 13px;
+    }
+
+    .live-stat span {
+      display: block;
+      margin-top: 4px;
+      color: #7f92a5;
+      font-size: 11px;
+    }
+
+    .lf-empty {
+      grid-column: 1 / -1;
+      padding: 45px;
+      text-align: center;
+      border: 1px dashed rgba(120,150,175,.25);
+      border-radius: 14px;
+      color: #7f92a5;
+    }
+
+    /* =========================
+       MARKET
+       ========================= */
+
+    #lfMarketSection {
+      margin-top: 75px;
+    }
+
+    .lf-market-toolbar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin: 22px 0;
+    }
+
+    .lf-market-toolbar input,
+    .lf-market-toolbar select {
+      min-height: 42px;
+      border-radius: 9px;
+      border: 1px solid rgba(120,150,175,.20);
+      background: rgba(13,20,27,.9);
+      color: #eaf1f6;
+      padding: 0 13px;
+      outline: none;
+    }
+
+    .lf-market-toolbar input {
+      flex: 1;
+    }
+
+    .lf-market-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(3, minmax(0,1fr));
+      gap: 16px;
+    }
+
+    .lf-market-card {
+      padding: 20px;
+      border-radius: 13px;
+      border: 1px solid rgba(120,150,175,.18);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(17,26,35,.95),
+          rgba(9,15,21,.95)
+        );
+    }
+
+    .lf-market-card:hover {
+      border-color:
+        rgba(117,239,180,.30);
+    }
+
+    .lf-market-player {
+      color: #f2f7fb;
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .lf-market-game {
+      color: #74879a;
+      font-size: 10px;
+      margin-bottom: 17px;
+    }
+
+    .lf-market-type {
+      color: #8ea1b3;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .10em;
+      font-weight: 800;
+    }
+
+    .lf-market-line {
+      margin: 6px 0 8px;
+      color: #f5f9fc;
+      font-size: 34px;
+      line-height: 1;
+      font-weight: 800;
+    }
+
+    .lf-market-odds {
+      display: flex;
+      gap: 15px;
+      color: #b9c8d5;
+      font-size: 12px;
+    }
+
+    .lf-market-odds .over {
+      color: #75efb4;
+    }
+
+    .lf-market-odds .under {
+      color: #ff9c9c;
+    }
+
+    .lf-market-best {
+      margin-top: 16px;
+      color: #7f92a5;
+      font-size: 10px;
+    }
+
+    .lf-market-result {
+      margin-top: 13px;
+      padding: 10px 11px;
+      border-radius: 8px;
+      background: rgba(117,239,180,.055);
+      color: #75efb4;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .lf-market-result.pending {
+      color: #7f92a5;
+      background: rgba(255,255,255,.035);
+    }
+
+    .lf-market-details {
+      display: inline-block;
+      margin-top: 16px;
+      color: #75efb4;
+      font-size: 11px;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* =========================
+       MARKET MODAL
+       ========================= */
+
+    .lf-market-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .lf-market-modal.open {
+      display: flex;
+    }
+
+    .lf-market-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(5px);
+    }
+
+    .lf-market-panel {
+      position: relative;
+      width: min(760px, 100%);
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 28px;
+      border-radius: 16px;
+      border: 1px solid rgba(120,150,175,.25);
+      background: #0c141c;
+      box-shadow: 0 25px 80px rgba(0,0,0,.55);
+    }
+
+    .lf-market-close {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      border: 0;
+      background: transparent;
+      color: #8da0b2;
+      font-size: 25px;
+      cursor: pointer;
+    }
+
+    .lf-market-panel h2 {
+      margin: 0 0 6px;
+    }
+
+    .lf-market-panel .market-subtitle {
+      color: #7f92a5;
+      font-size: 12px;
+      margin-bottom: 24px;
+    }
+
+    .lf-detail-section {
+      margin-top: 24px;
+    }
+
+    .lf-detail-section h3 {
+      color: #75efb4;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .10em;
+      margin-bottom: 10px;
+    }
+
+    .lf-book-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      padding: 11px 0;
+      border-bottom: 1px solid rgba(255,255,255,.055);
+      font-size: 12px;
+    }
+
+    .lf-book-row strong {
+      color: #eaf1f6;
+    }
+
+    .lf-book-row span {
+      color: #8b9eaf;
+    }
+
+    .lf-movement {
+      display: grid;
+      grid-template-columns:
+        repeat(3,1fr);
+      gap: 10px;
+    }
+
+    .lf-movement div {
+      padding: 13px;
+      border-radius: 9px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .lf-movement b {
+      display: block;
+      color: #edf4f8;
+      margin-bottom: 4px;
+    }
+
+    .lf-movement span {
+      color: #7d90a3;
+      font-size: 11px;
+    }
+
+    @media (max-width: 1000px) {
+      .lf-market-grid {
+        grid-template-columns:
+          repeat(2,minmax(0,1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .cards,
+      .lf-market-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics {
+        grid-template-columns:
+          repeat(2,minmax(0,1fr));
+      }
+
+      .lf-market-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .lf-week-summary {
+        width: 100%;
+        margin-left: 0;
+      }
+
+      .analyst-source {
+        grid-template-columns: 1fr;
+      }
+
+      .lf-book-row,
+      .lf-movement {
+        grid-template-columns: 1fr;
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+}
+
+
+// ============================================================
+// LOAD CORE DATA
+// ============================================================
+
+async function load() {
+
+  injectBoardStyles();
+
+  try {
+
+    const [
+      signalsResponse,
+      expertsResponse,
+      resultsResponse,
+      marketResponse
+    ] = await Promise.all([
+
+      fetch(
+        `${SIGNALS_URL}?_=${Date.now()}`,
+        { cache: 'no-store' }
+      ),
+
+      fetch(
+        `${EXPERTS_URL}?_=${Date.now()}`,
+        { cache: 'no-store' }
+      ),
+
+      fetch(
+        `${RESULTS_URL}?_=${Date.now()}`,
+        { cache: 'no-store' }
+      ),
+
+      fetch(
+        `${MARKET_DATA_URL}?_=${Date.now()}`,
+        { cache: 'no-store' }
+      )
+    ]);
+
+
+    if (!signalsResponse.ok) {
+      throw new Error(
+        `public-signals.json returned ${signalsResponse.status}`
+      );
+    }
+
+    if (!expertsResponse.ok) {
+      throw new Error(
+        `analyst-profiles.json returned ${expertsResponse.status}`
+      );
+    }
+
+    if (!resultsResponse.ok) {
+      throw new Error(
+        `results-ledger.json returned ${resultsResponse.status}`
+      );
+    }
+
+
+    const signalsData =
+      await signalsResponse.json();
+
+    const expertsData =
+      await expertsResponse.json();
+
+    const resultsData =
+      await resultsResponse.json();
+
+    let marketJson = null;
+
+    if (marketResponse.ok) {
+      marketJson =
+        await marketResponse.json();
+    }
+
+
+    experts =
+      expertsData;
+
+    results =
+      resultsData;
+
+    marketData =
+      marketJson?.markets ||
+      [];
+
+
+    board = {
+      mode: 'public-consensus',
+
+      season:
+        signalsData.season ||
+        2026,
+
+      week:
+        signalsData.week ||
+        1,
+
+      refreshedAt:
+        new Date().toISOString(),
+
+      sources:
+        signalsData.sources ||
+        [],
+
+      rawSignals:
+        signalsData.signals ||
+        [],
+
+      props:
+        buildConsensusProps(
+          signalsData.signals || [],
+          signalsData.sources || []
+        )
+    };
+
+
+    render();
+
+    await loadLiveResults();
+
+  }
+  catch (error) {
+
+    console.error(
+      'LineFoundry data load failed:',
+      error
+    );
+
+    if ($('#propCards')) {
+
+      $('#propCards').innerHTML = `
+        <div class="lf-empty">
+          <h3>Unable to load LineFoundry data</h3>
+          <p>Please refresh the page and try again.</p>
+        </div>
+      `;
+    }
+  }
+}
+
+
+// ============================================================
+// CONSENSUS ENGINE
 // ============================================================
 
 function buildConsensusProps(
@@ -137,821 +837,713 @@ function buildConsensusProps(
   sources
 ) {
 
-  const groups = {};
+  const groups = new Map();
 
-  (signals || []).forEach(signal => {
 
-    const key =
-      consensusKey(signal);
+  signals.forEach(signal => {
 
-    if (!groups[key]) {
+    const week =
+      normalizeWeek(
+        signal.week ??
+        signal.seasonWeek ??
+        board?.week ??
+        1
+      );
 
-      groups[key] = {
-        player:
-          signal.player ||
-          signal.playerName ||
-          'Unknown Player',
+    const player =
+      String(
+        signal.player || ''
+      ).trim();
 
-        market:
-          signal.market ||
-          'Unknown Market',
+    const market =
+      String(
+        signal.market || ''
+      ).trim();
 
-        week:
-          signal.week ||
-          null,
-
-        signals: []
-      };
-
+    if (!player || !market) {
+      return;
     }
 
-    groups[key].signals.push(signal);
 
+    // Important:
+    // Consensus is grouped by PLAYER + MARKET + WEEK.
+    // Line is intentionally NOT part of the grouping key.
+
+    const key =
+      `${player.toLowerCase()}|${market.toLowerCase()}|${week}`;
+
+
+    if (!groups.has(key)) {
+      groups.set(
+        key,
+        {
+          player,
+          market,
+          week,
+          signals: []
+        }
+      );
+    }
+
+
+    groups
+      .get(key)
+      .signals
+      .push(signal);
   });
 
 
-  return Object.values(groups).map(group => {
-
-    const normalized =
-      group.signals.map(signal => ({
-        ...signal,
-        normalizedSide:
-          normalizeSide(
-            signal.side ||
-            signal.pick ||
-            signal.selection
-          )
-      }));
-
+  return Array.from(
+    groups.values()
+  ).map(group => {
 
     const over =
-      normalized.filter(
+      group.signals.filter(
         signal =>
-          signal.normalizedSide === 'OVER'
+          String(signal.side)
+            .toUpperCase() ===
+          'OVER'
       );
 
     const under =
-      normalized.filter(
+      group.signals.filter(
         signal =>
-          signal.normalizedSide === 'UNDER'
+          String(signal.side)
+            .toUpperCase() ===
+          'UNDER'
       );
+
+    const yes =
+      group.signals.filter(
+        signal =>
+          String(signal.side)
+            .toUpperCase() ===
+          'YES'
+      );
+
+    let direction =
+      'YES';
+
+    if (over.length || under.length) {
+
+      direction =
+        over.length >= under.length
+          ? 'OVER'
+          : 'UNDER';
+    }
 
 
     const agree =
-      Math.max(
-        over.length,
-        under.length
-      );
+      direction === 'OVER'
+        ? over.length
+        : direction === 'UNDER'
+          ? under.length
+          : yes.length;
+
 
     const disagree =
-      Math.min(
-        over.length,
-        under.length
-      );
-
-    const total =
-      normalized.length;
+      direction === 'OVER'
+        ? under.length
+        : direction === 'UNDER'
+          ? over.length
+          : 0;
 
 
-    let majoritySide =
-      'SPLIT';
-
-    if (
-      over.length >
-      under.length
-    ) {
-      majoritySide = 'OVER';
-    }
-
-    if (
-      under.length >
-      over.length
-    ) {
-      majoritySide = 'UNDER';
-    }
+    const expertsCount =
+      group.signals.length;
 
 
     const percent =
-      total
+      expertsCount
         ? Math.round(
-            agree /
-            total *
+            (agree / expertsCount) *
             100
           )
         : 0;
 
 
-    const strength =
-      consensusStrength(
-        total,
-        agree,
-        disagree
-      );
-
-
     const lines =
-      normalized
-        .map(signal => signal.line)
+      group.signals
+        .map(
+          signal =>
+            signal.line
+        )
         .filter(
-          value =>
-            value !== null &&
-            value !== undefined &&
-            value !== ''
+          line =>
+            line !== null &&
+            line !== undefined
         )
         .map(Number)
         .filter(
-          value =>
-            Number.isFinite(value)
+          Number.isFinite
         );
 
 
-    const lineMin =
-      lines.length
-        ? Math.min(...lines)
-        : null;
-
-    const lineMax =
-      lines.length
-        ? Math.max(...lines)
-        : null;
+    const uniqueLines =
+      [...new Set(lines)]
+        .sort(
+          (a,b) => a-b
+        );
 
 
-    const analystDetails =
-      normalized.map(signal => {
-
-        const source =
-          (sources || []).find(
-            item =>
-              item.id ===
-              signal.sourceId
-          );
-
-        return {
-          ...signal,
-          source
-        };
-
-      });
+    let line = null;
+    let lineDisplay = '';
 
 
-    let rationale =
-      `${agree} ${majoritySide} expert${
-        agree === 1 ? '' : 's'
-      }`;
+    if (uniqueLines.length === 1) {
 
-    if (disagree) {
+      line =
+        uniqueLines[0];
 
-      rationale +=
-        ` • ${disagree} opposing`;
+      lineDisplay =
+        formatNumber(line);
 
-    } else {
+    }
+    else if (uniqueLines.length > 1) {
 
-      rationale +=
-        ' • No opposing pick found';
+      lineDisplay =
+        `${formatNumber(
+          uniqueLines[0]
+        )}–${formatNumber(
+          uniqueLines[
+            uniqueLines.length - 1
+          ]
+        )}`;
 
+      // Use the median published line
+      // when multiple analysts cited
+      // slightly different lines.
+      line =
+        uniqueLines[
+          Math.floor(
+            uniqueLines.length / 2
+          )
+        ];
     }
 
 
-    if (
-      lineMin !== null &&
-      lineMax !== null
-    ) {
+    const analystList =
+      group.signals.map(
+        signal => {
 
-      if (
-        lineMin === lineMax
-      ) {
+          const source =
+            sources.find(
+              item =>
+                item.id ===
+                signal.sourceId
+            );
 
-        rationale +=
-          ` • Published line: ${lineMin}`;
 
-      } else {
+          return {
+            name:
+              signal.analyst ||
+              'Unknown analyst',
 
-        rationale +=
-          ` • Lines: ${lineMin}–${lineMax}`;
+            outlet:
+              source?.outlet ||
+              signal.outlet ||
+              '',
 
-      }
+            side:
+              signal.side ||
+              '',
 
-    }
+            line:
+              signal.line ??
+              null,
+
+            url:
+              source?.url ||
+              signal.url ||
+              '',
+
+            note:
+              signal.note ||
+              ''
+          };
+        }
+      );
+
+
+    const consensusDisplay =
+      expertsCount === 1
+        ? 'EARLY'
+        : `${percent}%`;
 
 
     return {
 
-      ...group,
-
       id:
-        normalized[0]?.id ||
-        key,
+        `${group.player}-${group.market}-${group.week}`
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g,'-'),
+
+      player:
+        group.player,
+
+      market:
+        group.market,
 
       side:
-        majoritySide,
+        direction,
 
-      line:
-        normalized[0]?.line ??
-        null,
+      line,
+
+      lineDisplay,
+
+      week:
+        group.week,
+
+      weeks:
+        [group.week],
 
       agree,
+
       disagree,
-      total,
+
+      experts:
+        expertsCount,
+
       percent,
-      strength,
-      strengthLabel:
-        consensusLabel(strength),
+
+      analystCount:
+        expertsCount,
+
+      consensusScore:
+        percent,
+
+      consensusDisplay,
+
+      consensusStrength:
+        percent >= 75
+          ? 'HIGH'
+          : percent >= 60
+            ? 'MEDIUM'
+            : 'EARLY',
+
+      confidence:
+        percent >= 75
+          ? 'HIGH'
+          : percent >= 60
+            ? 'MEDIUM'
+            : 'EARLY',
 
       analysts:
-        analystDetails,
+        analystList,
 
-      lineMin,
-      lineMax,
+      rationale:
+        expertsCount === 1
+          ? 'One tracked source currently supports this direction; treat as an early signal until more sources agree.'
+          : `${percent}% of tracked analysts support this direction.`,
 
-      consensusDisplay:
-        `${percent}%`,
-
-      rationale
-
+      sourceIds:
+        [
+          ...new Set(
+            group.signals
+              .map(
+                signal =>
+                  signal.sourceId
+              )
+              .filter(Boolean)
+          )
+        ]
     };
-
   });
-
 }
 
 
 // ============================================================
-// CONSENSUS FILTER
+// LIVE WORKER
 // ============================================================
 
-function configureConsensusFilter() {
+async function loadLiveResults() {
 
-  const filter =
-    $('#confidenceFilter');
+  try {
 
-  if (!filter) {
-    return;
-  }
-
-
-  filter.innerHTML = `
-    <option value="ALL">All</option>
-    <option value="HEAVY">Heavy</option>
-    <option value="STRONG">Strong</option>
-    <option value="MODERATE">Moderate</option>
-    <option value="EMERGING">Emerging</option>
-    <option value="SINGLE">Single Source</option>
-    <option value="SPLIT">Split</option>
-  `;
-
-
-  const parent =
-    filter.parentElement;
-
-  if (!parent) {
-    return;
-  }
-
-
-  const label =
-    parent.querySelector('label');
-
-  if (label) {
-
-    label.textContent =
-      'Consensus Strength';
-
-  }
-
-}
-
-
-// ============================================================
-// RESULT HELPERS
-// ============================================================
-
-function formatNumber(value) {
-
-  if (
-    value === null ||
-    value === undefined
-  ) {
-    return '—';
-  }
-
-  return Number.isInteger(
-    Number(value)
-  )
-    ? String(value)
-    : Number(value).toFixed(1);
-
-}
-
-
-function formatLiveResult(result) {
-
-  if (
-    result.status ===
-      'GAME_NOT_FOUND' ||
-    result.status ===
-      'MARKET_NOT_FOUND' ||
-    result.status ===
-      'ERROR'
-  ) {
-
-    return 'Not Available';
-
-  }
-
-
-  if (
-    result.market ===
-    'Anytime TD'
-  ) {
-
-    if (
-      result.status ===
-      'HIT'
-    ) {
-      return 'HIT';
-    }
-
-    if (
-      result.status ===
-      'MISS'
-    ) {
-      return 'MISS';
-    }
-
-    if (
-      result.status ===
-      'LIVE'
-    ) {
-      return 'LIVE';
-    }
-
-    return 'PENDING';
-
-  }
-
-
-  if (
-    result.status ===
-    'HIT'
-  ) {
-
-    return `HIT — ${formatNumber(
-      result.currentValue
-    )}`;
-
-  }
-
-
-  if (
-    result.status ===
-    'MISS'
-  ) {
-
-    return `MISS — ${formatNumber(
-      result.currentValue
-    )}`;
-
-  }
-
-
-  if (
-    result.status ===
-    'LIVE'
-  ) {
-
-    return `LIVE — ${formatNumber(
-      result.currentValue
-    )}`;
-
-  }
-
-
-  return (
-    result.status ||
-    'PENDING'
-  );
-
-}
-
-
-function getResult(id) {
-
-  const live =
-    liveResults[id];
-
-  if (live) {
-
-    return formatLiveResult(
-      live
-    );
-
-  }
-
-
-  if (!results) {
-
-    return 'PENDING';
-
-  }
-
-
-  if (
-    results.results &&
-    results.results[id]
-  ) {
-
-    return results.results[id];
-
-  }
-
-
-  const pick =
-    (results.picks || [])
-      .find(
-        p => p.id === id
+    const response =
+      await fetch(
+        `${WORKER_URL}?_=${Date.now()}`,
+        {
+          cache: 'no-store'
+        }
       );
 
 
-  return (
-    pick?.result ||
-    'PENDING'
-  );
+    if (!response.ok) {
+      throw new Error(
+        `Worker returned ${response.status}`
+      );
+    }
 
+
+    const data =
+      await response.json();
+
+
+    if (!data.success) {
+      throw new Error(
+        data.error ||
+        'Worker returned an error'
+      );
+    }
+
+
+    liveResults = {};
+    marketResults = {};
+
+
+    (data.results || [])
+      .forEach(result => {
+
+        if (!result.id) {
+          return;
+        }
+
+        liveResults[result.id] =
+          result;
+
+        // Market results use the same
+        // result IDs as market-data.json.
+        marketResults[result.id] =
+          result;
+      });
+
+
+    if (board) {
+
+      board.liveUpdatedAt =
+        data.updatedAt ||
+        new Date().toISOString();
+    }
+
+
+    render();
+
+  }
+  catch (error) {
+
+    console.error(
+      'LineFoundry live data failed:',
+      error
+    );
+  }
 }
 
 
-function getResultDetails(id) {
+// Refresh ESPN/Worker every 60 seconds.
+setInterval(
+  loadLiveResults,
+  60000
+);
+
+
+// ============================================================
+// EXPERT RESULT HELPERS
+// ============================================================
+
+function getResult(prop) {
+
+  if (!prop) {
+    return 'PENDING';
+  }
+
+
+  // Expert result IDs may not exactly
+  // match the consensus ID, so first
+  // check the raw signals that make up
+  // this consensus.
+
+  const matching =
+    (board?.rawSignals || [])
+      .filter(signal => {
+
+        const signalWeek =
+          normalizeWeek(
+            signal.week ??
+            board?.week ??
+            1
+          );
+
+        return (
+          String(signal.player)
+            .toLowerCase() ===
+          String(prop.player)
+            .toLowerCase()
+          &&
+          String(signal.market)
+            .toLowerCase() ===
+          String(prop.market)
+            .toLowerCase()
+          &&
+          signalWeek ===
+          Number(prop.week)
+        );
+      });
+
+
+  for (const signal of matching) {
+
+    const live =
+      liveResults[signal.id];
+
+    if (live) {
+
+      if (
+        live.status === 'HIT'
+      ) {
+        return 'HIT';
+      }
+
+      if (
+        live.status === 'MISS'
+      ) {
+        return 'MISS';
+      }
+
+      if (
+        live.status === 'LIVE'
+      ) {
+        return 'LIVE';
+      }
+    }
+  }
+
+
+  return 'PENDING';
+}
+
+
+// ============================================================
+// EXPERT LIVE DISPLAY
+// ============================================================
+
+function liveStatus(prop) {
+
+  const matching =
+    (board?.rawSignals || [])
+      .filter(signal => {
+
+        const signalWeek =
+          normalizeWeek(
+            signal.week ??
+            board?.week ??
+            1
+          );
+
+        return (
+          String(signal.player)
+            .toLowerCase() ===
+          String(prop.player)
+            .toLowerCase()
+          &&
+          String(signal.market)
+            .toLowerCase() ===
+          String(prop.market)
+            .toLowerCase()
+          &&
+          signalWeek ===
+          Number(prop.week)
+        );
+      });
+
 
   const live =
-    liveResults[id];
+    matching
+      .map(
+        signal =>
+          liveResults[signal.id]
+      )
+      .find(Boolean);
+
 
   if (!live) {
-    return null;
-  }
-
-
-  if (
-    live.status ===
-      'GAME_NOT_FOUND' ||
-    live.status ===
-      'MARKET_NOT_FOUND' ||
-    live.status ===
-      'ERROR'
-  ) {
-
-    return null;
-
-  }
-
-
-  return live;
-
-}
-
-
-function label(p) {
-
-  return `${p.side} ${
-    p.line == null
-      ? 'TD'
-      : p.line
-  } ${p.market}`;
-
-}
-
-
-function liveStatus(p) {
-
-  const details =
-    getResultDetails(
-      p.id
-    );
-
-  if (!details) {
     return '';
   }
 
 
-  const status =
-    details.status;
-
-
+  // Anytime TD
   if (
-    status === 'HIT'
+    String(prop.market)
+      .toLowerCase()
+      .includes('anytime td')
   ) {
 
-    return `
-      <div class="live-result hit">
-        <strong>BET HIT</strong>
-        <span>
-          ${
-            details.currentValue !==
-            undefined
-              ? `${formatNumber(
-                  details.currentValue
-                )} — Final result`
-              : 'Final result'
-          }
-        </span>
-      </div>
-    `;
+    if (
+      live.status === 'HIT'
+    ) {
 
+      return `
+        <div class="live-stat">
+          <strong>BET HIT</strong>
+          <span>Touchdown recorded</span>
+        </div>
+      `;
+    }
+
+
+    if (
+      live.status === 'MISS'
+    ) {
+
+      return `
+        <div class="live-stat">
+          <strong>BET MISS</strong>
+          <span>No touchdown recorded</span>
+        </div>
+      `;
+    }
+
+
+    if (
+      live.status === 'LIVE'
+    ) {
+
+      return `
+        <div class="live-stat">
+          <strong>LIVE</strong>
+          <span>Game in progress</span>
+        </div>
+      `;
+    }
+
+
+    return '';
   }
 
 
   if (
-    status === 'MISS'
+    live.status === 'HIT'
   ) {
 
     return `
-      <div class="live-result miss">
-        <strong>BET MISS</strong>
-        <span>
-          ${
-            details.currentValue !==
-            undefined
-              ? `${formatNumber(
-                  details.currentValue
-                )} — Final result`
-              : 'Final result'
-          }
-        </span>
-      </div>
-    `;
-
-  }
-
-
-  if (
-    status === 'LIVE'
-  ) {
-
-    const value =
-      details.currentValue;
-
-    const line =
-      Number(
-        details.line
-      );
-
-
-    const needed =
-      Number.isFinite(line) &&
-      Number.isFinite(
-        Number(value)
-      )
-        ? Math.max(
-            0,
-            line -
-              Number(value) +
-              (
-                p.side ===
-                'UNDER'
-                  ? 0
-                  : 0
-              )
-          )
-        : null;
-
-
-    return `
-      <div class="live-result live">
+      <div class="live-stat">
         <strong>
-          LIVE${
-            value !==
-            undefined
-              ? ` — ${formatNumber(
-                  value
-                )} YARDS`
-              : ''
-          }
+          ${formatNumber(
+            live.currentValue
+          )} — BET HIT
+        </strong>
+        <span>
+          Final result
+        </span>
+      </div>
+    `;
+  }
+
+
+  if (
+    live.status === 'MISS'
+  ) {
+
+    return `
+      <div class="live-stat">
+        <strong>
+          ${formatNumber(
+            live.currentValue
+          )} — BET MISS
+        </strong>
+        <span>
+          Final result
+        </span>
+      </div>
+    `;
+  }
+
+
+  if (
+    live.status === 'LIVE'
+  ) {
+
+    return `
+      <div class="live-stat">
+        <strong>
+          LIVE —
+          ${formatNumber(
+            live.currentValue
+          )}
         </strong>
 
         ${
-          needed !== null
+          live.remaining !== null &&
+          live.remaining !== undefined
             ? `
               <span>
-                ${
-                  needed > 0
-                    ? `${formatNumber(
-                        needed
-                      )} needed`
-                    : 'Line reached'
-                }
+                ${formatNumber(
+                  live.remaining
+                )} needed
               </span>
             `
             : ''
         }
       </div>
     `;
-
   }
 
 
   return '';
-
 }
 
 
 // ============================================================
-// LOCK HELPERS
-// ============================================================
-
-function isLocked(id) {
-
-  return locked.includes(id);
-
-}
-
-
-function toggleLock(id) {
-
-  if (
-    isLocked(id)
-  ) {
-
-    locked =
-      locked.filter(
-        value =>
-          value !== id
-      );
-
-  } else {
-
-    locked.push(id);
-
-  }
-
-  save();
-  render();
-
-}
-
-
-// ============================================================
-// SOURCE HELPERS
-// ============================================================
-
-function sourceForSignal(
-  signal
-) {
-
-  if (
-    !signal
-  ) {
-    return null;
-  }
-
-
-  return (
-    (board?.sources || [])
-      .find(
-        source =>
-          source.id ===
-          signal.sourceId
-      ) ||
-    null
-  );
-
-}
-
-
-function sourceName(
-  signal
-) {
-
-  const source =
-    sourceForSignal(
-      signal
-    );
-
-  return (
-    source?.name ||
-    signal.source ||
-    signal.outlet ||
-    'Public Source'
-  );
-
-}
-
-
-function sourceOutlet(
-  signal
-) {
-
-  const source =
-    sourceForSignal(
-      signal
-    );
-
-  return (
-    source?.outlet ||
-    signal.outlet ||
-    ''
-  );
-
-}
-
-
-// ============================================================
-// CONSENSUS CARD
+// EXPERT CARD
 // ============================================================
 
 function card(prop) {
 
-  const side =
-    prop.side ===
-    'SPLIT'
-      ? 'SPLIT'
-      : prop.side;
+  const sideClass =
+    prop.side === 'UNDER'
+      ? 'consensus-under'
+      : 'consensus-over';
 
 
-  const lineText =
-    prop.line == null
-      ? 'Anytime TD'
-      : prop.line;
+  const lockedPick =
+    locked.includes(prop.id);
 
 
-  const status =
-    liveStatus(prop);
-
-
-  const lockedClass =
-    isLocked(prop.id)
-      ? ' locked'
-      : '';
-
-
-  const analystHtml =
+  const analysts =
     (prop.analysts || [])
-      .map(signal => {
+      .map(
+        analyst => `
+          <div class="analyst-source">
 
-        const source =
-          signal.source;
+            <strong>
+              ${escapeHtml(
+                analyst.name
+              )}
+            </strong>
 
-        const name =
-          signal.analyst ||
-          signal.analystName ||
-          signal.author ||
-          'Analyst';
+            <span>
+              ${escapeHtml(
+                analyst.outlet ||
+                ''
+              )}
 
+              ${
+                analyst.side
+                  ? ` — ${escapeHtml(
+                      analyst.side
+                    )}`
+                  : ''
+              }
 
-        const outlet =
-          source?.outlet ||
-          signal.outlet ||
-          'Public Source';
-
-
-        const sideLabel =
-          normalizeSide(
-            signal.side ||
-            signal.pick
-          );
-
-
-        const href =
-          signal.url ||
-          source?.url ||
-          null;
-
-
-        return `
-          <div class="analyst-row">
-
-            <div>
-              <strong>
-                ${escapeHtml(name)}
-              </strong>
-
-              <span>
-                ${escapeHtml(
-                  outlet
-                )}
-                —
-                ${escapeHtml(
-                  sideLabel
-                )}
-                ${
-                  signal.line != null
-                    ? ` ${escapeHtml(
-                        String(
-                          signal.line
-                        )
-                      )}`
-                    : ''
-                }
-              </span>
-            </div>
+              ${
+                analyst.line !== null &&
+                analyst.line !== undefined
+                  ? ` ${formatNumber(
+                      analyst.line
+                    )}`
+                  : ''
+              }
+            </span>
 
             ${
-              href
+              analyst.url
                 ? `
                   <a
-                    href="${escapeAttr(
-                      href
+                    href="${escapeHtml(
+                      analyst.url
                     )}"
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="noopener"
                   >
                     Source ↗
                   </a>
@@ -960,72 +1552,74 @@ function card(prop) {
             }
 
           </div>
-        `;
-
-      })
+        `
+      )
       .join('');
 
 
   return `
+
     <article
-      class="prop-card${lockedClass}"
-      data-id="${escapeAttr(
-        prop.id
-      )}"
+      class="prop ${
+        lockedPick
+          ? 'locked'
+          : ''
+      }"
     >
 
-      <div class="prop-card-top">
+      <div class="prop-top">
 
-        <span>
-          NFL • ${
-            escapeHtml(
-              prop.week ||
-              board?.week ||
-              ''
-            )
-          }
-        </span>
+        <div class="game">
+          NFL • WEEK ${prop.week}
+        </div>
 
-        <strong>
-          ${prop.percent}%
-        </strong>
+        <div class="grade">
+          ${escapeHtml(
+            prop.consensusDisplay
+          )}
+        </div>
 
       </div>
 
 
       <h3>
+
         ${escapeHtml(
           prop.player
         )}
+
         —
-        ${escapeHtml(
-          side
-        )}
+
+        <span
+          class="${sideClass}"
+        >
+          ${escapeHtml(
+            prop.side
+          )}
+        </span>
+
         ${
-          prop.line != null
-            ? ` ${escapeHtml(
-                String(
-                  prop.line
-                )
+          prop.line !== null &&
+          prop.line !== undefined
+            ? ` ${formatNumber(
+                prop.line
               )}`
             : ''
         }
+
         ${escapeHtml(
           prop.market
         )}
+
       </h3>
 
 
-      ${
-        status
-          ? status
-          : ''
-      }
+      ${liveStatus(prop)}
 
 
-      <div class="prop-metrics">
+      <div class="metrics">
 
-        <div>
+        <div class="metric">
           <b>
             ${prop.agree}
           </b>
@@ -1034,7 +1628,7 @@ function card(prop) {
           </span>
         </div>
 
-        <div>
+        <div class="metric">
           <b>
             ${prop.disagree}
           </b>
@@ -1043,16 +1637,16 @@ function card(prop) {
           </span>
         </div>
 
-        <div>
+        <div class="metric">
           <b>
-            ${prop.total}
+            ${prop.experts}
           </b>
           <span>
             Experts
           </span>
         </div>
 
-        <div>
+        <div class="metric">
           <b>
             ${prop.percent}%
           </b>
@@ -1067,1169 +1661,358 @@ function card(prop) {
       <div class="consensus-summary">
 
         <strong>
-          ${
-            prop.agree
-          }
-          ${
-            side
-          }
+
+          ${prop.agree}
+
+          ${escapeHtml(
+            prop.side
+          )}
+
           expert${
             prop.agree === 1
               ? ''
               : 's'
           }
+
+          ${
+            prop.disagree > 0
+              ? `
+                •
+                ${prop.disagree}
+                ${
+                  prop.side === 'OVER'
+                    ? 'UNDER'
+                    : 'OVER'
+                }
+                expert${
+                  prop.disagree === 1
+                    ? ''
+                    : 's'
+                }
+              `
+              : `
+                • No opposing pick found
+              `
+          }
+
         </strong>
 
-        <span>
-          ${
-            prop.disagree
-              ? `${prop.disagree} opposing`
-              : 'No opposing pick found'
-          }
-        </span>
 
-        <small>
+        <span>
+
           ${
-            prop.strengthLabel
-          } source signal
-        </small>
+            prop.experts === 1
+              ? 'Single-source signal'
+              : `${prop.percent}% direction consensus`
+          }
+
+          ${
+            prop.lineDisplay
+              ? `
+                • Published line${
+                  prop.lineDisplay.includes('–')
+                    ? ' range'
+                    : ''
+                }:
+                ${escapeHtml(
+                  prop.lineDisplay
+                )}
+              `
+              : ''
+          }
+
+        </span>
 
       </div>
 
 
-      ${
-        analystHtml
-          ? `
-            <div class="analysts">
-              ${analystHtml}
-            </div>
-          `
-          : ''
-      }
+      <div class="analyst-list">
+
+        ${analysts}
+
+      </div>
 
 
-      <div class="rationale">
+      <p class="why">
         ${escapeHtml(
           prop.rationale
         )}
-      </div>
+      </p>
 
 
-      <div class="prop-card-actions">
+      <div class="card-actions">
 
-        <button
-          type="button"
-          class="secondary-btn lock-btn"
-          data-lock-id="${escapeAttr(
-            prop.id
-          )}"
-        >
+        <span class="lock-status">
           ${
-            isLocked(prop.id)
-              ? 'Locked'
-              : 'Lock Pick'
+            lockedPick
+              ? '🔒 Locked'
+              : '🟢 Open'
           }
-        </button>
+        </span>
 
       </div>
 
     </article>
+
   `;
-
 }
 
 
 // ============================================================
-// ESCAPE HELPERS
+// WEEK SUMMARY
 // ============================================================
 
-function escapeHtml(
-  value
-) {
+function weekSummary(props) {
 
-  return String(
-    value ?? ''
-  )
-    .replaceAll(
-      '&',
-      '&amp;'
-    )
-    .replaceAll(
-      '<',
-      '&lt;'
-    )
-    .replaceAll(
-      '>',
-      '&gt;'
-    )
-    .replaceAll(
-      '"',
-      '&quot;'
-    )
-    .replaceAll(
-      "'",
-      '&#039;'
-    );
+  const hits =
+    props.filter(
+      prop =>
+        getResult(prop) ===
+        'HIT'
+    ).length;
 
-}
 
+  const misses =
+    props.filter(
+      prop =>
+        getResult(prop) ===
+        'MISS'
+    ).length;
 
-function escapeAttr(
-  value
-) {
 
-  return escapeHtml(
-    value
-  );
+  const live =
+    props.filter(
+      prop =>
+        getResult(prop) ===
+        'LIVE'
+    ).length;
 
-}
 
+  const pending =
+    props.filter(
+      prop =>
+        getResult(prop) ===
+        'PENDING'
+    ).length;
 
-// ============================================================
-// RENDER EXPERT SIGNALS
-// ============================================================
 
-function renderProps() {
+  const settled =
+    hits + misses;
 
-  const container =
-    $('#propCards');
 
-  if (!container) {
-    return;
-  }
-
-
-  const filter =
-    $('#confidenceFilter')
-      ?.value ||
-    'ALL';
-
-
-  let props =
-    board?.props ||
-    [];
-
-
-  if (
-    filter !==
-    'ALL'
-  ) {
-
-    props =
-      props.filter(
-        prop =>
-          prop.strength ===
-          filter
-      );
-
-  }
-
-
-  if (!props.length) {
-
-    container.innerHTML = `
-      <div class="empty-state">
-        <h3>
-          No consensus signals found
-        </h3>
-
-        <p>
-          Try another consensus-strength filter.
-        </p>
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  container.innerHTML =
-    props
-      .map(card)
-      .join('');
-
-
-  container
-    .querySelectorAll(
-      '[data-lock-id]'
-    )
-    .forEach(button => {
-
-      button.addEventListener(
-        'click',
-        () => {
-
-          toggleLock(
-            button.dataset.lockId
-          );
-
-        }
-      );
-
-    });
-
-}
-
-
-// ============================================================
-// RENDER EXPERT/SOURCE TABLES
-// ============================================================
-
-function renderExperts() {
-
-  const rows =
-    $('#expertRows');
-
-  if (!rows) {
-    return;
-  }
-
-
-  const list =
-    Array.isArray(experts)
-      ? experts
-      : (
-          experts?.analysts ||
-          experts?.experts ||
-          []
-        );
-
-
-  rows.innerHTML =
-    list.map(expert => {
-
-      const name =
-        expert.name ||
-        expert.analyst ||
-        'Unknown';
-
-
-      const outlet =
-        expert.outlet ||
-        expert.source ||
-        '';
-
-
-      const tracked =
-        expert.tracked ??
-        expert.picks ??
-        0;
-
-
-      const wins =
-        expert.wins ??
-        0;
-
-
-      const losses =
-        expert.losses ??
-        0;
-
-
-      const units =
-        expert.units ??
-        0;
-
-
-      const roi =
-        expert.roi ??
-        null;
-
-
-      return `
-        <tr>
-
-          <td>
-            ${escapeHtml(
-              name
-            )}
-          </td>
-
-          <td>
-            ${escapeHtml(
-              outlet
-            )}
-          </td>
-
-          <td>
-            ${tracked}
-          </td>
-
-          <td>
-            ${wins}-${losses}
-          </td>
-
-          <td>
-            ${Number(
-              units
-            ).toFixed(2)}u
-          </td>
-
-          <td>
-            ${
-              roi == null
-                ? '—'
-                : `${roi}%`
-            }
-          </td>
-
-          <td>
-            ${
-              expert.status ||
-              'Tracked'
-            }
-          </td>
-
-        </tr>
-      `;
-
-    }).join('');
-
-}
-
-
-function renderSources() {
-
-  const rows =
-    $('#sourceRows');
-
-  if (!rows) {
-    return;
-  }
-
-
-  const list =
-    board?.sources ||
-    [];
-
-
-  rows.innerHTML =
-    list.map(source => {
-
-      return `
-        <tr>
-
-          <td>
-            ${escapeHtml(
-              source.name ||
-              'Public Source'
-            )}
-          </td>
-
-          <td>
-            ${escapeHtml(
-              source.outlet ||
-              ''
-            )}
-          </td>
-
-          <td>
-            ${escapeHtml(
-              source.evidence ||
-              source.description ||
-              'Published analyst opinion'
-            )}
-          </td>
-
-          <td>
-            ${escapeHtml(
-              source.verification ||
-              'Public'
-            )}
-          </td>
-
-          <td>
-            ${
-              source.url
-                ? `
-                  <a
-                    href="${escapeAttr(
-                      source.url
-                    )}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Source ↗
-                  </a>
-                `
-                : '—'
-            }
-          </td>
-
-        </tr>
-      `;
-
-    }).join('');
-
-}
-
-
-// ============================================================
-// RENDER RECORD
-// ============================================================
-
-function renderRecord() {
-
-  const wins =
-    $('#wins');
-
-  const losses =
-    $('#losses');
-
-  const units =
-    $('#units');
-
-  const roi =
-    $('#roi');
-
-
-  if (!results) {
-    return;
-  }
-
-
-  const record =
-    results.record ||
-    results.summary ||
-    results;
-
-
-  if (wins) {
-
-    wins.textContent =
-      record.wins ??
-      0;
-
-  }
-
-
-  if (losses) {
-
-    losses.textContent =
-      record.losses ??
-      0;
-
-  }
-
-
-  if (units) {
-
-    const value =
-      Number(
-        record.units ??
-        0
-      );
-
-
-    units.textContent =
-      `${value.toFixed(2)}u`;
-
-  }
-
-
-  if (roi) {
-
-    const value =
-      record.roi;
-
-
-    roi.textContent =
-      value == null
-        ? '—'
-        : `${value}%`;
-
-  }
-
-}
-
-
-// ============================================================
-// RENDER BOARD
-// ============================================================
-
-function render() {
-
-  renderProps();
-  renderExperts();
-  renderSources();
-  renderRecord();
-
-  renderMarketSection();
-
-
-  const signalCount =
-    $('#signalCount2');
-
-  const sourceCount =
-    $('#sourceCount2');
-
-
-  if (signalCount) {
-
-    signalCount.textContent =
-      board?.rawSignals?.length ||
-      0;
-
-  }
-
-
-  if (sourceCount) {
-
-    sourceCount.textContent =
-      board?.sources?.length ||
-      0;
-
-  }
-
-
-  const lastRefresh =
-    $('#lastRefresh');
-
-  if (lastRefresh) {
-
-    const value =
-      board?.liveUpdatedAt ||
-      board?.refreshedAt;
-
-
-    lastRefresh.textContent =
-      value
-        ? new Date(
-            value
-          ).toLocaleString()
-        : '—';
-
-  }
-
-}
-
-
-// ============================================================
-// LOAD LINEFOUNDRY DATA
-// ============================================================
-
-async function load() {
-
-  try {
-
-    const [
-      signalsData,
-      expertsData,
-      resultsData,
-      marketData
-    ] =
-      await Promise.all([
-
-        fetch(
-          '/public-signals.json',
-          {
-            cache:
-              'no-store'
-          }
-        ).then(
-          response => {
-
-            if (!response.ok) {
-
-              throw new Error(
-                'Could not load public-signals.json'
-              );
-
-            }
-
-            return response.json();
-
-          }
-        ),
-
-
-        fetch(
-          '/analyst-profiles.json',
-          {
-            cache:
-              'no-store'
-          }
-        ).then(
-          response => {
-
-            if (!response.ok) {
-
-              throw new Error(
-                'Could not load analyst-profiles.json'
-              );
-
-            }
-
-            return response.json();
-
-          }
-        ),
-
-
-        fetch(
-          '/results-ledger.json',
-          {
-            cache:
-              'no-store'
-          }
-        ).then(
-          response => {
-
-            if (!response.ok) {
-
-              throw new Error(
-                'Could not load results-ledger.json'
-              );
-
-            }
-
-            return response.json();
-
-          }
-        ),
-
-
-        fetch(
-          '/market-data.json',
-          {
-            cache:
-              'no-store'
-          }
-        ).then(
-          response => {
-
-            if (!response.ok) {
-
-              throw new Error(
-                `Could not load market-data.json (${response.status})`
-              );
-
-            }
-
-            return response.json();
-
-          }
-        ).catch(
-          error => {
-
-            console.warn(
-              'Market data unavailable:',
-              error
-            );
-
-            return [];
-
-          }
+  const percentage =
+    settled > 0
+      ? Math.round(
+          (hits / settled) *
+          100
         )
-
-      ]);
-
-
-    const signals =
-      signalsData.signals ||
-      [];
+      : null;
 
 
-    const sources =
-      signalsData.sources ||
-      [];
+  return `
 
+    <span class="lf-week-summary">
 
-    board = {
-
-      mode:
-        'public-consensus',
-
-      week:
-        signalsData.week,
-
-      season:
-        signalsData.season,
-
-      refreshedAt:
-        new Date()
-          .toISOString(),
-
-      sources,
-
-      rawSignals:
-        signals,
-
-      props:
-        buildConsensusProps(
-          signals,
-          sources
-        )
-
-    };
-
-
-    experts =
-      expertsData;
-
-
-    results =
-      resultsData;
-
-
-    markets =
-      Array.isArray(
-        marketData
-      )
-        ? marketData
-        : (
-            marketData.markets ||
-            marketData.data ||
-            []
-          );
-
-
-    configureConsensusFilter();
-
-    configureMarketControls();
-
-    render();
-
-    await loadLiveResults();
-
-  }
-
-  catch (error) {
-
-    console.error(
-      'LineFoundry data load failed:',
-      error
-    );
-
-
-    if (
-      $('#propCards')
-    ) {
-
-      $('#propCards')
-        .innerHTML = `
-          <div class="empty-state">
-
-            <h3>
-              Unable to load LineFoundry data
-            </h3>
-
-            <p>
-              Please refresh the page and try again.
-            </p>
-
-          </div>
-        `;
-
-    }
-
-  }
-
-}
-
-
-// ============================================================
-// LOAD LIVE ESPN RESULTS
-// ============================================================
-
-async function loadLiveResults() {
-
-  try {
-
-    const response =
-      await fetch(
-        `${WORKER_URL}?_=${Date.now()}`,
-        {
-          cache:
-            'no-store'
-        }
-      );
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        `Worker returned ${response.status}`
-      );
-
-    }
-
-
-    const data =
-      await response.json();
-
-
-    if (!data.success) {
-
-      throw new Error(
-        data.error ||
-        'Worker returned an error'
-      );
-
-    }
-
-
-    liveResults = {};
-
-
-    (
-      data.results ||
-      []
-    ).forEach(
-      result => {
-
-        if (result.id) {
-
-          liveResults[
-            result.id
-          ] =
-            result;
-
-        }
-
+      ${props.length}
+      pick${
+        props.length === 1
+          ? ''
+          : 's'
       }
-    );
 
+      ${
+        settled
+          ? ` • ${hits} hit${
+              hits === 1
+                ? ''
+                : 's'
+            }`
+          : ''
+      }
 
-    if (board) {
+      ${
+        misses
+          ? ` • ${misses} miss${
+              misses === 1
+                ? ''
+                : 'es'
+            }`
+          : ''
+      }
 
-      board.liveUpdatedAt =
-        data.updatedAt ||
-        new Date()
-          .toISOString();
+      ${
+        live
+          ? ` • ${live} live`
+          : ''
+      }
 
+      ${
+        pending
+          ? ` • ${pending} pending`
+          : ''
+      }
 
-      render();
+      ${
+        percentage !== null
+          ? ` • ${percentage}%`
+          : ''
+      }
 
-    }
+    </span>
 
-
-    console.log(
-      'LineFoundry live results updated:',
-      data
-    );
-
-  }
-
-  catch (error) {
-
-    console.error(
-      'LineFoundry live data failed:',
-      error
-    );
-
-  }
-
+  `;
 }
 
 
 // ============================================================
-// AUTOMATIC LIVE REFRESH
+// WEEK SECTION
 // ============================================================
 
-setInterval(
-  loadLiveResults,
-  60000
-);
+function weekSection(
+  week,
+  props,
+  expanded
+) {
+
+  const sorted =
+    [...props].sort(
+      (a,b) =>
+        b.percent -
+        a.percent
+    );
 
 
-// ============================================================
-// ============================================================
-// THE MARKET — MERGED MARKET DATA MODULE
-// ============================================================
-// ============================================================
+  const status =
+    Number(week) ===
+    currentWeek()
+      ? 'CURRENT'
+      : (
+        props.some(
+          prop => {
 
-let marketSearchTerm = '';
-let marketTypeFilter = 'ALL';
-let marketTeamFilter = 'ALL';
+            const result =
+              getResult(prop);
+
+            return (
+              result === 'PENDING' ||
+              result === 'LIVE'
+            );
+          }
+        )
+          ? 'IN PROGRESS'
+          : 'COMPLETE'
+      );
+
+
+  return `
+
+    <details
+      class="lf-week-section"
+      data-week="${week}"
+      ${expanded ? 'open' : ''}
+    >
+
+      <summary>
+
+        <div class="lf-week-heading">
+
+          <strong>
+            WEEK ${week}
+          </strong>
+
+          <span class="lf-week-status">
+            ${status}
+          </span>
+
+          ${weekSummary(props)}
+
+        </div>
+
+      </summary>
+
+
+      <div class="cards lf-week-cards">
+
+        ${sorted
+          .map(card)
+          .join('')}
+
+      </div>
+
+    </details>
+
+  `;
+}
 
 
 // ============================================================
 // MARKET HELPERS
 // ============================================================
 
-function marketSide(
-  market,
-  side
-) {
-
-  if (!market) {
-    return null;
-  }
-
-
-  return (
-    market.sides?.[side] ||
-    market[side] ||
-    null
-  );
-
-}
-
-
-function marketLine(
-  market
-) {
-
-  const over =
-    marketSide(
-      market,
-      'over'
-    );
-
-
-  const under =
-    marketSide(
-      market,
-      'under'
-    );
-
-
-  return (
-    over?.line ??
-    under?.line ??
-    market.line ??
-    null
-  );
-
-}
-
-
-function marketOdds(
-  market,
-  side
-) {
-
-  const data =
-    marketSide(
-      market,
-      side
-    );
-
-
-  return (
-    data?.odds ??
-    data?.price ??
-    null
-  );
-
-}
-
-
-function marketBestBook(
-  market,
-  side
-) {
-
-  const data =
-    marketSide(
-      market,
-      side
-    );
-
-
-  return (
-    data?.bestBook ??
-    null
-  );
-
-}
-
-
-function marketBestOdds(
-  market,
-  side
-) {
-
-  const data =
-    marketSide(
-      market,
-      side
-    );
-
-
-  return (
-    data?.bestBookOdds ??
-    null
-  );
-
-}
-
-
-function marketBestLine(
-  market,
-  side
-) {
-
-  const data =
-    marketSide(
-      market,
-      side
-    );
-
-
-  return (
-    data?.bestBookLine ??
-    data?.line ??
-    null
-  );
-
-}
-
-
-function normalizeBookName(
-  value
-) {
-
-  if (!value) {
-    return '';
-  }
-
-
-  const names = {
-
-    fanduel:
-      'FanDuel',
-
-    draftkings:
-      'DraftKings',
-
-    betmgm:
-      'BetMGM',
-
-    espnbet:
-      'ESPN BET',
-
-    betrivers:
-      'BetRivers',
-
-    caesars:
-      'Caesars',
-
-    bet365:
-      'bet365',
-
-    bovada:
-      'Bovada',
-
-    hardrockbet:
-      'Hard Rock Bet',
-
-    pinnacle:
-      'Pinnacle',
-
-    fanatics:
-      'Fanatics',
-
-    fliff:
-      'Fliff'
-
-  };
-
-
-  const key =
-    String(
-      value
-    )
-      .trim()
-      .toLowerCase()
-      .replace(
-        /[^a-z0-9]/g,
-        ''
-      );
-
-
-  return (
-    names[key] ||
-    String(value)
-  );
-
-}
-
-
-function marketDisplayName(
-  market
-) {
+function marketTypeName(market) {
 
   return (
     market?.market?.name ||
-    market?.marketName ||
-    market?.statName ||
     'Player Prop'
   );
-
 }
 
 
-function marketPlayerName(
-  market
-) {
+function isAnytimeTDMarket(market) {
 
   return (
-    market?.player?.name ||
-    market?.playerName ||
-    'Unknown Player'
+    String(
+      market?.market?.name || ''
+    )
+      .toLowerCase()
+      .includes('anytime touchdown')
+    ||
+    String(
+      market?.market?.statId || ''
+    )
+      .toLowerCase()
+      .includes('touchdown')
+    &&
+    String(
+      market?.market?.betType || ''
+    )
+      .toLowerCase() === 'yn'
   );
-
 }
 
 
-function marketGameText(
-  market
-) {
-
-  const away =
-    market?.game?.awayTeam ||
-    market?.awayTeam ||
-    '';
-
-
-  const home =
-    market?.game?.homeTeam ||
-    market?.homeTeam ||
-    '';
-
+function getMarketLine(market) {
 
   if (
-    away &&
-    home
+    isAnytimeTDMarket(market)
   ) {
-
-    return `${away} @ ${home}`;
-
+    return 'TD';
   }
 
 
-  return (
-    market?.gameName ||
-    'NFL'
-  );
+  const over =
+    market?.sides?.over;
 
+  const under =
+    market?.sides?.under;
+
+
+  const line =
+    over?.line ??
+    under?.line ??
+    null;
+
+
+  return formatNumber(line);
 }
 
 
-function marketTeamName(
-  market
-) {
-
-  return (
-    market?.player?.teamId ||
-    market?.teamId ||
-    ''
-  );
-
-}
-
-
-function marketStatus(
-  market
-) {
+function getMarketResult(market) {
 
   const result =
-    findMarketLiveResult(
-      market
-    );
+    marketResults[
+      market.id
+    ];
 
 
   if (!result) {
@@ -2237,359 +2020,883 @@ function marketStatus(
   }
 
 
-  if (
-    result.status ===
-    'LIVE'
-  ) {
-
-    return {
-      type:
-        'live',
-
-      value:
-        result.currentValue
-
-    };
-
-  }
-
-
-  if (
-    result.status ===
-    'HIT'
-  ) {
-
-    return {
-      type:
-        'hit',
-
-      value:
-        result.currentValue
-
-    };
-
-  }
-
-
-  if (
-    result.status ===
-    'MISS'
-  ) {
-
-    return {
-      type:
-        'miss',
-
-      value:
-        result.currentValue
-
-    };
-
-  }
-
-
-  return null;
-
+  return result;
 }
 
 
-function findMarketLiveResult(
-  market
+function formatMarketResult(
+  market,
+  result
 ) {
 
-  const ids = [
-    market?.id,
-    market?.eventId,
-    market?.player?.playerId
-  ].filter(Boolean);
+  if (!result) {
+
+    return {
+      text: 'PENDING',
+      pending: true
+    };
+  }
 
 
-  for (
-    const id of ids
+  const status =
+    result.status;
+
+
+  // Anytime TD
+  if (
+    isAnytimeTDMarket(market)
   ) {
 
     if (
-      liveResults[id]
+      status === 'HIT'
     ) {
 
-      return liveResults[id];
-
+      return {
+        text: '1 TD ACTUAL',
+        pending: false
+      };
     }
 
+
+    if (
+      status === 'MISS'
+    ) {
+
+      return {
+        text: '0 TD ACTUAL',
+        pending: false
+      };
+    }
+
+
+    if (
+      status === 'LIVE'
+    ) {
+
+      if (
+        result.currentValue !==
+        null &&
+        result.currentValue !==
+        undefined
+      ) {
+
+        return {
+          text:
+            `LIVE · ${formatNumber(
+              result.currentValue
+            )} TD`,
+          pending: false
+        };
+      }
+
+
+      return {
+        text: 'LIVE',
+        pending: false
+      };
+    }
+
+
+    return {
+      text: 'PENDING',
+      pending: true
+    };
   }
 
 
-  const player =
-    marketPlayerName(
-      market
-    )
-      .toLowerCase();
-
-
-  const stat =
-    marketDisplayName(
-      market
-    )
-      .toLowerCase();
-
-
-  const found =
-    Object.values(
-      liveResults
-    ).find(
-      result => {
-
-        const resultPlayer =
-          String(
-            result.player ||
-            result.playerName ||
-            ''
-          )
-            .toLowerCase();
-
-
-        const resultMarket =
-          String(
-            result.market ||
-            result.stat ||
-            ''
-          )
-            .toLowerCase();
-
-
-        return (
-          resultPlayer ===
-            player &&
-          (
-            !resultMarket ||
-            resultMarket
-              .includes(stat) ||
-            stat.includes(
-              resultMarket
-            )
-          )
-        );
-
-      }
+  const value =
+    formatNumber(
+      result.currentValue
     );
 
 
-  return found ||
-    null;
+  if (
+    status === 'LIVE'
+  ) {
 
+    return {
+      text:
+        `LIVE · ${value} ${
+          String(
+            marketTypeName(market)
+          )
+            .toLowerCase()
+            .includes('attempt')
+            ? 'ATTEMPTS'
+            : 'YARDS'
+        }`,
+      pending: false
+    };
+  }
+
+
+  if (
+    status === 'HIT' ||
+    status === 'MISS'
+  ) {
+
+    return {
+      text:
+        `${value} ${
+          String(
+            marketTypeName(market)
+          )
+            .toLowerCase()
+            .includes('attempt')
+            ? 'ATTEMPTS ACTUAL'
+            : 'YARDS ACTUAL'
+        }`,
+      pending: false
+    };
+  }
+
+
+  return {
+    text: 'PENDING',
+    pending: true
+  };
+}
+
+
+function bestBook(
+  side
+) {
+
+  if (!side) {
+    return '—';
+  }
+
+
+  if (
+    side.bestBook &&
+    side.bestBookOdds
+  ) {
+
+    return `
+      ${escapeHtml(
+        String(
+          side.bestBook
+        )
+          .replace(
+            /^./,
+            letter =>
+              letter.toUpperCase()
+          )
+      )}
+
+      ${escapeHtml(
+        side.bestBookOdds
+      )}
+    `;
+  }
+
+
+  const books =
+    Object.values(
+      side.sportsbooks ||
+      {}
+    )
+      .filter(
+        book =>
+          book &&
+          (
+            book.available === true ||
+            book.odds
+          )
+      );
+
+
+  if (!books.length) {
+    return '—';
+  }
+
+
+  const first =
+    books[0];
+
+
+  return `
+    ${escapeHtml(
+      String(
+        first.name ||
+        'Book'
+      )
+    )}
+
+    ${
+      first.odds
+        ? escapeHtml(
+            first.odds
+          )
+        : ''
+    }
+  `;
+}
+
+
+function gameLabel(
+  market
+) {
+
+  const game =
+    market?.game || {};
+
+
+  const away =
+    game.awayTeam ||
+    '';
+
+  const home =
+    game.homeTeam ||
+    '';
+
+
+  if (!away && !home) {
+    return 'NFL';
+  }
+
+
+  return `${away} @ ${home}`;
 }
 
 
 // ============================================================
-// MARKET CONTROLS
+// MARKET CARD
 // ============================================================
 
-function configureMarketControls() {
+function marketCard(
+  market
+) {
 
-  const section =
-    $('#marketSection');
+  const result =
+    getMarketResult(
+      market
+    );
 
-  if (!section) {
+
+  const formatted =
+    formatMarketResult(
+      market,
+      result
+    );
+
+
+  const td =
+    isAnytimeTDMarket(
+      market
+    );
+
+
+  return `
+
+    <article
+      class="lf-market-card"
+    >
+
+      <div class="lf-market-player">
+        ${escapeHtml(
+          market?.player?.name ||
+          'Unknown Player'
+        )}
+      </div>
+
+      <div class="lf-market-game">
+        ${escapeHtml(
+          gameLabel(market)
+        )}
+      </div>
+
+
+      <div class="lf-market-type">
+        ${escapeHtml(
+          marketTypeName(
+            market
+          )
+        )}
+      </div>
+
+
+      <div class="lf-market-line">
+        ${
+          td
+            ? 'TD'
+            : escapeHtml(
+                getMarketLine(
+                  market
+                )
+              )
+        }
+      </div>
+
+
+      ${
+        td
+          ? `
+            <div class="lf-market-odds">
+
+              <span class="over">
+                YES ${
+                  market?.sides?.yes?.odds ||
+                  market?.sides?.yes?.bestBookOdds ||
+                  '—'
+                }
+              </span>
+
+              <span class="under">
+                NO ${
+                  market?.sides?.no?.odds ||
+                  market?.sides?.no?.bestBookOdds ||
+                  '—'
+                }
+              </span>
+
+            </div>
+          `
+          : `
+            <div class="lf-market-odds">
+
+              <span class="over">
+                OVER ${
+                  market?.sides?.over?.odds ||
+                  market?.sides?.over?.bestBookOdds ||
+                  '—'
+                }
+              </span>
+
+              <span class="under">
+                UNDER ${
+                  market?.sides?.under?.odds ||
+                  market?.sides?.under?.bestBookOdds ||
+                  '—'
+                }
+              </span>
+
+            </div>
+          `
+      }
+
+
+      ${
+        td
+          ? ''
+          : `
+            <div class="lf-market-best">
+              Best Over:
+              <strong>
+                ${bestBook(
+                  market?.sides?.over
+                )}
+              </strong>
+            </div>
+
+            <div class="lf-market-best">
+              Best Under:
+              <strong>
+                ${bestBook(
+                  market?.sides?.under
+                )}
+              </strong>
+            </div>
+          `
+      }
+
+
+      <div
+        class="
+          lf-market-result
+          ${
+            formatted.pending
+              ? 'pending'
+              : ''
+          }
+        "
+      >
+        ${escapeHtml(
+          formatted.text
+        )}
+      </div>
+
+
+      <a
+        href="#"
+        class="lf-market-details"
+        data-market-id="${escapeHtml(
+          market.id
+        )}"
+      >
+        View Market Details →
+      </a>
+
+    </article>
+
+  `;
+}
+
+
+// ============================================================
+// MARKET DETAILS
+// ============================================================
+
+function openMarketDetails(
+  marketId
+) {
+
+  const market =
+    marketData.find(
+      item =>
+        item.id ===
+        marketId
+    );
+
+
+  if (!market) {
     return;
   }
 
 
-  const search =
-    $('#marketSearch');
+  let modal =
+    $('#lfMarketModal');
 
 
-  const type =
-    $('#marketTypeFilter');
+  if (!modal) {
 
+    modal =
+      document.createElement(
+        'div'
+      );
 
-  const team =
-    $('#marketTeamFilter');
+    modal.id =
+      'lfMarketModal';
 
+    modal.className =
+      'lf-market-modal';
 
-  if (search) {
-
-    search.value =
-      marketSearchTerm;
-
-
-    search.oninput =
-      event => {
-
-        marketSearchTerm =
-          String(
-            event.target.value ||
-            ''
-          )
-            .trim()
-            .toLowerCase();
-
-
-        renderMarketCards();
-
-      };
-
+    document.body.appendChild(
+      modal
+    );
   }
 
 
-  const marketTypes =
-    [
-      ...new Set(
-        markets
-          .map(
-            market =>
-              marketDisplayName(
-                market
-              )
-          )
-          .filter(Boolean)
-      )
-    ]
-      .sort();
+  const result =
+    getMarketResult(
+      market
+    );
 
 
-  if (type) {
+  const over =
+    market?.sides?.over;
 
-    type.innerHTML =
-      `
-        <option value="ALL">
-          All Markets
-        </option>
-      ` +
-      marketTypes
-        .map(
-          name => `
-            <option value="${escapeAttr(
-              name
-            )}">
-              ${escapeHtml(
-                name
-              )}
-            </option>
-          `
+  const under =
+    market?.sides?.under;
+
+
+  const books =
+    new Map();
+
+
+  [
+    ...(Object.entries(
+      over?.sportsbooks ||
+      {}
+    ).map(
+      ([name, book]) =>
+        ({
+          name,
+          over: book
+        })
+    )),
+
+    ...(Object.entries(
+      under?.sportsbooks ||
+      {}
+    ).map(
+      ([name, book]) =>
+        ({
+          name,
+          under: book
+        })
+    ))
+  ]
+    .forEach(item => {
+
+      if (
+        !books.has(
+          item.name
         )
-        .join('');
+      ) {
+
+        books.set(
+          item.name,
+          {}
+        );
+      }
 
 
-    type.value =
-      marketTypeFilter;
+      Object.assign(
+        books.get(
+          item.name
+        ),
+        item
+      );
+    });
 
 
-    type.onchange =
-      event => {
+  const bookRows =
+    Array.from(
+      books.entries()
+    )
+      .map(
+        ([name, book]) => {
 
-        marketTypeFilter =
-          event.target.value ||
-          'ALL';
+          const overOdds =
+            book.over?.odds ||
+            '—';
+
+          const underOdds =
+            book.under?.odds ||
+            '—';
+
+          const overLine =
+            book.over?.line ??
+            '—';
+
+          const underLine =
+            book.under?.line ??
+            '—';
 
 
-        renderMarketCards();
+          return `
 
-      };
+            <div class="lf-book-row">
 
-  }
+              <strong>
+                ${escapeHtml(
+                  name
+                )}
+              </strong>
 
+              <span>
+                OVER
+                ${escapeHtml(
+                  String(
+                    overLine
+                  )
+                )}
+                ${
+                  overOdds !== '—'
+                    ? ` ${escapeHtml(
+                        overOdds
+                      )}`
+                    : ''
+                }
+              </span>
 
-  const teams =
-    [
-      ...new Set(
-        markets
-          .map(
-            market =>
-              marketTeamName(
-                market
-              )
-          )
-          .filter(Boolean)
+              <span>
+                UNDER
+                ${escapeHtml(
+                  String(
+                    underLine
+                  )
+                )}
+                ${
+                  underOdds !== '—'
+                    ? ` ${escapeHtml(
+                        underOdds
+                      )}`
+                    : ''
+                }
+              </span>
+
+            </div>
+
+          `;
+        }
       )
-    ]
-      .sort();
+      .join('');
 
 
-  if (team) {
+  const resultText =
+    result
+      ? formatMarketResult(
+          market,
+          result
+        ).text
+      : 'PENDING';
 
-    team.innerHTML =
-      `
-        <option value="ALL">
-          Teams
-        </option>
-      ` +
-      teams
-        .map(
-          value => `
-            <option value="${escapeAttr(
-              value
-            )}">
+
+  const opened =
+    over?.openingLine ??
+    under?.openingLine ??
+    '—';
+
+
+  const current =
+    over?.line ??
+    under?.line ??
+    '—';
+
+
+  const closing =
+    over?.closingLine ??
+    under?.closingLine ??
+    '—';
+
+
+  modal.innerHTML = `
+
+    <div
+      class="lf-market-backdrop"
+      data-market-close="1"
+    ></div>
+
+    <div
+      class="lf-market-panel"
+      role="dialog"
+      aria-modal="true"
+    >
+
+      <button
+        class="lf-market-close"
+        data-market-close="1"
+        aria-label="Close"
+      >
+        ×
+      </button>
+
+
+      <div class="eyebrow">
+        MARKET DETAILS
+      </div>
+
+      <h2>
+        ${escapeHtml(
+          market?.player?.name ||
+          ''
+        )}
+      </h2>
+
+      <div class="market-subtitle">
+        ${escapeHtml(
+          gameLabel(market)
+        )}
+        ·
+        ${escapeHtml(
+          marketTypeName(
+            market
+          )
+        )}
+      </div>
+
+
+      <div class="lf-detail-section">
+
+        <h3>
+          CURRENT MARKET
+        </h3>
+
+        <div class="lf-market-line">
+          ${
+            isAnytimeTDMarket(
+              market
+            )
+              ? 'TD'
+              : escapeHtml(
+                  getMarketLine(
+                    market
+                  )
+                )
+          }
+        </div>
+
+        <div class="lf-market-odds">
+
+          ${
+            isAnytimeTDMarket(
+              market
+            )
+              ? `
+                <span class="over">
+                  YES ${
+                    market?.sides?.yes?.odds ||
+                    '—'
+                  }
+                </span>
+
+                <span class="under">
+                  NO ${
+                    market?.sides?.no?.odds ||
+                    '—'
+                  }
+                </span>
+              `
+              : `
+                <span class="over">
+                  OVER ${
+                    over?.odds ||
+                    over?.bestBookOdds ||
+                    '—'
+                  }
+                </span>
+
+                <span class="under">
+                  UNDER ${
+                    under?.odds ||
+                    under?.bestBookOdds ||
+                    '—'
+                  }
+                </span>
+              `
+          }
+
+        </div>
+
+
+        <div
+          class="
+            lf-market-result
+            ${
+              result
+                ? ''
+                : 'pending'
+            }
+          "
+          style="margin-top:15px"
+        >
+          ${escapeHtml(
+            resultText
+          )}
+        </div>
+
+      </div>
+
+
+      <div class="lf-detail-section">
+
+        <h3>
+          SPORTSBOOK PRICES
+        </h3>
+
+        ${
+          bookRows ||
+          `
+            <div class="muted">
+              No sportsbook prices available.
+            </div>
+          `
+        }
+
+      </div>
+
+
+      <div class="lf-detail-section">
+
+        <h3>
+          LINE MOVEMENT
+        </h3>
+
+        <div class="lf-movement">
+
+          <div>
+            <b>
               ${escapeHtml(
-                prettyTeamName(
-                  value
+                String(
+                  opened
                 )
               )}
-            </option>
-          `
+            </b>
+            <span>
+              Opened
+            </span>
+          </div>
+
+          <div>
+            <b>
+              ${escapeHtml(
+                String(
+                  current
+                )
+              )}
+            </b>
+            <span>
+              Current
+            </span>
+          </div>
+
+          <div>
+            <b>
+              ${escapeHtml(
+                String(
+                  closing
+                )
+              )}
+            </b>
+            <span>
+              Closing
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  modal.classList.add(
+    'open'
+  );
+
+
+  modal
+    .querySelectorAll(
+      '[data-market-close]'
+    )
+    .forEach(
+      element =>
+        element.addEventListener(
+          'click',
+          closeMarketDetails
         )
-        .join('');
-
-
-    team.value =
-      marketTeamFilter;
-
-
-    team.onchange =
-      event => {
-
-        marketTeamFilter =
-          event.target.value ||
-          'ALL';
-
-
-        renderMarketCards();
-
-      };
-
-  }
-
-
-  renderMarketCards();
-
+    );
 }
 
 
-function prettyTeamName(
-  value
-) {
+function closeMarketDetails() {
 
-  return String(
-    value || ''
-  )
-    .replace(
-      /_NFL$/i,
-      ''
-    )
-    .replaceAll(
-      '_',
-      ' '
-    )
-    .replace(
-      /\b\w/g,
-      char =>
-        char.toUpperCase()
+  const modal =
+    $('#lfMarketModal');
+
+
+  if (modal) {
+
+    modal.classList.remove(
+      'open'
     );
-
+  }
 }
 
 
 // ============================================================
-// MARKET SECTION INJECTION
+// MARKET SECTION
 // ============================================================
 
 function ensureMarketSection() {
 
+  if (
+    !marketData.length
+  ) {
+    return;
+  }
+
+
   let section =
-    $('#marketSection');
+    $('#lfMarketSection');
 
 
   if (section) {
-    return section;
+    return;
   }
 
 
@@ -2598,7 +2905,7 @@ function ensureMarketSection() {
 
 
   if (!propsSection) {
-    return null;
+    return;
   }
 
 
@@ -2607,12 +2914,11 @@ function ensureMarketSection() {
       'section'
     );
 
-
   section.id =
-    'marketSection';
+    'lfMarketSection';
 
   section.className =
-    'section market-section';
+    'section-block';
 
 
   section.innerHTML = `
@@ -2630,1091 +2936,701 @@ function ensureMarketSection() {
         </h2>
 
         <p class="muted">
-          Current player prop markets
-          and the best available prices.
+          Current player prop markets and the best available prices.
         </p>
-
-      </div>
-
-
-      <div class="market-toolbar">
-
-        <input
-          id="marketSearch"
-          type="search"
-          placeholder="Search players or markets..."
-          autocomplete="off"
-        />
-
-
-        <select
-          id="marketTypeFilter"
-        >
-          <option value="ALL">
-            All Markets
-          </option>
-        </select>
-
-
-        <select
-          id="marketTeamFilter"
-        >
-          <option value="ALL">
-            Teams
-          </option>
-        </select>
 
       </div>
 
     </div>
 
 
-    <div id="marketCards"></div>
-
-  `;
-
-
-  propsSection
-    .insertAdjacentElement(
-      'afterend',
-      section
-    );
-
-
-  return section;
-
-}
-
-
-// ============================================================
-// MARKET CARD
-// ============================================================
-
-function marketCard(
-  market
-) {
-
-  const player =
-    marketPlayerName(
-      market
-    );
-
-
-  const matchup =
-    marketGameText(
-      market
-    );
-
-
-  const name =
-    marketDisplayName(
-      market
-    );
-
-
-  const line =
-    marketLine(
-      market
-    );
-
-
-  const overOdds =
-    marketOdds(
-      market,
-      'over'
-    );
-
-
-  const underOdds =
-    marketOdds(
-      market,
-      'under'
-    );
-
-
-  const bestOverBook =
-    normalizeBookName(
-      marketBestBook(
-        market,
-        'over'
-      )
-    );
-
-
-  const bestUnderBook =
-    normalizeBookName(
-      marketBestBook(
-        market,
-        'under'
-      )
-    );
-
-
-  const bestOverOdds =
-    marketBestOdds(
-      market,
-      'over'
-    );
-
-
-  const bestUnderOdds =
-    marketBestOdds(
-      market,
-      'under'
-    );
-
-
-  const status =
-    marketStatus(
-      market
-    );
-
-
-  const eventId =
-    market.eventId ||
-    market.id ||
-    '';
-
-
-  let statusHtml =
-    '';
-
-
-  if (status) {
-
-    const label =
-      status.type ===
-      'live'
-        ? 'LIVE'
-        : status.type ===
-          'hit'
-          ? 'BET HIT'
-          : 'BET MISS';
-
-
-    statusHtml = `
-      <div class="market-live ${status.type}">
-
-        <strong>
-          ${label}
-          ${
-            status.value !==
-            undefined
-              ? ` · ${escapeHtml(
-                  formatNumber(
-                    status.value
-                  )
-                )}`
-              : ''
-          }
-        </strong>
-
-      </div>
-    `;
-
-  }
-
-
-  return `
-
-    <article
-      class="market-card"
-      data-market-id="${escapeAttr(
-        eventId
-      )}"
-    >
-
-      <div class="market-card-top">
-
-        <div>
-
-          <h3>
-            ${escapeHtml(
-              player
-            )}
-          </h3>
-
-          <p>
-            ${escapeHtml(
-              matchup
-            )}
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="market-category">
-
-        ${escapeHtml(
-          name
-        )}
-
-      </div>
-
-
-      <div class="market-line">
-
-        <strong>
-          ${
-            line == null
-              ? '—'
-              : escapeHtml(
-                  String(line)
-                )
-          }
-        </strong>
-
-      </div>
-
-
-      <div class="market-odds">
-
-        <span class="over">
-          OVER
-          ${
-            overOdds
-              ? ` ${escapeHtml(
-                  String(
-                    overOdds
-                  )
-                )}`
-              : ''
-          }
-        </span>
-
-        <span class="under">
-          UNDER
-          ${
-            underOdds
-              ? ` ${escapeHtml(
-                  String(
-                    underOdds
-                  )
-                )}`
-              : ''
-          }
-        </span>
-
-      </div>
-
-
-      ${statusHtml}
-
-
-      <div class="market-best">
-
-        <div>
-
-          <span>
-            Best Over
-          </span>
-
-          <strong>
-            ${
-              bestOverBook
-                ? escapeHtml(
-                    bestOverBook
-                  )
-                : '—'
-            }
-
-            ${
-              bestOverOdds
-                ? ` ${escapeHtml(
-                    String(
-                      bestOverOdds
-                    )
-                  )}`
-                : ''
-            }
-          </strong>
-
-        </div>
-
-
-        <div>
-
-          <span>
-            Best Under
-          </span>
-
-          <strong>
-            ${
-              bestUnderBook
-                ? escapeHtml(
-                    bestUnderBook
-                  )
-                : '—'
-            }
-
-            ${
-              bestUnderOdds
-                ? ` ${escapeHtml(
-                    String(
-                      bestUnderOdds
-                    )
-                  )}`
-                : ''
-            }
-          </strong>
-
-        </div>
-
-      </div>
-
-
-      <button
-        type="button"
-        class="market-details-btn"
-        data-market-details="${escapeAttr(
-          eventId
-        )}"
+    <div class="lf-market-toolbar">
+
+      <input
+        id="lfMarketSearch"
+        type="search"
+        placeholder="Search players or markets..."
+        autocomplete="off"
+      />
+
+      <select
+        id="lfMarketType"
       >
-        View Market Details →
-      </button>
+        <option value="ALL">
+          All Markets
+        </option>
+      </select>
 
-    </article>
+    </div>
+
+
+    <div
+      id="lfMarketGrid"
+      class="lf-market-grid"
+    ></div>
 
   `;
 
-}
 
-
-// ============================================================
-// FILTER MARKET DATA
-// ============================================================
-
-function filteredMarkets() {
-
-  return markets.filter(
-    market => {
-
-      const player =
-        marketPlayerName(
-          market
-        );
-
-
-      const name =
-        marketDisplayName(
-          market
-        );
-
-
-      const matchup =
-        marketGameText(
-          market
-        );
-
-
-      const team =
-        marketTeamName(
-          market
-        );
-
-
-      const searchText =
-        [
-          player,
-          name,
-          matchup,
-          team
-        ]
-          .join(' ')
-          .toLowerCase();
-
-
-      if (
-        marketSearchTerm &&
-        !searchText.includes(
-          marketSearchTerm
-        )
-      ) {
-
-        return false;
-
-      }
-
-
-      if (
-        marketTypeFilter !==
-        'ALL' &&
-        name !==
-        marketTypeFilter
-      ) {
-
-        return false;
-
-      }
-
-
-      if (
-        marketTeamFilter !==
-        'ALL' &&
-        team !==
-        marketTeamFilter
-      ) {
-
-        return false;
-
-      }
-
-
-      return true;
-
-    }
+  propsSection.after(
+    section
   );
 
+
+  populateMarketTypes();
+
+
+  $('#lfMarketSearch')
+    ?.addEventListener(
+      'input',
+      renderMarkets
+    );
+
+
+  $('#lfMarketType')
+    ?.addEventListener(
+      'change',
+      renderMarkets
+    );
+
+
+  renderMarkets();
 }
 
 
-// ============================================================
-// MARKET RENDER
-// ============================================================
+function populateMarketTypes() {
 
-function renderMarketCards() {
-
-  const section =
-    ensureMarketSection();
+  const select =
+    $('#lfMarketType');
 
 
-  if (!section) {
+  if (!select) {
     return;
   }
 
 
-  const cards =
-    $('#marketCards');
+  const types =
+    [
+      ...new Set(
+        marketData
+          .map(
+            market =>
+              marketTypeName(
+                market
+              )
+          )
+          .filter(Boolean)
+      )
+    ]
+      .sort();
 
 
-  if (!cards) {
+  select.innerHTML =
+    `
+      <option value="ALL">
+        All Markets
+      </option>
+
+      ${
+        types
+          .map(
+            type => `
+              <option
+                value="${escapeHtml(
+                  type
+                )}"
+              >
+                ${escapeHtml(
+                  type
+                )}
+              </option>
+            `
+          )
+          .join('')
+      }
+    `;
+}
+
+
+function renderMarkets() {
+
+  ensureMarketSection();
+
+
+  const grid =
+    $('#lfMarketGrid');
+
+
+  if (!grid) {
     return;
   }
 
 
-  const list =
-    filteredMarkets();
+  const search =
+    (
+      $('#lfMarketSearch')
+        ?.value ||
+      ''
+    )
+      .trim()
+      .toLowerCase();
 
 
-  if (!list.length) {
+  const type =
+    $('#lfMarketType')
+      ?.value ||
+    'ALL';
 
-    cards.innerHTML = `
-      <div class="empty-state">
+
+  const filtered =
+    marketData
+      .filter(
+        market => {
+
+          const player =
+            String(
+              market?.player?.name ||
+              ''
+            )
+              .toLowerCase();
+
+          const marketName =
+            String(
+              marketTypeName(
+                market
+              )
+            )
+              .toLowerCase();
+
+          const game =
+            String(
+              gameLabel(
+                market
+              )
+            )
+              .toLowerCase();
+
+
+          const matchesSearch =
+            !search ||
+            player.includes(search) ||
+            marketName.includes(search) ||
+            game.includes(search);
+
+
+          const matchesType =
+            type === 'ALL' ||
+            marketName ===
+            type.toLowerCase();
+
+
+          return (
+            matchesSearch &&
+            matchesType
+          );
+        }
+      )
+      .slice(0, 300);
+
+
+  if (!filtered.length) {
+
+    grid.innerHTML = `
+
+      <div class="lf-empty">
 
         <h3>
           No markets found
         </h3>
 
         <p>
-          Try a different player,
-          market or team.
+          Try another player or market.
         </p>
 
       </div>
+
     `;
 
     return;
-
   }
 
 
-  const groups = {};
-
-
-  list.forEach(
-    market => {
-
-      const week =
-        market.week ||
-        'Week 1';
-
-
-      if (!groups[week]) {
-
-        groups[week] =
-          [];
-
-      }
-
-
-      groups[week].push(
-        market
-      );
-
-    }
-  );
-
-
-  cards.innerHTML =
-    Object.entries(
-      groups
-    )
+  grid.innerHTML =
+    filtered
       .map(
-        ([
-          week,
-          weekMarkets
-        ]) => {
-
-          const liveCount =
-            weekMarkets.filter(
-              market =>
-                marketStatus(
-                  market
-                )?.type ===
-                'live'
-            ).length;
-
-
-          return `
-
-            <div
-              class="market-week"
-              data-week="${escapeAttr(
-                week
-              )}"
-            >
-
-              <div class="market-week-head">
-
-                <div>
-
-                  <strong>
-                    ${escapeHtml(
-                      week
-                    )}
-                  </strong>
-
-                  <span class="market-state">
-                    ${
-                      week ===
-                      (
-                        board?.week ||
-                        'Week 1'
-                      )
-                        ? 'CURRENT'
-                        : 'UPCOMING'
-                    }
-                  </span>
-
-                </div>
-
-
-                <span>
-
-                  ${
-                    weekMarkets.length
-                  }
-                  markets
-
-                  ${
-                    liveCount
-                      ? ` • ${liveCount} live`
-                      : ''
-                  }
-
-                </span>
-
-              </div>
-
-
-              <div class="market-grid">
-
-                ${
-                  weekMarkets
-                    .map(
-                      marketCard
-                    )
-                    .join('')
-                }
-
-              </div>
-
-            </div>
-
-          `;
-
-        }
+        marketCard
       )
       .join('');
 
 
-  cards
+  grid
     .querySelectorAll(
-      '[data-market-details]'
+      '.lf-market-details'
     )
     .forEach(
-      button => {
+      link => {
 
-        button.addEventListener(
+        link.addEventListener(
           'click',
-          () => {
+          event => {
 
-            const id =
-              button.dataset
-                .marketDetails;
+            event.preventDefault();
 
-
-            const market =
-              markets.find(
-                item =>
-                  String(
-                    item.id ||
-                    item.eventId ||
-                    ''
-                  ) ===
-                  String(id)
-              );
-
-
-            if (market) {
-
-              openMarketDetails(
-                market
-              );
-
-            }
-
+            openMarketDetails(
+              link.dataset.marketId
+            );
           }
         );
-
       }
     );
-
 }
 
 
 // ============================================================
-// MARKET DETAILS MODAL
+// SOURCES
 // ============================================================
 
-function openMarketDetails(
-  market
-) {
+function renderSources() {
 
-  let modal =
-    $('#marketDetailsModal');
+  const container =
+    $('#sourceRows');
 
 
-  if (!modal) {
-
-    modal =
-      document.createElement(
-        'div'
-      );
+  if (!container) {
+    return;
+  }
 
 
-    modal.id =
-      'marketDetailsModal';
+  container.innerHTML =
+    (board?.sources || [])
+      .map(
+        source => `
 
+          <tr>
 
-    modal.className =
-      'modal';
+            <td>
+              <strong>
+                ${escapeHtml(
+                  source.analyst
+                )}
+              </strong>
+            </td>
 
+            <td>
+              ${escapeHtml(
+                source.outlet
+              )}
+            </td>
 
-    modal.innerHTML = `
+            <td>
+              ${Math.round(
+                (source.quality || 0) *
+                100
+              )}/100
+            </td>
 
-      <div class="modal-backdrop"></div>
+            <td>
+              ${escapeHtml(
+                source.verification ||
+                ''
+              )}
+            </td>
 
-      <div
-        class="modal-panel market-details-panel"
-        role="dialog"
-        aria-modal="true"
-      >
+            <td>
 
-        <button
-          type="button"
-          class="modal-close"
-          id="closeMarketDetails"
-          aria-label="Close"
-        >
-          ×
-        </button>
+              ${
+                source.url
+                  ? `
+                    <a
+                      href="${escapeHtml(
+                        source.url
+                      )}"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      Open source ↗
+                    </a>
+                  `
+                  : ''
+              }
 
+            </td>
 
-        <div
-          id="marketDetailsContent"
-        ></div>
+          </tr>
 
-      </div>
-
-    `;
-
-
-    document.body
-      .appendChild(
-        modal
-      );
-
-
-    $('#closeMarketDetails')
-      ?.addEventListener(
-        'click',
-        closeMarketDetails
-      );
-
-
-    modal
-      .querySelector(
-        '.modal-backdrop'
+        `
       )
-      ?.addEventListener(
-        'click',
-        closeMarketDetails
-      );
-
-  }
-
-
-  const content =
-    $('#marketDetailsContent');
-
-
-  if (!content) {
-    return;
-  }
-
-
-  const player =
-    marketPlayerName(
-      market
-    );
-
-
-  const matchup =
-    marketGameText(
-      market
-    );
-
-
-  const name =
-    marketDisplayName(
-      market
-    );
-
-
-  const over =
-    marketSide(
-      market,
-      'over'
-    );
-
-
-  const under =
-    marketSide(
-      market,
-      'under'
-    );
-
-
-  const sportsbooks = {
-    ...(over?.sportsbooks || {}),
-    ...(under?.sportsbooks || {})
-  };
-
-
-  const books =
-    Object.values(
-      sportsbooks
-    );
-
-
-  content.innerHTML = `
-
-    <p class="eyebrow">
-      MARKET DETAILS
-    </p>
-
-
-    <h2>
-      ${escapeHtml(
-        player
-      )}
-    </h2>
-
-
-    <p class="muted">
-      ${escapeHtml(
-        matchup
-      )}
-    </p>
-
-
-    <div class="market-detail-summary">
-
-      <div>
-        <span>
-          Market
-        </span>
-
-        <strong>
-          ${escapeHtml(
-            name
-          )}
-        </strong>
-      </div>
-
-
-      <div>
-        <span>
-          Current Line
-        </span>
-
-        <strong>
-          ${
-            marketLine(
-              market
-            ) ??
-            '—'
-          }
-        </strong>
-      </div>
-
-
-      <div>
-        <span>
-          Over
-        </span>
-
-        <strong>
-          ${
-            marketOdds(
-              market,
-              'over'
-            ) ||
-            '—'
-          }
-        </strong>
-      </div>
-
-
-      <div>
-        <span>
-          Under
-        </span>
-
-        <strong>
-          ${
-            marketOdds(
-              market,
-              'under'
-            ) ||
-            '—'
-          }
-        </strong>
-      </div>
-
-    </div>
-
-
-    <h3>
-      Available Prices
-    </h3>
-
-
-    <div class="market-books">
-
-      ${
-        books.length
-          ? books
-              .map(
-                book => `
-
-                  <div class="market-book-row">
-
-                    <strong>
-                      ${escapeHtml(
-                        normalizeBookName(
-                          book.name ||
-                          book.book ||
-                          ''
-                        )
-                      )}
-                    </strong>
-
-                    <span>
-                      ${
-                        book.line ??
-                        '—'
-                      }
-                    </span>
-
-                    <span>
-                      ${
-                        book.odds ??
-                        '—'
-                      }
-                    </span>
-
-                  </div>
-
-                `
-              )
-              .join('')
-          : `
-              <p class="muted">
-                No individual sportsbook
-                prices are currently available.
-              </p>
-            `
-      }
-
-    </div>
-
-  `;
-
-
-  modal.classList.add(
-    'open'
-  );
-
-
-  modal.setAttribute(
-    'aria-hidden',
-    'false'
-  );
-
-}
-
-
-function closeMarketDetails() {
-
-  const modal =
-    $('#marketDetailsModal');
-
-
-  if (!modal) {
-    return;
-  }
-
-
-  modal.classList.remove(
-    'open'
-  );
-
-
-  modal.setAttribute(
-    'aria-hidden',
-    'true'
-  );
-
+      .join('');
 }
 
 
 // ============================================================
-// MARKET DATA REFRESH
+// EXPERT TABLE
 // ============================================================
 
-async function loadMarkets() {
+function renderExperts() {
 
-  try {
+  const container =
+    $('#expertRows');
 
-    const response =
-      await fetch(
-        '/market-data.json?_=' +
-        Date.now(),
-        {
-          cache:
-            'no-store'
+
+  if (!container) {
+    return;
+  }
+
+
+  const expertList =
+    experts?.experts ||
+    [];
+
+
+  container.innerHTML =
+    expertList
+      .map(
+        expert => {
+
+          const tracked =
+            expert.tracked ||
+            {};
+
+          const wins =
+            tracked.wins ||
+            0;
+
+          const losses =
+            tracked.losses ||
+            0;
+
+          const picks =
+            tracked.picks ||
+            0;
+
+          const units =
+            Number(
+              tracked.units ||
+              0
+            );
+
+          const roi =
+            expert.roi == null
+              ? '—'
+              : `${(
+                  expert.roi *
+                  100
+                ).toFixed(1)}%`;
+
+          const status =
+            picks >= 50
+              ? 'RANKED'
+              : picks > 0
+                ? 'TRACKING'
+                : 'NEW';
+
+
+          return `
+
+            <tr>
+
+              <td>
+                <strong>
+                  ${escapeHtml(
+                    expert.name
+                  )}
+                </strong>
+              </td>
+
+              <td>
+                ${escapeHtml(
+                  expert.outlet ||
+                  ''
+                )}
+              </td>
+
+              <td>
+                ${picks}
+              </td>
+
+              <td>
+                ${wins}-${losses}
+              </td>
+
+              <td>
+                ${units.toFixed(2)}u
+              </td>
+
+              <td>
+                ${roi}
+              </td>
+
+              <td>
+                <span
+                  class="
+                    status
+                    ${status.toLowerCase()}
+                  "
+                >
+                  ${status}
+                </span>
+              </td>
+
+            </tr>
+
+          `;
         }
-      );
+      )
+      .join('');
+}
 
 
-    if (!response.ok) {
+// ============================================================
+// RECORD
+// ============================================================
 
-      throw new Error(
-        `Could not load market-data.json (${response.status})`
-      );
+function renderRecord() {
 
-    }
-
-
-    const data =
-      await response.json();
+  const record =
+    experts?.record ||
+    {};
 
 
-    markets =
-  Array.isArray(data)
-    ? data
-    : (
-        Array.isArray(data?.markets)
-          ? data.markets
-          : Array.isArray(data?.data?.markets)
-            ? data.data.markets
-            : Array.isArray(data?.data)
-              ? data.data
-              : []
-      );
+  if ($('#wins')) {
 
-
-    configureMarketControls();
-
-    renderMarketSection();
-
+    $('#wins')
+      .textContent =
+      record.wins ||
+      0;
   }
 
-  catch (error) {
 
-    console.error(
-      'LineFoundry market data failed:',
-      error
+  if ($('#losses')) {
+
+    $('#losses')
+      .textContent =
+      record.losses ||
+      0;
+  }
+
+
+  if ($('#units')) {
+
+    $('#units')
+      .textContent =
+      `${Number(
+        record.units ||
+        0
+      ).toFixed(2)}u`;
+  }
+
+
+  if ($('#roi')) {
+
+    $('#roi')
+      .textContent =
+      record.roi == null
+        ? '—'
+        : `${(
+            record.roi *
+            100
+          ).toFixed(1)}%`;
+  }
+}
+
+
+// ============================================================
+// MAIN RENDER
+// ============================================================
+
+function render() {
+
+  if (!board) {
+    return;
+  }
+
+
+  const allProps =
+    board.props ||
+    [];
+
+
+  const filter =
+    $('#confidenceFilter')
+      ?.value ||
+    'ALL';
+
+
+  const filtered =
+    allProps.filter(
+      prop => {
+
+        if (
+          filter === 'ALL'
+        ) {
+          return true;
+        }
+
+        return (
+          prop.confidence ===
+          filter
+        );
+      }
     );
 
 
-    const cards =
-      $('#marketCards');
+  const weeks =
+    [
+      ...new Set(
+        filtered.map(
+          prop =>
+            Number(
+              prop.week
+            )
+        )
+      )
+    ]
+      .filter(
+        Number.isFinite
+      )
+      .sort(
+        (a,b) => a-b
+      );
 
 
-    if (cards) {
+  const selectedCurrentWeek =
+    currentWeek();
 
-      cards.innerHTML = `
-        <div class="empty-state">
+
+  const container =
+    $('#propCards');
+
+
+  if (container) {
+
+    if (!filtered.length) {
+
+      container.innerHTML = `
+
+        <div class="lf-empty">
 
           <h3>
-            Market data unavailable
+            No picks match your filters
           </h3>
 
           <p>
-            The Expert Signals board
-            is still available.
+            Try changing your confidence filter.
           </p>
 
         </div>
+
       `;
 
     }
+    else {
 
+      container.innerHTML =
+        weeks
+          .map(
+            week => {
+
+              const weekProps =
+                filtered.filter(
+                  prop =>
+                    Number(
+                      prop.week
+                    ) ===
+                    Number(week)
+                );
+
+
+              return weekSection(
+                week,
+                weekProps,
+                Number(week) ===
+                selectedCurrentWeek
+              );
+            }
+          )
+          .join('');
+    }
   }
 
-}
+
+  // Top stats
+
+  if ($('#signalCount')) {
+
+    $('#signalCount')
+      .textContent =
+      allProps.length;
+  }
 
 
-// ============================================================
-// MARKET SECTION RENDER
-// ============================================================
+  if ($('#sourceCount')) {
 
-function renderMarketSection() {
+    $('#sourceCount')
+      .textContent =
+      board.sources?.length ||
+      0;
+  }
+
+
+  if ($('#lastRefresh')) {
+
+    $('#lastRefresh')
+      .textContent =
+      board.liveUpdatedAt
+        ? new Date(
+            board.liveUpdatedAt
+          ).toLocaleString()
+        : board.refreshedAt
+          ? new Date(
+              board.refreshedAt
+            ).toLocaleString()
+          : 'not run';
+  }
+
+
+  // These IDs existed in earlier
+  // versions of the board.
+
+  if ($('#signalCount2')) {
+
+    $('#signalCount2')
+      .textContent =
+      allProps.length;
+  }
+
+
+  if ($('#sourceCount2')) {
+
+    $('#sourceCount2')
+      .textContent =
+      board.sources?.length ||
+      0;
+  }
+
+
+  if ($('#pickCount')) {
+
+    $('#pickCount')
+      .textContent =
+      locked.length;
+  }
+
+
+  renderSources();
+
+  renderExperts();
+
+  renderRecord();
 
   ensureMarketSection();
 
-  configureMarketControls();
-
+  renderMarkets();
 }
 
 
 // ============================================================
-// MARKET AUTO REFRESH
-// ============================================================
-
-setInterval(
-  loadMarkets,
-  60000
-);
-
-
-// ============================================================
-// EVENT LISTENERS
+// EVENTS
 // ============================================================
 
 $('#confidenceFilter')
@@ -3727,10 +3643,9 @@ $('#confidenceFilter')
 $('#refreshBoard')
   ?.addEventListener(
     'click',
-    () => {
+    async () => {
 
-      load();
-
+      await load();
     }
   );
 
@@ -3738,24 +3653,28 @@ $('#refreshBoard')
 $('#howItWorks')
   ?.addEventListener(
     'click',
-    () =>
+    () => {
+
       $('#howModal')
         ?.setAttribute(
           'aria-hidden',
           'false'
-        )
+        );
+    }
   );
 
 
 $('#closeHow')
   ?.addEventListener(
     'click',
-    () =>
+    () => {
+
       $('#howModal')
         ?.setAttribute(
           'aria-hidden',
           'true'
-        )
+        );
+    }
   );
 
 
@@ -3765,39 +3684,47 @@ document
   )
   ?.addEventListener(
     'click',
-    () =>
+    () => {
+
       $('#howModal')
         ?.setAttribute(
           'aria-hidden',
           'true'
-        )
+        );
+    }
+  );
+
+
+document
+  .addEventListener(
+    'keydown',
+    event => {
+
+      if (
+        event.key ===
+        'Escape'
+      ) {
+
+        closeMarketDetails();
+
+        $('#howModal')
+          ?.setAttribute(
+            'aria-hidden',
+            'true'
+          );
+      }
+    }
   );
 
 
 // ============================================================
 // INITIAL LOAD
 // ============================================================
-// ============================================================
-// LINEFOUNDRY PROD UI FIX — CARD + MARKET STYLES
-// ============================================================
 
-(function injectLineFoundryProdStyles(){
-  // ...the entire CSS block I gave you...
-})();
+injectBoardStyles();
 
 load();
 
-// Also independently load the Market.
-// This means a market-data problem cannot
-// prevent Expert Signals from loading.
-setTimeout(
-  loadMarkets,
-  1000
-);
-
-
-// Also trigger live results independently shortly
-// after page load.
 setTimeout(
   loadLiveResults,
   1500
