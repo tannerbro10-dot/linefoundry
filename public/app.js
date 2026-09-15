@@ -195,16 +195,15 @@ function injectBoardStyles() {
       font-size: 12px;
     }
 
-    .lf-week-cards {
-      padding: 22px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
+  .lf-week-cards {
+  padding: 18px 0 0;
+}
+   .cards {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
 
     .prop {
       min-width: 0;
