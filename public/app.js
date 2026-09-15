@@ -3635,13 +3635,17 @@ async function loadMarkets() {
 
 
     markets =
-      Array.isArray(data)
-        ? data
-        : (
-            data.markets ||
-            data.data ||
-            []
-          );
+  Array.isArray(data)
+    ? data
+    : (
+        Array.isArray(data?.markets)
+          ? data.markets
+          : Array.isArray(data?.data?.markets)
+            ? data.data.markets
+            : Array.isArray(data?.data)
+              ? data.data
+              : []
+      );
 
 
     configureMarketControls();
@@ -3773,9 +3777,15 @@ document
 // ============================================================
 // INITIAL LOAD
 // ============================================================
+// ============================================================
+// LINEFOUNDRY PROD UI FIX — CARD + MARKET STYLES
+// ============================================================
+
+(function injectLineFoundryProdStyles(){
+  // ...the entire CSS block I gave you...
+})();
 
 load();
-
 
 // Also independently load the Market.
 // This means a market-data problem cannot
