@@ -1,4886 +1,1782 @@
-let board = null;
-let experts = null;
-let results = null;
-let marketData = null;
-let liveResults = {};
-
-const WORKER_URL =
-  'https://old-mouse-660a.tannerbro10.workers.dev/';
+const SIGNALS_URL =
+  "https://raw.githubusercontent.com/tannerbro10-dot/linefoundry/main/public/public-signals.json";
 
 const MARKET_DATA_URL =
-  'https://raw.githubusercontent.com/tannerbro10-dot/linefoundry/main/market-data.json';
+  "https://raw.githubusercontent.com/tannerbro10-dot/linefoundry/main/market-data.json";
 
-let locked = JSON.parse(
-  localStorage.getItem('lf_consensus_locked') || '[]'
-);
+const WORKER_URL =
+  "https://old-mouse-660a.tannerbro10.workers.dev/";
 
-const $ = selector =>
-  document.querySelector(selector);
+let signals = [];
+let markets = [];
+let marketResults = [];
+let selectedConfidence = "all";
+let selectedMarketType = "all";
+let searchTerm = "";
 
+document.addEventListener("DOMContentLoaded", () => {
+  injectBoardStyles();
+  bindNavigation();
+  bindControls();
+  loadBoard();
+});
 
-// ============================================================
-// BASIC HELPERS
-// ============================================================
+function injectBoardStyles() {
+  if (document.getElementById("linefoundry-board-styles")) return;
 
-function save() {
-  localStorage.setItem(
-    'lf_consensus_locked',
-    JSON.stringify(locked)
+  const style = document.createElement("style");
+  style.id = "linefoundry-board-styles";
+
+  style.textContent = `
+    .lf-market-section {
+      margin-top: 40px;
+    }
+
+    .lf-market-controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin: 20px 0 24px;
+      flex-wrap: wrap;
+    }
+
+    .lf-market-search {
+      flex: 1;
+      min-width: 220px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 10px;
+      background: rgba(255,255,255,.04);
+      color: inherit;
+      font: inherit;
+    }
+
+    .lf-market-filter {
+      min-width: 170px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 10px;
+      background: rgba(255,255,255,.04);
+      color: inherit;
+      font: inherit;
+    }
+
+    .lf-market-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .lf-market-card {
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 16px;
+      padding: 20px;
+      background: rgba(255,255,255,.035);
+      min-width: 0;
+    }
+
+    .lf-market-player {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+
+    .lf-market-meta {
+      margin-top: 5px;
+      font-size: 13px;
+      opacity: .65;
+    }
+
+    .lf-market-name {
+      margin-top: 18px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      opacity: .65;
+      font-weight: 700;
+    }
+
+    .lf-market-line {
+      font-size: 42px;
+      line-height: 1;
+      font-weight: 900;
+      margin-top: 7px;
+      letter-spacing: -.04em;
+    }
+
+    .lf-market-odds {
+      display: flex;
+      gap: 14px;
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .lf-market-best {
+      margin-top: 13px;
+      font-size: 12px;
+      opacity: .7;
+    }
+
+    .lf-market-result {
+      margin-top: 15px;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .04em;
+    }
+
+    .lf-market-result.live {
+      opacity: .9;
+    }
+
+    .lf-market-result.final {
+      opacity: .9;
+    }
+
+    .lf-market-result.pending {
+      opacity: .45;
+    }
+
+    .lf-market-details {
+      display: inline-block;
+      margin-top: 18px;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .lf-empty {
+      padding: 30px;
+      border: 1px dashed rgba(255,255,255,.12);
+      border-radius: 14px;
+      opacity: .65;
+      text-align: center;
+    }
+
+    .lf-week-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 16px 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 12px;
+      background: rgba(255,255,255,.025);
+      color: inherit;
+      cursor: pointer;
+      font: inherit;
+      text-align: left;
+      margin-top: 14px;
+    }
+
+    .lf-week-title {
+      font-weight: 900;
+    }
+
+    .lf-week-summary {
+      font-size: 12px;
+      opacity: .6;
+      margin-left: 12px;
+    }
+
+    .lf-week-body {
+      padding-top: 8px;
+    }
+
+    .lf-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,.72);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .lf-modal {
+      width: min(760px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: #111;
+      padding: 24px;
+      box-shadow: 0 20px 80px rgba(0,0,0,.45);
+    }
+
+    .lf-modal-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .lf-modal-close {
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    .lf-book-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .lf-modal-section {
+      margin-top: 26px;
+    }
+
+    .lf-modal-section h4 {
+      margin-bottom: 12px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      opacity: .6;
+    }
+
+    @media (max-width: 1100px) {
+      .lf-market-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .lf-market-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lf-market-line {
+        font-size: 36px;
+      }
+    }
+  `;
+
+  document.head.appendChild(style);
+}
+
+function bindNavigation() {
+  document.querySelectorAll("[data-section]").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const target = link.getAttribute("data-section");
+      const element = document.getElementById(target);
+
+      if (element) {
+        event.preventDefault();
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    });
+  });
+}
+
+function bindControls() {
+  const confidence = document.getElementById("confidenceFilter");
+
+  if (confidence) {
+    confidence.addEventListener("change", (event) => {
+      selectedConfidence = event.target.value;
+      renderSignals();
+    });
+  }
+
+  const refresh = document.getElementById("refreshBoard");
+
+  if (refresh) {
+    refresh.addEventListener("click", async () => {
+      await loadBoard(true);
+    });
+  }
+}
+
+async function loadBoard(showStatus = false) {
+  try {
+    if (showStatus) {
+      setRefreshStatus("Refreshing LineFoundry data...");
+    }
+
+    const [signalsResponse, marketResponse, workerResponse] =
+      await Promise.all([
+        fetch(`${SIGNALS_URL}?t=${Date.now()}`),
+        fetch(`${MARKET_DATA_URL}?t=${Date.now()}`),
+        fetch(`${WORKER_URL}?t=${Date.now()}`),
+      ]);
+
+    if (!signalsResponse.ok) {
+      throw new Error("Unable to load public signals.");
+    }
+
+    if (!marketResponse.ok) {
+      throw new Error("Unable to load market data.");
+    }
+
+    const signalData = await signalsResponse.json();
+    const marketData = await marketResponse.json();
+
+    signals = Array.isArray(signalData)
+      ? signalData
+      : Array.isArray(signalData.signals)
+      ? signalData.signals
+      : [];
+
+    markets = Array.isArray(marketData)
+      ? marketData
+      : Array.isArray(marketData.markets)
+      ? marketData.markets
+      : [];
+
+    if (workerResponse.ok) {
+      const workerData = await workerResponse.json();
+
+      if (workerData && workerData.success) {
+        signals = mergeWorkerSignalResults(signals, workerData);
+        marketResults = Array.isArray(workerData.marketResults)
+          ? workerData.marketResults
+          : [];
+      }
+    }
+
+    renderAll();
+    populateMarketTypes();
+
+    if (showStatus) {
+      setRefreshStatus(
+        `Updated ${new Date().toLocaleTimeString([], {
+          hour: "numeric",
+          minute: "2-digit",
+        })}`
+      );
+    }
+  } catch (error) {
+    console.error("LineFoundry load error:", error);
+
+    if (showStatus) {
+      setRefreshStatus("Unable to refresh data.");
+    }
+
+    renderAll();
+  }
+}
+
+function mergeWorkerSignalResults(baseSignals, workerData) {
+  if (!Array.isArray(workerData.signals)) {
+    return baseSignals;
+  }
+
+  const workerMap = new Map();
+
+  workerData.signals.forEach((signal) => {
+    const key = getSignalKey(signal);
+    workerMap.set(key, signal);
+  });
+
+  return baseSignals.map((signal) => {
+    const match = workerMap.get(getSignalKey(signal));
+
+    if (!match) {
+      return signal;
+    }
+
+    return {
+      ...signal,
+      ...match,
+      result: match.result || signal.result,
+      actual: match.actual ?? signal.actual,
+      status: match.status || signal.status,
+    };
+  });
+}
+
+function getSignalKey(signal) {
+  return [
+    signal.week || "",
+    signal.player || signal.playerName || "",
+    signal.market || signal.marketType || "",
+    signal.line ?? "",
+    signal.side || signal.direction || "",
+  ]
+    .join("|")
+    .toLowerCase();
+}
+
+function renderAll() {
+  renderSignals();
+  renderExperts();
+  renderConsensus();
+  renderResults();
+  renderMarkets();
+  bindMarketSearch();
+  bindMarketDetails();
+}
+
+function renderSignals() {
+  const container =
+    document.getElementById("propCards") ||
+    document.getElementById("signalCards") ||
+    document.querySelector(".prop-cards");
+
+  if (!container) return;
+
+  const filtered = filterSignals();
+
+  if (!filtered.length) {
+    container.innerHTML =
+      '<div class="lf-empty">No tracked signals match the current filters.</div>';
+    return;
+  }
+
+  const grouped = groupSignalsByWeek(filtered);
+
+  container.innerHTML = "";
+
+  const weeks = Object.keys(grouped).sort(compareWeeks);
+
+  weeks.forEach((week, index) => {
+    const section = document.createElement("div");
+    section.className = "lf-week-section";
+
+    const stats = getWeekSignalStats(grouped[week]);
+
+    const header = document.createElement("button");
+    header.className = "lf-week-header";
+
+    const isCurrent = isCurrentWeek(week);
+
+    header.innerHTML = `
+      <span>
+        <span class="lf-week-title">${escapeHtml(week)}</span>
+        <span class="lf-week-summary">
+          ${stats.total} picks · ${stats.hits} hits · ${stats.misses} misses
+        </span>
+      </span>
+      <span>${isCurrent ? "▾" : "▸"}</span>
+    `;
+
+    const body = document.createElement("div");
+    body.className = "lf-week-body";
+    body.style.display = isCurrent ? "block" : "none";
+
+    header.addEventListener("click", () => {
+      const open = body.style.display !== "none";
+      body.style.display = open ? "none" : "block";
+
+      const arrow = header.querySelector("span:last-child");
+      if (arrow) {
+        arrow.textContent = open ? "▸" : "▾";
+      }
+    });
+
+    const grid = document.createElement("div");
+    grid.className = "prop-grid";
+
+    grouped[week].forEach((signal) => {
+      grid.appendChild(createSignalCard(signal));
+    });
+
+    body.appendChild(grid);
+    section.appendChild(header);
+    section.appendChild(body);
+    container.appendChild(section);
+  });
+}
+
+function createSignalCard(signal) {
+  const card = document.createElement("article");
+  card.className = "prop-card";
+
+  const player =
+    signal.player ||
+    signal.playerName ||
+    signal.name ||
+    "Unknown Player";
+
+  const market =
+    signal.market ||
+    signal.marketType ||
+    signal.stat ||
+    "Player Prop";
+
+  const side = String(
+    signal.side || signal.direction || signal.pick || "OVER"
+  ).toUpperCase();
+
+  const line = signal.line ?? signal.threshold ?? "";
+
+  const status = getSignalStatus(signal);
+  const actual = getSignalActual(signal);
+
+  card.innerHTML = `
+    <div class="prop-card-top">
+      <div>
+        <div class="prop-player">${escapeHtml(player)}</div>
+        <div class="prop-market">${escapeHtml(market)}</div>
+      </div>
+      <div class="prop-side">${escapeHtml(side)}</div>
+    </div>
+
+    <div class="prop-line">${escapeHtml(String(line))}</div>
+
+    ${
+      status
+        ? `<div class="prop-result ${status.className}">
+             ${escapeHtml(status.label)}
+           </div>`
+        : ""
+    }
+
+    ${
+      actual !== null && actual !== undefined
+        ? `<div class="prop-actual">${escapeHtml(formatActual(market, actual))}</div>`
+        : ""
+    }
+
+    ${renderSignalConsensus(signal)}
+  `;
+
+  return card;
+}
+
+function renderSignalConsensus(signal) {
+  const group = getConsensusGroupForSignal(signal);
+
+  if (!group) return "";
+
+  return `
+    <div class="prop-consensus">
+      <span>AGREE ${group.agree}</span>
+      <span>·</span>
+      <span>DISAGREE ${group.disagree}</span>
+      <span>·</span>
+      <span>EXPERTS ${group.total}</span>
+    </div>
+  `;
+}
+
+function getSignalStatus(signal) {
+  const status = String(
+    signal.status ||
+      signal.result ||
+      signal.settlement ||
+      signal.outcome ||
+      ""
+  ).toUpperCase();
+
+  if (status.includes("HIT") || status === "WIN") {
+    return {
+      label: "🟢 BET HIT",
+      className: "hit",
+    };
+  }
+
+  if (status.includes("MISS") || status === "LOSS") {
+    return {
+      label: "🔴 BET MISS",
+      className: "miss",
+    };
+  }
+
+  if (status === "LIVE") {
+    return {
+      label: "LIVE",
+      className: "live",
+    };
+  }
+
+  return null;
+}
+
+function getSignalActual(signal) {
+  if (signal.actual !== undefined && signal.actual !== null) {
+    return signal.actual;
+  }
+
+  if (
+    signal.currentValue !== undefined &&
+    signal.currentValue !== null
+  ) {
+    return signal.currentValue;
+  }
+
+  if (
+    signal.result &&
+    typeof signal.result === "object" &&
+    signal.result.currentValue !== undefined
+  ) {
+    return signal.result.currentValue;
+  }
+
+  return null;
+}
+
+function formatActual(market, value) {
+  const normalized = String(market || "").toLowerCase();
+
+  if (
+    normalized.includes("touchdown") ||
+    normalized.includes("td")
+  ) {
+    return `${value} TD${Number(value) === 1 ? "" : "S"} ACTUAL`;
+  }
+
+  if (
+    normalized.includes("yard") ||
+    normalized.includes("attempt") ||
+    normalized.includes("reception") ||
+    normalized.includes("completion") ||
+    normalized.includes("interception")
+  ) {
+    const label = normalized.includes("yard")
+      ? "YARDS"
+      : normalized.includes("attempt")
+      ? "ATTEMPTS"
+      : normalized.includes("reception")
+      ? "RECEPTIONS"
+      : normalized.includes("completion")
+      ? "COMPLETIONS"
+      : "INT";
+
+    return `${value} ${label} ACTUAL`;
+  }
+
+  return `${value} ACTUAL`;
+}
+
+function filterSignals() {
+  return signals.filter((signal) => {
+    if (selectedConfidence !== "all") {
+      const confidence = String(
+        signal.confidence || signal.confidenceLevel || ""
+      ).toLowerCase();
+
+      if (confidence !== selectedConfidence.toLowerCase()) {
+        return false;
+      }
+    }
+
+    return true;
+  });
+}
+
+function groupSignalsByWeek(items) {
+  return items.reduce((groups, signal) => {
+    const week = signal.week || "Week 1";
+
+    if (!groups[week]) {
+      groups[week] = [];
+    }
+
+    groups[week].push(signal);
+    return groups;
+  }, {});
+}
+
+function getWeekSignalStats(items) {
+  let hits = 0;
+  let misses = 0;
+
+  items.forEach((signal) => {
+    const status = getSignalStatus(signal);
+
+    if (status?.className === "hit") hits++;
+    if (status?.className === "miss") misses++;
+  });
+
+  return {
+    total: items.length,
+    hits,
+    misses,
+  };
+}
+
+function getConsensusGroupForSignal(signal) {
+  const week = signal.week || "Week 1";
+
+  const player = String(
+    signal.player || signal.playerName || ""
+  ).toLowerCase();
+
+  const market = String(
+    signal.market || signal.marketType || signal.stat || ""
+  ).toLowerCase();
+
+  const line = String(signal.line ?? "").toLowerCase();
+
+  const related = signals.filter((item) => {
+    const itemWeek = item.week || "Week 1";
+
+    const itemPlayer = String(
+      item.player || item.playerName || ""
+    ).toLowerCase();
+
+    const itemMarket = String(
+      item.market || item.marketType || item.stat || ""
+    ).toLowerCase();
+
+    const itemLine = String(item.line ?? "").toLowerCase();
+
+    return (
+      itemWeek === week &&
+      itemPlayer === player &&
+      itemMarket === market &&
+      itemLine === line
+    );
+  });
+
+  if (!related.length) return null;
+
+  let agree = 0;
+  let disagree = 0;
+
+  const direction = String(
+    signal.side || signal.direction || signal.pick || ""
+  ).toLowerCase();
+
+  related.forEach((item) => {
+    const itemDirection = String(
+      item.side || item.direction || item.pick || ""
+    ).toLowerCase();
+
+    if (itemDirection === direction) {
+      agree++;
+    } else {
+      disagree++;
+    }
+  });
+
+  return {
+    agree,
+    disagree,
+    total: related.length,
+  };
+}
+
+function renderExperts() {
+  const container =
+    document.getElementById("expertCards") ||
+    document.getElementById("expertsGrid") ||
+    document.querySelector(".expert-grid");
+
+  if (!container) return;
+
+  const experts = buildExpertSummary();
+
+  if (!experts.length) {
+    container.innerHTML =
+      '<div class="lf-empty">Expert tracking data will appear here as results accumulate.</div>';
+    return;
+  }
+
+  container.innerHTML = "";
+
+  experts.forEach((expert) => {
+    const card = document.createElement("article");
+    card.className = "expert-card";
+
+    card.innerHTML = `
+      <div class="expert-card-name">${escapeHtml(expert.name)}</div>
+      <div class="expert-card-source">${escapeHtml(expert.source)}</div>
+      <div class="expert-card-record">
+        ${expert.hits}-${expert.misses}
+      </div>
+      <div class="expert-card-meta">
+        ${expert.total} tracked picks
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+function buildExpertSummary() {
+  const map = new Map();
+
+  signals.forEach((signal) => {
+    const name =
+      signal.analyst ||
+      signal.expert ||
+      signal.author ||
+      signal.sourceName;
+
+    if (!name) return;
+
+    const key = String(name).toLowerCase();
+
+    if (!map.has(key)) {
+      map.set(key, {
+        name,
+        source: signal.source || signal.publication || "",
+        hits: 0,
+        misses: 0,
+        total: 0,
+      });
+    }
+
+    const item = map.get(key);
+    const status = getSignalStatus(signal);
+
+    item.total++;
+
+    if (status?.className === "hit") item.hits++;
+    if (status?.className === "miss") item.misses++;
+  });
+
+  return Array.from(map.values()).sort((a, b) => {
+    if (b.hits !== a.hits) {
+      return b.hits - a.hits;
+    }
+
+    return b.total - a.total;
+  });
+}
+
+function renderConsensus() {
+  const container =
+    document.getElementById("consensusCards") ||
+    document.getElementById("consensusGrid");
+
+  if (!container) return;
+
+  const groups = buildConsensusGroups();
+
+  if (!groups.length) {
+    container.innerHTML =
+      '<div class="lf-empty">Consensus signals will appear here as analysts publish picks.</div>';
+    return;
+  }
+
+  container.innerHTML = "";
+
+  groups.forEach((group) => {
+    const card = document.createElement("article");
+    card.className = "consensus-card";
+
+    card.innerHTML = `
+      <div class="consensus-player">${escapeHtml(group.player)}</div>
+      <div class="consensus-market">${escapeHtml(group.market)}</div>
+      <div class="consensus-pick">
+        ${escapeHtml(group.direction)} ${escapeHtml(String(group.line))}
+      </div>
+      <div class="consensus-count">
+        AGREE ${group.agree} · DISAGREE ${group.disagree} · EXPERTS ${group.total}
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+function buildConsensusGroups() {
+  const map = new Map();
+
+  signals.forEach((signal) => {
+    const week = signal.week || "Week 1";
+
+    const player =
+      signal.player ||
+      signal.playerName ||
+      signal.name ||
+      "";
+
+    const market =
+      signal.market ||
+      signal.marketType ||
+      signal.stat ||
+      "";
+
+    const line = signal.line ?? "";
+
+    const direction = String(
+      signal.side || signal.direction || signal.pick || ""
+    ).toUpperCase();
+
+    const key = [
+      week,
+      player,
+      market,
+      line,
+    ]
+      .join("|")
+      .toLowerCase();
+
+    if (!map.has(key)) {
+      map.set(key, {
+        week,
+        player,
+        market,
+        line,
+        direction,
+        agree: 0,
+        disagree: 0,
+        total: 0,
+      });
+    }
+
+    const group = map.get(key);
+    group.total++;
+
+    if (group.total === 1) {
+      group.direction = direction;
+      group.agree++;
+    } else if (direction === group.direction) {
+      group.agree++;
+    } else {
+      group.disagree++;
+    }
+  });
+
+  return Array.from(map.values())
+    .filter((group) => group.total >= 2)
+    .sort((a, b) => b.total - a.total);
+}
+
+function renderResults() {
+  const record =
+    document.getElementById("resultsRecord") ||
+    document.getElementById("publicRecord");
+
+  if (!record) return;
+
+  let hits = 0;
+  let misses = 0;
+
+  signals.forEach((signal) => {
+    const status = getSignalStatus(signal);
+
+    if (status?.className === "hit") hits++;
+    if (status?.className === "miss") misses++;
+  });
+
+  const total = hits + misses;
+  const percentage = total
+    ? Math.round((hits / total) * 100)
+    : 0;
+
+  record.textContent = total
+    ? `${hits}-${misses} · ${percentage}%`
+    : "Results tracking is live";
+}
+
+function populateMarketTypes() {
+  const select =
+    document.getElementById("marketTypeFilter") ||
+    document.getElementById("marketFilter");
+
+  if (!select) return;
+
+  const currentValue = select.value;
+
+  const types = Array.from(
+    new Set(
+      markets
+        .map((market) => {
+          return (
+            market?.market?.name ||
+            market?.marketType ||
+            market?.market?.statId ||
+            ""
+          );
+        })
+        .filter(Boolean)
+    )
+  ).sort();
+
+  select.innerHTML = `<option value="all">All Markets</option>`;
+
+  types.forEach((type) => {
+    const option = document.createElement("option");
+    option.value = type;
+    option.textContent = prettifyMarketType(type);
+    select.appendChild(option);
+  });
+
+  if (types.includes(currentValue)) {
+    select.value = currentValue;
+  }
+
+  select.onchange = (event) => {
+    selectedMarketType = event.target.value;
+    renderMarkets();
+  };
+}
+
+function prettifyMarketType(type) {
+  const value = String(type || "");
+
+  return value
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
+function bindMarketSearch() {
+  const input =
+    document.getElementById("marketSearch") ||
+    document.getElementById("marketSearchInput");
+
+  if (!input || input.dataset.bound === "true") return;
+
+  input.dataset.bound = "true";
+
+  input.addEventListener("input", (event) => {
+    searchTerm = event.target.value.toLowerCase().trim();
+    renderMarkets();
+  });
+}
+
+function renderMarkets() {
+  const container =
+    document.getElementById("marketCards") ||
+    document.getElementById("marketGrid") ||
+    document.querySelector(".market-grid");
+
+  if (!container) return;
+
+  const filtered = markets.filter((market) => {
+    const player = String(
+      market?.player?.name ||
+        market?.playerName ||
+        ""
+    ).toLowerCase();
+
+    const marketName = String(
+      market?.market?.name ||
+        market?.marketType ||
+        ""
+    ).toLowerCase();
+
+    const game = String(
+      market?.game?.awayTeam || ""
+    ).toLowerCase() +
+      " " +
+      String(
+        market?.game?.homeTeam || ""
+      ).toLowerCase();
+
+    const type =
+      market?.market?.name ||
+      market?.marketType ||
+      market?.market?.statId ||
+      "";
+
+    if (
+      selectedMarketType !== "all" &&
+      String(type).toLowerCase() !==
+        String(selectedMarketType).toLowerCase()
+    ) {
+      return false;
+    }
+
+    if (!searchTerm) return true;
+
+    return (
+      player.includes(searchTerm) ||
+      marketName.includes(searchTerm) ||
+      game.includes(searchTerm)
+    );
+  });
+
+  if (!filtered.length) {
+    container.innerHTML =
+      '<div class="lf-empty">No markets match your search.</div>';
+    return;
+  }
+
+  container.innerHTML = "";
+
+  filtered.forEach((market) => {
+    container.appendChild(createMarketCard(market));
+  });
+
+  bindMarketDetails();
+}
+
+function createMarketCard(market) {
+  const card = document.createElement("article");
+  card.className = "lf-market-card";
+
+  const player =
+    market?.player?.name ||
+    market?.playerName ||
+    "Unknown Player";
+
+  const team =
+    market?.player?.teamId ||
+    market?.team ||
+    "";
+
+  const away = market?.game?.awayTeam || "";
+  const home = market?.game?.homeTeam || "";
+
+  const opponent = getOpponentText(team, away, home);
+
+  const marketName =
+    market?.market?.name ||
+    market?.marketType ||
+    prettifyMarketType(
+      market?.market?.statId || "Player Prop"
+    );
+
+  const isTouchdown = marketName
+    .toLowerCase()
+    .includes("touchdown");
+
+  const over = market?.sides?.over || {};
+  const under = market?.sides?.under || {};
+
+  const yes = market?.sides?.yes || {};
+  const no = market?.sides?.no || {};
+
+  let mainLine = "";
+  let oddsHtml = "";
+
+  if (isTouchdown) {
+    mainLine = "TD";
+
+    oddsHtml = `
+      <span>YES ${escapeHtml(formatOdds(yes.odds))}</span>
+      <span>NO ${escapeHtml(formatOdds(no.odds))}</span>
+    `;
+  } else {
+    const line = over.line ?? under.line ?? "";
+
+    mainLine = line;
+
+    oddsHtml = `
+      <span>OVER ${escapeHtml(formatOdds(over.odds))}</span>
+      <span>UNDER ${escapeHtml(formatOdds(under.odds))}</span>
+    `;
+  }
+
+  const bestOverBook = over.bestBook || "";
+  const bestUnderBook = under.bestBook || "";
+
+  const result = getMarketResult(market);
+
+  card.innerHTML = `
+    <div class="lf-market-player">${escapeHtml(player)}</div>
+
+    <div class="lf-market-meta">
+      ${escapeHtml(teamName(team) || team)}
+      ${
+        opponent
+          ? ` · ${escapeHtml(opponent)}`
+          : ""
+      }
+    </div>
+
+    <div class="lf-market-name">
+      ${escapeHtml(marketName)}
+    </div>
+
+    <div class="lf-market-line">
+      ${escapeHtml(String(mainLine))}
+    </div>
+
+    <div class="lf-market-odds">
+      ${oddsHtml}
+    </div>
+
+    ${
+      bestOverBook || bestUnderBook
+        ? `
+          <div class="lf-market-best">
+            ${
+              bestOverBook
+                ? `Best Over: ${escapeHtml(prettifyBook(bestOverBook))}`
+                : ""
+            }
+            ${
+              bestOverBook && bestUnderBook
+                ? " · "
+                : ""
+            }
+            ${
+              bestUnderBook
+                ? `Best Under: ${escapeHtml(prettifyBook(bestUnderBook))}`
+                : ""
+            }
+          </div>
+        `
+        : ""
+    }
+
+    ${renderMarketResult(result, isTouchdown)}
+
+    <a href="#" class="lf-market-details" data-market-id="${escapeHtml(
+      market.id || ""
+    )}">
+      View Market Details →
+    </a>
+  `;
+
+  return card;
+}
+
+function getMarketResult(market) {
+  if (!market) return null;
+
+  const id = String(market.id || "");
+
+  const direct = marketResults.find(
+    (result) =>
+      String(result.id || result.marketId || "") === id
+  );
+
+  if (direct) return direct;
+
+  const eventId = String(market.eventId || "");
+  const playerId = String(
+    market.player?.playerId ||
+      market.playerId ||
+      ""
+  );
+
+  const statId = String(
+    market.market?.statId ||
+      market.statId ||
+      ""
+  );
+
+  return (
+    marketResults.find((result) => {
+      return (
+        String(result.eventId || "") === eventId &&
+        String(
+          result.playerId ||
+            result.player?.playerId ||
+            ""
+        ) === playerId &&
+        String(
+          result.statId ||
+            result.market?.statId ||
+            ""
+        ) === statId
+      );
+    }) || null
   );
 }
 
-function escapeHtml(value) {
-  return String(value ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
+function renderMarketResult(result, isTouchdown) {
+  if (!result) {
+    return `
+      <div class="lf-market-result pending">
+        PENDING
+      </div>
+    `;
+  }
+
+  const status = String(
+    result.status ||
+      result.resultStatus ||
+      result.state ||
+      ""
+  ).toUpperCase();
+
+  const currentValue =
+    result.currentValue ??
+    result.actual ??
+    result.value ??
+    null;
+
+  if (
+    status === "LIVE" ||
+    status === "IN_PROGRESS" ||
+    result.live === true
+  ) {
+    if (currentValue === null || currentValue === undefined) {
+      return `
+        <div class="lf-market-result live">
+          LIVE
+        </div>
+      `;
+    }
+
+    return `
+      <div class="lf-market-result live">
+        LIVE · ${escapeHtml(
+          formatLiveValue(currentValue, isTouchdown)
+        )}
+      </div>
+    `;
+  }
+
+  if (
+    status === "FINAL" ||
+    status === "COMPLETED" ||
+    status === "SETTLED"
+  ) {
+    if (currentValue === null || currentValue === undefined) {
+      return `
+        <div class="lf-market-result final">
+          FINAL
+        </div>
+      `;
+    }
+
+    return `
+      <div class="lf-market-result final">
+        ${escapeHtml(
+          formatActualValue(currentValue, isTouchdown)
+        )}
+      </div>
+    `;
+  }
+
+  if (
+    currentValue !== null &&
+    currentValue !== undefined
+  ) {
+    return `
+      <div class="lf-market-result final">
+        ${escapeHtml(
+          formatActualValue(currentValue, isTouchdown)
+        )}
+      </div>
+    `;
+  }
+
+  return `
+    <div class="lf-market-result pending">
+      PENDING
+    </div>
+  `;
 }
 
-function formatNumber(value) {
+function formatLiveValue(value, isTouchdown) {
+  if (isTouchdown) {
+    return `${value} TD${Number(value) === 1 ? "" : "S"}`;
+  }
+
+  return `${value} ${inferMarketUnit(value)}`;
+}
+
+function formatActualValue(value, isTouchdown) {
+  if (isTouchdown) {
+    return `${value} TD${Number(value) === 1 ? "" : "S"} ACTUAL`;
+  }
+
+  return `${value} ${inferMarketUnit(value)} ACTUAL`;
+}
+
+function inferMarketUnit() {
+  return "YARDS";
+}
+
+function bindMarketDetails() {
+  document
+    .querySelectorAll(".lf-market-details")
+    .forEach((link) => {
+      if (link.dataset.bound === "true") return;
+
+      link.dataset.bound = "true";
+
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        const id = link.getAttribute("data-market-id");
+        const market = markets.find(
+          (item) => String(item.id) === String(id)
+        );
+
+        if (market) {
+          openMarketDetails(market);
+        }
+      });
+    });
+}
+
+function openMarketDetails(market) {
+  const existing = document.querySelector(
+    ".lf-modal-backdrop"
+  );
+
+  if (existing) existing.remove();
+
+  const player =
+    market?.player?.name ||
+    market?.playerName ||
+    "Unknown Player";
+
+  const marketName =
+    market?.market?.name ||
+    market?.marketType ||
+    "Player Prop";
+
+  const over = market?.sides?.over || {};
+  const under = market?.sides?.under || {};
+
+  const modal = document.createElement("div");
+  modal.className = "lf-modal-backdrop";
+
+  modal.innerHTML = `
+    <div class="lf-modal" role="dialog" aria-modal="true">
+      <div class="lf-modal-head">
+        <div>
+          <div class="eyebrow">MARKET DETAILS</div>
+          <h2>${escapeHtml(player)}</h2>
+          <p class="muted">${escapeHtml(marketName)}</p>
+        </div>
+
+        <button class="lf-modal-close" aria-label="Close">
+          ×
+        </button>
+      </div>
+
+      <div class="lf-modal-section">
+        <h4>Current Market</h4>
+
+        <div class="lf-book-row">
+          <strong>Over</strong>
+          <span>
+            ${escapeHtml(
+              String(over.line ?? "")
+            )}
+            ·
+            ${escapeHtml(
+              formatOdds(over.odds)
+            )}
+          </span>
+        </div>
+
+        <div class="lf-book-row">
+          <strong>Under</strong>
+          <span>
+            ${escapeHtml(
+              String(under.line ?? "")
+            )}
+            ·
+            ${escapeHtml(
+              formatOdds(under.odds)
+            )}
+          </span>
+        </div>
+      </div>
+
+      <div class="lf-modal-section">
+        <h4>Sportsbook Prices</h4>
+
+        ${renderSportsbookPrices(market)}
+      </div>
+
+      <div class="lf-modal-section">
+        <h4>Line Movement</h4>
+
+        ${renderLineMovement(market)}
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  modal
+    .querySelector(".lf-modal-close")
+    .addEventListener("click", () => modal.remove());
+
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.remove();
+    }
+  });
+}
+
+function renderSportsbookPrices(market) {
+  const books = new Map();
+
+  const sides = [
+    {
+      side: "Over",
+      data: market?.sides?.over,
+    },
+    {
+      side: "Under",
+      data: market?.sides?.under,
+    },
+  ];
+
+  sides.forEach(({ side, data }) => {
+    const sportsbooks = data?.sportsbooks || {};
+
+    Object.entries(sportsbooks).forEach(
+      ([book, values]) => {
+        if (!books.has(book)) {
+          books.set(book, {});
+        }
+
+        books.get(book)[side] = values;
+      }
+    );
+  });
+
+  if (!books.size) {
+    return `
+      <div class="muted">
+        Sportsbook price detail is not available.
+      </div>
+    `;
+  }
+
+  return Array.from(books.entries())
+    .map(([book, values]) => {
+      return `
+        <div class="lf-book-row">
+          <strong>${escapeHtml(
+            prettifyBook(book)
+          )}</strong>
+
+          <span>
+            ${
+              values.Over
+                ? `O ${escapeHtml(
+                    formatOdds(
+                      values.Over.odds ??
+                        values.Over.price
+                    )
+                  )}`
+                : ""
+            }
+
+            ${
+              values.Over && values.Under
+                ? " · "
+                : ""
+            }
+
+            ${
+              values.Under
+                ? `U ${escapeHtml(
+                    formatOdds(
+                      values.Under.odds ??
+                        values.Under.price
+                    )
+                  )}`
+                : ""
+            }
+          </span>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+function renderLineMovement(market) {
+  const over = market?.sides?.over || {};
+  const under = market?.sides?.under || {};
+
+  const opened =
+    over.openingLine ??
+    under.openingLine ??
+    null;
+
+  const current =
+    over.line ??
+    under.line ??
+    null;
+
+  if (opened === null && current === null) {
+    return `
+      <div class="muted">
+        Line movement data is not available.
+      </div>
+    `;
+  }
+
+  let change = "";
+
   if (
-    value === null ||
-    value === undefined ||
-    value === ''
+    opened !== null &&
+    current !== null
   ) {
-    return '';
+    const difference =
+      Number(current) - Number(opened);
+
+    if (!Number.isNaN(difference)) {
+      change =
+        difference > 0
+          ? `+${difference}`
+          : String(difference);
+    }
   }
 
-  const number = Number(value);
+  return `
+    <div class="lf-book-row">
+      <strong>Opened</strong>
+      <span>${escapeHtml(
+        String(opened ?? "—")
+      )}</span>
+    </div>
 
-  if (!Number.isFinite(number)) {
-    return String(value);
+    <div class="lf-book-row">
+      <strong>Current</strong>
+      <span>${escapeHtml(
+        String(current ?? "—")
+      )}</span>
+    </div>
+
+    <div class="lf-book-row">
+      <strong>Change</strong>
+      <span>${escapeHtml(
+        change || "—"
+      )}</span>
+    </div>
+  `;
+}
+
+function getOpponentText(team, away, home) {
+  const normalizedTeam = normalizeTeamName(team);
+
+  const normalizedAway = normalizeTeamName(away);
+  const normalizedHome = normalizeTeamName(home);
+
+  if (
+    normalizedTeam &&
+    normalizedAway &&
+    normalizedTeam === normalizedAway
+  ) {
+    return `@ ${home}`;
   }
 
-  return Number.isInteger(number)
-    ? String(number)
-    : number.toFixed(1);
+  if (
+    normalizedTeam &&
+    normalizedHome &&
+    normalizedTeam === normalizedHome
+  ) {
+    return `vs. ${away}`;
+  }
+
+  return "";
+}
+
+function normalizeTeamName(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "");
+}
+
+function teamName(value) {
+  const map = {
+    DENVER_BRONCOS_NFL: "Denver Broncos",
+    KANSAS_CITY_CHIEFS_NFL: "Kansas City Chiefs",
+    DETROIT_LIONS_NFL: "Detroit Lions",
+    BUFFALO_BILLS_NFL: "Buffalo Bills",
+  };
+
+  return map[value] || value || "";
+}
+
+function prettifyBook(book) {
+  const map = {
+    draftkings: "DraftKings",
+    fanduel: "FanDuel",
+    betmgm: "BetMGM",
+    caesars: "Caesars",
+    bet365: "Bet365",
+    espnbet: "ESPN BET",
+    fanatics: "Fanatics",
+    hardrock: "Hard Rock",
+  };
+
+  const key = String(book || "").toLowerCase();
+
+  return (
+    map[key] ||
+    String(book || "")
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, (char) =>
+        char.toUpperCase()
+      )
+  );
 }
 
 function formatOdds(value) {
   if (
     value === null ||
     value === undefined ||
-    value === ''
+    value === ""
   ) {
-    return '—';
+    return "—";
   }
 
-  const text = String(value);
+  const numeric = Number(value);
 
-  if (
-    text.startsWith('-') ||
-    text.startsWith('+')
-  ) {
-    return text;
+  if (!Number.isNaN(numeric)) {
+    if (numeric > 0) {
+      return `+${numeric}`;
+    }
+
+    return String(numeric);
   }
 
-  const number = Number(value);
-
-  if (!Number.isFinite(number)) {
-    return text;
-  }
-
-  return number > 0
-    ? `+${number}`
-    : String(number);
+  return String(value);
 }
 
-function currentWeek() {
+function isCurrentWeek(week) {
+  const number = parseInt(
+    String(week).replace(/\D/g, ""),
+    10
+  );
+
+  if (Number.isNaN(number)) return true;
+
+  return number === getCurrentNFLWeek();
+}
+
+function getCurrentNFLWeek() {
   const now = new Date();
 
-  const seasonStart =
-    new Date('2026-09-06T13:00:00Z');
+  const seasonStart = new Date(
+    "2026-09-10T00:00:00-04:00"
+  );
 
   const diff =
-    now.getTime() -
-    seasonStart.getTime();
+    now.getTime() - seasonStart.getTime();
 
-  if (diff < 0) {
-    return 1;
-  }
+  if (diff < 0) return 1;
 
-  const week =
-    Math.floor(
-      diff /
-      (7 * 24 * 60 * 60 * 1000)
-    ) + 1;
+  const days =
+    diff / (1000 * 60 * 60 * 24);
 
   return Math.min(
-    Math.max(week, 1),
-    18
+    18,
+    Math.max(
+      1,
+      Math.floor(days / 7) + 1
+    )
   );
 }
 
-
-// ============================================================
-// STYLES
-// ============================================================
-
-function injectBoardStyles() {
-  if ($('#linefoundry-board-styles')) {
-    return;
-  }
-
-  const style =
-    document.createElement('style');
-
-  style.id =
-    'linefoundry-board-styles';
-
-  style.textContent = `
-
-    /* ========================================================
-       EXPERT BOARD
-       ======================================================== */
-
-    #props #propCards {
-      display: block !important;
-      width: 100% !important;
-      max-width: none !important;
-    }
-
-    #props .lf-week-section {
-      display: block !important;
-      width: 100% !important;
-      max-width: none !important;
-    }
-
-    #props .lf-week-cards {
-      width: 100% !important;
-      max-width: none !important;
-      display: grid !important;
-      grid-template-columns:
-        repeat(3, minmax(0, 1fr)) !important;
-      gap: 15px !important;
-    }
-
-
-    /* ========================================================
-       MARKET SECTION
-       ======================================================== */
-
-    .lf-market-wrap {
-      width: 100%;
-      margin-top: 30px;
-    }
-
-    .lf-market-header {
-      margin-bottom: 18px;
-    }
-
-    .lf-market-header .eyebrow {
-      margin-bottom: 8px;
-    }
-
-    .lf-market-header h2 {
-      margin: 0;
-      font: 700 32px 'Space Grotesk';
-      letter-spacing: -.035em;
-    }
-
-    .lf-market-header p {
-      margin: 6px 0 0;
-    }
-
-
-    /* ========================================================
-       MARKET CONTROLS
-       ======================================================== */
-
-    .lf-market-controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .lf-market-search {
-      flex: 1;
-      min-width: 0;
-      height: 44px;
-      padding: 0 15px;
-      border: 1px solid rgba(255,255,255,.09);
-      border-radius: 12px;
-      outline: none;
-      background: rgba(255,255,255,.035);
-      color: inherit;
-      font: inherit;
-    }
-
-    .lf-market-search::placeholder {
-      color: rgba(255,255,255,.4);
-    }
-
-    .lf-market-filter {
-      width: 190px;
-      height: 44px;
-      padding: 0 14px;
-      border: 1px solid rgba(255,255,255,.09);
-      border-radius: 12px;
-      background: #111820;
-      color: #f5f7fa;
-      font: inherit;
-      cursor: pointer;
-      color-scheme: dark;
-    }
-
-    .lf-market-filter option {
-      background: #111820;
-      color: #f5f7fa;
-    }
-
-
-    /* ========================================================
-       MARKET WEEK SECTIONS
-       ======================================================== */
-
-    .lf-market-week-section {
-      margin-bottom: 24px;
-    }
-
-    .lf-market-week-section > summary {
-      list-style: none;
-      cursor: pointer;
-      user-select: none;
-      margin-bottom: 14px;
-    }
-
-    .lf-market-week-section > summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .lf-market-week-heading {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 9px;
-      padding: 12px 14px;
-      border: 1px solid rgba(255,255,255,.07);
-      border-radius: 12px;
-      background: rgba(255,255,255,.025);
-    }
-
-    .lf-market-week-heading::after {
-      content: '▸';
-      margin-left: auto;
-      color: rgba(255,255,255,.4);
-      font-size: 12px;
-      transition: transform .15s ease;
-    }
-
-    .lf-market-week-section[open]
-      .lf-market-week-heading::after {
-      transform: rotate(90deg);
-    }
-
-    .lf-market-week-heading strong {
-      font-size: 13px;
-    }
-
-    .lf-market-week-status {
-      padding: 3px 7px;
-      border-radius: 6px;
-      background: rgba(255,255,255,.06);
-      font-size: 9px;
-      font-weight: 750;
-      letter-spacing: .06em;
-    }
-
-    .lf-market-week-summary {
-      color: rgba(255,255,255,.46);
-      font-size: 11px;
-    }
-
-
-    /* ========================================================
-       MARKET GRID
-       ======================================================== */
-
-    .lf-market-grid {
-      display: grid;
-      width: 100%;
-      grid-template-columns:
-        repeat(4, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .lf-market-card {
-      position: relative;
-      min-width: 0;
-      padding: 17px;
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 16px;
-      background:
-        linear-gradient(
-          180deg,
-          rgba(255,255,255,.045),
-          rgba(255,255,255,.02)
-        );
-      box-shadow:
-        0 8px 24px rgba(0,0,0,.12);
-      transition:
-        transform .16s ease,
-        border-color .16s ease,
-        box-shadow .16s ease;
-    }
-
-    .lf-market-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,.16);
-      box-shadow:
-        0 12px 30px rgba(0,0,0,.18);
-    }
-
-    .lf-market-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 13px;
-    }
-
-    .lf-market-player {
-      min-width: 0;
-    }
-
-    .lf-market-player strong {
-      display: block;
-      font-size: 15px;
-      line-height: 1.2;
-      font-weight: 750;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .lf-market-game {
-      display: block;
-      margin-top: 4px;
-      color: rgba(255,255,255,.52);
-      font-size: 11px;
-      line-height: 1.2;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .lf-market-week {
-      flex: 0 0 auto;
-      padding: 4px 7px;
-      border-radius: 7px;
-      background: rgba(255,255,255,.07);
-      color: rgba(255,255,255,.68);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .05em;
-    }
-
-    .lf-market-type {
-      margin-bottom: 7px;
-      color: rgba(255,255,255,.58);
-      font-size: 11px;
-      font-weight: 650;
-      text-transform: uppercase;
-      letter-spacing: .055em;
-    }
-
-    .lf-market-line {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      min-height: 45px;
-      padding: 8px 0;
-    }
-
-    .lf-market-line-number {
-      font-size: 28px;
-      line-height: 1;
-      font-weight: 800;
-      letter-spacing: -.04em;
-    }
-
-    .lf-market-sides {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 4px;
-      font-size: 10px;
-      font-weight: 650;
-    }
-
-    .lf-market-side {
-      white-space: nowrap;
-    }
-
-    .lf-market-side b {
-      margin-left: 3px;
-      color: rgba(255,255,255,.86);
-    }
-
-    .lf-market-divider {
-      height: 1px;
-      margin: 8px 0 10px;
-      background: rgba(255,255,255,.07);
-    }
-
-    .lf-market-result {
-      margin-top: 7px;
-      font-size: 10px;
-      font-weight: 750;
-      letter-spacing: .025em;
-    }
-
-    .lf-market-result.actual {
-      color: rgba(255,255,255,.72);
-    }
-
-    .lf-market-result.live {
-      color: rgba(104,235,171,.95);
-    }
-
-    .lf-market-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .lf-market-best {
-      min-width: 0;
-      color: rgba(255,255,255,.5);
-      font-size: 10px;
-      line-height: 1.3;
-    }
-
-    .lf-market-best strong {
-      color: rgba(255,255,255,.76);
-      font-weight: 700;
-    }
-
-    .lf-market-details {
-      flex: 0 0 auto;
-      border: 0;
-      padding: 0;
-      background: none;
-      color: inherit;
-      font: inherit;
-      font-size: 10px;
-      font-weight: 750;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .lf-market-details:hover {
-      text-decoration: underline;
-    }
-
-
-    /* ========================================================
-       MARKET MODAL
-       ======================================================== */
-
-    .lf-market-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: rgba(0,0,0,.68);
-      backdrop-filter: blur(7px);
-    }
-
-    .lf-market-modal[hidden] {
-      display: none;
-    }
-
-    .lf-market-modal-box {
-      width: min(680px, 100%);
-      max-height: 90vh;
-      overflow: auto;
-      padding: 24px;
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 20px;
-      background: #111;
-      box-shadow:
-        0 24px 70px rgba(0,0,0,.4);
-    }
-
-    .lf-market-modal-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-
-    .lf-market-modal-head h3 {
-      margin: 0;
-      font-size: 22px;
-    }
-
-    .lf-market-modal-sub {
-      margin-top: 5px;
-      color: rgba(255,255,255,.52);
-      font-size: 12px;
-    }
-
-    .lf-market-close {
-      border: 0;
-      background: none;
-      color: inherit;
-      font-size: 22px;
-      cursor: pointer;
-    }
-
-    .lf-market-detail-section {
-      margin-top: 20px;
-    }
-
-    .lf-market-detail-section h4 {
-      margin: 0 0 10px;
-      font-size: 11px;
-      letter-spacing: .07em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.48);
-    }
-
-    .lf-market-book {
-      display: grid;
-      grid-template-columns:
-        1fr auto auto;
-      gap: 10px;
-      align-items: center;
-      padding: 9px 0;
-      border-bottom:
-        1px solid rgba(255,255,255,.06);
-      font-size: 12px;
-    }
-
-    .lf-market-book-name {
-      font-weight: 700;
-    }
-
-    .lf-market-book span {
-      color: rgba(255,255,255,.7);
-    }
-
-    .lf-market-empty {
-      padding: 30px;
-      border: 1px dashed rgba(255,255,255,.12);
-      border-radius: 14px;
-      text-align: center;
-      color: rgba(255,255,255,.5);
-    }
-
-
-    /* ========================================================
-       EXPERT WEEK SECTIONS
-       ======================================================== */
-
-    .lf-week-section {
-      margin-bottom: 24px;
-    }
-
-    .lf-week-section > summary {
-      list-style: none;
-      cursor: pointer;
-      user-select: none;
-      margin-bottom: 14px;
-    }
-
-    .lf-week-section > summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .lf-week-heading {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 9px;
-      padding: 12px 14px;
-      border: 1px solid rgba(255,255,255,.07);
-      border-radius: 12px;
-      background: rgba(255,255,255,.025);
-    }
-
-    .lf-week-section > summary
-      .lf-week-heading::after {
-      content: '▸';
-      margin-left: auto;
-      color: rgba(255,255,255,.4);
-      font-size: 12px;
-      transition: transform .15s ease;
-    }
-
-    .lf-week-section[open]
-      .lf-week-heading::after {
-      transform: rotate(90deg);
-    }
-
-    .lf-week-status {
-      padding: 3px 7px;
-      border-radius: 6px;
-      background: rgba(255,255,255,.06);
-      font-size: 9px;
-      font-weight: 750;
-      letter-spacing: .06em;
-    }
-
-    .lf-week-summary {
-      color: rgba(255,255,255,.46);
-      font-size: 11px;
-    }
-
-    .lf-empty {
-      padding: 35px;
-      text-align: center;
-      border: 1px dashed rgba(255,255,255,.1);
-      border-radius: 14px;
-    }
-
-
-    /* ========================================================
-       RESPONSIVE
-       ======================================================== */
-
-    @media (max-width: 1100px) {
-
-      #props .lf-week-cards {
-        grid-template-columns:
-          repeat(2, minmax(0, 1fr)) !important;
-      }
-
-      .lf-market-grid {
-        grid-template-columns:
-          repeat(2, minmax(0, 1fr));
-      }
-
-    }
-
-    @media (max-width: 650px) {
-
-      #props .lf-week-cards {
-        grid-template-columns:
-          1fr !important;
-      }
-
-      .lf-market-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .lf-market-controls {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .lf-market-search,
-      .lf-market-filter {
-        width: 100%;
-      }
-
-    }
-
-  `;
-
-  document.head.appendChild(style);
+function compareWeeks(a, b) {
+  const aNum =
+    parseInt(String(a).replace(/\D/g, ""), 10) ||
+    0;
+
+  const bNum =
+    parseInt(String(b).replace(/\D/g, ""), 10) ||
+    0;
+
+  return aNum - bNum;
 }
 
+function setRefreshStatus(text) {
+  const element =
+    document.getElementById("refreshStatus");
 
-// ============================================================
-// CONSENSUS BUILD
-// ============================================================
-
-function buildConsensusProps(
-  signals,
-  sources
-) {
-  const groups = new Map();
-
-  (signals || []).forEach(
-    signal => {
-
-      const week =
-        Number(
-          signal.week || 1
-        );
-
-      const key = [
-        signal.player,
-        signal.market,
-        week
-      ]
-        .join('|')
-        .toLowerCase();
-
-      if (!groups.has(key)) {
-
-        groups.set(
-          key,
-          {
-            player:
-              signal.player,
-
-            market:
-              signal.market,
-
-            week,
-
-            signals: []
-          }
-        );
-
-      }
-
-      groups
-        .get(key)
-        .signals
-        .push(signal);
-
-    }
-  );
-
-  return Array.from(
-    groups.values()
-  )
-    .map(group => {
-
-      const signalsForProp =
-        group.signals;
-
-      const over =
-        signalsForProp.filter(
-          signal =>
-            String(
-              signal.side
-            ).toUpperCase() ===
-            'OVER'
-        );
-
-      const under =
-        signalsForProp.filter(
-          signal =>
-            String(
-              signal.side
-            ).toUpperCase() ===
-            'UNDER'
-        );
-
-      const yes =
-        signalsForProp.filter(
-          signal =>
-            String(
-              signal.side
-            ).toUpperCase() ===
-            'YES'
-        );
-
-      const total =
-        signalsForProp.length;
-
-      const primary =
-        over.length >= under.length
-          ? (
-              over[0] ||
-              yes[0] ||
-              signalsForProp[0]
-            )
-          : under[0];
-
-      const primarySide =
-        String(
-          primary?.side ||
-          'OVER'
-        ).toUpperCase();
-
-      const agree =
-        primarySide === 'UNDER'
-          ? under.length
-          : primarySide === 'YES'
-            ? yes.length
-            : over.length;
-
-      const opposing =
-        primarySide === 'UNDER'
-          ? over.length
-          : primarySide === 'YES'
-            ? 0
-            : under.length;
-
-      const percent =
-        total > 0
-          ? Math.round(
-              (agree / total) *
-              100
-            )
-          : 0;
-
-      const sourceMap =
-        Object.fromEntries(
-          (sources || []).map(
-            source => [
-              source.id,
-              source
-            ]
-          )
-        );
-
-      const analysts =
-        signalsForProp.map(
-          signal => {
-
-            const source =
-              sourceMap[
-                signal.sourceId
-              ] || {};
-
-            return {
-
-              name:
-                signal.analyst ||
-                source.analyst ||
-                'Unknown analyst',
-
-              outlet:
-                source.outlet ||
-                '',
-
-              side:
-                signal.side ||
-                '',
-
-              line:
-                signal.line,
-
-              url:
-                source.url ||
-                signal.url ||
-                ''
-
-            };
-
-          }
-        );
-
-      const lines =
-        signalsForProp
-          .map(
-            signal =>
-              signal.line
-          )
-          .filter(
-            line =>
-              line !== null &&
-              line !== undefined
-          )
-          .map(Number)
-          .filter(
-            Number.isFinite
-          );
-
-      const uniqueLines =
-        [
-          ...new Set(lines)
-        ].sort(
-          (a, b) =>
-            a - b
-        );
-
-      let lineDisplay = '';
-
-      if (
-        uniqueLines.length === 1
-      ) {
-
-        lineDisplay =
-          formatNumber(
-            uniqueLines[0]
-          );
-
-      }
-      else if (
-        uniqueLines.length > 1
-      ) {
-
-        lineDisplay =
-          `${formatNumber(
-            uniqueLines[0]
-          )}–${formatNumber(
-            uniqueLines[
-              uniqueLines.length - 1
-            ]
-          )}`;
-
-      }
-
-      return {
-
-        id:
-          signalsForProp[0]?.id ||
-          `${group.player}-${group.market}-${group.week}`,
-
-        player:
-          group.player,
-
-        market:
-          group.market,
-
-        side:
-          primary?.side ||
-          'OVER',
-
-        line:
-          primary?.line ??
-          null,
-
-        week:
-          group.week,
-
-        weeks:
-          [group.week],
-
-        agree,
-
-        disagree:
-          opposing,
-
-        experts:
-          total,
-
-        percent,
-
-        lineDisplay,
-
-        consensusDisplay:
-          `${percent}%`,
-
-        confidence:
-          percent >= 75
-            ? 'STRONG'
-            : percent >= 60
-              ? 'LEAN'
-              : 'EARLY',
-
-        analysts,
-
-        rationale:
-          `${agree} ${
-            primary?.side ||
-            'OVER'
-          } expert${
-            agree === 1
-              ? ''
-              : 's'
-          } tracked for this market.`
-
-      };
-
-    });
+  if (element) {
+    element.textContent = text;
+  }
 }
 
-
-// ============================================================
-// EXPERT RESULTS
-// ============================================================
-
-function resultForSignal(
-  prop
-) {
-  if (!prop) {
-    return null;
-  }
-
-  return (
-    liveResults[prop.id] ||
-    null
-  );
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
-
-function getResult(prop) {
-
-  const result =
-    resultForSignal(prop);
-
-  if (!result) {
-    return 'PENDING';
-  }
-
-  const status =
-    String(
-      result.result ||
-      result.status ||
-      ''
-    ).toUpperCase();
-
-  if (
-    status === 'HIT' ||
-    status === 'WIN'
-  ) {
-    return 'HIT';
-  }
-
-  if (
-    status === 'MISS' ||
-    status === 'LOSS'
-  ) {
-    return 'MISS';
-  }
-
-  if (
-    status === 'LIVE' ||
-    status === 'IN_PROGRESS'
-  ) {
-    return 'LIVE';
-  }
-
-  return 'PENDING';
-}
-
-function getActualValue(
-  prop
-) {
-  const result =
-    resultForSignal(prop);
-
-  if (!result) {
-    return null;
-  }
-
-  const candidates = [
-    result.actual,
-    result.actualValue,
-    result.value,
-    result.stat,
-    result.playerStat,
-    result.finalStat,
-    result.currentStat,
-    result.currentValue,
-    result.yards,
-    result.total
-  ];
-
-  for (
-    const value of candidates
-  ) {
-
-    if (
-      value !== null &&
-      value !== undefined &&
-      value !== ''
-    ) {
-      return value;
-    }
-
-  }
-
-  return null;
-}
-
-function actualLabel(
-  prop
-) {
-  const market =
-    String(
-      prop?.market ||
-      ''
-    ).toLowerCase();
-
-  if (
-    market.includes(
-      'reception'
-    )
-  ) {
-    return 'RECEPTIONS ACTUAL';
-  }
-
-  if (
-    market.includes(
-      'attempt'
-    )
-  ) {
-    return 'ATTEMPTS ACTUAL';
-  }
-
-  if (
-    market.includes(
-      'interception'
-    )
-  ) {
-    return 'INTERCEPTIONS ACTUAL';
-  }
-
-  if (
-    market.includes(
-      'touchdown'
-    ) ||
-    market.includes(
-      'anytime'
-    )
-  ) {
-    return 'TOUCHDOWNS ACTUAL';
-  }
-
-  if (
-    market.includes(
-      'receiv'
-    ) ||
-    market.includes(
-      'rushing'
-    ) ||
-    market.includes(
-      'passing'
-    )
-  ) {
-    return 'YARDS ACTUAL';
-  }
-
-  return 'ACTUAL';
-}
-
-function liveStatus(
-  prop
-) {
-  const status =
-    getResult(prop);
-
-  const actual =
-    getActualValue(prop);
-
-  if (
-    status === 'HIT' ||
-    status === 'MISS'
-  ) {
-
-    return `
-      <div
-        class="
-          lf-result
-          ${status.toLowerCase()}
-        "
-      >
-
-        <strong>
-          ${
-            status === 'HIT'
-              ? '🟢 BET HIT'
-              : '🔴 BET MISS'
-          }
-        </strong>
-
-        ${
-          actual !== null
-            ? `
-              <span>
-                ${escapeHtml(
-                  formatNumber(
-                    actual
-                  )
-                )}
-                ${actualLabel(
-                  prop
-                )}
-              </span>
-            `
-            : ''
-        }
-
-      </div>
-    `;
-
-  }
-
-  if (
-    status === 'LIVE'
-  ) {
-
-    return `
-      <div
-        class="lf-result live"
-      >
-
-        <strong>
-          🔴 LIVE
-        </strong>
-
-        ${
-          actual !== null
-            ? `
-              <span>
-                ${escapeHtml(
-                  formatNumber(
-                    actual
-                  )
-                )}
-                ${actualLabel(
-                  prop
-                )}
-              </span>
-            `
-            : ''
-        }
-
-      </div>
-    `;
-
-  }
-
-  return '';
-}
-
-
-// ============================================================
-// EXPERT CARD
-// ============================================================
-
-function sortProps(
-  props
-) {
-  const order = {
-    HIT: 0,
-    LIVE: 1,
-    PENDING: 2,
-    MISS: 3
-  };
-
-  return [
-    ...props
-  ].sort(
-    (a, b) => {
-
-      const aOrder =
-        order[
-          getResult(a)
-        ] ?? 2;
-
-      const bOrder =
-        order[
-          getResult(b)
-        ] ?? 2;
-
-      if (
-        aOrder !==
-        bOrder
-      ) {
-        return (
-          aOrder -
-          bOrder
-        );
-      }
-
-      return String(
-        a.player
-      ).localeCompare(
-        String(
-          b.player
-        )
-      );
-
-    }
-  );
-}
-
-function card(
-  prop
-) {
-  const lockedPick =
-    locked.includes(
-      prop.id
-    );
-
-  const analysts =
-    (
-      prop.analysts ||
-      []
-    )
-      .map(
-        analyst => `
-          <div
-            class="analyst-source"
-          >
-
-            <strong>
-              ${escapeHtml(
-                analyst.name
-              )}
-            </strong>
-
-            <span>
-              ${escapeHtml(
-                analyst.outlet ||
-                ''
-              )}
-
-              —
-
-              ${escapeHtml(
-                analyst.side ||
-                ''
-              )}
-
-              ${
-                analyst.line !==
-                  null &&
-                analyst.line !==
-                  undefined
-                  ? `
-                    ${formatNumber(
-                      analyst.line
-                    )}
-                  `
-                  : ''
-              }
-
-            </span>
-
-            ${
-              analyst.url
-                ? `
-                  <a
-                    href="${escapeHtml(
-                      analyst.url
-                    )}"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    Source ↗
-                  </a>
-                `
-                : ''
-            }
-
-          </div>
-        `
-      )
-      .join('');
-
-  return `
-    <article
-      class="
-        prop
-        ${
-          lockedPick
-            ? 'locked'
-            : ''
-        }
-      "
-    >
-
-      <div
-        class="prop-top"
-      >
-
-        <div
-          class="game"
-        >
-          NFL • WEEK
-          ${prop.week}
-        </div>
-
-        <div
-          class="grade"
-        >
-          ${escapeHtml(
-            prop.consensusDisplay
-          )}
-        </div>
-
-      </div>
-
-      <h3>
-
-        ${escapeHtml(
-          prop.player
-        )}
-
-        —
-
-        ${escapeHtml(
-          prop.side
-        )}
-
-        ${
-          prop.line !==
-            null &&
-          prop.line !==
-            undefined
-            ? `
-              ${formatNumber(
-                prop.line
-              )}
-            `
-            : ''
-        }
-
-        ${escapeHtml(
-          prop.market
-        )}
-
-      </h3>
-
-      ${liveStatus(
-        prop
-      )}
-
-      <div
-        class="metrics"
-      >
-
-        <div class="metric">
-          <b>
-            ${prop.agree}
-          </b>
-          <span>
-            Agree
-          </span>
-        </div>
-
-        <div class="metric">
-          <b>
-            ${prop.disagree}
-          </b>
-          <span>
-            Disagree
-          </span>
-        </div>
-
-        <div class="metric">
-          <b>
-            ${prop.experts}
-          </b>
-          <span>
-            Experts
-          </span>
-        </div>
-
-        <div class="metric">
-          <b>
-            ${prop.percent}%
-          </b>
-          <span>
-            Consensus
-          </span>
-        </div>
-
-      </div>
-
-      <div
-        class="consensus-summary"
-      >
-
-        <strong>
-
-          ${prop.agree}
-
-          ${escapeHtml(
-            prop.side
-          )}
-
-          expert${
-            prop.agree === 1
-              ? ''
-              : 's'
-          }
-
-          ${
-            prop.disagree >
-            0
-              ? `
-                •
-                ${prop.disagree}
-                ${
-                  prop.side ===
-                  'OVER'
-                    ? 'UNDER'
-                    : 'OVER'
-                }
-                expert${
-                  prop.disagree ===
-                  1
-                    ? ''
-                    : 's'
-                }
-              `
-              : `
-                • No opposing pick found
-              `
-          }
-
-        </strong>
-
-        <span>
-
-          ${
-            prop.experts ===
-            1
-              ? 'Single-source signal'
-              : `${prop.percent}% direction consensus`
-          }
-
-          ${
-            prop.lineDisplay
-              ? `
-                • Published line:
-                ${escapeHtml(
-                  prop.lineDisplay
-                )}
-              `
-              : ''
-          }
-
-        </span>
-
-      </div>
-
-      <div
-        class="analyst-list"
-      >
-
-        ${analysts}
-
-      </div>
-
-      <p
-        class="why"
-      >
-        ${escapeHtml(
-          prop.rationale
-        )}
-      </p>
-
-      <div
-        class="card-actions"
-      >
-
-        <span
-          class="lock-status"
-        >
-          ${
-            lockedPick
-              ? '🔒 Locked'
-              : '🟢 Open'
-          }
-        </span>
-
-      </div>
-
-    </article>
-  `;
-}
-
-
-// ============================================================
-// EXPERT WEEK SUMMARY
-// ============================================================
-
-function weekSummary(
-  props
-) {
-  const hits =
-    props.filter(
-      prop =>
-        getResult(prop) ===
-        'HIT'
-    ).length;
-
-  const misses =
-    props.filter(
-      prop =>
-        getResult(prop) ===
-        'MISS'
-    ).length;
-
-  const live =
-    props.filter(
-      prop =>
-        getResult(prop) ===
-        'LIVE'
-    ).length;
-
-  const pending =
-    props.filter(
-      prop =>
-        getResult(prop) ===
-        'PENDING'
-    ).length;
-
-  const settled =
-    hits + misses;
-
-  const percentage =
-    settled > 0
-      ? Math.round(
-          (hits / settled) *
-          100
-        )
-      : null;
-
-  return `
-    <span
-      class="lf-week-summary"
-    >
-
-      ${props.length}
-      pick${
-        props.length === 1
-          ? ''
-          : 's'
-      }
-
-      ${
-        settled
-          ? ` • ${hits} hit${
-              hits === 1
-                ? ''
-                : 's'
-            }`
-          : ''
-      }
-
-      ${
-        misses
-          ? ` • ${misses} miss${
-              misses === 1
-                ? ''
-                : 'es'
-            }`
-          : ''
-      }
-
-      ${
-        live
-          ? ` • ${live} live`
-          : ''
-      }
-
-      ${
-        pending
-          ? ` • ${pending} pending`
-          : ''
-      }
-
-      ${
-        percentage !== null
-          ? ` • ${percentage}%`
-          : ''
-      }
-
-    </span>
-  `;
-}
-
-
-// ============================================================
-// EXPERT WEEK SECTION
-// ============================================================
-
-function weekSection(
-  week,
-  props,
-  expanded
-) {
-  return `
-    <details
-      class="lf-week-section"
-      data-week="${week}"
-      ${expanded ? 'open' : ''}
-    >
-
-      <summary>
-
-        <div
-          class="lf-week-heading"
-        >
-
-          <strong>
-            WEEK ${week}
-          </strong>
-
-          <span
-            class="lf-week-status"
-          >
-            ${
-              Number(week) ===
-              currentWeek()
-                ? 'CURRENT'
-                : (
-                    props.some(
-                      prop =>
-                        getResult(
-                          prop
-                        ) ===
-                          'PENDING' ||
-                        getResult(
-                          prop
-                        ) ===
-                          'LIVE'
-                    )
-                      ? 'IN PROGRESS'
-                      : 'COMPLETE'
-                  )
-            }
-          </span>
-
-          ${weekSummary(
-            props
-          )}
-
-        </div>
-
-      </summary>
-
-      <div
-        class="
-          cards
-          lf-week-cards
-        "
-      >
-
-        ${
-          sortProps(
-            props
-          )
-            .map(card)
-            .join('')
-        }
-
-      </div>
-
-    </details>
-  `;
-}
-
-
-// ============================================================
-// FILTER STATE
-// ============================================================
-
-const filterState = {
-  search: '',
-  week: 'ALL',
-  market: 'ALL',
-  outcome: 'ALL',
-  consensus: 'ALL'
-};
-
-function getAvailableWeeks() {
-
-  const weeks =
-    (
-      board?.props ||
-      []
-    )
-      .flatMap(
-        prop =>
-          prop.weeks ||
-          [prop.week]
-      )
-      .filter(Boolean)
-      .map(Number);
-
-  return [
-    ...new Set(weeks)
-  ].sort(
-    (a, b) =>
-      b - a
-  );
-}
-
-function propMatchesFilters(
-  prop
-) {
-  const search =
-    filterState.search
-      .trim()
-      .toLowerCase();
-
-  if (search) {
-
-    const haystack =
-      [
-        prop.player,
-        prop.market,
-        prop.side,
-        prop.line,
-        ...(
-          prop.analysts ||
-          []
-        ).map(
-          analyst =>
-            `${analyst.name} ${analyst.outlet}`
-        )
-      ]
-        .join(' ')
-        .toLowerCase();
-
-    if (
-      !haystack.includes(
-        search
-      )
-    ) {
-      return false;
-    }
-  }
-
-  if (
-    filterState.week !==
-    'ALL'
-  ) {
-
-    const weeks =
-      prop.weeks ||
-      [prop.week];
-
-    if (
-      !weeks
-        .map(String)
-        .includes(
-          String(
-            filterState.week
-          )
-        )
-    ) {
-      return false;
-    }
-  }
-
-  if (
-    filterState.market !==
-    'ALL' &&
-    String(
-      prop.market
-    ).toLowerCase() !==
-      String(
-        filterState.market
-      ).toLowerCase()
-  ) {
-    return false;
-  }
-
-  if (
-    filterState.outcome !==
-    'ALL' &&
-    getResult(prop) !==
-      filterState.outcome
-  ) {
-    return false;
-  }
-
-  if (
-    filterState.consensus !==
-    'ALL'
-  ) {
-
-    const percent =
-      Number(
-        prop.percent ||
-        0
-      );
-
-    if (
-      filterState.consensus ===
-        'STRONG' &&
-      percent < 75
-    ) {
-      return false;
-    }
-
-    if (
-      filterState.consensus ===
-        'LEAN' &&
-      (
-        percent < 60 ||
-        percent >= 75
-      )
-    ) {
-      return false;
-    }
-
-    if (
-      filterState.consensus ===
-        'EARLY' &&
-      percent >= 60
-    ) {
-      return false;
-    }
-
-  }
-
-  return true;
-}
-
-function updateFilterCount() {
-
-  const button =
-    $('#lfFilterButton');
-
-  if (!button) {
-    return;
-  }
-
-  let count = 0;
-
-  if (
-    filterState.week !==
-    'ALL'
-  ) count++;
-
-  if (
-    filterState.market !==
-    'ALL'
-  ) count++;
-
-  if (
-    filterState.outcome !==
-    'ALL'
-  ) count++;
-
-  if (
-    filterState.consensus !==
-    'ALL'
-  ) count++;
-
-  button.textContent =
-    count > 0
-      ? `Filters (${count})`
-      : 'Filters';
-}
-
-
-// ============================================================
-// MARKET HELPERS
-// ============================================================
-
-function marketPlayerName(
-  market
-) {
-  return (
-    market?.player?.name ||
-    'Unknown Player'
-  );
-}
-
-function marketName(
-  market
-) {
-  return (
-    market?.market?.name ||
-    'Player Prop'
-  );
-}
-
-function marketLine(
-  market
-) {
-  return (
-    market?.sides?.over?.line ??
-    market?.sides?.under?.line ??
-    null
-  );
-}
-
-function marketSide(
-  market,
-  side
-) {
-  return (
-    market?.sides?.[
-      side
-    ] ||
-    null
-  );
-}
-
-function bestBook(
-  market,
-  side
-) {
-  const value =
-    marketSide(
-      market,
-      side
-    );
-
-  return (
-    value?.bestBook ||
-    null
-  );
-}
-
-function gameDescription(
-  market
-) {
-  const game =
-    market?.game ||
-    {};
-
-  if (
-    game.awayTeam &&
-    game.homeTeam
-  ) {
-
-    return `
-      ${game.awayTeam}
-      @
-      ${game.homeTeam}
-    `;
-
-  }
-
-  return '';
-}
-
-function marketWeek(
-  market
-) {
-
-  const value =
-    market?.week ??
-    market?.event?.week;
-
-  if (
-    value === null ||
-    value === undefined
-  ) {
-    return null;
-  }
-
-  const match =
-    String(value)
-      .match(/\d+/);
-
-  return match
-    ? Number(match[0])
-    : null;
-}
-
-function marketType(
-  market
-) {
-  return (
-    market?.market?.marketType ||
-    ''
-  );
-}
-
-
-// ============================================================
-// MARKET ACTUAL RESULT
-// ============================================================
-
-function marketActualValue(
-  market
-) {
-
-  const candidates = [
-
-    market?.actual,
-    market?.actualValue,
-    market?.result?.actual,
-    market?.result?.actualValue,
-    market?.result?.value,
-    market?.results?.actual,
-    market?.results?.actualValue,
-    market?.finalStat,
-    market?.currentStat,
-    market?.currentValue
-
-  ];
-
-  for (
-    const value of candidates
-  ) {
-
-    if (
-      value !== null &&
-      value !== undefined &&
-      value !== ''
-    ) {
-      return value;
-    }
-
-  }
-
-  return null;
-}
-
-function marketIsLive(
-  market
-) {
-
-  const status =
-    String(
-      market?.status ||
-      market?.event?.status ||
-      ''
-    ).toLowerCase();
-
-  return (
-    status.includes('live') ||
-    status.includes('progress')
-  );
-
-}
-
-function marketActualLabel(
-  market,
-  value
-) {
-
-  const name =
-    marketName(
-      market
-    ).toLowerCase();
-
-  const formatted =
-    formatNumber(
-      value
-    );
-
-  if (
-    name.includes(
-      'anytime touchdown'
-    ) ||
-    name.includes(
-      'touchdown'
-    )
-  ) {
-
-    return `
-      ${formatted} TD
-      ACTUAL
-    `;
-
-  }
-
-  if (
-    name.includes(
-      'reception'
-    )
-  ) {
-
-    return `
-      ${formatted}
-      RECEPTIONS ACTUAL
-    `;
-
-  }
-
-  if (
-    name.includes(
-      'attempt'
-    )
-  ) {
-
-    return `
-      ${formatted}
-      ATTEMPTS ACTUAL
-    `;
-
-  }
-
-  if (
-    name.includes(
-      'interception'
-    )
-  ) {
-
-    return `
-      ${formatted}
-      INTERCEPTIONS ACTUAL
-    `;
-
-  }
-
-  return `
-    ${formatted}
-    YARDS ACTUAL
-  `;
-
-}
-
-function marketResultMarkup(
-  market
-) {
-
-  const actual =
-    marketActualValue(
-      market
-    );
-
-  if (
-    actual !== null
-  ) {
-
-    return `
-      <div
-        class="
-          lf-market-result
-          actual
-        "
-      >
-        ${escapeHtml(
-          marketActualLabel(
-            market,
-            actual
-          )
-        )}
-      </div>
-    `;
-
-  }
-
-  if (
-    marketIsLive(
-      market
-    )
-  ) {
-
-    return `
-      <div
-        class="
-          lf-market-result
-          live
-        "
-      >
-        LIVE
-      </div>
-    `;
-
-  }
-
-  return '';
-
-}
-
-
-// ============================================================
-// MARKET CARD
-// ============================================================
-
-function marketCard(
-  market,
-  index
-) {
-  const player =
-    marketPlayerName(
-      market
-    );
-
-  const name =
-    marketName(
-      market
-    );
-
-  const line =
-    marketLine(
-      market
-    );
-
-  const over =
-    marketSide(
-      market,
-      'over'
-    );
-
-  const under =
-    marketSide(
-      market,
-      'under'
-    );
-
-  const yes =
-    marketSide(
-      market,
-      'yes'
-    );
-
-  const no =
-    marketSide(
-      market,
-      'no'
-    );
-
-  const week =
-    marketWeek(
-      market
-    );
-
-  const game =
-    gameDescription(
-      market
-    )
-      .replace(
-        /\s+/g,
-        ' '
-      )
-      .trim();
-
-  const type =
-    marketType(
-      market
-    );
-
-  const isYesNo =
-    type ===
-    'yes_no';
-
-  const best =
-    isYesNo
-      ? bestBook(
-          market,
-          'yes'
-        )
-      : (
-          bestBook(
-            market,
-            'over'
-          ) ||
-          bestBook(
-            market,
-            'under'
-          )
-        );
-
-  const id =
-    market.id ||
-    `market-${index}`;
-
-  return `
-    <article
-      class="lf-market-card"
-    >
-
-      <div
-        class="lf-market-top"
-      >
-
-        <div
-          class="lf-market-player"
-        >
-
-          <strong>
-            ${escapeHtml(
-              player
-            )}
-          </strong>
-
-          <span
-            class="lf-market-game"
-          >
-            ${escapeHtml(
-              game
-            )}
-          </span>
-
-        </div>
-
-        ${
-          week
-            ? `
-              <span
-                class="lf-market-week"
-              >
-                W${week}
-              </span>
-            `
-            : ''
-        }
-
-      </div>
-
-      <div
-        class="lf-market-type"
-      >
-        ${escapeHtml(
-          name
-        )}
-      </div>
-
-      <div
-        class="lf-market-line"
-      >
-
-        <span
-          class="
-            lf-market-line-number
-          "
-        >
-          ${
-            isYesNo
-              ? 'TD'
-              : formatNumber(
-                  line
-                )
-          }
-        </span>
-
-        <div
-          class="lf-market-sides"
-        >
-
-          ${
-            isYesNo
-              ? `
-                <span
-                  class="lf-market-side"
-                >
-                  YES
-                  <b>
-                    ${formatOdds(
-                      yes?.odds
-                    )}
-                  </b>
-                </span>
-
-                ${
-                  no
-                    ? `
-                      <span
-                        class="lf-market-side"
-                      >
-                        NO
-                        <b>
-                          ${formatOdds(
-                            no?.odds
-                          )}
-                        </b>
-                      </span>
-                    `
-                    : ''
-                }
-              `
-              : `
-                <span
-                  class="lf-market-side"
-                >
-                  OVER
-                  <b>
-                    ${formatOdds(
-                      over?.odds
-                    )}
-                  </b>
-                </span>
-
-                <span
-                  class="lf-market-side"
-                >
-                  UNDER
-                  <b>
-                    ${formatOdds(
-                      under?.odds
-                    )}
-                  </b>
-                </span>
-              `
-          }
-
-        </div>
-
-      </div>
-
-      ${marketResultMarkup(
-        market
-      )}
-
-      <div
-        class="lf-market-divider"
-      ></div>
-
-      <div
-        class="lf-market-bottom"
-      >
-
-        <span
-          class="lf-market-best"
-        >
-          Best Price:
-          <strong>
-            ${escapeHtml(
-              best ||
-              '—'
-            )}
-          </strong>
-        </span>
-
-        <button
-          class="lf-market-details"
-          type="button"
-          data-market-details="${escapeHtml(
-            id
-          )}"
-        >
-          Details →
-        </button>
-
-      </div>
-
-    </article>
-  `;
-}
-
-
-// ============================================================
-// MARKET WEEK SUMMARY
-// ============================================================
-
-function marketWeekSummary(
-  markets
-) {
-
-  const actual =
-    markets.filter(
-      market =>
-        marketActualValue(
-          market
-        ) !== null
-    ).length;
-
-  const live =
-    markets.filter(
-      market =>
-        marketIsLive(
-          market
-        )
-    ).length;
-
-  return `
-    <span
-      class="
-        lf-market-week-summary
-      "
-    >
-
-      ${markets.length}
-      market${
-        markets.length === 1
-          ? ''
-          : 's'
-      }
-
-      ${
-        actual
-          ? ` • ${actual} final`
-          : ''
-      }
-
-      ${
-        live
-          ? ` • ${live} live`
-          : ''
-      }
-
-    </span>
-  `;
-
-}
-
-
-// ============================================================
-// MARKET WEEK SECTION
-// ============================================================
-
-function marketWeekSection(
-  week,
-  markets,
-  expanded
-) {
-
-  const status =
-    Number(week) ===
-    currentWeek()
-      ? 'CURRENT'
-      : (
-          markets.some(
-            market =>
-              marketIsLive(
-                market
-              )
-          )
-            ? 'IN PROGRESS'
-            : 'UPCOMING'
-        );
-
-  return `
-    <details
-      class="
-        lf-market-week-section
-      "
-      data-market-week="${week}"
-      ${expanded ? 'open' : ''}
-    >
-
-      <summary>
-
-        <div
-          class="
-            lf-market-week-heading
-          "
-        >
-
-          <strong>
-            WEEK ${week}
-          </strong>
-
-          <span
-            class="
-              lf-market-week-status
-            "
-          >
-            ${status}
-          </span>
-
-          ${marketWeekSummary(
-            markets
-          )}
-
-        </div>
-
-      </summary>
-
-      <div
-        class="lf-market-grid"
-      >
-
-        ${markets
-          .map(
-            (
-              market,
-              index
-            ) =>
-              marketCard(
-                market,
-                index
-              )
-          )
-          .join('')}
-
-      </div>
-
-    </details>
-  `;
-}
-
-
-// ============================================================
-// MARKET RENDER
-// ============================================================
-
-function renderMarkets() {
-
-  const container =
-    $('#marketCards');
-
-  if (!container) {
-    return;
-  }
-
-  const markets =
-    Array.isArray(
-      marketData?.markets
-    )
-      ? marketData.markets
-      : [];
-
-  const search =
-    (
-      $('#lfMarketSearch')
-        ?.value ||
-      ''
-    )
-      .trim()
-      .toLowerCase();
-
-  const selectedMarket =
-    (
-      $('#lfMarketType')
-        ?.value ||
-      'ALL'
-    )
-      .trim();
-
-  const filtered =
-    markets.filter(
-      market => {
-
-        const player =
-          marketPlayerName(
-            market
-          );
-
-        const name =
-          marketName(
-            market
-          );
-
-        const game =
-          gameDescription(
-            market
-          );
-
-        const haystack =
-          [
-            player,
-            name,
-            game
-          ]
-            .join(' ')
-            .toLowerCase();
-
-        if (
-          search &&
-          !haystack.includes(
-            search
-          )
-        ) {
-          return false;
-        }
-
-        if (
-          selectedMarket !==
-          'ALL' &&
-          name
-            .trim()
-            .toLowerCase() !==
-            selectedMarket
-              .trim()
-              .toLowerCase()
-        ) {
-          return false;
-        }
-
-        return true;
-
-      }
-    );
-
-  if (!filtered.length) {
-
-    container.innerHTML = `
-      <div
-        class="lf-market-empty"
-      >
-        No markets match your search.
-      </div>
-    `;
-
-    return;
-  }
-
-  const grouped =
-    new Map();
-
-  filtered.forEach(
-    market => {
-
-      const week =
-        marketWeek(
-          market
-        ) ||
-        1;
-
-      if (
-        !grouped.has(
-          week
-        )
-      ) {
-
-        grouped.set(
-          week,
-          []
-        );
-
-      }
-
-      grouped
-        .get(week)
-        .push(market);
-
-    }
-  );
-
-  const weeks =
-    Array.from(
-      grouped.keys()
-    )
-      .sort(
-        (a, b) =>
-          b - a
-      );
-
-  container.innerHTML =
-    weeks
-      .map(
-        week =>
-          marketWeekSection(
-            week,
-            grouped.get(
-              week
-            ),
-            Number(week) ===
-              currentWeek()
-          )
-      )
-      .join('');
-
-  container
-    .querySelectorAll(
-      '[data-market-details]'
-    )
-    .forEach(
-      button => {
-
-        button.addEventListener(
-          'click',
-          () => {
-
-            const id =
-              button.dataset
-                .marketDetails;
-
-            const market =
-              markets.find(
-                item =>
-                  String(
-                    item.id
-                  ) ===
-                  String(id)
-              );
-
-            if (market) {
-
-              openMarketDetails(
-                market
-              );
-
-            }
-
-          }
-        );
-
-      }
-    );
-
-}
-
-
-// ============================================================
-// MARKET DETAILS
-// ============================================================
-
-function bookmakerRows(
-  market
-) {
-
-  const overBooks =
-    market?.sides?.over?.sportsbooks ||
-    {};
-
-  const underBooks =
-    market?.sides?.under?.sportsbooks ||
-    {};
-
-  const yesBooks =
-    market?.sides?.yes?.sportsbooks ||
-    {};
-
-  const noBooks =
-    market?.sides?.no?.sportsbooks ||
-    {};
-
-  const bookNames =
-    [
-      ...new Set([
-        ...Object.keys(
-          overBooks
-        ),
-        ...Object.keys(
-          underBooks
-        ),
-        ...Object.keys(
-          yesBooks
-        ),
-        ...Object.keys(
-          noBooks
-        )
-      ])
-    ];
-
-  if (!bookNames.length) {
-
-    return `
-      <div
-        class="lf-market-empty"
-      >
-        Sportsbook detail is not
-        available for this market.
-      </div>
-    `;
-
-  }
-
-  return bookNames
-    .map(
-      key => {
-
-        const over =
-          overBooks[key];
-
-        const under =
-          underBooks[key];
-
-        const yes =
-          yesBooks[key];
-
-        const no =
-          noBooks[key];
-
-        const name =
-          over?.name ||
-          under?.name ||
-          yes?.name ||
-          no?.name ||
-          key;
-
-        const isYesNo =
-          !!yes ||
-          !!no;
-
-        if (isYesNo) {
-
-          return `
-            <div
-              class="lf-market-book"
-            >
-
-              <strong
-                class="
-                  lf-market-book-name
-                "
-              >
-                ${escapeHtml(
-                  name
-                )}
-              </strong>
-
-              <span>
-                YES
-                ${
-                  yes?.odds
-                    ? formatOdds(
-                        yes.odds
-                      )
-                    : '—'
-                }
-              </span>
-
-              <span>
-                NO
-                ${
-                  no?.odds
-                    ? formatOdds(
-                        no.odds
-                      )
-                    : '—'
-                }
-              </span>
-
-            </div>
-          `;
-
-        }
-
-        return `
-          <div
-            class="lf-market-book"
-          >
-
-            <strong
-              class="
-                lf-market-book-name
-              "
-            >
-              ${escapeHtml(
-                name
-              )}
-            </strong>
-
-            <span>
-              O
-              ${
-                over?.line !==
-                undefined &&
-                over?.line !==
-                null
-                  ? formatNumber(
-                      over.line
-                    )
-                  : '—'
-              }
-
-              ${
-                over?.odds
-                  ? ` ${formatOdds(
-                      over.odds
-                    )}`
-                  : ''
-              }
-
-            </span>
-
-            <span>
-              U
-              ${
-                under?.line !==
-                undefined &&
-                under?.line !==
-                null
-                  ? formatNumber(
-                      under.line
-                    )
-                  : '—'
-              }
-
-              ${
-                under?.odds
-                  ? ` ${formatOdds(
-                      under.odds
-                    )}`
-                  : ''
-              }
-
-            </span>
-
-          </div>
-        `;
-
-      }
-    )
-    .join('');
-}
-
-function openMarketDetails(
-  market
-) {
-
-  const existing =
-    $('#lfMarketModal');
-
-  if (existing) {
-    existing.remove();
-  }
-
-  const player =
-    marketPlayerName(
-      market
-    );
-
-  const name =
-    marketName(
-      market
-    );
-
-  const line =
-    marketLine(
-      market
-    );
-
-  const type =
-    marketType(
-      market
-    );
-
-  const over =
-    marketSide(
-      market,
-      'over'
-    );
-
-  const under =
-    marketSide(
-      market,
-      'under'
-    );
-
-  const yes =
-    marketSide(
-      market,
-      'yes'
-    );
-
-  const no =
-    marketSide(
-      market,
-      'no'
-    );
-
-  const isYesNo =
-    type ===
-    'yes_no';
-
-  const actual =
-    marketActualValue(
-      market
-    );
-
-  const modal =
-    document.createElement(
-      'div'
-    );
-
-  modal.id =
-    'lfMarketModal';
-
-  modal.className =
-    'lf-market-modal';
-
-  modal.innerHTML = `
-    <div
-      class="lf-market-modal-box"
-      role="dialog"
-      aria-modal="true"
-    >
-
-      <div
-        class="lf-market-modal-head"
-      >
-
-        <div>
-
-          <h3>
-            ${escapeHtml(
-              player
-            )}
-          </h3>
-
-          <div
-            class="lf-market-modal-sub"
-          >
-            ${escapeHtml(
-              name
-            )}
-
-            ${
-              !isYesNo &&
-              line !== null
-                ? `
-                  ·
-                  ${formatNumber(
-                    line
-                  )}
-                `
-                : ''
-            }
-
-          </div>
-
-        </div>
-
-        <button
-          class="lf-market-close"
-          type="button"
-          aria-label="Close"
-        >
-          ×
-        </button>
-
-      </div>
-
-
-      <div
-        class="
-          lf-market-detail-section
-        "
-      >
-
-        <h4>
-          Current Market
-        </h4>
-
-        ${
-          isYesNo
-            ? `
-
-              <div
-                class="lf-market-book"
-              >
-
-                <strong
-                  class="
-                    lf-market-book-name
-                  "
-                >
-                  Anytime TD
-                </strong>
-
-                <span>
-                  YES
-                  ${formatOdds(
-                    yes?.odds
-                  )}
-                </span>
-
-                <span>
-                  NO
-                  ${formatOdds(
-                    no?.odds
-                  )}
-                </span>
-
-              </div>
-
-            `
-            : `
-
-              <div
-                class="lf-market-book"
-              >
-
-                <strong
-                  class="
-                    lf-market-book-name
-                  "
-                >
-                  Best Over
-                </strong>
-
-                <span>
-                  ${formatNumber(
-                    over?.line ??
-                    line
-                  )}
-                </span>
-
-                <span>
-                  ${formatOdds(
-                    over?.odds
-                  )}
-                </span>
-
-              </div>
-
-              <div
-                class="lf-market-book"
-              >
-
-                <strong
-                  class="
-                    lf-market-book-name
-                  "
-                >
-                  Best Under
-                </strong>
-
-                <span>
-                  ${formatNumber(
-                    under?.line ??
-                    line
-                  )}
-                </span>
-
-                <span>
-                  ${formatOdds(
-                    under?.odds
-                  )}
-                </span>
-
-              </div>
-
-            `
-        }
-
-      </div>
-
-
-      ${
-        actual !== null
-          ? `
-            <div
-              class="
-                lf-market-detail-section
-              "
-            >
-
-              <h4>
-                Actual
-              </h4>
-
-              <div
-                class="lf-market-book"
-              >
-
-                <strong
-                  class="
-                    lf-market-book-name
-                  "
-                >
-                  Final Result
-                </strong>
-
-                <span>
-                  ${escapeHtml(
-                    marketActualLabel(
-                      market,
-                      actual
-                    )
-                  )}
-                </span>
-
-                <span></span>
-
-              </div>
-
-            </div>
-          `
-          : ''
-      }
-
-
-      <div
-        class="
-          lf-market-detail-section
-        "
-      >
-
-        <h4>
-          Sportsbook Prices
-        </h4>
-
-        ${bookmakerRows(
-          market
-        )}
-
-      </div>
-
-
-      <div
-        class="
-          lf-market-detail-section
-        "
-      >
-
-        <h4>
-          Line Movement
-        </h4>
-
-        <div
-          class="lf-market-book"
-        >
-
-          <strong
-            class="
-              lf-market-book-name
-            "
-          >
-            Open
-          </strong>
-
-          <span>
-            ${
-              isYesNo
-                ? '—'
-                : formatNumber(
-                    market?.sides?.over?.openingLine ??
-                    market?.sides?.under?.openingLine ??
-                    '—'
-                  )
-            }
-          </span>
-
-          <span>
-            ${formatOdds(
-              isYesNo
-                ? (
-                    yes?.openingOdds
-                  )
-                : (
-                    market?.sides?.over?.openingOdds ??
-                    market?.sides?.under?.openingOdds
-                  )
-            )}
-          </span>
-
-        </div>
-
-
-        <div
-          class="lf-market-book"
-        >
-
-          <strong
-            class="
-              lf-market-book-name
-            "
-          >
-            Current
-          </strong>
-
-          <span>
-            ${
-              isYesNo
-                ? '—'
-                : formatNumber(
-                    line
-                  )
-            }
-          </span>
-
-          <span>
-            ${formatOdds(
-              isYesNo
-                ? yes?.odds
-                : (
-                    over?.odds ??
-                    under?.odds
-                  )
-            )}
-          </span>
-
-        </div>
-
-      </div>
-
-    </div>
-  `;
-
-  document.body.appendChild(
-    modal
-  );
-
-  modal
-    .querySelector(
-      '.lf-market-close'
-    )
-    ?.addEventListener(
-      'click',
-      () =>
-        modal.remove()
-    );
-
-  modal.addEventListener(
-    'click',
-    event => {
-
-      if (
-        event.target ===
-        modal
-      ) {
-        modal.remove();
-      }
-
-    }
-  );
-
-}
-
-
-// ============================================================
-// MARKET UI
-// ============================================================
-
-function configureMarketUI() {
-
-  const section =
-    $('#nfl');
-
-  if (!section) {
-    return;
-  }
-
-  if (
-    $('#marketCards')
-  ) {
-    return;
-  }
-
-  const wrapper =
-    document.createElement(
-      'div'
-    );
-
-  wrapper.className =
-    'lf-market-wrap';
-
-  wrapper.innerHTML = `
-
-    <div
-      class="lf-market-header"
-    >
-
-      <p class="eyebrow">
-        NFL PROPS
-      </p>
-
-      <h2>
-        The Market
-      </h2>
-
-      <p class="muted">
-        Current player prop markets
-        and the best available prices.
-      </p>
-
-    </div>
-
-
-    <div
-      class="lf-market-controls"
-    >
-
-      <input
-        id="lfMarketSearch"
-        class="lf-market-search"
-        type="search"
-        placeholder="Search players, props..."
-        aria-label="Search NFL player props"
-      >
-
-      <select
-        id="lfMarketType"
-        class="lf-market-filter"
-        aria-label="Filter market type"
-      >
-
-        <option value="ALL">
-          All Markets
-        </option>
-
-      </select>
-
-    </div>
-
-
-    <div
-      id="marketCards"
-    >
-
-      <div
-        class="lf-market-empty"
-      >
-        Loading NFL markets...
-      </div>
-
-    </div>
-
-  `;
-
-  section.appendChild(
-    wrapper
-  );
-
-  $('#lfMarketSearch')
-    ?.addEventListener(
-      'input',
-      renderMarkets
-    );
-
-  $('#lfMarketType')
-    ?.addEventListener(
-      'change',
-      renderMarkets
-    );
-
-}
-
-
-// ============================================================
-// POPULATE MARKET DROPDOWN
-// ============================================================
-
-function populateMarketTypes() {
-
-  const select =
-    $('#lfMarketType');
-
-  if (!select) {
-    return;
-  }
-
-  const markets =
-    Array.isArray(
-      marketData?.markets
-    )
-      ? marketData.markets
-      : [];
-
-  const names =
-    [
-      ...new Set(
-        markets
-          .map(
-            market =>
-              marketName(
-                market
-              )
-                .trim()
-          )
-          .filter(
-            Boolean
-          )
-      )
-    ]
-      .sort(
-        (a, b) =>
-          a.localeCompare(
-            b
-          )
-      );
-
-  select.innerHTML = `
-
-    <option value="ALL">
-      All Markets
-    </option>
-
-    ${
-      names
-        .map(
-          name => `
-            <option
-              value="${escapeHtml(
-                name
-              )}"
-            >
-              ${escapeHtml(
-                name
-              )}
-            </option>
-          `
-        )
-        .join('')
-    }
-
-  `;
-
-}
-
-
-// ============================================================
-// LOAD MARKET DATA
-// ============================================================
-
-async function loadMarketData() {
-
-  try {
-
-    const response =
-      await fetch(
-        `${MARKET_DATA_URL}?_=${Date.now()}`,
-        {
-          cache:
-            'no-store'
-        }
-      );
-
-    if (!response.ok) {
-
-      throw new Error(
-        `Market data returned ${response.status}`
-      );
-
-    }
-
-    const data =
-      await response.json();
-
-    marketData =
-      data;
-
-    populateMarketTypes();
-
-    renderMarkets();
-
-    console.log(
-      'LineFoundry market data loaded:',
-      {
-        events:
-          marketData?.eventCount ||
-          0,
-
-        markets:
-          marketData?.marketCount ||
-          0
-      }
-    );
-
-  }
-  catch (error) {
-
-    console.error(
-      'LineFoundry market data failed:',
-      error
-    );
-
-    const container =
-      $('#marketCards');
-
-    if (container) {
-
-      container.innerHTML = `
-        <div
-          class="lf-market-empty"
-        >
-          Market data is temporarily
-          unavailable.
-        </div>
-      `;
-
-    }
-
-  }
-
-}
-
-
-// ============================================================
-// CONSENSUS FILTER UI
-// ============================================================
-
-function configureConsensusFilter() {
-
-  const oldToolbar =
-    document.querySelector(
-      '#props .toolbar'
-    );
-
-  if (
-    oldToolbar
-  ) {
-    oldToolbar.style.display =
-      'none';
-  }
-
-  const propHead =
-    document.querySelector(
-      '#props .section-head'
-    );
-
-  if (
-    !propHead ||
-    $('#lfConsensusControls')
-  ) {
-    return;
-  }
-
-  const controls =
-    document.createElement(
-      'div'
-    );
-
-  controls.id =
-    'lfConsensusControls';
-
-  controls.style.cssText =
-    `
-      display:flex;
-      gap:10px;
-      align-items:center;
-      margin-top:18px;
-      flex-wrap:wrap;
-    `;
-
-  controls.innerHTML = `
-
-    <input
-      id="lfConsensusSearch"
-      type="search"
-      placeholder="Search players, props..."
-      style="
-        flex:1;
-        min-width:220px;
-        height:50px;
-        padding:0 16px;
-        border-radius:999px;
-        border:1px solid rgba(255,255,255,.1);
-        background:rgba(255,255,255,.035);
-        color:inherit;
-        font:inherit;
-        outline:none;
-      "
-    >
-
-    <button
-      id="lfFilterButton"
-      class="secondary-btn"
-      type="button"
-      style="
-        height:50px;
-        border-radius:999px;
-      "
-    >
-      Filters
-    </button>
-
-  `;
-
-  propHead.appendChild(
-    controls
-  );
-
-  const panel =
-    document.createElement(
-      'div'
-    );
-
-  panel.id =
-    'lfFilterPanel';
-
-  panel.hidden =
-    true;
-
-  panel.style.cssText =
-    `
-      margin-top:12px;
-      padding:16px;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:14px;
-      background:rgba(255,255,255,.025);
-    `;
-
-  panel.innerHTML = `
-
-    <div
-      style="
-        display:grid;
-        grid-template-columns:
-          repeat(4,minmax(0,1fr));
-        gap:10px;
-      "
-    >
-
-      <select
-        id="lfWeekFilter"
-        class="secondary-btn"
-      >
-
-        <option value="ALL">
-          All Weeks
-        </option>
-
-      </select>
-
-
-      <select
-        id="lfMarketFilter"
-        class="secondary-btn"
-      >
-
-        <option value="ALL">
-          All Markets
-        </option>
-
-      </select>
-
-
-      <select
-        id="lfOutcomeFilter"
-        class="secondary-btn"
-      >
-
-        <option value="ALL">
-          All Results
-        </option>
-
-        <option value="HIT">
-          Bet Hit
-        </option>
-
-        <option value="MISS">
-          Bet Miss
-        </option>
-
-        <option value="LIVE">
-          Live
-        </option>
-
-        <option value="PENDING">
-          Pending
-        </option>
-
-      </select>
-
-
-      <select
-        id="lfConsensusFilter"
-        class="secondary-btn"
-      >
-
-        <option value="ALL">
-          All Consensus
-        </option>
-
-        <option value="STRONG">
-          Strong 75%+
-        </option>
-
-        <option value="LEAN">
-          Lean 60–74%
-        </option>
-
-        <option value="EARLY">
-          Early <60%
-        </option>
-
-      </select>
-
-    </div>
-
-  `;
-
-  propHead.appendChild(
-    panel
-  );
-
-  $('#lfConsensusSearch')
-    ?.addEventListener(
-      'input',
-      event => {
-
-        filterState.search =
-          event.target.value;
-
-        render();
-
-      }
-    );
-
-  $('#lfFilterButton')
-    ?.addEventListener(
-      'click',
-      () => {
-
-        panel.hidden =
-          !panel.hidden;
-
-      }
-    );
-
-  $('#lfWeekFilter')
-    ?.addEventListener(
-      'change',
-      event => {
-
-        filterState.week =
-          event.target.value;
-
-        render();
-
-      }
-    );
-
-  $('#lfMarketFilter')
-    ?.addEventListener(
-      'change',
-      event => {
-
-        filterState.market =
-          event.target.value;
-
-        render();
-
-      }
-    );
-
-  $('#lfOutcomeFilter')
-    ?.addEventListener(
-      'change',
-      event => {
-
-        filterState.outcome =
-          event.target.value;
-
-        render();
-
-      }
-    );
-
-  $('#lfConsensusFilter')
-    ?.addEventListener(
-      'change',
-      event => {
-
-        filterState.consensus =
-          event.target.value;
-
-        render();
-
-      }
-    );
-
-}
-
-
-// ============================================================
-// POPULATE CONSENSUS FILTERS
-// ============================================================
-
-function populateConsensusFilters() {
-
-  const weekSelect =
-    $('#lfWeekFilter');
-
-  const marketSelect =
-    $('#lfMarketFilter');
-
-  if (
-    weekSelect &&
-    board
-  ) {
-
-    const weeks =
-      getAvailableWeeks();
-
-    weekSelect.innerHTML = `
-
-      <option value="ALL">
-        All Weeks
-      </option>
-
-      ${weeks
-        .map(
-          week => `
-            <option
-              value="${week}"
-            >
-              Week ${week}
-            </option>
-          `
-        )
-        .join('')}
-
-    `;
-
-  }
-
-  if (
-    marketSelect &&
-    board
-  ) {
-
-    const markets =
-      [
-        ...new Set(
-          (
-            board.props ||
-            []
-          )
-            .map(
-              prop =>
-                prop.market
-            )
-            .filter(Boolean)
-        )
-      ]
-        .sort();
-
-    marketSelect.innerHTML = `
-
-      <option value="ALL">
-        All Markets
-      </option>
-
-      ${markets
-        .map(
-          market => `
-            <option
-              value="${escapeHtml(
-                market
-              )}"
-            >
-              ${escapeHtml(
-                market
-              )}
-            </option>
-          `
-        )
-        .join('')}
-
-    `;
-
-  }
-
-}
-
-
-// ============================================================
-// MAIN RENDER
-// ============================================================
-
-function render() {
-
-  if (!board) {
-    return;
-  }
-
-  updateFilterCount();
-
-  const allProps =
-    board.props ||
-    [];
-
-  const filteredProps =
-    allProps.filter(
-      prop =>
-        propMatchesFilters(
-          prop
-        )
-    );
-
-  const selectedWeek =
-    filterState.week;
-
-  let weeks =
-    getAvailableWeeks();
-
-  if (
-    selectedWeek !==
-    'ALL'
-  ) {
-
-    weeks =
-      weeks.filter(
-        week =>
-          String(week) ===
-          String(
-            selectedWeek
-          )
-      );
-
-  }
-
-  const container =
-    $('#propCards');
-
-  if (container) {
-
-    if (
-      !filteredProps.length
-    ) {
-
-      container.innerHTML = `
-        <div
-          class="lf-empty"
-        >
-
-          <h3>
-            No picks match your filters
-          </h3>
-
-          <p>
-            Try changing your search
-            or filters.
-          </p>
-
-        </div>
-      `;
-
-    }
-    else {
-
-      const sorted =
-        sortProps(
-          filteredProps
-        );
-
-      const sections =
-        weeks
-          .map(
-            week => {
-
-              const weekProps =
-                sorted.filter(
-                  prop =>
-                    (
-                      prop.weeks ||
-                      [prop.week]
-                    ).map(Number).includes(
-                      Number(week)
-                    )
-                );
-
-              if (
-                !weekProps.length
-              ) {
-                return '';
-              }
-
-              const expanded =
-                selectedWeek !==
-                  'ALL'
-                  ? true
-                  : Number(week) ===
-                    currentWeek();
-
-              return weekSection(
-                week,
-                weekProps,
-                expanded
-              );
-
-            }
-          )
-          .filter(Boolean)
-          .join('');
-
-      container.innerHTML =
-        sections;
-
-    }
-
-  }
-
-  if ($('#pickCount')) {
-
-    $('#pickCount')
-      .textContent =
-      locked.length;
-
-  }
-
-  if ($('#sourceCount')) {
-
-    $('#sourceCount')
-      .textContent =
-      board.sources?.length ||
-      0;
-
-  }
-
-  if ($('#signalCount')) {
-
-    $('#signalCount')
-      .textContent =
-      allProps.length;
-
-  }
-
-  if ($('#lastRefresh')) {
-
-    $('#lastRefresh')
-      .textContent =
-      board.liveUpdatedAt
-        ? new Date(
-            board.liveUpdatedAt
-          ).toLocaleString()
-        : board.refreshedAt
-          ? new Date(
-              board.refreshedAt
-            ).toLocaleString()
-          : 'not run';
-
-  }
-
-  renderSources();
-  renderExperts();
-  renderRecord();
-
-}
-
-
-// ============================================================
-// SOURCE TABLE
-// ============================================================
-
-function renderSources() {
-
-  if (!$('#sourceRows')) {
-    return;
-  }
-
-  $('#sourceRows')
-    .innerHTML =
-      (
-        board?.sources ||
-        []
-      )
-        .map(
-          source => `
-
-            <tr>
-
-              <td>
-                <strong>
-                  ${escapeHtml(
-                    source.analyst
-                  )}
-                </strong>
-              </td>
-
-              <td>
-                ${escapeHtml(
-                  source.outlet
-                )}
-              </td>
-
-              <td>
-                ${Math.round(
-                  (
-                    source.quality ||
-                    0
-                  ) *
-                  100
-                )}/100
-              </td>
-
-              <td>
-                ${escapeHtml(
-                  source.verification
-                )}
-              </td>
-
-              <td>
-
-                ${
-                  source.url
-                    ? `
-                      <a
-                        href="${escapeHtml(
-                          source.url
-                        )}"
-                        target="_blank"
-                        rel="noopener"
-                      >
-                        Open source ↗
-                      </a>
-                    `
-                    : ''
-                }
-
-              </td>
-
-            </tr>
-
-          `
-        )
-        .join('');
-}
-
-
-// ============================================================
-// EXPERT TABLE
-// ============================================================
-
-function renderExperts() {
-
-  const expertList =
-    experts?.experts ||
-    [];
-
-  if (!$('#expertRows')) {
-    return;
-  }
-
-  $('#expertRows')
-    .innerHTML =
-      expertList
-        .map(
-          expert => {
-
-            const tracked =
-              expert.tracked ||
-              {};
-
-            const wins =
-              tracked.wins ||
-              0;
-
-            const losses =
-              tracked.losses ||
-              0;
-
-            const picks =
-              tracked.picks ||
-              0;
-
-            const units =
-              Number(
-                tracked.units ||
-                0
-              );
-
-            const roi =
-              expert.roi == null
-                ? '—'
-                : `${(
-                    expert.roi *
-                    100
-                  ).toFixed(1)}%`;
-
-            const status =
-              picks >= 50
-                ? 'RANKED'
-                : picks > 0
-                  ? 'TRACKING'
-                  : 'NEW';
-
-            return `
-
-              <tr>
-
-                <td>
-                  <strong>
-                    ${escapeHtml(
-                      expert.name
-                    )}
-                  </strong>
-                </td>
-
-                <td>
-                  ${escapeHtml(
-                    expert.outlet
-                  )}
-                </td>
-
-                <td>
-                  ${picks}
-                </td>
-
-                <td>
-                  ${wins}-${losses}
-                </td>
-
-                <td>
-                  ${units.toFixed(2)}u
-                </td>
-
-                <td>
-                  ${roi}
-                </td>
-
-                <td>
-
-                  <span
-                    class="
-                      status
-                      ${status.toLowerCase()}
-                    "
-                  >
-                    ${status}
-                  </span>
-
-                </td>
-
-              </tr>
-
-            `;
-
-          }
-        )
-        .join('');
-}
-
-
-// ============================================================
-// RECORD
-// ============================================================
-
-function renderRecord() {
-
-  const record =
-    experts?.record ||
-    {};
-
-  if ($('#wins')) {
-
-    $('#wins')
-      .textContent =
-      record.wins ||
-      0;
-
-  }
-
-  if ($('#losses')) {
-
-    $('#losses')
-      .textContent =
-      record.losses ||
-      0;
-
-  }
-
-  if ($('#units')) {
-
-    $('#units')
-      .textContent =
-      `${Number(
-        record.units ||
-        0
-      ).toFixed(2)}u`;
-
-  }
-
-  if ($('#roi')) {
-
-    $('#roi')
-      .textContent =
-      record.roi == null
-        ? '—'
-        : `${(
-            record.roi *
-            100
-          ).toFixed(1)}%`;
-
-  }
-
-}
-
-
-// ============================================================
-// LOAD CORE DATA
-// ============================================================
-
-async function load() {
-
-  try {
-
-    const [
-      signalsData,
-      expertsData,
-      resultsData
-    ] =
-      await Promise.all([
-
-        fetch(
-          '/public-signals.json',
-          {
-            cache:
-              'no-store'
-          }
-        )
-          .then(
-            response => {
-
-              if (
-                !response.ok
-              ) {
-
-                throw new Error(
-                  'Could not load public-signals.json'
-                );
-
-              }
-
-              return response.json();
-
-            }
-          ),
-
-        fetch(
-          '/analyst-profiles.json',
-          {
-            cache:
-              'no-store'
-          }
-        )
-          .then(
-            response => {
-
-              if (
-                !response.ok
-              ) {
-
-                throw new Error(
-                  'Could not load analyst-profiles.json'
-                );
-
-              }
-
-              return response.json();
-
-            }
-          ),
-
-        fetch(
-          '/results-ledger.json',
-          {
-            cache:
-              'no-store'
-          }
-        )
-          .then(
-            response => {
-
-              if (
-                !response.ok
-              ) {
-
-                throw new Error(
-                  'Could not load results-ledger.json'
-                );
-
-              }
-
-              return response.json();
-
-            }
-          )
-
-      ]);
-
-    const signals =
-      signalsData.signals ||
-      [];
-
-    const sources =
-      signalsData.sources ||
-      [];
-
-    board = {
-
-      mode:
-        'public-consensus',
-
-      week:
-        signalsData.week,
-
-      season:
-        signalsData.season,
-
-      refreshedAt:
-        new Date().toISOString(),
-
-      sources,
-
-      rawSignals:
-        signals,
-
-      props:
-        buildConsensusProps(
-          signals,
-          sources
-        )
-
-    };
-
-    experts =
-      expertsData;
-
-    results =
-      resultsData;
-
-    render();
-
-    populateConsensusFilters();
-
-    await loadLiveResults();
-
-  }
-  catch (error) {
-
-    console.error(
-      'LineFoundry data load failed:',
-      error
-    );
-
-    if (
-      $('#propCards')
-    ) {
-
-      $('#propCards')
-        .innerHTML = `
-          <div
-            class="empty-state"
-          >
-
-            <h3>
-              Unable to load
-              LineFoundry data
-            </h3>
-
-            <p>
-              Please refresh the page
-              and try again.
-            </p>
-
-          </div>
-        `;
-
-    }
-
-  }
-
-}
-
-
-// ============================================================
-// LIVE RESULTS
-// ============================================================
-
-async function loadLiveResults() {
-
-  try {
-
-    const response =
-      await fetch(
-        `${WORKER_URL}?_=${Date.now()}`,
-        {
-          cache:
-            'no-store'
-        }
-      );
-
-    if (!response.ok) {
-
-      throw new Error(
-        `Worker returned ${response.status}`
-      );
-
-    }
-
-    const data =
-      await response.json();
-
-    if (!data.success) {
-
-      throw new Error(
-        data.error ||
-        'Worker returned an error'
-      );
-
-    }
-
-    liveResults = {};
-
-    (
-      data.results ||
-      []
-    )
-      .forEach(
-        result => {
-
-          if (
-            result.id
-          ) {
-
-            liveResults[
-              result.id
-            ] = result;
-
-          }
-
-        }
-      );
-
-    if (board) {
-
-      board.liveUpdatedAt =
-        data.updatedAt ||
-        new Date().toISOString();
-
-      render();
-
-    }
-
-  }
-  catch (error) {
-
-    console.error(
-      'LineFoundry live data failed:',
-      error
-    );
-
-  }
-
-}
-
-
-// ============================================================
-// HOW IT WORKS
-// ============================================================
-
-function configureHowItWorks() {
-
-  $('#howItWorks')
-    ?.addEventListener(
-      'click',
-      () => {
-
-        $('#howModal')
-          ?.setAttribute(
-            'aria-hidden',
-            'false'
-          );
-
-      }
-    );
-
-  $('#closeHow')
-    ?.addEventListener(
-      'click',
-      () => {
-
-        $('#howModal')
-          ?.setAttribute(
-            'aria-hidden',
-            'true'
-          );
-
-      }
-    );
-
-  document
-    .querySelector(
-      '.modal-backdrop'
-    )
-    ?.addEventListener(
-      'click',
-      () => {
-
-        $('#howModal')
-          ?.setAttribute(
-            'aria-hidden',
-            'true'
-          );
-
-      }
-    );
-
-}
-
-
-// ============================================================
-// REFRESH BOARD
-// ============================================================
-
-function configureRefresh() {
-
-  $('#refreshBoard')
-    ?.addEventListener(
-      'click',
-      async () => {
-
-        await load();
-
-        await loadMarketData();
-
-      }
-    );
-
-}
-
-
-// ============================================================
-// INITIALIZATION
-// ============================================================
-
-injectBoardStyles();
-
-configureMarketUI();
-
-configureConsensusFilter();
-
-configureHowItWorks();
-
-configureRefresh();
-
-load();
-
-loadMarketData();
-
-setInterval(
-  loadLiveResults,
-  60000
-);
