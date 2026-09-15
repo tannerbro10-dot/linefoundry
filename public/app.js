@@ -196,11 +196,12 @@ function injectBoardStyles() {
     }
 
   .lf-week-cards {
-  padding: 18px 0 0;
+  padding: 22px;
 }
    .cards {
+  width: 100%;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
 }
 
