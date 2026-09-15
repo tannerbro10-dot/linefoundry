@@ -1791,13 +1791,17 @@ function card(prop) {
 
       <div class="card-actions">
 
-        <span class="lock-status">
-          ${
-            lockedPick
-              ? '🔒 Locked'
-              : '🟢 Open'
-          }
-        </span>
+    <span class="lock-status">
+  ${
+    getResult(prop) === 'HIT'
+      ? '🟢 BET HIT'
+      : getResult(prop) === 'MISS'
+        ? '🔴 BET MISS'
+        : getResult(prop) === 'LIVE'
+          ? '🟡 LIVE'
+          : '⚪ PENDING'
+  }
+</span>
 
       </div>
 
