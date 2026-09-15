@@ -7,6 +7,9 @@ let liveResults = {};
 const WORKER_URL =
   'https://old-mouse-660a.tannerbro10.workers.dev/';
 
+const MARKET_DATA_URL =
+  'https://raw.githubusercontent.com/tannerbro10-dot/linefoundry/main/market-data.json';
+
 let locked = JSON.parse(
   localStorage.getItem('lf_consensus_locked') || '[]'
 );
@@ -112,7 +115,7 @@ function currentWeek() {
 
 
 // ============================================================
-// STYLES FOR NEW MARKET AREA
+// STYLES
 // ============================================================
 
 function injectBoardStyles() {
@@ -129,15 +132,60 @@ function injectBoardStyles() {
   style.textContent = `
 
     /* ========================================================
+       EXPERT BOARD WIDTH FIX
+       ======================================================== */
+
+    #props #propCards {
+      display: block !important;
+      width: 100% !important;
+      max-width: none !important;
+    }
+
+    #props .lf-week-section {
+      display: block !important;
+      width: 100% !important;
+      max-width: none !important;
+    }
+
+    #props .lf-week-cards {
+      width: 100% !important;
+      max-width: none !important;
+      display: grid !important;
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr)) !important;
+      gap: 15px !important;
+    }
+
+    /* ========================================================
        MARKET GRID
        ======================================================== */
 
     .lf-market-wrap {
-      margin-top: 28px;
+      width: 100%;
+      margin-top: 30px;
+    }
+
+    .lf-market-header {
+      margin-bottom: 18px;
+    }
+
+    .lf-market-header .eyebrow {
+      margin-bottom: 8px;
+    }
+
+    .lf-market-header h2 {
+      margin: 0;
+      font: 700 32px 'Space Grotesk';
+      letter-spacing: -.035em;
+    }
+
+    .lf-market-header p {
+      margin: 6px 0 0;
     }
 
     .lf-market-grid {
       display: grid;
+      width: 100%;
       grid-template-columns:
         repeat(4, minmax(0, 1fr));
       gap: 14px;
@@ -300,14 +348,13 @@ function injectBoardStyles() {
     }
 
     /* ========================================================
-       MARKET FILTER BAR
+       MARKET CONTROLS
        ======================================================== */
 
     .lf-market-controls {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-top: 20px;
       margin-bottom: 16px;
     }
 
@@ -449,7 +496,7 @@ function injectBoardStyles() {
     }
 
     /* ========================================================
-       WEEK / CONSENSUS LAYOUT
+       WEEK SECTIONS
        ======================================================== */
 
     .lf-week-section {
@@ -500,13 +547,25 @@ function injectBoardStyles() {
     }
 
     @media (max-width: 1100px) {
+
+      #props .lf-week-cards {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr)) !important;
+      }
+
       .lf-market-grid {
         grid-template-columns:
           repeat(2, minmax(0, 1fr));
       }
+
     }
 
     @media (max-width: 650px) {
+
+      #props .lf-week-cards {
+        grid-template-columns: 1fr !important;
+      }
+
       .lf-market-grid {
         grid-template-columns: 1fr;
       }
@@ -520,6 +579,7 @@ function injectBoardStyles() {
       .lf-market-filter {
         width: 100%;
       }
+
     }
 
   `;
@@ -529,7 +589,7 @@ function injectBoardStyles() {
 
 
 // ============================================================
-// BUILD CONSENSUS PROPS
+// CONSENSUS BUILD
 // ============================================================
 
 function buildConsensusProps(
@@ -538,56 +598,81 @@ function buildConsensusProps(
 ) {
   const groups = new Map();
 
-  (signals || []).forEach(signal => {
-    const week =
-      Number(signal.week || 1);
+  (signals || []).forEach(
+    signal => {
 
-    const key = [
-      signal.player,
-      signal.market,
-      week
-    ]
-      .join('|')
-      .toLowerCase();
+      const week =
+        Number(
+          signal.week || 1
+        );
 
-    if (!groups.has(key)) {
-      groups.set(key, {
-        player: signal.player,
-        market: signal.market,
-        week,
-        signals: []
-      });
+      const key = [
+        signal.player,
+        signal.market,
+        week
+      ]
+        .join('|')
+        .toLowerCase();
+
+      if (!groups.has(key)) {
+
+        groups.set(
+          key,
+          {
+            player:
+              signal.player,
+
+            market:
+              signal.market,
+
+            week,
+
+            signals: []
+          }
+        );
+
+      }
+
+      groups
+        .get(key)
+        .signals
+        .push(signal);
+
     }
+  );
 
-    groups
-      .get(key)
-      .signals
-      .push(signal);
-  });
-
-  return Array.from(groups.values())
+  return Array.from(
+    groups.values()
+  )
     .map(group => {
+
       const signalsForProp =
         group.signals;
 
       const over =
         signalsForProp.filter(
-          s =>
-            String(s.side).toUpperCase() ===
+          signal =>
+            String(
+              signal.side
+            ).toUpperCase() ===
             'OVER'
         );
 
       const under =
         signalsForProp.filter(
-          s =>
-            String(s.side).toUpperCase() ===
+          signal =>
+            String(
+              signal.side
+            ).toUpperCase() ===
             'UNDER'
         );
 
       const yes =
         signalsForProp.filter(
-          s =>
-            String(s.side).toUpperCase() ===
+          signal =>
+            String(
+              signal.side
+            ).toUpperCase() ===
             'YES'
         );
 
@@ -596,35 +681,38 @@ function buildConsensusProps(
 
       const primary =
         over.length >= under.length
-          ? over[0] || yes[0] || signalsForProp[0]
+          ? (
+              over[0] ||
+              yes[0] ||
+              signalsForProp[0]
+            )
           : under[0];
 
+      const primarySide =
+        String(
+          primary?.side ||
+          'OVER'
+        ).toUpperCase();
+
       const agree =
-        primary &&
-        String(primary.side).toUpperCase() ===
-          'UNDER'
+        primarySide === 'UNDER'
           ? under.length
-          : primary &&
-            String(primary.side).toUpperCase() ===
-              'YES'
+          : primarySide === 'YES'
             ? yes.length
             : over.length;
 
       const opposing =
-        primary &&
-        String(primary.side).toUpperCase() ===
-          'UNDER'
+        primarySide === 'UNDER'
           ? over.length
-          : primary &&
-            String(primary.side).toUpperCase() ===
-              'YES'
+          : primarySide === 'YES'
             ? 0
             : under.length;
 
       const percent =
         total > 0
           ? Math.round(
-              (agree / total) * 100
+              (agree / total) *
+              100
             )
           : 0;
 
@@ -639,60 +727,82 @@ function buildConsensusProps(
         );
 
       const analysts =
-        signalsForProp.map(signal => {
-          const source =
-            sourceMap[
-              signal.sourceId
-            ] || {};
+        signalsForProp.map(
+          signal => {
 
-          return {
-            name:
-              signal.analyst ||
-              source.analyst ||
-              'Unknown analyst',
+            const source =
+              sourceMap[
+                signal.sourceId
+              ] || {};
 
-            outlet:
-              source.outlet ||
-              '',
+            return {
 
-            side:
-              signal.side ||
-              '',
+              name:
+                signal.analyst ||
+                source.analyst ||
+                'Unknown analyst',
 
-            line:
-              signal.line,
+              outlet:
+                source.outlet ||
+                '',
 
-            url:
-              source.url ||
-              signal.url ||
-              ''
-          };
-        });
+              side:
+                signal.side ||
+                '',
+
+              line:
+                signal.line,
+
+              url:
+                source.url ||
+                signal.url ||
+                ''
+
+            };
+
+          }
+        );
 
       const lines =
         signalsForProp
-          .map(s => s.line)
+          .map(
+            signal =>
+              signal.line
+          )
           .filter(
             line =>
               line !== null &&
               line !== undefined
           )
           .map(Number)
-          .filter(Number.isFinite);
+          .filter(
+            Number.isFinite
+          );
 
       const uniqueLines =
-        [...new Set(lines)]
-          .sort((a, b) => a - b);
+        [
+          ...new Set(lines)
+        ].sort(
+          (a, b) =>
+            a - b
+        );
 
       let lineDisplay = '';
 
-      if (uniqueLines.length === 1) {
+      if (
+        uniqueLines.length === 1
+      ) {
+
         lineDisplay =
           formatNumber(
             uniqueLines[0]
           );
+
       }
-      else if (uniqueLines.length > 1) {
+      else if (
+        uniqueLines.length > 1
+      ) {
+
         lineDisplay =
           `${formatNumber(
             uniqueLines[0]
@@ -701,15 +811,14 @@ function buildConsensusProps(
               uniqueLines.length - 1
             ]
           )}`;
+
       }
 
-      const side =
-        primary?.side || 'OVER';
-
       return {
+
         id:
           signalsForProp[0]?.id ||
-          key,
+          `${group.player}-${group.market}-${group.week}`,
 
         player:
           group.player,
@@ -717,7 +826,9 @@ function buildConsensusProps(
         market:
           group.market,
 
-        side,
+        side:
+          primary?.side ||
+          'OVER',
 
         line:
           primary?.line ??
@@ -726,7 +837,8 @@ function buildConsensusProps(
         week:
           group.week,
 
-        weeks: [group.week],
+        weeks:
+          [group.week],
 
         agree,
 
@@ -753,19 +865,23 @@ function buildConsensusProps(
         analysts,
 
         rationale:
-          `${agree} ${side} expert${
-            agree === 1 ? '' : 's'
-          } tracked for this market.`,
+          `${agree} ${
+            primary?.side ||
+            'OVER'
+          } expert${
+            agree === 1
+              ? ''
+              : 's'
+          } tracked for this market.`
 
-        sourceCount:
-          analysts.length
       };
+
     });
 }
 
 
 // ============================================================
-// RESULT HELPERS
+// RESULTS
 // ============================================================
 
 function resultForSignal(
@@ -775,13 +891,14 @@ function resultForSignal(
     return null;
   }
 
-  const matching =
-    liveResults[prop.id];
-
-  return matching || null;
+  return (
+    liveResults[prop.id] ||
+    null
+  );
 }
 
 function getResult(prop) {
+
   const result =
     resultForSignal(prop);
 
@@ -820,7 +937,9 @@ function getResult(prop) {
   return 'PENDING';
 }
 
-function getActualValue(prop) {
+function getActualValue(
+  prop
+) {
   const result =
     resultForSignal(prop);
 
@@ -844,6 +963,7 @@ function getActualValue(prop) {
   for (
     const value of candidates
   ) {
+
     if (
       value !== null &&
       value !== undefined &&
@@ -851,46 +971,66 @@ function getActualValue(prop) {
     ) {
       return value;
     }
+
   }
 
   return null;
 }
 
-function actualLabel(prop) {
+function actualLabel(
+  prop
+) {
   const market =
     String(
-      prop?.market || ''
+      prop?.market ||
+      ''
     ).toLowerCase();
 
   if (
-    market.includes('receiv') ||
-    market.includes('rushing') ||
-    market.includes('passing')
+    market.includes(
+      'receiv'
+    ) ||
+    market.includes(
+      'rushing'
+    ) ||
+    market.includes(
+      'passing'
+    )
   ) {
     return 'YARDS ACTUAL';
   }
 
   if (
-    market.includes('reception')
+    market.includes(
+      'reception'
+    )
   ) {
     return 'RECEPTIONS ACTUAL';
   }
 
   if (
-    market.includes('attempt')
+    market.includes(
+      'attempt'
+    )
   ) {
     return 'ATTEMPTS ACTUAL';
   }
 
   if (
-    market.includes('interception')
+    market.includes(
+      'interception'
+    )
   ) {
     return 'INTERCEPTIONS ACTUAL';
   }
 
   if (
-    market.includes('touchdown') ||
-    market.includes('anytime')
+    market.includes(
+      'touchdown'
+    ) ||
+    market.includes(
+      'anytime'
+    )
   ) {
     return 'TOUCHDOWNS ACTUAL';
   }
@@ -898,7 +1038,9 @@ function actualLabel(prop) {
   return 'ACTUAL';
 }
 
-function liveStatus(prop) {
+function liveStatus(
+  prop
+) {
   const status =
     getResult(prop);
 
@@ -909,12 +1051,21 @@ function liveStatus(prop) {
     status === 'HIT' ||
     status === 'MISS'
   ) {
+
     return `
-      <div class="lf-result ${status.toLowerCase()}">
+      <div
+        class="
+          lf-result
+          ${status.toLowerCase()}
+        "
+      >
+
         <strong>
-          ${status === 'HIT'
-            ? '🟢 BET HIT'
-            : '🔴 BET MISS'}
+          ${
+            status === 'HIT'
+              ? '🟢 BET HIT'
+              : '🔴 BET MISS'
+          }
         </strong>
 
         ${
@@ -922,38 +1073,56 @@ function liveStatus(prop) {
             ? `
               <span>
                 ${escapeHtml(
-                  formatNumber(actual)
+                  formatNumber(
+                    actual
+                  )
                 )}
-                ${actualLabel(prop)}
+                ${actualLabel(
+                  prop
+                )}
               </span>
             `
             : ''
         }
+
       </div>
     `;
+
   }
 
   if (
     status === 'LIVE'
   ) {
+
     return `
-      <div class="lf-result live">
-        <strong>🔴 LIVE</strong>
+      <div
+        class="lf-result live"
+      >
+
+        <strong>
+          🔴 LIVE
+        </strong>
 
         ${
           actual !== null
             ? `
               <span>
                 ${escapeHtml(
-                  formatNumber(actual)
+                  formatNumber(
+                    actual
+                  )
                 )}
-                ${actualLabel(prop)}
+                ${actualLabel(
+                  prop
+                )}
               </span>
             `
             : ''
         }
+
       </div>
     `;
+
   }
 
   return '';
@@ -964,59 +1133,71 @@ function liveStatus(prop) {
 // EXPERT CARD
 // ============================================================
 
-function sortProps(props) {
-  return [...props].sort(
-    (a, b) => {
-      const resultOrder = {
-        HIT: 0,
-        LIVE: 1,
-        PENDING: 2,
-        MISS: 3
-      };
+function sortProps(
+  props
+) {
+  const order = {
+    HIT: 0,
+    LIVE: 1,
+    PENDING: 2,
+    MISS: 3
+  };
 
-      const aResult =
-        resultOrder[
+  return [
+    ...props
+  ].sort(
+    (a, b) => {
+
+      const aOrder =
+        order[
           getResult(a)
         ] ?? 2;
 
-      const bResult =
-        resultOrder[
+      const bOrder =
+        order[
           getResult(b)
         ] ?? 2;
 
       if (
-        aResult !== bResult
+        aOrder !==
+        bOrder
       ) {
         return (
-          aResult -
-          bResult
+          aOrder -
+          bOrder
         );
       }
 
-      return (
-        String(a.player)
-          .localeCompare(
-            String(b.player)
-          )
+      return String(
+        a.player
+      ).localeCompare(
+        String(
+          b.player
+        )
       );
+
     }
   );
 }
 
-function card(prop) {
+function card(
+  prop
+) {
   const lockedPick =
-    locked.includes(prop.id);
-
-  const sideClass =
-    prop.side === 'UNDER'
-      ? 'consensus-under'
-      : 'consensus-over';
+    locked.includes(
+      prop.id
+    );
 
   const analysts =
-    (prop.analysts || [])
+    (
+      prop.analysts ||
+      []
+    )
       .map(
         analyst => `
-          <div class="analyst-source">
+          <div
+            class="analyst-source"
+          >
 
             <strong>
               ${escapeHtml(
@@ -1026,18 +1207,22 @@ function card(prop) {
 
             <span>
               ${escapeHtml(
-                analyst.outlet || ''
+                analyst.outlet ||
+                ''
               )}
 
               —
 
               ${escapeHtml(
-                analyst.side || ''
+                analyst.side ||
+                ''
               )}
 
               ${
-                analyst.line !== null &&
-                analyst.line !== undefined
+                analyst.line !==
+                  null &&
+                analyst.line !==
+                  undefined
                   ? `
                     ${formatNumber(
                       analyst.line
@@ -1045,6 +1230,7 @@ function card(prop) {
                   `
                   : ''
               }
+
             </span>
 
             ${
@@ -1080,13 +1266,20 @@ function card(prop) {
       "
     >
 
-      <div class="prop-top">
+      <div
+        class="prop-top"
+      >
 
-        <div class="game">
-          NFL • WEEK ${prop.week}
+        <div
+          class="game"
+        >
+          NFL • WEEK
+          ${prop.week}
         </div>
 
-        <div class="grade">
+        <div
+          class="grade"
+        >
           ${escapeHtml(
             prop.consensusDisplay
           )}
@@ -1102,17 +1295,15 @@ function card(prop) {
 
         —
 
-        <span
-          class="${sideClass}"
-        >
-          ${escapeHtml(
-            prop.side
-          )}
-        </span>
+        ${escapeHtml(
+          prop.side
+        )}
 
         ${
-          prop.line !== null &&
-          prop.line !== undefined
+          prop.line !==
+            null &&
+          prop.line !==
+            undefined
             ? `
               ${formatNumber(
                 prop.line
@@ -1127,48 +1318,64 @@ function card(prop) {
 
       </h3>
 
-      ${liveStatus(prop)}
+      ${liveStatus(
+        prop
+      )}
 
-      <div class="metrics">
+      <div
+        class="metrics"
+      >
 
         <div class="metric">
           <b>
             ${prop.agree}
           </b>
-          <span>Agree</span>
+          <span>
+            Agree
+          </span>
         </div>
 
         <div class="metric">
           <b>
             ${prop.disagree}
           </b>
-          <span>Disagree</span>
+          <span>
+            Disagree
+          </span>
         </div>
 
         <div class="metric">
           <b>
             ${prop.experts}
           </b>
-          <span>Experts</span>
+          <span>
+            Experts
+          </span>
         </div>
 
         <div class="metric">
           <b>
             ${prop.percent}%
           </b>
-          <span>Consensus</span>
+          <span>
+            Consensus
+          </span>
         </div>
 
       </div>
 
-      <div class="consensus-summary">
+      <div
+        class="consensus-summary"
+      >
 
         <strong>
 
           ${prop.agree}
+
           ${escapeHtml(
             prop.side
           )}
+
           expert${
             prop.agree === 1
               ? ''
@@ -1176,7 +1383,8 @@ function card(prop) {
           }
 
           ${
-            prop.disagree > 0
+            prop.disagree >
+            0
               ? `
                 •
                 ${prop.disagree}
@@ -1187,7 +1395,8 @@ function card(prop) {
                     : 'OVER'
                 }
                 expert${
-                  prop.disagree === 1
+                  prop.disagree ===
+                  1
                     ? ''
                     : 's'
                 }
@@ -1202,7 +1411,8 @@ function card(prop) {
         <span>
 
           ${
-            prop.experts === 1
+            prop.experts ===
+            1
               ? 'Single-source signal'
               : `${prop.percent}% direction consensus`
           }
@@ -1210,11 +1420,7 @@ function card(prop) {
           ${
             prop.lineDisplay
               ? `
-                • Published line${
-                  prop.lineDisplay.includes('–')
-                    ? ' range'
-                    : ''
-                }:
+                • Published line:
                 ${escapeHtml(
                   prop.lineDisplay
                 )}
@@ -1226,19 +1432,29 @@ function card(prop) {
 
       </div>
 
-      <div class="analyst-list">
+      <div
+        class="analyst-list"
+      >
+
         ${analysts}
+
       </div>
 
-      <p class="why">
+      <p
+        class="why"
+      >
         ${escapeHtml(
           prop.rationale
         )}
       </p>
 
-      <div class="card-actions">
+      <div
+        class="card-actions"
+      >
 
-        <span class="lock-status">
+        <span
+          class="lock-status"
+        >
           ${
             lockedPick
               ? '🔒 Locked'
@@ -1300,7 +1516,9 @@ function weekSummary(
       : null;
 
   return `
-    <span class="lf-week-summary">
+    <span
+      class="lf-week-summary"
+    >
 
       ${props.length}
       pick${
@@ -1361,25 +1579,6 @@ function weekSection(
   props,
   expanded
 ) {
-  const sorted =
-    sortProps(props);
-
-  const status =
-    Number(week) ===
-    currentWeek()
-      ? 'CURRENT'
-      : (
-        props.some(
-          prop =>
-            getResult(prop) ===
-              'PENDING' ||
-            getResult(prop) ===
-              'LIVE'
-        )
-          ? 'IN PROGRESS'
-          : 'COMPLETE'
-      );
-
   return `
     <details
       class="lf-week-section"
@@ -1389,27 +1588,61 @@ function weekSection(
 
       <summary>
 
-        <div class="lf-week-heading">
+        <div
+          class="lf-week-heading"
+        >
 
           <strong>
             WEEK ${week}
           </strong>
 
-          <span class="lf-week-status">
-            ${status}
+          <span
+            class="lf-week-status"
+          >
+            ${
+              Number(week) ===
+              currentWeek()
+                ? 'CURRENT'
+                : (
+                    props.some(
+                      prop =>
+                        getResult(
+                          prop
+                        ) ===
+                          'PENDING' ||
+                        getResult(
+                          prop
+                        ) ===
+                          'LIVE'
+                    )
+                      ? 'IN PROGRESS'
+                      : 'COMPLETE'
+                  )
+            }
           </span>
 
-          ${weekSummary(props)}
+          ${weekSummary(
+            props
+          )}
 
         </div>
 
       </summary>
 
-      <div class="cards lf-week-cards">
+      <div
+        class="
+          cards
+          lf-week-cards
+        "
+      >
 
-        ${sorted
-          .map(card)
-          .join('')}
+        ${
+          sortProps(
+            props
+          )
+            .map(card)
+            .join('')
+        }
 
       </div>
 
@@ -1432,7 +1665,10 @@ const filterState = {
 
 function getAvailableWeeks() {
   const weeks =
-    (board?.props || [])
+    (
+      board?.props ||
+      []
+    )
       .flatMap(
         prop =>
           prop.weeks ||
@@ -1444,7 +1680,8 @@ function getAvailableWeeks() {
   return [
     ...new Set(weeks)
   ].sort(
-    (a, b) => b - a
+    (a, b) =>
+      b - a
   );
 }
 
@@ -1457,22 +1694,28 @@ function propMatchesFilters(
       .toLowerCase();
 
   if (search) {
-    const haystack = [
-      prop.player,
-      prop.market,
-      prop.side,
-      prop.line,
-      ...(prop.analysts || [])
-        .map(
+
+    const haystack =
+      [
+        prop.player,
+        prop.market,
+        prop.side,
+        prop.line,
+        ...(
+          prop.analysts ||
+          []
+        ).map(
           analyst =>
             `${analyst.name} ${analyst.outlet}`
         )
-    ]
-      .join(' ')
-      .toLowerCase();
+      ]
+        .join(' ')
+        .toLowerCase();
 
     if (
-      !haystack.includes(search)
+      !haystack.includes(
+        search
+      )
     ) {
       return false;
     }
@@ -1482,6 +1725,7 @@ function propMatchesFilters(
     filterState.week !==
     'ALL'
   ) {
+
     const weeks =
       prop.weeks ||
       [prop.week];
@@ -1490,7 +1734,9 @@ function propMatchesFilters(
       !weeks
         .map(String)
         .includes(
-          String(filterState.week)
+          String(
+            filterState.week
+          )
         )
     ) {
       return false;
@@ -1508,29 +1754,27 @@ function propMatchesFilters(
 
   if (
     filterState.outcome !==
-    'ALL'
-  ) {
-    const result =
-      getResult(prop);
-
-    if (
-      result !==
+    'ALL' &&
+    getResult(prop) !==
       filterState.outcome
-    ) {
-      return false;
-    }
+  ) {
+    return false;
   }
 
   if (
     filterState.consensus !==
     'ALL'
   ) {
+
     const percent =
-      Number(prop.percent || 0);
+      Number(
+        prop.percent ||
+        0
+      );
 
     if (
       filterState.consensus ===
-      'STRONG' &&
+        'STRONG' &&
       percent < 75
     ) {
       return false;
@@ -1538,20 +1782,23 @@ function propMatchesFilters(
 
     if (
       filterState.consensus ===
-      'LEAN' &&
-      (percent < 60 ||
-        percent >= 75)
+        'LEAN' &&
+      (
+        percent < 60 ||
+        percent >= 75
+      )
     ) {
       return false;
     }
 
     if (
       filterState.consensus ===
-      'EARLY' &&
+        'EARLY' &&
       percent >= 60
     ) {
       return false;
     }
+
   }
 
   return true;
@@ -1593,40 +1840,18 @@ function updateFilterCount() {
       : 'Filters';
 }
 
-function configureConsensusFilter() {
-  const oldFilter =
-    $('#confidenceFilter');
-
-  if (!oldFilter) {
-    return;
-  }
-
-  const parent =
-    oldFilter.parentElement;
-
-  if (!parent) {
-    return;
-  }
-
-  const label =
-    parent.querySelector('label');
-
-  if (label) {
-    label.textContent =
-      'Consensus Strength';
-  }
-}
-
 
 // ============================================================
-// LOAD MARKET DATA
+// MARKET DATA
 // ============================================================
 
 async function loadMarketData() {
+
   try {
+
     const response =
       await fetch(
-        '/market-data.json',
+        `${MARKET_DATA_URL}?_=${Date.now()}`,
         {
           cache: 'no-store'
         }
@@ -1634,21 +1859,46 @@ async function loadMarketData() {
 
     if (!response.ok) {
       throw new Error(
-        'Could not load market-data.json'
+        `Market data returned ${response.status}`
       );
     }
 
     marketData =
       await response.json();
 
+    populateMarketTypes();
+
     renderMarkets();
+
+    console.log(
+      'LineFoundry market data loaded:',
+      marketData
+    );
 
   }
   catch (error) {
+
     console.error(
       'LineFoundry market data failed:',
       error
     );
+
+    const container =
+      $('#marketCards');
+
+    if (container) {
+
+      container.innerHTML = `
+        <div
+          class="lf-market-empty"
+        >
+          Market data is temporarily
+          unavailable.
+        </div>
+      `;
+
+    }
+
   }
 }
 
@@ -1657,12 +1907,12 @@ async function loadMarketData() {
 // MARKET HELPERS
 // ============================================================
 
-function marketWeek(market) {
+function marketWeek(
+  market
+) {
   const value =
-    market?.event?.week ??
     market?.week ??
-    market?.eventWeek ??
-    market?.seasonWeek;
+    market?.event?.week;
 
   if (
     value === null ||
@@ -1672,7 +1922,8 @@ function marketWeek(market) {
   }
 
   const match =
-    String(value).match(/\d+/);
+    String(value)
+      .match(/\d+/);
 
   return match
     ? Number(match[0])
@@ -1684,8 +1935,6 @@ function marketPlayerName(
 ) {
   return (
     market?.player?.name ||
-    market?.playerName ||
-    market?.player?.displayName ||
     'Unknown Player'
   );
 }
@@ -1695,7 +1944,6 @@ function marketName(
 ) {
   return (
     market?.market?.name ||
-    market?.marketName ||
     'Player Prop'
   );
 }
@@ -1706,8 +1954,6 @@ function marketLine(
   return (
     market?.sides?.over?.line ??
     market?.sides?.under?.line ??
-    market?.line ??
-    market?.overUnder ??
     null
   );
 }
@@ -1719,7 +1965,8 @@ function marketSide(
   return (
     market?.sides?.[
       side
-    ] || null
+    ] ||
+    null
   );
 }
 
@@ -1735,8 +1982,6 @@ function bestBook(
 
   return (
     value?.bestBook ||
-    value?.bookmaker ||
-    value?.sportsbook ||
     null
   );
 }
@@ -1744,35 +1989,22 @@ function bestBook(
 function gameDescription(
   market
 ) {
-  const event =
-    market?.event || {};
-
-  const away =
-    event?.awayTeam ||
-    event?.away ||
-    event?.teams?.away?.name ||
-    event?.teams?.away?.names?.short ||
-    '';
-
-  const home =
-    event?.homeTeam ||
-    event?.home ||
-    event?.teams?.home?.name ||
-    event?.teams?.home?.names?.short ||
-    '';
+  const game =
+    market?.game ||
+    {};
 
   if (
-    away &&
-    home
+    game.awayTeam &&
+    game.homeTeam
   ) {
-    return `${away} @ ${home}`;
+    return `
+      ${game.awayTeam}
+      @
+      ${game.homeTeam}
+    `;
   }
 
-  return (
-    market?.game ||
-    market?.eventName ||
-    ''
-  );
+  return '';
 }
 
 function marketType(
@@ -1780,7 +2012,6 @@ function marketType(
 ) {
   return (
     market?.market?.marketType ||
-    market?.marketType ||
     ''
   );
 }
@@ -1827,6 +2058,12 @@ function marketCard(
       'yes'
     );
 
+  const no =
+    marketSide(
+      market,
+      'no'
+    );
+
   const week =
     marketWeek(
       market
@@ -1835,32 +2072,12 @@ function marketCard(
   const game =
     gameDescription(
       market
-    );
-
-  const bestOver =
-    bestBook(
-      market,
-      'over'
-    );
-
-  const bestYes =
-    bestBook(
-      market,
-      'yes'
-    );
-
-  const best =
-    bestOver ||
-    bestYes ||
-    bestBook(
-      market,
-      'under'
-    );
-
-  const id =
-    market.oddID ||
-    market.id ||
-    `market-${index}`;
+    )
+      .replace(
+        /\s+/g,
+        ' '
+      )
+      .trim();
 
   const type =
     marketType(
@@ -1871,15 +2088,39 @@ function marketCard(
     type ===
     'yes_no';
 
+  const best =
+    isYesNo
+      ? bestBook(
+          market,
+          'yes'
+        )
+      : (
+          bestBook(
+            market,
+            'over'
+          ) ||
+          bestBook(
+            market,
+            'under'
+          )
+        );
+
+  const id =
+    market.id ||
+    `market-${index}`;
+
   return `
     <article
       class="lf-market-card"
-      data-market-id="${escapeHtml(id)}"
     >
 
-      <div class="lf-market-top">
+      <div
+        class="lf-market-top"
+      >
 
-        <div class="lf-market-player">
+        <div
+          class="lf-market-player"
+        >
 
           <strong>
             ${escapeHtml(
@@ -1887,7 +2128,9 @@ function marketCard(
             )}
           </strong>
 
-          <span class="lf-market-game">
+          <span
+            class="lf-market-game"
+          >
             ${escapeHtml(
               game
             )}
@@ -1898,7 +2141,9 @@ function marketCard(
         ${
           week
             ? `
-              <span class="lf-market-week">
+              <span
+                class="lf-market-week"
+              >
                 W${week}
               </span>
             `
@@ -1907,27 +2152,39 @@ function marketCard(
 
       </div>
 
-      <div class="lf-market-type">
-        ${escapeHtml(name)}
+      <div
+        class="lf-market-type"
+      >
+        ${escapeHtml(
+          name
+        )}
       </div>
 
-      <div class="lf-market-line">
+      <div
+        class="lf-market-line"
+      >
 
         <span
-          class="lf-market-line-number"
+          class="
+            lf-market-line-number
+          "
         >
           ${
             isYesNo
               ? 'YES'
-              : formatNumber(line)
+              : formatNumber(
+                  line
+                )
           }
         </span>
 
-        ${
-          isYesNo
-            ? `
-              <div class="lf-market-sides">
+        <div
+          class="lf-market-sides"
+        >
 
+          ${
+            isYesNo
+              ? `
                 <span
                   class="lf-market-side"
                 >
@@ -1940,10 +2197,7 @@ function marketCard(
                 </span>
 
                 ${
-                  marketSide(
-                    market,
-                    'no'
-                  )
+                  no
                     ? `
                       <span
                         class="lf-market-side"
@@ -1951,22 +2205,15 @@ function marketCard(
                         NO
                         <b>
                           ${formatOdds(
-                            marketSide(
-                              market,
-                              'no'
-                            )?.odds
+                            no?.odds
                           )}
                         </b>
                       </span>
                     `
                     : ''
                 }
-
-              </div>
-            `
-            : `
-              <div class="lf-market-sides">
-
+              `
+              : `
                 <span
                   class="lf-market-side"
                 >
@@ -1988,10 +2235,10 @@ function marketCard(
                     )}
                   </b>
                 </span>
+              `
+          }
 
-              </div>
-            `
-        }
+        </div>
 
       </div>
 
@@ -1999,17 +2246,18 @@ function marketCard(
         class="lf-market-divider"
       ></div>
 
-      <div class="lf-market-bottom">
+      <div
+        class="lf-market-bottom"
+      >
 
-        <span class="lf-market-best">
-          Best ${
-            isYesNo
-              ? 'Price'
-              : 'Over'
-          }:
+        <span
+          class="lf-market-best"
+        >
+          Best Price:
           <strong>
             ${escapeHtml(
-              best || '—'
+              best ||
+              '—'
             )}
           </strong>
         </span>
@@ -2039,95 +2287,71 @@ function bookmakerRows(
   market
 ) {
   const bookmakers =
-    market?.bookmakers ||
-    market?.byBookmaker ||
+    market?.sides?.over?.sportsbooks ||
+    market?.sides?.yes?.sportsbooks ||
     {};
 
-  if (
-    Array.isArray(bookmakers)
-  ) {
-    return bookmakers
-      .map(book => {
-        const name =
-          book.name ||
-          book.bookmaker ||
-          book.id ||
-          'Book';
-
-        return `
-          <div class="lf-market-book">
-
-            <strong
-              class="lf-market-book-name"
-            >
-              ${escapeHtml(
-                name
-              )}
-            </strong>
-
-            <span>
-              ${formatNumber(
-                book.overUnder ??
-                book.line ??
-                ''
-              )}
-            </span>
-
-            <span>
-              ${formatOdds(
-                book.odds
-              )}
-            </span>
-
-          </div>
-        `;
-      })
-      .join('');
-  }
-
-  return Object.entries(
-    bookmakers
-  )
-    .map(
-      ([key, book]) => `
-        <div class="lf-market-book">
-
-          <strong
-            class="lf-market-book-name"
-          >
-            ${escapeHtml(
-              book?.name ||
-              key
-            )}
-          </strong>
-
-          <span>
-            ${formatNumber(
-              book?.overUnder ??
-              book?.line ??
-              ''
-            )}
-          </span>
-
-          <span>
-            ${formatOdds(
-              book?.odds
-            )}
-          </span>
-
-        </div>
-      `
+  const rows =
+    Object.entries(
+      bookmakers
     )
-    .join('');
+      .map(
+        ([key, book]) => {
+
+          return `
+            <div
+              class="lf-market-book"
+            >
+
+              <strong
+                class="
+                  lf-market-book-name
+                "
+              >
+                ${escapeHtml(
+                  book?.name ||
+                  key
+                )}
+              </strong>
+
+              <span>
+                ${formatNumber(
+                  book?.line
+                )}
+              </span>
+
+              <span>
+                ${formatOdds(
+                  book?.odds
+                )}
+              </span>
+
+            </div>
+          `;
+
+        }
+      )
+      .join('');
+
+  return (
+    rows ||
+    `
+      <div
+        class="lf-market-empty"
+      >
+        Bookmaker detail is not
+        available for this market.
+      </div>
+    `
+  );
 }
 
 function alternateLines(
   market
 ) {
   const lines =
-    market?.alternateLines ||
-    market?.altLines ||
-    market?.sides?.over?.altLines ||
+    market?.sides?.over?.alternateLines ||
+    market?.sides?.under?.alternateLines ||
     [];
 
   if (
@@ -2135,40 +2359,44 @@ function alternateLines(
     !lines.length
   ) {
     return `
-      <div class="lf-market-empty">
+      <div
+        class="lf-market-empty"
+      >
         No alternate lines available.
       </div>
     `;
   }
 
-  const values =
-    lines
-      .map(
-        line =>
-          line?.overUnder ??
-          line?.line ??
-          line
-      )
-      .filter(
-        value =>
-          value !== null &&
-          value !== undefined
-      );
-
   const unique =
-    [...new Set(
-      values.map(String)
-    )];
+    [
+      ...new Set(
+        lines
+          .map(
+            line =>
+              line?.line
+          )
+          .filter(
+            line =>
+              line !== null &&
+              line !== undefined
+          )
+          .map(String)
+      )
+    ];
 
   return `
-    <div class="lf-alt-lines">
+    <div
+      class="lf-alt-lines"
+    >
 
       ${unique
         .map(
-          value => `
-            <span class="lf-alt-line">
+          line => `
+            <span
+              class="lf-alt-line"
+            >
               ${escapeHtml(
-                value
+                line
               )}
             </span>
           `
@@ -2217,7 +2445,9 @@ function openMarketDetails(
     );
 
   const modal =
-    document.createElement('div');
+    document.createElement(
+      'div'
+    );
 
   modal.id =
     'lfMarketModal';
@@ -2250,13 +2480,18 @@ function openMarketDetails(
             ${escapeHtml(
               name
             )}
+
             ${
               line !== null
-                ? ` · ${formatNumber(
+                ? `
+                  ·
+                  ${formatNumber(
                     line
-                  )}`
+                  )}
+                `
                 : ''
             }
+
           </div>
 
         </div>
@@ -2272,7 +2507,9 @@ function openMarketDetails(
       </div>
 
       <div
-        class="lf-market-detail-section"
+        class="
+          lf-market-detail-section
+        "
       >
 
         <h4>
@@ -2282,8 +2519,11 @@ function openMarketDetails(
         <div
           class="lf-market-book"
         >
+
           <strong
-            class="lf-market-book-name"
+            class="
+              lf-market-book-name
+            "
           >
             Best Over
           </strong>
@@ -2300,13 +2540,17 @@ function openMarketDetails(
               over?.odds
             )}
           </span>
+
         </div>
 
         <div
           class="lf-market-book"
         >
+
           <strong
-            class="lf-market-book-name"
+            class="
+              lf-market-book-name
+            "
           >
             Best Under
           </strong>
@@ -2323,36 +2567,31 @@ function openMarketDetails(
               under?.odds
             )}
           </span>
+
         </div>
 
       </div>
 
       <div
-        class="lf-market-detail-section"
+        class="
+          lf-market-detail-section
+        "
       >
 
         <h4>
           Sportsbook Prices
         </h4>
 
-        ${
-          bookmakerRows(
-            market
-          ) ||
-          `
-            <div
-              class="lf-market-empty"
-            >
-              Bookmaker detail is not
-              available for this market.
-            </div>
-          `
-        }
+        ${bookmakerRows(
+          market
+        )}
 
       </div>
 
       <div
-        class="lf-market-detail-section"
+        class="
+          lf-market-detail-section
+        "
       >
 
         <h4>
@@ -2366,7 +2605,9 @@ function openMarketDetails(
       </div>
 
       <div
-        class="lf-market-detail-section"
+        class="
+          lf-market-detail-section
+        "
       >
 
         <h4>
@@ -2376,51 +2617,57 @@ function openMarketDetails(
         <div
           class="lf-market-book"
         >
+
           <strong
-            class="lf-market-book-name"
+            class="
+              lf-market-book-name
+            "
           >
             Open
           </strong>
 
           <span>
             ${formatNumber(
-              market?.openBookOverUnder ??
-              market?.openFairOverUnder ??
+              market?.sides?.over?.openingLine ??
+              market?.sides?.under?.openingLine ??
               '—'
             )}
           </span>
 
           <span>
             ${formatOdds(
-              market?.openBookOdds ??
-              market?.openFairOdds
+              market?.sides?.over?.openingOdds ??
+              market?.sides?.under?.openingOdds
             )}
           </span>
+
         </div>
 
         <div
           class="lf-market-book"
         >
+
           <strong
-            class="lf-market-book-name"
+            class="
+              lf-market-book-name
+            "
           >
             Current
           </strong>
 
           <span>
             ${formatNumber(
-              market?.bookOverUnder ??
-              market?.fairOverUnder ??
               line
             )}
           </span>
 
           <span>
             ${formatOdds(
-              market?.bookOdds ??
-              market?.fairOdds
+              over?.odds ??
+              under?.odds
             )}
           </span>
+
         </div>
 
       </div>
@@ -2438,46 +2685,32 @@ function openMarketDetails(
     )
     ?.addEventListener(
       'click',
-      () => modal.remove()
+      () =>
+        modal.remove()
     );
 
   modal.addEventListener(
     'click',
     event => {
+
       if (
         event.target ===
         modal
       ) {
         modal.remove();
       }
-    }
-  );
 
-  document.addEventListener(
-    'keydown',
-    function closeOnEscape(
-      event
-    ) {
-      if (
-        event.key === 'Escape'
-      ) {
-        modal.remove();
-
-        document.removeEventListener(
-          'keydown',
-          closeOnEscape
-        );
-      }
     }
   );
 }
 
 
 // ============================================================
-// RENDER MARKETS
+// MARKET RENDER
 // ============================================================
 
 function renderMarkets() {
+
   const container =
     $('#marketCards');
 
@@ -2486,15 +2719,19 @@ function renderMarkets() {
   }
 
   const markets =
-    marketData?.markets || [];
+    marketData?.markets ||
+    [];
 
   const search =
-    $('#lfMarketSearch')?.value
+    $('#lfMarketSearch')
+      ?.value
       ?.trim()
-      .toLowerCase() || '';
+      .toLowerCase() ||
+    '';
 
   const selectedMarket =
-    $('#lfMarketType')?.value ||
+    $('#lfMarketType')
+      ?.value ||
     'ALL';
 
   const filtered =
@@ -2531,7 +2768,7 @@ function renderMarkets() {
 
         if (
           selectedMarket !==
-          'ALL' &&
+            'ALL' &&
           name !==
             selectedMarket
         ) {
@@ -2543,6 +2780,7 @@ function renderMarkets() {
     );
 
   if (!filtered.length) {
+
     container.innerHTML = `
       <div
         class="lf-market-empty"
@@ -2565,38 +2803,46 @@ function renderMarkets() {
     .querySelectorAll(
       '[data-market-details]'
     )
-    .forEach(button => {
+    .forEach(
+      button => {
 
-      button.addEventListener(
-        'click',
-        () => {
+        button.addEventListener(
+          'click',
+          () => {
 
-          const id =
-            button.dataset
-              .marketDetails;
+            const id =
+              button.dataset
+                .marketDetails;
 
-          const market =
-            markets.find(
-              item =>
-                String(
-                  item.oddID ||
-                  item.id
-                ) ===
-                String(id)
-            );
+            const market =
+              markets.find(
+                item =>
+                  String(
+                    item.id
+                  ) ===
+                  String(id)
+              );
 
-          if (market) {
-            openMarketDetails(
-              market
-            );
+            if (market) {
+              openMarketDetails(
+                market
+              );
+            }
+
           }
-        }
-      );
+        );
 
-    });
+      }
+    );
 }
 
+
+// ============================================================
+// MARKET UI
+// ============================================================
+
 function configureMarketUI() {
+
   const section =
     $('#nfl');
 
@@ -2604,55 +2850,11 @@ function configureMarketUI() {
     return;
   }
 
-  /*
-    The Market gets its own content directly
-    beneath the NFL Picks heading.
-  */
-
   if (
     $('#marketCards')
   ) {
     return;
   }
-
-  const controls =
-    document.createElement(
-      'div'
-    );
-
-  controls.className =
-    'lf-market-controls';
-
-  controls.innerHTML = `
-    <input
-      id="lfMarketSearch"
-      class="lf-market-search"
-      type="search"
-      placeholder="Search players, props..."
-      aria-label="Search NFL player props"
-    >
-
-    <select
-      id="lfMarketType"
-      class="lf-market-filter"
-      aria-label="Filter market type"
-    >
-      <option value="ALL">
-        All Markets
-      </option>
-    </select>
-  `;
-
-  const grid =
-    document.createElement(
-      'div'
-    );
-
-  grid.id =
-    'marketCards';
-
-  grid.className =
-    'lf-market-grid';
 
   const wrapper =
     document.createElement(
@@ -2662,13 +2864,59 @@ function configureMarketUI() {
   wrapper.className =
     'lf-market-wrap';
 
-  wrapper.appendChild(
-    controls
-  );
+  wrapper.innerHTML = `
 
-  wrapper.appendChild(
-    grid
-  );
+    <div
+      class="lf-market-header"
+    >
+
+      <p class="eyebrow">
+        NFL PROPS
+      </p>
+
+      <h2>
+        The Market
+      </h2>
+
+      <p class="muted">
+        Current player prop markets
+        and the best available prices.
+      </p>
+
+    </div>
+
+    <div
+      class="lf-market-controls"
+    >
+
+      <input
+        id="lfMarketSearch"
+        class="lf-market-search"
+        type="search"
+        placeholder="Search players, props..."
+        aria-label="Search NFL player props"
+      >
+
+      <select
+        id="lfMarketType"
+        class="lf-market-filter"
+        aria-label="Filter market type"
+      >
+
+        <option value="ALL">
+          All Markets
+        </option>
+
+      </select>
+
+    </div>
+
+    <div
+      id="marketCards"
+      class="lf-market-grid"
+    ></div>
+
+  `;
 
   section.appendChild(
     wrapper
@@ -2688,6 +2936,7 @@ function configureMarketUI() {
 }
 
 function populateMarketTypes() {
+
   const select =
     $('#lfMarketType');
 
@@ -2698,7 +2947,10 @@ function populateMarketTypes() {
   const names =
     [
       ...new Set(
-        (marketData?.markets || [])
+        (
+          marketData?.markets ||
+          []
+        )
           .map(
             market =>
               marketName(
@@ -2710,6 +2962,7 @@ function populateMarketTypes() {
     ].sort();
 
   select.innerHTML = `
+
     <option value="ALL">
       All Markets
     </option>
@@ -2729,15 +2982,17 @@ function populateMarketTypes() {
         `
       )
       .join('')}
+
   `;
 }
 
 
 // ============================================================
-// RENDER CONSENSUS
+// MAIN RENDER
 // ============================================================
 
 function render() {
+
   if (!board) {
     return;
   }
@@ -2745,7 +3000,8 @@ function render() {
   updateFilterCount();
 
   const allProps =
-    board.props || [];
+    board.props ||
+    [];
 
   const filteredProps =
     allProps.filter(
@@ -2753,11 +3009,6 @@ function render() {
         propMatchesFilters(
           prop
         )
-    );
-
-  const sorted =
-    sortProps(
-      filteredProps
     );
 
   const selectedWeek =
@@ -2770,6 +3021,7 @@ function render() {
     selectedWeek !==
     'ALL'
   ) {
+
     weeks =
       weeks.filter(
         week =>
@@ -2778,6 +3030,7 @@ function render() {
             selectedWeek
           )
       );
+
   }
 
   const container =
@@ -2785,10 +3038,14 @@ function render() {
 
   if (container) {
 
-    if (!sorted.length) {
+    if (
+      !filteredProps.length
+    ) {
 
       container.innerHTML = `
-        <div class="lf-empty">
+        <div
+          class="lf-empty"
+        >
 
           <h3>
             No picks match your filters
@@ -2804,6 +3061,11 @@ function render() {
 
     }
     else {
+
+      const sorted =
+        sortProps(
+          filteredProps
+        );
 
       const sections =
         weeks
@@ -2829,7 +3091,7 @@ function render() {
 
               const expanded =
                 selectedWeek !==
-                'ALL'
+                  'ALL'
                   ? true
                   : Number(week) ===
                     currentWeek();
@@ -2839,6 +3101,7 @@ function render() {
                 weekProps,
                 expanded
               );
+
             }
           )
           .filter(Boolean)
@@ -2846,7 +3109,9 @@ function render() {
 
       container.innerHTML =
         sections;
+
     }
+
   }
 
   if ($('#pickCount')) {
@@ -2858,7 +3123,7 @@ function render() {
   if ($('#sourceCount')) {
     $('#sourceCount')
       .textContent =
-      board?.sources?.length ||
+      board.sources?.length ||
       0;
   }
 
@@ -2869,17 +3134,19 @@ function render() {
   }
 
   if ($('#lastRefresh')) {
+
     $('#lastRefresh')
       .textContent =
-      board?.liveUpdatedAt
+      board.liveUpdatedAt
         ? new Date(
             board.liveUpdatedAt
           ).toLocaleString()
-        : board?.refreshedAt
+        : board.refreshedAt
           ? new Date(
               board.refreshedAt
             ).toLocaleString()
           : 'not run';
+
   }
 
   renderSources();
@@ -2893,15 +3160,20 @@ function render() {
 // ============================================================
 
 function renderSources() {
+
   if (!$('#sourceRows')) {
     return;
   }
 
   $('#sourceRows')
     .innerHTML =
-      (board?.sources || [])
+      (
+        board?.sources ||
+        []
+      )
         .map(
           source => `
+
             <tr>
 
               <td>
@@ -2920,7 +3192,10 @@ function renderSources() {
 
               <td>
                 ${Math.round(
-                  (source.quality || 0) *
+                  (
+                    source.quality ||
+                    0
+                  ) *
                   100
                 )}/100
               </td>
@@ -2952,6 +3227,7 @@ function renderSources() {
               </td>
 
             </tr>
+
           `
         )
         .join('');
@@ -2963,8 +3239,10 @@ function renderSources() {
 // ============================================================
 
 function renderExperts() {
+
   const expertList =
-    experts?.experts || [];
+    experts?.experts ||
+    [];
 
   if (!$('#expertRows')) {
     return;
@@ -3014,6 +3292,7 @@ function renderExperts() {
                   : 'NEW';
 
             return `
+
               <tr>
 
                 <td>
@@ -3060,7 +3339,9 @@ function renderExperts() {
                 </td>
 
               </tr>
+
             `;
+
           }
         )
         .join('');
@@ -3068,10 +3349,11 @@ function renderExperts() {
 
 
 // ============================================================
-// OVERALL RECORD
+// RECORD
 // ============================================================
 
 function renderRecord() {
+
   const record =
     experts?.record ||
     {};
@@ -3113,10 +3395,11 @@ function renderRecord() {
 
 
 // ============================================================
-// LOAD LINEFOUNDRY DATA
+// LOAD
 // ============================================================
 
 async function load() {
+
   try {
 
     const [
@@ -3129,50 +3412,71 @@ async function load() {
         fetch(
           '/public-signals.json',
           {
-            cache: 'no-store'
+            cache:
+              'no-store'
           }
-        ).then(response => {
+        )
+          .then(
+            response => {
 
-          if (!response.ok) {
-            throw new Error(
-              'Could not load public-signals.json'
-            );
-          }
+              if (
+                !response.ok
+              ) {
+                throw new Error(
+                  'Could not load public-signals.json'
+                );
+              }
 
-          return response.json();
-        }),
+              return response.json();
+
+            }
+          ),
 
         fetch(
           '/analyst-profiles.json',
           {
-            cache: 'no-store'
+            cache:
+              'no-store'
           }
-        ).then(response => {
+        )
+          .then(
+            response => {
 
-          if (!response.ok) {
-            throw new Error(
-              'Could not load analyst-profiles.json'
-            );
-          }
+              if (
+                !response.ok
+              ) {
+                throw new Error(
+                  'Could not load analyst-profiles.json'
+                );
+              }
 
-          return response.json();
-        }),
+              return response.json();
+
+            }
+          ),
 
         fetch(
           '/results-ledger.json',
           {
-            cache: 'no-store'
+            cache:
+              'no-store'
           }
-        ).then(response => {
+        )
+          .then(
+            response => {
 
-          if (!response.ok) {
-            throw new Error(
-              'Could not load results-ledger.json'
-            );
-          }
+              if (
+                !response.ok
+              ) {
+                throw new Error(
+                  'Could not load results-ledger.json'
+                );
+              }
 
-          return response.json();
-        })
+              return response.json();
+
+            }
+          )
 
       ]);
 
@@ -3185,6 +3489,7 @@ async function load() {
       [];
 
     board = {
+
       mode:
         'public-consensus',
 
@@ -3207,6 +3512,7 @@ async function load() {
           signals,
           sources
         )
+
     };
 
     experts =
@@ -3214,8 +3520,6 @@ async function load() {
 
     results =
       resultsData;
-
-    configureConsensusFilter();
 
     render();
 
@@ -3229,11 +3533,15 @@ async function load() {
       error
     );
 
-    if ($('#propCards')) {
+    if (
+      $('#propCards')
+    ) {
 
       $('#propCards')
         .innerHTML = `
-          <div class="empty-state">
+          <div
+            class="empty-state"
+          >
 
             <h3>
               Unable to load
@@ -3247,55 +3555,70 @@ async function load() {
 
           </div>
         `;
+
     }
+
   }
+
 }
 
 
 // ============================================================
-// LOAD LIVE ESPN RESULTS
+// LIVE RESULTS
 // ============================================================
 
 async function loadLiveResults() {
+
   try {
 
     const response =
       await fetch(
         `${WORKER_URL}?_=${Date.now()}`,
         {
-          cache: 'no-store'
+          cache:
+            'no-store'
         }
       );
 
     if (!response.ok) {
+
       throw new Error(
         `Worker returned ${response.status}`
       );
+
     }
 
     const data =
       await response.json();
 
     if (!data.success) {
+
       throw new Error(
         data.error ||
         'Worker returned an error'
       );
+
     }
 
     liveResults = {};
 
-    (data.results || [])
+    (
+      data.results ||
+      []
+    )
       .forEach(
         result => {
 
-          if (result.id) {
+          if (
+            result.id
+          ) {
 
             liveResults[
               result.id
             ] = result;
 
           }
+
         }
       );
 
@@ -3306,12 +3629,8 @@ async function loadLiveResults() {
         new Date().toISOString();
 
       render();
-    }
 
-    console.log(
-      'LineFoundry live results updated:',
-      data
-    );
+    }
 
   }
   catch (error) {
@@ -3320,68 +3639,17 @@ async function loadLiveResults() {
       'LineFoundry live data failed:',
       error
     );
+
   }
+
 }
 
 
 // ============================================================
-// EVENTS
+// CONSENSUS FILTER UI
 // ============================================================
 
-$('#refreshBoard')
-  ?.addEventListener(
-    'click',
-    async () => {
-      await load();
-      await loadMarketData();
-    }
-  );
-
-$('#howItWorks')
-  ?.addEventListener(
-    'click',
-    () => {
-      $('#howModal')
-        ?.setAttribute(
-          'aria-hidden',
-          'false'
-        );
-    }
-  );
-
-$('#closeHow')
-  ?.addEventListener(
-    'click',
-    () => {
-      $('#howModal')
-        ?.setAttribute(
-          'aria-hidden',
-          'true'
-        );
-    }
-  );
-
-document
-  .querySelector(
-    '.modal-backdrop'
-  )
-  ?.addEventListener(
-    'click',
-    () => {
-      $('#howModal')
-        ?.setAttribute(
-          'aria-hidden',
-          'true'
-        );
-    }
-  );
-
-
-// ============================================================
-// FILTER UI
-// ============================================================
-
-(function configureFilters() {
+function configureConsensusFilter() {
 
   const oldToolbar =
     document.querySelector(
@@ -3425,6 +3693,7 @@ document
     `;
 
   controls.innerHTML = `
+
     <input
       id="lfConsensusSearch"
       type="search"
@@ -3454,6 +3723,7 @@ document
     >
       Filters
     </button>
+
   `;
 
   propHead.appendChild(
@@ -3513,67 +3783,81 @@ document
         id="lfOutcomeFilter"
         class="secondary-btn"
       >
+
         <option value="ALL">
           All Results
         </option>
+
         <option value="HIT">
           Bet Hit
         </option>
+
         <option value="MISS">
           Bet Miss
         </option>
+
         <option value="LIVE">
           Live
         </option>
+
         <option value="PENDING">
           Pending
         </option>
+
       </select>
 
       <select
         id="lfConsensusFilter"
         class="secondary-btn"
       >
+
         <option value="ALL">
           All Consensus
         </option>
+
         <option value="STRONG">
           Strong 75%+
         </option>
+
         <option value="LEAN">
           Lean 60–74%
         </option>
+
         <option value="EARLY">
           Early <60%
         </option>
+
       </select>
 
     </div>
+
   `;
 
   propHead.appendChild(
     panel
   );
 
-  const search =
-    $('#lfConsensusSearch');
+  $('#lfConsensusSearch')
+    ?.addEventListener(
+      'input',
+      event => {
 
-  search?.addEventListener(
-    'input',
-    () => {
-      filterState.search =
-        search.value;
+        filterState.search =
+          event.target.value;
 
-      render();
-    }
-  );
+        render();
+
+      }
+    );
 
   $('#lfFilterButton')
     ?.addEventListener(
       'click',
       () => {
+
         panel.hidden =
           !panel.hidden;
+
       }
     );
 
@@ -3581,10 +3865,12 @@ document
     ?.addEventListener(
       'change',
       event => {
+
         filterState.week =
           event.target.value;
 
         render();
+
       }
     );
 
@@ -3592,10 +3878,12 @@ document
     ?.addEventListener(
       'change',
       event => {
+
         filterState.market =
           event.target.value;
 
         render();
+
       }
     );
 
@@ -3603,10 +3891,12 @@ document
     ?.addEventListener(
       'change',
       event => {
+
         filterState.outcome =
           event.target.value;
 
         render();
+
       }
     );
 
@@ -3614,26 +3904,22 @@ document
     ?.addEventListener(
       'change',
       event => {
+
         filterState.consensus =
           event.target.value;
 
         render();
+
       }
     );
 
-})();
+}
 
 
 // ============================================================
-// INITIALIZE MARKET UI
+// POPULATE CONSENSUS FILTERS
 // ============================================================
 
-injectBoardStyles();
-
-configureMarketUI();
-
-
-// Populate consensus filter options
 function populateConsensusFilters() {
 
   const weekSelect =
@@ -3651,6 +3937,7 @@ function populateConsensusFilters() {
       getAvailableWeeks();
 
     weekSelect.innerHTML = `
+
       <option value="ALL">
         All Weeks
       </option>
@@ -3658,13 +3945,17 @@ function populateConsensusFilters() {
       ${weeks
         .map(
           week => `
-            <option value="${week}">
+            <option
+              value="${week}"
+            >
               Week ${week}
             </option>
           `
         )
         .join('')}
+
     `;
+
   }
 
   if (
@@ -3675,7 +3966,10 @@ function populateConsensusFilters() {
     const markets =
       [
         ...new Set(
-          (board.props || [])
+          (
+            board.props ||
+            []
+          )
             .map(
               prop =>
                 prop.market
@@ -3685,6 +3979,7 @@ function populateConsensusFilters() {
       ].sort();
 
     marketSelect.innerHTML = `
+
       <option value="ALL">
         All Markets
       </option>
@@ -3704,14 +3999,80 @@ function populateConsensusFilters() {
           `
         )
         .join('')}
+
     `;
+
   }
+
 }
 
 
-// Wrap render so filters stay populated
-const originalRender =
-  render;
+// ============================================================
+// EVENTS / INITIALIZATION
+// ============================================================
+
+injectBoardStyles();
+
+configureMarketUI();
+
+configureConsensusFilter();
+
+$('#refreshBoard')
+  ?.addEventListener(
+    'click',
+    async () => {
+
+      await load();
+
+      await loadMarketData();
+
+    }
+  );
+
+$('#howItWorks')
+  ?.addEventListener(
+    'click',
+    () => {
+
+      $('#howModal')
+        ?.setAttribute(
+          'aria-hidden',
+          'false'
+        );
+
+    }
+  );
+
+$('#closeHow')
+  ?.addEventListener(
+    'click',
+    () => {
+
+      $('#howModal')
+        ?.setAttribute(
+          'aria-hidden',
+          'true'
+        );
+
+    }
+  );
+
+document
+  .querySelector(
+    '.modal-backdrop'
+  )
+  ?.addEventListener(
+    'click',
+    () => {
+
+      $('#howModal')
+        ?.setAttribute(
+          'aria-hidden',
+          'true'
+        );
+
+    }
+  );
 
 
 // ============================================================
@@ -3721,22 +4082,13 @@ const originalRender =
 load()
   .then(
     () => {
+
       populateConsensusFilters();
+
     }
   );
 
-loadMarketData()
-  .then(
-    () => {
-      populateMarketTypes();
-      renderMarkets();
-    }
-  );
-
-setTimeout(
-  loadLiveResults,
-  1500
-);
+loadMarketData();
 
 setInterval(
   loadLiveResults,
