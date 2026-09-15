@@ -1,18 +1,15 @@
 'use strict';
 
 /*
- * LineFoundry
+ * LINEFOUNDRY
  * SportsGameOdds Market Normalizer
  *
- * Converts the raw SportsGameOdds NFL event response
- * into clean Market objects for LineFoundry.
+ * Purpose:
+ * Convert the raw SportsGameOdds response into
+ * clean NFL player-prop Market objects.
  *
- * Important:
- * - SportsGameOdds events are returned in response.data
- * - event.odds is an object keyed by oddID
- * - OVER / UNDER records are paired using opposingOddID
- * - YES / NO records are preserved for Anytime Touchdown
- * - Market data remains completely separate from Expert Signals
+ * IMPORTANT:
+ * Market data is completely separate from Expert Signals.
  */
 
 const SUPPORTED_MARKETS = {
@@ -35,57 +32,91 @@ const SUPPORTED_MARKETS = {
   touchdowns: 'Anytime Touchdown'
 };
 
-function clean(value) {
-  if (value === undefined || value === null) {
-    return null;
+
+/* --------------------------------------------------
+   BASIC HELPERS
+-------------------------------------------------- */
+
+function normalize(value) {
+  if (
+    value === undefined ||
+    value === null
+  ) {
+    return '';
   }
 
-  return String(value).trim().toLowerCase();
+  return String(value)
+    .trim()
+    .toLowerCase();
 }
 
+
 function getEvents(response) {
-  if (!response || typeof response !== 'object') {
+  if (!response) {
     return [];
   }
 
+  /*
+   * SportsGameOdds currently returns events
+   * inside `data`.
+   */
   if (Array.isArray(response.data)) {
-    return response.data.filter(Boolean);
+    return response.data;
   }
 
+  /*
+   * Fallback for alternate response shapes.
+   */
   if (Array.isArray(response.events)) {
-    return response.events.filter(Boolean);
+    return response.events;
   }
 
   return [];
 }
 
+
 function getOdds(event) {
-  if (!event || typeof event !== 'object') {
+  if (!event) {
     return [];
   }
 
-  if (Array.isArray(event.odds)) {
-    return event.odds.filter(Boolean);
-  }
-
+  /*
+   * SportsGameOdds returns odds as an object
+   * keyed by oddID.
+   */
   if (
     event.odds &&
-    typeof event.odds === 'object'
+    typeof event.odds === 'object' &&
+    !Array.isArray(event.odds)
   ) {
     return Object.values(event.odds)
       .filter(
         odd =>
           odd &&
-          typeof odd === 'object' &&
-          !Array.isArray(odd)
+          typeof odd === 'object'
       );
+  }
+
+  /*
+   * Defensive fallback.
+   */
+  if (Array.isArray(event.odds)) {
+    return event.odds.filter(Boolean);
   }
 
   return [];
 }
 
+
+/* --------------------------------------------------
+   PLAYER / GAME
+-------------------------------------------------- */
+
 function getPlayer(event, playerId) {
-  if (!event || !playerId) {
+  if (
+    !event ||
+    !playerId
+  ) {
     return null;
   }
 
@@ -95,7 +126,10 @@ function getPlayer(event, playerId) {
     event.playerDirectory
   ];
 
-  for (const container of containers) {
+  for (
+    const container
+    of containers
+  ) {
     if (
       container &&
       typeof container === 'object' &&
@@ -108,22 +142,29 @@ function getPlayer(event, playerId) {
   return null;
 }
 
-function getPlayerName(event, odd) {
-  const playerId = odd?.playerID;
 
+function getPlayerName(
+  event,
+  odd
+) {
   const player =
-    getPlayer(event, playerId);
+    getPlayer(
+      event,
+      odd?.playerID
+    );
 
   if (player) {
-    const fullName =
-      player.name ||
-      [
-        player.firstName,
-        player.lastName
-      ]
-        .filter(Boolean)
-        .join(' ')
-        .trim();
+    if (player.name) {
+      return player.name;
+    }
+
+    const fullName = [
+      player.firstName,
+      player.lastName
+    ]
+      .filter(Boolean)
+      .join(' ')
+      .trim();
 
     if (fullName) {
       return fullName;
@@ -137,7 +178,11 @@ function getPlayerName(event, odd) {
   );
 }
 
-function getPlayerTeam(event, odd) {
+
+function getPlayerTeam(
+  event,
+  odd
+) {
   const player =
     getPlayer(
       event,
@@ -153,8 +198,9 @@ function getPlayerTeam(event, odd) {
   );
 }
 
+
 function getTeamName(team) {
-  if (!team || typeof team !== 'object') {
+  if (!team) {
     return null;
   }
 
@@ -167,13 +213,18 @@ function getTeamName(team) {
   );
 }
 
+
 function getGame(event) {
   return {
     awayTeam:
-      getTeamName(event?.teams?.away),
+      getTeamName(
+        event?.teams?.away
+      ),
 
     homeTeam:
-      getTeamName(event?.teams?.home),
+      getTeamName(
+        event?.teams?.home
+      ),
 
     startsAt:
       event?.status?.startsAt ||
@@ -182,7 +233,6 @@ function getGame(event) {
 
     status:
       event?.status?.type ||
-      event?.status?.status ||
       event?.status?.name ||
       (
         typeof event?.status === 'string'
@@ -191,6 +241,7 @@ function getGame(event) {
       )
   };
 }
+
 
 function getWeek(event) {
   return (
@@ -201,8 +252,16 @@ function getWeek(event) {
   );
 }
 
+
+/* --------------------------------------------------
+   MARKET VALIDATION
+-------------------------------------------------- */
+
 function isSupportedOdd(odd) {
-  if (!odd || typeof odd !== 'object') {
+  if (
+    !odd ||
+    typeof odd !== 'object'
+  ) {
     return false;
   }
 
@@ -215,22 +274,35 @@ function isSupportedOdd(odd) {
   }
 
   const statId =
-    clean(odd.statID);
+    normalize(odd.statID);
 
   const periodId =
-    clean(odd.periodID);
+    normalize(odd.periodID);
 
   const betTypeId =
-    clean(odd.betTypeID);
+    normalize(odd.betTypeID);
 
-  if (!SUPPORTED_MARKETS[statId]) {
+  /*
+   * Only markets LineFoundry currently supports.
+   */
+  if (
+    !SUPPORTED_MARKETS[statId]
+  ) {
     return false;
   }
 
-  if (periodId !== 'game') {
+  /*
+   * Only full-game player props.
+   */
+  if (
+    periodId !== 'game'
+  ) {
     return false;
   }
 
+  /*
+   * O/U and Y/N only.
+   */
   if (
     betTypeId !== 'ou' &&
     betTypeId !== 'yn'
@@ -241,16 +313,21 @@ function isSupportedOdd(odd) {
   return true;
 }
 
+
+/* --------------------------------------------------
+   SIDE HANDLING
+-------------------------------------------------- */
+
 function getSide(odd) {
-  if (!odd || typeof odd !== 'object') {
+  if (!odd) {
     return null;
   }
 
   const betType =
-    clean(odd.betTypeID);
+    normalize(odd.betTypeID);
 
   const side =
-    clean(odd.sideID);
+    normalize(odd.sideID);
 
   if (betType === 'ou') {
     if (side === 'over') {
@@ -275,81 +352,72 @@ function getSide(odd) {
   return null;
 }
 
-function getCurrentLine(odd) {
-  if (!odd) {
-    return null;
-  }
 
+/* --------------------------------------------------
+   PRICE / LINE DATA
+-------------------------------------------------- */
+
+function getCurrentLine(odd) {
   return (
-    odd.bookOverUnder ??
-    odd.fairOverUnder ??
+    odd?.bookOverUnder ??
+    odd?.fairOverUnder ??
     null
   );
 }
+
 
 function getCurrentOdds(odd) {
-  if (!odd) {
-    return null;
-  }
-
   return (
-    odd.bookOdds ??
-    odd.fairOdds ??
+    odd?.bookOdds ??
+    odd?.fairOdds ??
     null
   );
 }
+
 
 function getOpeningLine(odd) {
-  if (!odd) {
-    return null;
-  }
-
   return (
-    odd.openBookOverUnder ??
-    odd.openFairOverUnder ??
+    odd?.openBookOverUnder ??
+    odd?.openFairOverUnder ??
     null
   );
 }
+
 
 function getOpeningOdds(odd) {
-  if (!odd) {
-    return null;
-  }
-
   return (
-    odd.openBookOdds ??
-    odd.openFairOdds ??
+    odd?.openBookOdds ??
+    odd?.openFairOdds ??
     null
   );
 }
+
 
 function getClosingLine(odd) {
-  if (!odd) {
-    return null;
-  }
-
   return (
-    odd.closeBookOverUnder ??
-    odd.closeFairOverUnder ??
+    odd?.closeBookOverUnder ??
+    odd?.closeFairOverUnder ??
     null
   );
 }
+
 
 function getClosingOdds(odd) {
-  if (!odd) {
-    return null;
-  }
-
   return (
-    odd.closeBookOdds ??
-    odd.closeFairOdds ??
+    odd?.closeBookOdds ??
+    odd?.closeFairOdds ??
     null
   );
 }
+
+
+/* --------------------------------------------------
+   SPORTSBOOKS
+-------------------------------------------------- */
 
 function normalizeBookmaker(
   bookmaker,
-  name
+  bookmakerName
 ) {
   if (
     !bookmaker ||
@@ -358,44 +426,63 @@ function normalizeBookmaker(
     return null;
   }
 
-  const alternateLines =
-    Array.isArray(bookmaker.altLines)
-      ? bookmaker.altLines
-          .filter(Boolean)
-          .filter(
-            line =>
-              line.available !== false
-          )
-          .map(line => ({
-            line:
-              line.overUnder ??
-              line.bookOverUnder ??
-              line.fairOverUnder ??
-              null,
+  const alternateLines = [];
 
-            odds:
-              line.odds ??
-              line.bookOdds ??
-              line.fairOdds ??
-              null,
+  if (
+    Array.isArray(
+      bookmaker.altLines
+    )
+  ) {
+    for (
+      const alt
+      of bookmaker.altLines
+    ) {
+      if (!alt) {
+        continue;
+      }
 
-            available:
-              line.available !== false,
+      if (
+        alt.available === false
+      ) {
+        continue;
+      }
 
-            lastUpdatedAt:
-              line.lastUpdatedAt ||
-              null
-          }))
-          .filter(
-            line =>
-              line.line !== null ||
-              line.odds !== null
-          )
-      : [];
+      const line =
+        alt.overUnder ??
+        alt.bookOverUnder ??
+        alt.fairOverUnder ??
+        null;
+
+      const odds =
+        alt.odds ??
+        alt.bookOdds ??
+        alt.fairOdds ??
+        null;
+
+      if (
+        line === null &&
+        odds === null
+      ) {
+        continue;
+      }
+
+      alternateLines.push({
+        line,
+        odds,
+
+        available:
+          alt.available !== false,
+
+        lastUpdatedAt:
+          alt.lastUpdatedAt ||
+          null
+      });
+    }
+  }
 
   return {
     name:
-      clean(name),
+      normalize(bookmakerName),
 
     line:
       bookmaker.overUnder ??
@@ -424,10 +511,10 @@ function normalizeBookmaker(
   };
 }
 
+
 function getSportsbooks(odd) {
   if (
-    !odd ||
-    !odd.byBookmaker ||
+    !odd?.byBookmaker ||
     typeof odd.byBookmaker !== 'object'
   ) {
     return {};
@@ -436,13 +523,18 @@ function getSportsbooks(odd) {
   const sportsbooks = {};
 
   for (
-    const [name, bookmaker]
-    of Object.entries(odd.byBookmaker)
+    const [
+      bookmakerName,
+      bookmaker
+    ]
+    of Object.entries(
+      odd.byBookmaker
+    )
   ) {
     const normalized =
       normalizeBookmaker(
         bookmaker,
-        name
+        bookmakerName
       );
 
     if (!normalized) {
@@ -450,14 +542,28 @@ function getSportsbooks(odd) {
     }
 
     sportsbooks[
-      clean(name)
+      normalize(bookmakerName)
     ] = normalized;
   }
 
   return sportsbooks;
 }
 
-function americanOddsProbability(odds) {
+
+/* --------------------------------------------------
+   BEST PRICE
+-------------------------------------------------- */
+
+function impliedProbability(
+  odds
+) {
+  if (
+    odds === null ||
+    odds === undefined
+  ) {
+    return null;
+  }
+
   const number =
     Number(
       String(odds)
@@ -465,30 +571,46 @@ function americanOddsProbability(odds) {
         .trim()
     );
 
-  if (!Number.isFinite(number) || number === 0) {
+  if (
+    !Number.isFinite(number) ||
+    number === 0
+  ) {
     return null;
   }
 
   if (number > 0) {
-    return 100 / (number + 100);
+    return (
+      100 /
+      (number + 100)
+    );
   }
 
   return (
     Math.abs(number) /
-    (Math.abs(number) + 100)
+    (
+      Math.abs(number) +
+      100
+    )
   );
 }
 
-function findBestBook(sportsbooks) {
+
+function findBestBook(
+  sportsbooks
+) {
   let best = null;
 
   for (
     const bookmaker
-    of Object.values(sportsbooks || {})
+    of Object.values(
+      sportsbooks || {}
+    )
   ) {
+    /*
+     * Only use currently available prices.
+     */
     if (
-      !bookmaker ||
-      bookmaker.available === false
+      bookmaker.available !== true
     ) {
       continue;
     }
@@ -501,11 +623,13 @@ function findBestBook(sportsbooks) {
     }
 
     const probability =
-      americanOddsProbability(
+      impliedProbability(
         bookmaker.odds
       );
 
-    if (probability === null) {
+    if (
+      probability === null
+    ) {
       continue;
     }
 
@@ -515,9 +639,15 @@ function findBestBook(sportsbooks) {
         best.impliedProbability
     ) {
       best = {
-        book: bookmaker.name,
-        odds: bookmaker.odds,
-        line: bookmaker.line,
+        book:
+          bookmaker.name,
+
+        odds:
+          bookmaker.odds,
+
+        line:
+          bookmaker.line,
+
         impliedProbability:
           probability
       };
@@ -527,10 +657,16 @@ function findBestBook(sportsbooks) {
   return best;
 }
 
-function getAlternateLines(odd) {
+
+/* --------------------------------------------------
+   ALTERNATE LINES
+-------------------------------------------------- */
+
+function getAlternateLines(
+  odd
+) {
   if (
-    !odd ||
-    !odd.byBookmaker ||
+    !odd?.byBookmaker ||
     typeof odd.byBookmaker !== 'object'
   ) {
     return [];
@@ -539,37 +675,46 @@ function getAlternateLines(odd) {
   const lines = [];
 
   for (
-    const [bookName, bookmaker]
-    of Object.entries(odd.byBookmaker)
+    const [
+      bookmakerName,
+      bookmaker
+    ]
+    of Object.entries(
+      odd.byBookmaker
+    )
   ) {
     if (
-      !bookmaker ||
-      !Array.isArray(bookmaker.altLines)
+      !Array.isArray(
+        bookmaker?.altLines
+      )
     ) {
       continue;
     }
 
     for (
-      const altLine
+      const alt
       of bookmaker.altLines
     ) {
+      if (!alt) {
+        continue;
+      }
+
       if (
-        !altLine ||
-        altLine.available === false
+        alt.available === false
       ) {
         continue;
       }
 
       const line =
-        altLine.overUnder ??
-        altLine.bookOverUnder ??
-        altLine.fairOverUnder ??
+        alt.overUnder ??
+        alt.bookOverUnder ??
+        alt.fairOverUnder ??
         null;
 
       const odds =
-        altLine.odds ??
-        altLine.bookOdds ??
-        altLine.fairOdds ??
+        alt.odds ??
+        alt.bookOdds ??
+        alt.fairOdds ??
         null;
 
       if (
@@ -581,17 +726,17 @@ function getAlternateLines(odd) {
 
       lines.push({
         book:
-          clean(bookName),
+          normalize(bookmakerName),
 
         line,
 
         odds,
 
         available:
-          altLine.available !== false,
+          alt.available !== false,
 
         lastUpdatedAt:
-          altLine.lastUpdatedAt ||
+          alt.lastUpdatedAt ||
           null
       });
     }
@@ -600,31 +745,43 @@ function getAlternateLines(odd) {
   return lines;
 }
 
-function uniqueAlternateLines(lines) {
-  const seen = new Set();
+
+function dedupeAlternateLines(
+  lines
+) {
+  const seen =
+    new Set();
+
   const result = [];
 
-  for (const line of lines) {
-    if (!line) {
-      continue;
-    }
-
+  for (
+    const line
+    of lines
+  ) {
     const key = [
       line.book,
       line.line,
       line.odds
     ].join('|');
 
-    if (seen.has(key)) {
+    if (
+      seen.has(key)
+    ) {
       continue;
     }
 
     seen.add(key);
+
     result.push(line);
   }
 
   return result;
 }
+
+
+/* --------------------------------------------------
+   NORMALIZE ONE SIDE
+-------------------------------------------------- */
 
 function normalizeSide(odd) {
   if (!odd) {
@@ -634,14 +791,14 @@ function normalizeSide(odd) {
   const sportsbooks =
     getSportsbooks(odd);
 
-  const alternateLines =
-    uniqueAlternateLines(
-      getAlternateLines(odd)
-    );
-
   const bestBook =
     findBestBook(
       sportsbooks
+    );
+
+  const alternateLines =
+    dedupeAlternateLines(
+      getAlternateLines(odd)
     );
 
   return {
@@ -689,7 +846,12 @@ function normalizeSide(odd) {
   };
 }
 
-function getPairKey(odd) {
+
+/* --------------------------------------------------
+   MARKET PAIRING
+-------------------------------------------------- */
+
+function getMarketKey(odd) {
   if (!odd) {
     return null;
   }
@@ -705,10 +867,9 @@ function getPairKey(odd) {
       : '';
 
   /*
-   * Preferred:
-   * OVER and UNDER point to each other through
-   * opposingOddID. Sorting the two IDs means
-   * both records generate the same key.
+   * Best case:
+   * SportsGameOdds gives each side the other's
+   * oddID through opposingOddID.
    */
   if (
     oddId &&
@@ -723,32 +884,30 @@ function getPairKey(odd) {
   }
 
   /*
-   * Fallback when opposingOddID is unavailable.
+   * Fallback.
    */
   return [
-    odd.eventID ||
-      '',
-    odd.playerID ||
-      '',
-    odd.statID ||
-      '',
-    odd.periodID ||
-      '',
-    odd.betTypeID ||
-      ''
+    odd.eventID || '',
+    odd.playerID || '',
+    odd.statID || '',
+    odd.periodID || '',
+    odd.betTypeID || ''
   ].join('::');
 }
 
-function normalizePair(
+
+/* --------------------------------------------------
+   NORMALIZE ONE MARKET
+-------------------------------------------------- */
+
+function normalizeMarket(
   event,
   odds
 ) {
-  const validOdds =
-    Array.isArray(odds)
-      ? odds.filter(Boolean)
-      : [];
-
-  if (validOdds.length === 0) {
+  if (
+    !Array.isArray(odds) ||
+    odds.length === 0
+  ) {
     return null;
   }
 
@@ -757,7 +916,14 @@ function normalizePair(
   let yes = null;
   let no = null;
 
-  for (const odd of validOdds) {
+  for (
+    const odd
+    of odds
+  ) {
+    if (!odd) {
+      continue;
+    }
+
     const side =
       getSide(odd);
 
@@ -789,14 +955,14 @@ function normalizePair(
   }
 
   const statId =
-    clean(sample.statID);
+    normalize(
+      sample.statID
+    );
 
   const betType =
-    clean(sample.betTypeID);
-
-  const playerId =
-    sample.playerID ||
-    null;
+    normalize(
+      sample.betTypeID
+    );
 
   const sides = {};
 
@@ -820,9 +986,18 @@ function normalizePair(
       normalizeSide(no);
   }
 
+  /*
+   * Do not create empty markets.
+   */
+  if (
+    Object.keys(sides).length === 0
+  ) {
+    return null;
+  }
+
   return {
     id:
-      getPairKey(sample),
+      getMarketKey(sample),
 
     eventId:
       event?.eventID ||
@@ -835,7 +1010,9 @@ function normalizePair(
       getGame(event),
 
     player: {
-      playerId,
+      playerId:
+        sample.playerID ||
+        null,
 
       name:
         getPlayerName(
@@ -859,7 +1036,9 @@ function normalizePair(
         ] || statId,
 
       period:
-        clean(sample.periodID),
+        normalize(
+          sample.periodID
+        ),
 
       betType,
 
@@ -895,6 +1074,11 @@ function normalizePair(
   };
 }
 
+
+/* --------------------------------------------------
+   NORMALIZE ONE EVENT
+-------------------------------------------------- */
+
 function normalizeEvent(event) {
   if (
     !event ||
@@ -914,16 +1098,22 @@ function normalizeEvent(event) {
   const groups =
     new Map();
 
-  for (const odd of supportedOdds) {
+  for (
+    const odd
+    of supportedOdds
+  ) {
     const key =
-      getPairKey(odd);
+      getMarketKey(odd);
 
     if (!key) {
       continue;
     }
 
     if (!groups.has(key)) {
-      groups.set(key, []);
+      groups.set(
+        key,
+        []
+      );
     }
 
     groups
@@ -938,7 +1128,7 @@ function normalizeEvent(event) {
     of groups.values()
   ) {
     const market =
-      normalizePair(
+      normalizeMarket(
         event,
         group
       );
@@ -951,6 +1141,11 @@ function normalizeEvent(event) {
   return markets;
 }
 
+
+/* --------------------------------------------------
+   NORMALIZE COMPLETE RESPONSE
+-------------------------------------------------- */
+
 function normalizeSportsGameOddsResponse(
   response
 ) {
@@ -959,7 +1154,10 @@ function normalizeSportsGameOddsResponse(
 
   const markets = [];
 
-  for (const event of events) {
+  for (
+    const event
+    of events
+  ) {
     markets.push(
       ...normalizeEvent(event)
     );
@@ -982,6 +1180,11 @@ function normalizeSportsGameOddsResponse(
     markets
   };
 }
+
+
+/* --------------------------------------------------
+   EXPORTS
+-------------------------------------------------- */
 
 module.exports = {
   SUPPORTED_MARKETS,
