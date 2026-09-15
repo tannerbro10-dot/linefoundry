@@ -1,6 +1,7 @@
 let board = null;
 let experts = null;
 let results = null;
+let marketData = null;
 let liveResults = {};
 
 const WORKER_URL =
@@ -15,7 +16,7 @@ const $ = selector =>
 
 
 // ============================================================
-// SAVE
+// BASIC HELPERS
 // ============================================================
 
 function save() {
@@ -25,40 +26,14 @@ function save() {
   );
 }
 
-
-// ============================================================
-// BASIC HELPERS
-// ============================================================
-
-function normalizeSide(side) {
-  const value = String(side || '')
-    .trim()
-    .toUpperCase();
-
-  if (
-    value === 'YES' ||
-    value === 'OVER'
-  ) {
-    return 'OVER';
-  }
-
-  if (
-    value === 'NO' ||
-    value === 'UNDER'
-  ) {
-    return 'UNDER';
-  }
-
-  return value;
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 }
-
-
-function normalizeText(value) {
-  return String(value || '')
-    .trim()
-    .toLowerCase();
-}
-
 
 function formatNumber(value) {
   if (
@@ -66,7 +41,7 @@ function formatNumber(value) {
     value === undefined ||
     value === ''
   ) {
-    return '—';
+    return '';
   }
 
   const number = Number(value);
@@ -80,664 +55,476 @@ function formatNumber(value) {
     : number.toFixed(1);
 }
 
+function formatOdds(value) {
+  if (
+    value === null ||
+    value === undefined ||
+    value === ''
+  ) {
+    return '—';
+  }
 
-function escapeHtml(value) {
-  return String(value ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
+  const text = String(value);
+
+  if (
+    text.startsWith('-') ||
+    text.startsWith('+')
+  ) {
+    return text;
+  }
+
+  const number = Number(value);
+
+  if (!Number.isFinite(number)) {
+    return text;
+  }
+
+  return number > 0
+    ? `+${number}`
+    : String(number);
+}
+
+function currentWeek() {
+  const now = new Date();
+
+  const seasonStart =
+    new Date('2026-09-06T13:00:00Z');
+
+  const diff =
+    now.getTime() -
+    seasonStart.getTime();
+
+  if (diff < 0) {
+    return 1;
+  }
+
+  const week =
+    Math.floor(
+      diff /
+      (7 * 24 * 60 * 60 * 1000)
+    ) + 1;
+
+  return Math.min(
+    Math.max(week, 1),
+    18
+  );
 }
 
 
 // ============================================================
-// UI STYLES
+// STYLES FOR NEW MARKET AREA
 // ============================================================
 
 function injectBoardStyles() {
-  if ($('#lfBoardStyles')) {
+  if ($('#linefoundry-board-styles')) {
     return;
   }
 
   const style =
     document.createElement('style');
 
-  style.id = 'lfBoardStyles';
+  style.id =
+    'linefoundry-board-styles';
 
   style.textContent = `
 
     /* ========================================================
-       BOARD WIDTH
+       MARKET GRID
        ======================================================== */
 
-    #props {
-      width: 100%;
+    .lf-market-wrap {
+      margin-top: 28px;
     }
 
-    #props .section-head {
-      width: 100%;
-      margin-bottom: 22px;
-    }
-
-    #props .section-head > .toolbar {
-      display: none !important;
-    }
-
-    #propCards {
-      width: 100%;
-      display: block;
-    }
-
-
-    /* ========================================================
-       SEARCH + FILTER BAR
-       ======================================================== */
-
-    .lf-controls {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 0 0 24px;
-      position: relative;
-      z-index: 20;
-    }
-
-    .lf-search-wrap {
-      position: relative;
-      flex: 1 1 auto;
-      min-width: 280px;
-    }
-
-    .lf-search-icon {
-      position: absolute;
-      left: 17px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 17px;
-      height: 17px;
-      color: #748295;
-      pointer-events: none;
-    }
-
-    .lf-search {
-      width: 100%;
-      height: 50px;
-      border-radius: 15px !important;
-      border: 1px solid #263140 !important;
-      background:
-        linear-gradient(
-          180deg,
-          rgba(17,24,35,.96),
-          rgba(10,15,22,.96)
-        ) !important;
-      color: #f4f7fb !important;
-      padding: 0 18px 0 48px !important;
-      font-size: 14px !important;
-      outline: none;
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.025),
-        0 8px 25px rgba(0,0,0,.12);
-      transition:
-        border-color .2s ease,
-        box-shadow .2s ease,
-        background .2s ease;
-    }
-
-    .lf-search::placeholder {
-      color: #68778a;
-    }
-
-    .lf-search:focus {
-      border-color: rgba(125,242,178,.42) !important;
-      background:
-        linear-gradient(
-          180deg,
-          rgba(18,27,38,.98),
-          rgba(10,16,23,.98)
-        ) !important;
-      box-shadow:
-        0 0 0 3px rgba(125,242,178,.07),
-        0 10px 30px rgba(0,0,0,.18);
-    }
-
-
-    /* ========================================================
-       COMBINED FILTER
-       ======================================================== */
-
-    .lf-filter-wrap {
-      position: relative;
-      flex: 0 0 auto;
-    }
-
-    .lf-filter-button {
-      height: 50px;
-      min-width: 138px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      border-radius: 15px !important;
-      border: 1px solid #263140 !important;
-      background:
-        linear-gradient(
-          180deg,
-          #111823,
-          #0b1017
-        ) !important;
-      color: #eaf0f5 !important;
-      padding: 0 16px !important;
-      font-size: 13px !important;
-      font-weight: 800 !important;
-      cursor: pointer;
-      transition:
-        border-color .2s ease,
-        background .2s ease;
-    }
-
-    .lf-filter-button:hover,
-    .lf-filter-button.active {
-      border-color: rgba(125,242,178,.38) !important;
-      background:
-        linear-gradient(
-          180deg,
-          #15201f,
-          #0d1517
-        ) !important;
-    }
-
-    .lf-filter-button svg {
-      width: 16px;
-      height: 16px;
-    }
-
-    .lf-filter-count {
-      min-width: 20px;
-      height: 20px;
-      padding: 0 6px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 999px;
-      background: rgba(125,242,178,.12);
-      color: var(--green);
-      font-size: 10px;
-      font-weight: 900;
-    }
-
-
-    /* ========================================================
-       FILTER PANEL
-       ======================================================== */
-
-    .lf-filter-panel {
-      position: absolute;
-      right: 0;
-      top: calc(100% + 10px);
-      width: 340px;
-      max-width: calc(100vw - 32px);
-      background:
-        linear-gradient(
-          180deg,
-          #111923,
-          #0b1017
-        );
-      border: 1px solid #2a3544;
-      border-radius: 18px;
-      padding: 8px;
-      box-shadow:
-        0 25px 70px rgba(0,0,0,.48),
-        0 0 0 1px rgba(255,255,255,.015);
-      display: none;
-      z-index: 100;
-    }
-
-    .lf-filter-panel.open {
-      display: block;
-      animation:
-        lfFilterIn .15s ease-out;
-    }
-
-    @keyframes lfFilterIn {
-      from {
-        opacity: 0;
-        transform: translateY(-5px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .lf-filter-section {
-      border-bottom: 1px solid #1c2632;
-    }
-
-    .lf-filter-section:last-child {
-      border-bottom: 0;
-    }
-
-    .lf-filter-section-title {
-      width: 100%;
-      min-height: 45px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      background: transparent;
-      border: 0;
-      border-radius: 10px;
-      color: #dbe4ec;
-      padding: 0 10px;
-      cursor: pointer;
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .lf-filter-section-title:hover {
-      background: rgba(255,255,255,.025);
-    }
-
-    .lf-filter-chevron {
-      color: #6f7e8f;
-      transition: transform .15s ease;
-    }
-
-    .lf-filter-section.expanded
-      .lf-filter-chevron {
-      transform: rotate(180deg);
-    }
-
-    .lf-filter-options {
-      display: none;
-      padding: 0 7px 9px;
-    }
-
-    .lf-filter-section.expanded
-      .lf-filter-options {
+    .lf-market-grid {
       display: grid;
-      gap: 3px;
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+      gap: 14px;
     }
 
-    .lf-filter-option {
-      width: 100%;
-      min-height: 38px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border: 0;
-      border-radius: 9px;
-      background: transparent;
-      color: #aeb9c5;
-      text-align: left;
-      padding: 8px 10px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .lf-filter-option:hover {
-      background: rgba(255,255,255,.035);
-      color: #fff;
-    }
-
-    .lf-filter-option.selected {
-      background: rgba(125,242,178,.08);
-      color: var(--green);
-    }
-
-    .lf-filter-option-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      border: 1px solid #526172;
-      flex: 0 0 auto;
-    }
-
-    .lf-filter-option.selected
-      .lf-filter-option-dot {
-      border-color: var(--green);
-      background: var(--green);
+    .lf-market-card {
+      position: relative;
+      min-width: 0;
+      padding: 17px;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,.045),
+          rgba(255,255,255,.02)
+        );
       box-shadow:
-        0 0 0 3px rgba(125,242,178,.08);
+        0 8px 24px rgba(0,0,0,.12);
+      transition:
+        transform .16s ease,
+        border-color .16s ease,
+        box-shadow .16s ease;
     }
 
-    .lf-filter-footer {
+    .lf-market-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.16);
+      box-shadow:
+        0 12px 30px rgba(0,0,0,.18);
+    }
+
+    .lf-market-top {
       display: flex;
+      align-items: flex-start;
       justify-content: space-between;
-      align-items: center;
       gap: 10px;
-      padding: 10px 7px 5px;
+      margin-bottom: 13px;
     }
 
-    .lf-filter-active-label {
-      color: #718094;
+    .lf-market-player {
+      min-width: 0;
+    }
+
+    .lf-market-player strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.2;
+      font-weight: 750;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .lf-market-game {
+      display: block;
+      margin-top: 4px;
+      color: rgba(255,255,255,.52);
+      font-size: 11px;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .lf-market-week {
+      flex: 0 0 auto;
+      padding: 4px 7px;
+      border-radius: 7px;
+      background: rgba(255,255,255,.07);
+      color: rgba(255,255,255,.68);
       font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .05em;
     }
 
-    .lf-filter-clear {
-      border: 0 !important;
-      background: transparent !important;
-      color: var(--green) !important;
-      padding: 7px 9px !important;
-      font-size: 10px !important;
-      font-weight: 900 !important;
+    .lf-market-type {
+      margin-bottom: 7px;
+      color: rgba(255,255,255,.58);
+      font-size: 11px;
+      font-weight: 650;
       text-transform: uppercase;
-      letter-spacing: .08em;
+      letter-spacing: .055em;
+    }
+
+    .lf-market-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      min-height: 45px;
+      padding: 8px 0;
+    }
+
+    .lf-market-line-number {
+      font-size: 28px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+
+    .lf-market-sides {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 650;
+    }
+
+    .lf-market-side {
+      white-space: nowrap;
+    }
+
+    .lf-market-side b {
+      margin-left: 3px;
+      color: rgba(255,255,255,.86);
+    }
+
+    .lf-market-divider {
+      height: 1px;
+      margin: 8px 0 10px;
+      background: rgba(255,255,255,.07);
+    }
+
+    .lf-market-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .lf-market-best {
+      min-width: 0;
+      color: rgba(255,255,255,.5);
+      font-size: 10px;
+      line-height: 1.3;
+    }
+
+    .lf-market-best strong {
+      color: rgba(255,255,255,.76);
+      font-weight: 700;
+    }
+
+    .lf-market-details {
+      flex: 0 0 auto;
+      border: 0;
+      padding: 0;
+      background: none;
+      color: inherit;
+      font: inherit;
+      font-size: 10px;
+      font-weight: 750;
       cursor: pointer;
+      white-space: nowrap;
     }
 
-    .lf-filter-clear:hover {
-      background: rgba(125,242,178,.06) !important;
+    .lf-market-details:hover {
+      text-decoration: underline;
     }
-
 
     /* ========================================================
-       WEEK SECTIONS
+       MARKET FILTER BAR
+       ======================================================== */
+
+    .lf-market-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+      margin-bottom: 16px;
+    }
+
+    .lf-market-search {
+      flex: 1;
+      min-width: 0;
+      height: 44px;
+      padding: 0 15px;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 12px;
+      outline: none;
+      background: rgba(255,255,255,.035);
+      color: inherit;
+      font: inherit;
+    }
+
+    .lf-market-search::placeholder {
+      color: rgba(255,255,255,.4);
+    }
+
+    .lf-market-filter {
+      height: 44px;
+      padding: 0 14px;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 12px;
+      background: rgba(255,255,255,.035);
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    /* ========================================================
+       MARKET DETAILS MODAL
+       ======================================================== */
+
+    .lf-market-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0,0,0,.68);
+      backdrop-filter: blur(7px);
+    }
+
+    .lf-market-modal[hidden] {
+      display: none;
+    }
+
+    .lf-market-modal-box {
+      width: min(680px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      padding: 24px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 20px;
+      background: #111;
+      box-shadow: 0 24px 70px rgba(0,0,0,.4);
+    }
+
+    .lf-market-modal-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .lf-market-modal-head h3 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .lf-market-modal-sub {
+      margin-top: 5px;
+      color: rgba(255,255,255,.52);
+      font-size: 12px;
+    }
+
+    .lf-market-close {
+      border: 0;
+      background: none;
+      color: inherit;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .lf-market-detail-section {
+      margin-top: 20px;
+    }
+
+    .lf-market-detail-section h4 {
+      margin: 0 0 10px;
+      font-size: 11px;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.48);
+    }
+
+    .lf-market-book {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      font-size: 12px;
+    }
+
+    .lf-market-book-name {
+      font-weight: 700;
+    }
+
+    .lf-market-book span {
+      color: rgba(255,255,255,.7);
+    }
+
+    .lf-alt-lines {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .lf-alt-line {
+      padding: 6px 8px;
+      border-radius: 7px;
+      background: rgba(255,255,255,.06);
+      font-size: 11px;
+    }
+
+    .lf-market-empty {
+      padding: 30px;
+      border: 1px dashed rgba(255,255,255,.12);
+      border-radius: 14px;
+      text-align: center;
+      color: rgba(255,255,255,.5);
+    }
+
+    /* ========================================================
+       WEEK / CONSENSUS LAYOUT
        ======================================================== */
 
     .lf-week-section {
-      width: 100%;
-      margin-bottom: 18px;
-      border: 1px solid #1d2734;
-      border-radius: 18px;
-      background: rgba(8,12,17,.34);
-      overflow: visible;
+      margin-bottom: 24px;
     }
 
     .lf-week-section > summary {
       list-style: none;
       cursor: pointer;
-      padding: 18px 20px;
-      border-radius: 18px;
       user-select: none;
+      margin-bottom: 14px;
     }
 
     .lf-week-section > summary::-webkit-details-marker {
       display: none;
     }
 
-    .lf-week-section > summary:hover {
-      background: rgba(255,255,255,.015);
-    }
-
     .lf-week-heading {
-      width: 100%;
       display: flex;
       align-items: center;
-      gap: 12px;
       flex-wrap: wrap;
-    }
-
-    .lf-week-heading strong {
-      color: #fff;
-      font: 700 18px/1 'Space Grotesk', sans-serif;
-      letter-spacing: -.02em;
+      gap: 9px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 12px;
+      background: rgba(255,255,255,.025);
     }
 
     .lf-week-status {
-      padding: 5px 8px;
-      border-radius: 7px;
-      background: rgba(125,242,178,.08);
-      color: var(--green);
+      padding: 3px 7px;
+      border-radius: 6px;
+      background: rgba(255,255,255,.06);
       font-size: 9px;
-      font-weight: 900;
-      letter-spacing: .1em;
+      font-weight: 750;
+      letter-spacing: .06em;
     }
 
     .lf-week-summary {
-      color: #718094;
+      color: rgba(255,255,255,.46);
       font-size: 11px;
-      font-weight: 600;
     }
-
-    .lf-week-cards {
-      padding: 0 18px 18px;
-      display: grid !important;
-      grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-
-    /* ========================================================
-       CARDS
-       ======================================================== */
-
-    .lf-week-cards .prop {
-      min-width: 0;
-      width: 100%;
-      padding: 19px;
-    }
-
-    .lf-week-cards .prop h3 {
-      line-height: 1.25;
-    }
-
-    .lf-week-cards .live-stat {
-      margin: 13px 0;
-    }
-
-    .actual-stat {
-      display: block;
-      margin-top: 5px;
-      color: #aeb9c5;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-    }
-
-    .consensus-over {
-      color: var(--green);
-    }
-
-    .consensus-under {
-      color: #ff9a9a;
-    }
-
-
-    /* ========================================================
-       EMPTY STATE
-       ======================================================== */
 
     .lf-empty {
-      width: 100%;
-      padding: 55px 25px;
+      padding: 35px;
       text-align: center;
-      border: 1px dashed #273241;
-      border-radius: 18px;
-      background: rgba(10,15,22,.45);
+      border: 1px dashed rgba(255,255,255,.1);
+      border-radius: 14px;
     }
 
-    .lf-empty h3 {
-      margin: 0 0 7px;
-      font: 700 20px 'Space Grotesk';
-    }
-
-    .lf-empty p {
-      margin: 0;
-      color: #718094;
-      font-size: 12px;
-    }
-
-
-    /* ========================================================
-       RESPONSIVE
-       ======================================================== */
-
-    @media (max-width: 1050px) {
-      .lf-week-cards {
+    @media (max-width: 1100px) {
+      .lf-market-grid {
         grid-template-columns:
           repeat(2, minmax(0, 1fr));
       }
     }
 
-    @media (max-width: 700px) {
-      .lf-controls {
+    @media (max-width: 650px) {
+      .lf-market-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lf-market-controls {
+        flex-direction: column;
         align-items: stretch;
       }
 
-      .lf-search-wrap {
-        min-width: 0;
-      }
-
-      .lf-filter-button {
-        min-width: 112px;
-      }
-
-      .lf-week-cards {
-        grid-template-columns: 1fr;
-        padding: 0 12px 12px;
-      }
-
-      .lf-week-section > summary {
-        padding: 15px;
-      }
-    }
-
-    @media (max-width: 500px) {
-      .lf-controls {
-        flex-direction: column;
-      }
-
-      .lf-filter-wrap {
+      .lf-market-search,
+      .lf-market-filter {
         width: 100%;
-      }
-
-      .lf-filter-button {
-        width: 100%;
-      }
-
-      .lf-filter-panel {
-        width: 100%;
-        left: 0;
-        right: auto;
       }
     }
 
   `;
 
   document.head.appendChild(style);
-}
-
-
-// ============================================================
-// CONSENSUS ENGINE
-// ============================================================
-
-function consensusKey(signal) {
-  return [
-    normalizeText(signal.player),
-    normalizeText(signal.market),
-    getSignalWeek(signal)
-  ].join('|');
-}
-
-
-function consensusStrength(
-  total,
-  agree,
-  disagree
-) {
-  if (total <= 1) {
-    return 'SINGLE';
-  }
-
-  if (agree === disagree) {
-    return 'SPLIT';
-  }
-
-  if (total === 2) {
-    return 'EMERGING';
-  }
-
-  if (total <= 4) {
-    return 'MODERATE';
-  }
-
-  if (total <= 6) {
-    return 'STRONG';
-  }
-
-  return 'HEAVY';
-}
-
-
-function consensusLabel(strength) {
-  const labels = {
-    HEAVY: 'HEAVY',
-    STRONG: 'STRONG',
-    MODERATE: 'MODERATE',
-    EMERGING: 'EMERGING',
-    SINGLE: 'SINGLE SOURCE',
-    SPLIT: 'SPLIT'
-  };
-
-  return labels[strength] || strength;
-}
-
-
-// ============================================================
-// WEEK HELPERS
-// ============================================================
-
-function getSignalWeek(signal) {
-  if (
-    signal.week !== null &&
-    signal.week !== undefined &&
-    signal.week !== ''
-  ) {
-    return Number(signal.week);
-  }
-
-  return Number(board?.week || 1);
-}
-
-
-function getAvailableWeeks() {
-  const weeks = new Set();
-
-  (board?.rawSignals || [])
-    .forEach(signal => {
-      const week =
-        getSignalWeek(signal);
-
-      if (Number.isFinite(week)) {
-        weeks.add(week);
-      }
-    });
-
-  if (
-    board?.week !== null &&
-    board?.week !== undefined
-  ) {
-    weeks.add(
-      Number(board.week)
-    );
-  }
-
-  return [...weeks]
-    .sort((a, b) => a - b);
-}
-
-
-function currentWeek() {
-  const weeks =
-    getAvailableWeeks();
-
-  if (!weeks.length) {
-    return Number(
-      board?.week || 1
-    );
-  }
-
-  return Math.max(...weeks);
 }
 
 
@@ -751,1861 +538,484 @@ function buildConsensusProps(
 ) {
   const groups = new Map();
 
-  signals.forEach(signal => {
-    const key =
-      consensusKey(signal);
+  (signals || []).forEach(signal => {
+    const week =
+      Number(signal.week || 1);
+
+    const key = [
+      signal.player,
+      signal.market,
+      week
+    ]
+      .join('|')
+      .toLowerCase();
 
     if (!groups.has(key)) {
-      groups.set(key, []);
+      groups.set(key, {
+        player: signal.player,
+        market: signal.market,
+        week,
+        signals: []
+      });
     }
 
     groups
       .get(key)
+      .signals
       .push(signal);
   });
 
-  return Array
-    .from(groups.values())
+  return Array.from(groups.values())
     .map(group => {
-
-      const first =
-        group[0];
-
-      const overSignals =
-        group.filter(
-          signal =>
-            normalizeSide(
-              signal.side
-            ) === 'OVER'
-        );
-
-      const underSignals =
-        group.filter(
-          signal =>
-            normalizeSide(
-              signal.side
-            ) === 'UNDER'
-        );
+      const signalsForProp =
+        group.signals;
 
       const over =
-        overSignals.length;
+        signalsForProp.filter(
+          s =>
+            String(s.side).toUpperCase() ===
+            'OVER'
+        );
 
       const under =
-        underSignals.length;
+        signalsForProp.filter(
+          s =>
+            String(s.side).toUpperCase() ===
+            'UNDER'
+        );
+
+      const yes =
+        signalsForProp.filter(
+          s =>
+            String(s.side).toUpperCase() ===
+            'YES'
+        );
 
       const total =
-        group.length;
+        signalsForProp.length;
 
-      let majoritySide;
-      let agree;
-      let disagree;
+      const primary =
+        over.length >= under.length
+          ? over[0] || yes[0] || signalsForProp[0]
+          : under[0];
 
-      if (over > under) {
-        majoritySide = 'OVER';
-        agree = over;
-        disagree = under;
-      }
-      else if (under > over) {
-        majoritySide = 'UNDER';
-        agree = under;
-        disagree = over;
-      }
-      else {
-        majoritySide =
-          normalizeSide(
-            first.side
-          );
+      const agree =
+        primary &&
+        String(primary.side).toUpperCase() ===
+          'UNDER'
+          ? under.length
+          : primary &&
+            String(primary.side).toUpperCase() ===
+              'YES'
+            ? yes.length
+            : over.length;
 
-        agree = over;
-        disagree = under;
-      }
+      const opposing =
+        primary &&
+        String(primary.side).toUpperCase() ===
+          'UNDER'
+          ? over.length
+          : primary &&
+            String(primary.side).toUpperCase() ===
+              'YES'
+            ? 0
+            : under.length;
 
       const percent =
         total > 0
           ? Math.round(
-              (agree / total) *
-              100
+              (agree / total) * 100
             )
           : 0;
 
-      const strength =
-        consensusStrength(
-          total,
-          agree,
-          disagree
+      const sourceMap =
+        Object.fromEntries(
+          (sources || []).map(
+            source => [
+              source.id,
+              source
+            ]
+          )
         );
 
       const analysts =
-        group.map(signal => {
-
+        signalsForProp.map(signal => {
           const source =
-            sources.find(
-              item =>
-                item.id ===
-                signal.sourceId
-            );
+            sourceMap[
+              signal.sourceId
+            ] || {};
 
           return {
             name:
-              signal.analyst,
+              signal.analyst ||
+              source.analyst ||
+              'Unknown analyst',
 
             outlet:
-              source?.outlet || '',
-
-            sourceId:
-              signal.sourceId,
-
-            url:
-              source?.url || '',
-
-            note:
-              signal.note || '',
+              source.outlet ||
+              '',
 
             side:
-              normalizeSide(
-                signal.side
-              ),
+              signal.side ||
+              '',
 
             line:
               signal.line,
 
-            week:
-              getSignalWeek(
-                signal
-              ),
-
-            signalId:
-              signal.id
+            url:
+              source.url ||
+              signal.url ||
+              ''
           };
         });
 
-      const majoritySignals =
-        group.filter(
-          signal =>
-            normalizeSide(
-              signal.side
-            ) === majoritySide
-        );
-
-      const majorityLines =
-        majoritySignals
-          .map(
-            signal =>
-              signal.line
-          )
+      const lines =
+        signalsForProp
+          .map(s => s.line)
           .filter(
             line =>
               line !== null &&
-              line !== undefined &&
-              line !== ''
+              line !== undefined
           )
           .map(Number)
-          .filter(
-            Number.isFinite
-          );
-
-      const allLines =
-        group
-          .map(
-            signal =>
-              signal.line
-          )
-          .filter(
-            line =>
-              line !== null &&
-              line !== undefined &&
-              line !== ''
-          )
-          .map(Number)
-          .filter(
-            Number.isFinite
-          );
+          .filter(Number.isFinite);
 
       const uniqueLines =
-        [
-          ...new Set(
-            allLines
-          )
-        ].sort(
-          (a, b) => a - b
-        );
-
-      const line =
-        majorityLines.length
-          ? majorityLines[0]
-          : first.line;
+        [...new Set(lines)]
+          .sort((a, b) => a - b);
 
       let lineDisplay = '';
 
-      if (
-        uniqueLines.length === 1
-      ) {
+      if (uniqueLines.length === 1) {
         lineDisplay =
-          String(
+          formatNumber(
             uniqueLines[0]
           );
       }
-      else if (
-        uniqueLines.length > 1
-      ) {
+      else if (uniqueLines.length > 1) {
         lineDisplay =
-          `${uniqueLines[0]}–${uniqueLines[uniqueLines.length - 1]}`;
+          `${formatNumber(
+            uniqueLines[0]
+          )}–${formatNumber(
+            uniqueLines[
+              uniqueLines.length - 1
+            ]
+          )}`;
       }
 
-      let rationale;
-
-      if (total === 1) {
-        rationale =
-          'One tracked source currently supports this direction; treat it as an early signal until more sources agree.';
-      }
-      else if (
-        over === under
-      ) {
-        rationale =
-          `${over} OVER expert${over === 1 ? '' : 's'} and ${under} UNDER expert${under === 1 ? '' : 's'} — the sources are split.`;
-      }
-      else {
-        rationale =
-          `${agree} ${majoritySide} expert${agree === 1 ? '' : 's'} • ${disagree} opposing expert${disagree === 1 ? '' : 's'} • ${percent}% direction consensus.`;
-      }
-
-      const weeks =
-        [
-          ...new Set(
-            group.map(
-              signal =>
-                getSignalWeek(
-                  signal
-                )
-            )
-          )
-        ].sort(
-          (a, b) => a - b
-        );
+      const side =
+        primary?.side || 'OVER';
 
       return {
-
         id:
-          `CONS-${group
-            .map(
-              signal =>
-                signal.id
-            )
-            .join('-')}`,
+          signalsForProp[0]?.id ||
+          key,
 
         player:
-          first.player,
+          group.player,
 
         market:
-          first.market,
+          group.market,
 
-        side:
-          majoritySide,
+        side,
 
         line:
-          line,
+          primary?.line ??
+          null,
 
-        lineDisplay:
-          lineDisplay,
+        week:
+          group.week,
 
-        analyst:
-          majoritySignals[0]?.analyst ||
-          first.analyst,
+        weeks: [group.week],
 
-        analysts:
-          analysts,
+        agree,
 
-        analystCount:
-          total,
+        disagree:
+          opposing,
 
         experts:
           total,
 
-        agree:
-          agree,
+        percent,
 
-        disagree:
-          disagree,
-
-        percent:
-          percent,
-
-        consensusScore:
-          percent,
-
-        consensusStrength:
-          strength,
+        lineDisplay,
 
         consensusDisplay:
-          total === 1
-            ? `1/1 ${majoritySide}`
-            : `${agree}/${total} ${majoritySide}`,
+          `${percent}%`,
 
         confidence:
-          consensusLabel(
-            strength
-          ),
+          percent >= 75
+            ? 'STRONG'
+            : percent >= 60
+              ? 'LEAN'
+              : 'EARLY',
+
+        analysts,
 
         rationale:
-          rationale,
+          `${agree} ${side} expert${
+            agree === 1 ? '' : 's'
+          } tracked for this market.`,
 
-        weeks:
-          weeks,
-
-        week:
-          weeks.length
-            ? weeks[0]
-            : Number(
-                board?.week || 1
-              )
+        sourceCount:
+          analysts.length
       };
     });
 }
 
 
 // ============================================================
-// FILTER STATE
+// RESULT HELPERS
 // ============================================================
 
-const filterState = {
-  week: 'ALL',
-  market: 'ALL',
-  outcome: 'ALL',
-  consensus: 'ALL',
-  player: ''
-};
-
-
-// ============================================================
-// FILTER UI
-// ============================================================
-
-function createFilterUI() {
-  const cards =
-    $('#propCards');
-
-  if (!cards) {
-    return;
-  }
-
-  /*
-   * Remove the old Confidence toolbar.
-   */
-  const oldToolbar =
-    document.querySelector(
-      '#props .section-head .toolbar'
-    );
-
-  if (oldToolbar) {
-    oldToolbar.remove();
-  }
-
-  /*
-   * Remove any previous generated controls.
-   */
-  $('#lfControls')
-    ?.remove();
-
-  const controls =
-    document.createElement('div');
-
-  controls.id =
-    'lfControls';
-
-  controls.className =
-    'lf-controls';
-
-  controls.innerHTML = `
-
-    <div class="lf-search-wrap">
-
-      <svg
-        class="lf-search-icon"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <circle
-          cx="11"
-          cy="11"
-          r="7"
-        ></circle>
-
-        <path
-          d="m20 20-3.5-3.5"
-        ></path>
-      </svg>
-
-      <input
-        id="lfPlayerSearch"
-        class="lf-search"
-        type="search"
-        placeholder="Search players, props..."
-        autocomplete="off"
-        aria-label="Search players and props"
-      />
-
-    </div>
-
-
-    <div class="lf-filter-wrap">
-
-      <button
-        id="lfFilterButton"
-        class="lf-filter-button"
-        type="button"
-        aria-expanded="false"
-      >
-
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <line
-            x1="4"
-            y1="6"
-            x2="20"
-            y2="6"
-          ></line>
-
-          <line
-            x1="7"
-            y1="12"
-            x2="20"
-            y2="12"
-          ></line>
-
-          <line
-            x1="10"
-            y1="18"
-            x2="20"
-            y2="18"
-          ></line>
-        </svg>
-
-        <span>
-          Filters
-        </span>
-
-        <span
-          id="lfFilterCount"
-          class="lf-filter-count"
-          style="display:none"
-        >
-          0
-        </span>
-
-      </button>
-
-
-      <div
-        id="lfFilterPanel"
-        class="lf-filter-panel"
-        aria-hidden="true"
-      ></div>
-
-    </div>
-
-  `;
-
-  /*
-   * Insert directly above the cards.
-   */
-  cards.parentNode.insertBefore(
-    controls,
-    cards
-  );
-
-  $('#lfPlayerSearch')
-    ?.addEventListener(
-      'input',
-      event => {
-        filterState.player =
-          event.target.value;
-
-        render();
-      }
-    );
-
-  $('#lfFilterButton')
-    ?.addEventListener(
-      'click',
-      event => {
-        event.stopPropagation();
-
-        toggleFilterPanel();
-      }
-    );
-
-  document.addEventListener(
-    'click',
-    closeFilterOnOutsideClick
-  );
-
-  renderFilterPanel();
-}
-
-
-function toggleFilterPanel() {
-  const panel =
-    $('#lfFilterPanel');
-
-  const button =
-    $('#lfFilterButton');
-
-  if (!panel || !button) {
-    return;
-  }
-
-  const open =
-    panel.classList.toggle(
-      'open'
-    );
-
-  button.classList.toggle(
-    'active',
-    open
-  );
-
-  button.setAttribute(
-    'aria-expanded',
-    open
-      ? 'true'
-      : 'false'
-  );
-
-  panel.setAttribute(
-    'aria-hidden',
-    open
-      ? 'false'
-      : 'true'
-  );
-}
-
-
-function closeFilterOnOutsideClick(
-  event
+function resultForSignal(
+  prop
 ) {
-  const wrapper =
-    document.querySelector(
-      '.lf-filter-wrap'
-    );
-
-  if (
-    wrapper &&
-    !wrapper.contains(
-      event.target
-    )
-  ) {
-    const panel =
-      $('#lfFilterPanel');
-
-    const button =
-      $('#lfFilterButton');
-
-    panel?.classList.remove(
-      'open'
-    );
-
-    button?.classList.remove(
-      'active'
-    );
-
-    button?.setAttribute(
-      'aria-expanded',
-      'false'
-    );
+  if (!prop) {
+    return null;
   }
+
+  const matching =
+    liveResults[prop.id];
+
+  return matching || null;
 }
-
-
-function renderFilterPanel() {
-  const panel =
-    $('#lfFilterPanel');
-
-  if (!panel) {
-    return;
-  }
-
-  const weeks =
-    getAvailableWeeks();
-
-  const markets =
-    [
-      ...new Set(
-        (board?.props || [])
-          .map(
-            prop =>
-              prop.market
-          )
-          .filter(Boolean)
-      )
-    ].sort(
-      (a, b) =>
-        String(a).localeCompare(
-          String(b)
-        )
-    );
-
-  panel.innerHTML = `
-
-    ${filterSection(
-      'week',
-      'Week',
-      [
-        {
-          value: 'ALL',
-          label: 'All Weeks'
-        },
-        ...weeks.map(
-          week => ({
-            value:
-              String(week),
-            label:
-              `Week ${week}`
-          })
-        )
-      ],
-      filterState.week
-    )}
-
-
-    ${filterSection(
-      'market',
-      'Market',
-      [
-        {
-          value: 'ALL',
-          label: 'All Markets'
-        },
-        ...markets.map(
-          market => ({
-            value:
-              market,
-            label:
-              market
-          })
-        )
-      ],
-      filterState.market
-    )}
-
-
-    ${filterSection(
-      'outcome',
-      'Outcome',
-      [
-        {
-          value: 'ALL',
-          label: 'All Outcomes'
-        },
-        {
-          value: 'PENDING',
-          label: 'Pending / Live'
-        },
-        {
-          value: 'HIT',
-          label: 'Bet Hit'
-        },
-        {
-          value: 'MISS',
-          label: 'Bet Miss'
-        }
-      ],
-      filterState.outcome
-    )}
-
-
-    ${filterSection(
-      'consensus',
-      'Consensus',
-      [
-        {
-          value: 'ALL',
-          label: 'All Consensus'
-        },
-        {
-          value: '2',
-          label: '2+ Experts'
-        },
-        {
-          value: '3',
-          label: '3+ Experts'
-        },
-        {
-          value: '4',
-          label: '4+ Experts'
-        }
-      ],
-      filterState.consensus
-    )}
-
-
-    <div class="lf-filter-footer">
-
-      <span
-        id="lfFilterActiveLabel"
-        class="lf-filter-active-label"
-      >
-        No filters applied
-      </span>
-
-      <button
-        id="lfFilterClear"
-        class="lf-filter-clear"
-        type="button"
-      >
-        Clear Filters
-      </button>
-
-    </div>
-
-  `;
-
-  /*
-   * Open the first section by default.
-   */
-  panel
-    .querySelector(
-      '.lf-filter-section'
-    )
-    ?.classList.add(
-      'expanded'
-    );
-
-  panel
-    .querySelectorAll(
-      '.lf-filter-section-title'
-    )
-    .forEach(button => {
-
-      button.addEventListener(
-        'click',
-        () => {
-
-          const section =
-            button.closest(
-              '.lf-filter-section'
-            );
-
-          section?.classList.toggle(
-            'expanded'
-          );
-
-        }
-      );
-
-    });
-
-  panel
-    .querySelectorAll(
-      '.lf-filter-option'
-    )
-    .forEach(button => {
-
-      button.addEventListener(
-        'click',
-        () => {
-
-          const type =
-            button.dataset.filterType;
-
-          const value =
-            button.dataset.value;
-
-          filterState[type] =
-            value;
-
-          renderFilterPanel();
-
-          render();
-
-        }
-      );
-
-    });
-
-  $('#lfFilterClear')
-    ?.addEventListener(
-      'click',
-      () => {
-
-        filterState.week =
-          'ALL';
-
-        filterState.market =
-          'ALL';
-
-        filterState.outcome =
-          'ALL';
-
-        filterState.consensus =
-          'ALL';
-
-        renderFilterPanel();
-
-        render();
-
-      }
-    );
-
-  updateFilterCount();
-}
-
-
-function filterSection(
-  type,
-  title,
-  options,
-  selected
-) {
-  const hasFilter =
-    selected !== 'ALL';
-
-  return `
-
-    <div
-      class="lf-filter-section ${
-        hasFilter
-          ? 'expanded'
-          : ''
-      }"
-    >
-
-      <button
-        class="lf-filter-section-title"
-        type="button"
-      >
-
-        <span>
-          ${escapeHtml(title)}
-        </span>
-
-        <svg
-          class="lf-filter-chevron"
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <polyline
-            points="6 9 12 15 18 9"
-          ></polyline>
-        </svg>
-
-      </button>
-
-
-      <div class="lf-filter-options">
-
-        ${options
-          .map(option => `
-
-            <button
-              class="
-                lf-filter-option
-                ${
-                  String(
-                    selected
-                  ) ===
-                  String(
-                    option.value
-                  )
-                    ? 'selected'
-                    : ''
-                }
-              "
-              type="button"
-              data-filter-type="${escapeHtml(type)}"
-              data-value="${escapeHtml(option.value)}"
-            >
-
-              <span
-                class="lf-filter-option-dot"
-              ></span>
-
-              <span>
-                ${escapeHtml(
-                  option.label
-                )}
-              </span>
-
-            </button>
-
-          `)
-          .join('')}
-
-      </div>
-
-    </div>
-
-  `;
-}
-
-
-function updateFilterCount() {
-  const count =
-    [
-      filterState.week !== 'ALL',
-      filterState.market !== 'ALL',
-      filterState.outcome !== 'ALL',
-      filterState.consensus !== 'ALL'
-    ]
-      .filter(Boolean)
-      .length;
-
-  const badge =
-    $('#lfFilterCount');
-
-  if (badge) {
-
-    badge.textContent =
-      count;
-
-    badge.style.display =
-      count
-        ? 'inline-flex'
-        : 'none';
-
-  }
-
-  const label =
-    $('#lfFilterActiveLabel');
-
-  if (label) {
-
-    label.textContent =
-      count === 0
-        ? 'No filters applied'
-        : `${count} filter${count === 1 ? '' : 's'} active`;
-
-  }
-}
-
-
-// ============================================================
-// LOAD DATA
-// ============================================================
-
-async function load() {
-
-  try {
-
-    const [
-      signalsData,
-      expertsData,
-      resultsData
-    ] =
-      await Promise.all([
-
-        fetch(
-          '/public-signals.json',
-          {
-            cache: 'no-store'
-          }
-        )
-          .then(response => {
-
-            if (!response.ok) {
-              throw new Error(
-                'Could not load public-signals.json'
-              );
-            }
-
-            return response.json();
-
-          }),
-
-        fetch(
-          '/analyst-profiles.json',
-          {
-            cache: 'no-store'
-          }
-        )
-          .then(response => {
-
-            if (!response.ok) {
-              throw new Error(
-                'Could not load analyst-profiles.json'
-              );
-            }
-
-            return response.json();
-
-          }),
-
-        fetch(
-          '/results-ledger.json',
-          {
-            cache: 'no-store'
-          }
-        )
-          .then(response => {
-
-            if (!response.ok) {
-              throw new Error(
-                'Could not load results-ledger.json'
-              );
-            }
-
-            return response.json();
-
-          })
-
-      ]);
-
-
-    const signals =
-      signalsData.signals || [];
-
-    const sources =
-      signalsData.sources || [];
-
-
-    board = {
-
-      mode:
-        'public-consensus',
-
-      week:
-        signalsData.week,
-
-      season:
-        signalsData.season,
-
-      refreshedAt:
-        new Date().toISOString(),
-
-      sources:
-        sources,
-
-      rawSignals:
-        signals,
-
-      props:
-        buildConsensusProps(
-          signals,
-          sources
-        )
-
-    };
-
-
-    experts =
-      expertsData;
-
-    results =
-      resultsData;
-
-
-    injectBoardStyles();
-
-    createFilterUI();
-
-    render();
-
-    await loadLiveResults();
-
-  }
-  catch (error) {
-
-    console.error(
-      'LineFoundry data load failed:',
-      error
-    );
-
-    if ($('#propCards')) {
-
-      $('#propCards').innerHTML = `
-
-        <div class="lf-empty">
-
-          <h3>
-            Unable to load LineFoundry data
-          </h3>
-
-          <p>
-            Please refresh the page and try again.
-          </p>
-
-        </div>
-
-      `;
-
-    }
-
-  }
-
-}
-
-
-// ============================================================
-// LIVE ESPN RESULTS
-// ============================================================
-
-async function loadLiveResults() {
-
-  try {
-
-    const response =
-      await fetch(
-        `${WORKER_URL}?_=${Date.now()}`,
-        {
-          cache: 'no-store'
-        }
-      );
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        `Worker returned ${response.status}`
-      );
-
-    }
-
-
-    const data =
-      await response.json();
-
-
-    if (!data.success) {
-
-      throw new Error(
-        data.error ||
-        'Worker returned an error'
-      );
-
-    }
-
-
-    liveResults = {};
-
-
-    (data.results || [])
-      .forEach(result => {
-
-        if (result.id) {
-
-          liveResults[result.id] =
-            result;
-
-        }
-
-      });
-
-
-    if (board) {
-
-      board.liveUpdatedAt =
-        data.updatedAt ||
-        new Date().toISOString();
-
-      render();
-
-    }
-
-
-    console.log(
-      'LineFoundry live results updated:',
-      data
-    );
-
-  }
-  catch (error) {
-
-    console.error(
-      'LineFoundry live data failed:',
-      error
-    );
-
-  }
-
-}
-
-
-// ============================================================
-// AUTOMATIC LIVE REFRESH
-// ============================================================
-
-setInterval(
-  loadLiveResults,
-  60000
-);
-
-
-// ============================================================
-// RESULT LOOKUP
-// ============================================================
-
-function getSignalIdsForProp(prop) {
-
-  if (!board?.rawSignals) {
-    return [];
-  }
-
-
-  const analystIds =
-    new Set(
-      prop.analysts
-        .map(
-          analyst =>
-            analyst.sourceId
-        )
-        .filter(Boolean)
-    );
-
-
-  return board.rawSignals
-    .filter(signal => {
-
-      if (
-        normalizeText(
-          signal.player
-        ) !==
-        normalizeText(
-          prop.player
-        )
-      ) {
-        return false;
-      }
-
-
-      if (
-        normalizeText(
-          signal.market
-        ) !==
-        normalizeText(
-          prop.market
-        )
-      ) {
-        return false;
-      }
-
-
-      if (
-        getSignalWeek(
-          signal
-        ) !==
-        Number(prop.week)
-      ) {
-        return false;
-      }
-
-
-      if (
-        !analystIds.has(
-          signal.sourceId
-        )
-      ) {
-        return false;
-      }
-
-
-      return true;
-
-    })
-    .map(
-      signal =>
-        signal.id
-    );
-
-}
-
-
-function getLiveMatches(prop) {
-
-  return getSignalIdsForProp(prop)
-    .map(
-      id =>
-        liveResults[id]
-    )
-    .filter(Boolean);
-
-}
-
 
 function getResult(prop) {
+  const result =
+    resultForSignal(prop);
 
-  const matches =
-    getLiveMatches(prop);
-
-
-  if (!matches.length) {
+  if (!result) {
     return 'PENDING';
   }
 
-
-  const hits =
-    matches.filter(
-      result =>
-        result.status === 'HIT'
-    );
-
-
-  const misses =
-    matches.filter(
-      result =>
-        result.status === 'MISS'
-    );
-
-
-  const live =
-    matches.find(
-      result =>
-        result.status === 'LIVE'
-    );
-
+  const status =
+    String(
+      result.result ||
+      result.status ||
+      ''
+    ).toUpperCase();
 
   if (
-    hits.length &&
-    !misses.length
+    status === 'HIT' ||
+    status === 'WIN'
   ) {
     return 'HIT';
   }
 
-
   if (
-    misses.length &&
-    !hits.length
+    status === 'MISS' ||
+    status === 'LOSS'
   ) {
     return 'MISS';
   }
 
-
-  if (live) {
-    return 'LIVE';
-  }
-
-
   if (
-    hits.length ||
-    misses.length
+    status === 'LIVE' ||
+    status === 'IN_PROGRESS'
   ) {
     return 'LIVE';
   }
 
-
   return 'PENDING';
-
 }
 
-
-// ============================================================
-// ACTUAL STAT
-// ============================================================
-
-function extractActualValue(result) {
+function getActualValue(prop) {
+  const result =
+    resultForSignal(prop);
 
   if (!result) {
     return null;
   }
 
-
-  const possibleValues = [
-
+  const candidates = [
     result.actual,
-
     result.actualValue,
-
     result.value,
-
     result.stat,
-
     result.playerStat,
-
     result.finalStat,
-
     result.currentStat,
-
     result.currentValue,
-
     result.yards,
-
     result.total
-
   ];
 
-
   for (
-    const value of possibleValues
+    const value of candidates
   ) {
-
     if (
       value !== null &&
       value !== undefined &&
-      value !== '' &&
-      Number.isFinite(
-        Number(value)
-      )
+      value !== ''
     ) {
-
-      return Number(value);
-
+      return value;
     }
-
   }
-
 
   return null;
-
 }
 
-
-function getActualValue(prop) {
-
-  const matches =
-    getLiveMatches(prop);
-
-
-  if (!matches.length) {
-    return null;
-  }
-
-
-  const values =
-    matches
-      .map(
-        extractActualValue
-      )
-      .filter(
-        value =>
-          value !== null &&
-          value !== undefined
-      );
-
-
-  if (!values.length) {
-    return null;
-  }
-
-
-  return values[0];
-
-}
-
-
-function marketActualLabel(
-  market
-) {
-
-  const value =
-    normalizeText(market);
-
+function actualLabel(prop) {
+  const market =
+    String(
+      prop?.market || ''
+    ).toLowerCase();
 
   if (
-    value.includes(
-      'receiving'
-    ) ||
-    value.includes(
-      'rushing'
-    ) ||
-    value.includes(
-      'passing'
-    )
+    market.includes('receiv') ||
+    market.includes('rushing') ||
+    market.includes('passing')
   ) {
     return 'YARDS ACTUAL';
   }
 
-
   if (
-    value.includes(
-      'reception'
-    )
+    market.includes('reception')
   ) {
     return 'RECEPTIONS ACTUAL';
   }
 
-
   if (
-    value.includes(
-      'attempt'
-    )
+    market.includes('attempt')
   ) {
     return 'ATTEMPTS ACTUAL';
   }
 
-
   if (
-    value.includes(
-      'interception'
-    )
+    market.includes('interception')
   ) {
     return 'INTERCEPTIONS ACTUAL';
   }
 
-
   if (
-    value.includes(
-      'touchdown'
-    )
+    market.includes('touchdown') ||
+    market.includes('anytime')
   ) {
     return 'TOUCHDOWNS ACTUAL';
   }
 
-
   return 'ACTUAL';
-
 }
 
-
-// ============================================================
-// RESULT DISPLAY
-// ============================================================
-
 function liveStatus(prop) {
-
-  const result =
+  const status =
     getResult(prop);
-
 
   const actual =
     getActualValue(prop);
 
-
   if (
-    result === 'HIT'
+    status === 'HIT' ||
+    status === 'MISS'
   ) {
-
     return `
-
-      <div class="live-stat hit">
-
+      <div class="lf-result ${status.toLowerCase()}">
         <strong>
-          BET HIT
+          ${status === 'HIT'
+            ? '🟢 BET HIT'
+            : '🔴 BET MISS'}
         </strong>
 
         ${
           actual !== null
             ? `
-              <span class="actual-stat">
-                ${formatNumber(actual)}
-                ${marketActualLabel(
-                  prop.market
+              <span>
+                ${escapeHtml(
+                  formatNumber(actual)
                 )}
+                ${actualLabel(prop)}
               </span>
             `
             : ''
         }
-
       </div>
-
     `;
-
   }
 
-
   if (
-    result === 'MISS'
+    status === 'LIVE'
   ) {
-
     return `
-
-      <div class="live-stat miss">
-
-        <strong>
-          BET MISS
-        </strong>
+      <div class="lf-result live">
+        <strong>🔴 LIVE</strong>
 
         ${
           actual !== null
             ? `
-              <span class="actual-stat">
-                ${formatNumber(actual)}
-                ${marketActualLabel(
-                  prop.market
+              <span>
+                ${escapeHtml(
+                  formatNumber(actual)
                 )}
+                ${actualLabel(prop)}
               </span>
             `
             : ''
         }
-
       </div>
-
     `;
-
   }
 
-
-  if (
-    result === 'LIVE'
-  ) {
-
-    return `
-
-      <div class="live-stat pending">
-
-        <strong>
-          LIVE
-        </strong>
-
-        ${
-          actual !== null
-            ? `
-              <span class="actual-stat">
-                ${formatNumber(actual)}
-                ${marketActualLabel(
-                  prop.market
-                )}
-              </span>
-            `
-            : ''
-        }
-
-      </div>
-
-    `;
-
-  }
-
-
-  return `
-
-    <div class="live-stat pending">
-
-      <strong>
-        PENDING
-      </strong>
-
-    </div>
-
-  `;
-
+  return '';
 }
 
 
 // ============================================================
-// FILTER LOGIC
+// EXPERT CARD
 // ============================================================
 
-function propMatchesFilters(
-  prop
-) {
+function sortProps(props) {
+  return [...props].sort(
+    (a, b) => {
+      const resultOrder = {
+        HIT: 0,
+        LIVE: 1,
+        PENDING: 2,
+        MISS: 3
+      };
 
-  const playerSearch =
-    normalizeText(
-      filterState.player
-    );
+      const aResult =
+        resultOrder[
+          getResult(a)
+        ] ?? 2;
 
+      const bResult =
+        resultOrder[
+          getResult(b)
+        ] ?? 2;
 
-  if (
-    playerSearch &&
-    !normalizeText(
-      `${prop.player} ${prop.market} ${prop.side}`
-    ).includes(
-      playerSearch
-    )
-  ) {
-    return false;
-  }
-
-
-  if (
-    filterState.week !==
-    'ALL'
-  ) {
-
-    if (
-      !prop.weeks.includes(
-        Number(
-          filterState.week
-        )
-      )
-    ) {
-      return false;
-    }
-
-  }
-
-
-  if (
-    filterState.market !==
-    'ALL'
-  ) {
-
-    if (
-      String(
-        prop.market
-      ) !==
-      String(
-        filterState.market
-      )
-    ) {
-      return false;
-    }
-
-  }
-
-
-  const outcome =
-    getResult(prop);
-
-
-  if (
-    filterState.outcome ===
-    'HIT'
-  ) {
-
-    if (
-      outcome !== 'HIT'
-    ) {
-      return false;
-    }
-
-  }
-
-
-  if (
-    filterState.outcome ===
-    'MISS'
-  ) {
-
-    if (
-      outcome !== 'MISS'
-    ) {
-      return false;
-    }
-
-  }
-
-
-  if (
-    filterState.outcome ===
-    'PENDING'
-  ) {
-
-    if (
-      outcome !== 'PENDING' &&
-      outcome !== 'LIVE'
-    ) {
-      return false;
-    }
-
-  }
-
-
-  if (
-    filterState.consensus !==
-    'ALL'
-  ) {
-
-    const minimum =
-      Number(
-        filterState.consensus
-      );
-
-    if (
-      prop.experts <
-      minimum
-    ) {
-      return false;
-    }
-
-  }
-
-
-  return true;
-
-}
-
-
-// ============================================================
-// SORT
-// ============================================================
-
-function sortProps(
-  props
-) {
-
-  return [...props]
-    .sort(
-      (a, b) => {
-
-        /*
-         * Most experts first.
-         */
-        if (
-          b.experts !==
-          a.experts
-        ) {
-
-          return (
-            b.experts -
-            a.experts
-          );
-
-        }
-
-
-        /*
-         * Strongest consensus second.
-         */
-        if (
-          b.percent !==
-          a.percent
-        ) {
-
-          return (
-            b.percent -
-            a.percent
-          );
-
-        }
-
-
-        /*
-         * Alphabetical tiebreaker.
-         */
-        return String(
-          a.player
-        ).localeCompare(
-          String(
-            b.player
-          )
+      if (
+        aResult !== bResult
+      ) {
+        return (
+          aResult -
+          bResult
         );
-
       }
-    );
 
+      return (
+        String(a.player)
+          .localeCompare(
+            String(b.player)
+          )
+      );
+    }
+  );
 }
-
-
-// ============================================================
-// CARD
-// ============================================================
 
 function card(prop) {
-
   const lockedPick =
-    locked.includes(
-      prop.id
-    );
-
+    locked.includes(prop.id);
 
   const sideClass =
     prop.side === 'UNDER'
       ? 'consensus-under'
       : 'consensus-over';
 
-
   const analysts =
-    prop.analysts
+    (prop.analysts || [])
       .map(
         analyst => `
-
           <div class="analyst-source">
 
             <strong>
@@ -2616,22 +1026,18 @@ function card(prop) {
 
             <span>
               ${escapeHtml(
-                analyst.outlet ||
-                ''
+                analyst.outlet || ''
               )}
 
               —
 
               ${escapeHtml(
-                analyst.side ||
-                ''
+                analyst.side || ''
               )}
 
               ${
-                analyst.line !==
-                  null &&
-                analyst.line !==
-                  undefined
+                analyst.line !== null &&
+                analyst.line !== undefined
                   ? `
                     ${formatNumber(
                       analyst.line
@@ -2639,7 +1045,6 @@ function card(prop) {
                   `
                   : ''
               }
-
             </span>
 
             ${
@@ -2659,14 +1064,11 @@ function card(prop) {
             }
 
           </div>
-
         `
       )
       .join('');
 
-
   return `
-
     <article
       class="
         prop
@@ -2691,7 +1093,6 @@ function card(prop) {
         </div>
 
       </div>
-
 
       <h3>
 
@@ -2726,76 +1127,48 @@ function card(prop) {
 
       </h3>
 
-
       ${liveStatus(prop)}
-
 
       <div class="metrics">
 
         <div class="metric">
-
           <b>
             ${prop.agree}
           </b>
-
-          <span>
-            Agree
-          </span>
-
+          <span>Agree</span>
         </div>
 
-
         <div class="metric">
-
           <b>
             ${prop.disagree}
           </b>
-
-          <span>
-            Disagree
-          </span>
-
+          <span>Disagree</span>
         </div>
 
-
         <div class="metric">
-
           <b>
             ${prop.experts}
           </b>
-
-          <span>
-            Experts
-          </span>
-
+          <span>Experts</span>
         </div>
 
-
         <div class="metric">
-
           <b>
             ${prop.percent}%
           </b>
-
-          <span>
-            Consensus
-          </span>
-
+          <span>Consensus</span>
         </div>
 
       </div>
-
 
       <div class="consensus-summary">
 
         <strong>
 
           ${prop.agree}
-
           ${escapeHtml(
             prop.side
           )}
-
           expert${
             prop.agree === 1
               ? ''
@@ -2805,34 +1178,26 @@ function card(prop) {
           ${
             prop.disagree > 0
               ? `
-
                 •
-
                 ${prop.disagree}
-
                 ${
                   prop.side ===
                   'OVER'
                     ? 'UNDER'
                     : 'OVER'
                 }
-
                 expert${
                   prop.disagree === 1
                     ? ''
                     : 's'
                 }
-
               `
               : `
-
                 • No opposing pick found
-
               `
           }
 
         </strong>
-
 
         <span>
 
@@ -2845,18 +1210,14 @@ function card(prop) {
           ${
             prop.lineDisplay
               ? `
-
                 • Published line${
-                  prop.lineDisplay
-                    .includes('–')
+                  prop.lineDisplay.includes('–')
                     ? ' range'
                     : ''
                 }:
-
                 ${escapeHtml(
                   prop.lineDisplay
                 )}
-
               `
               : ''
           }
@@ -2865,41 +1226,30 @@ function card(prop) {
 
       </div>
 
-
       <div class="analyst-list">
-
         ${analysts}
-
       </div>
 
-
       <p class="why">
-
         ${escapeHtml(
           prop.rationale
         )}
-
       </p>
-
 
       <div class="card-actions">
 
         <span class="lock-status">
-
           ${
             lockedPick
               ? '🔒 Locked'
               : '🟢 Open'
           }
-
         </span>
 
       </div>
 
     </article>
-
   `;
-
 }
 
 
@@ -2910,14 +1260,12 @@ function card(prop) {
 function weekSummary(
   props
 ) {
-
   const hits =
     props.filter(
       prop =>
         getResult(prop) ===
         'HIT'
     ).length;
-
 
   const misses =
     props.filter(
@@ -2926,14 +1274,12 @@ function weekSummary(
         'MISS'
     ).length;
 
-
   const live =
     props.filter(
       prop =>
         getResult(prop) ===
         'LIVE'
     ).length;
-
 
   const pending =
     props.filter(
@@ -2942,10 +1288,8 @@ function weekSummary(
         'PENDING'
     ).length;
 
-
   const settled =
     hits + misses;
-
 
   const percentage =
     settled > 0
@@ -2955,9 +1299,7 @@ function weekSummary(
         )
       : null;
 
-
   return `
-
     <span class="lf-week-summary">
 
       ${props.length}
@@ -3006,9 +1348,7 @@ function weekSummary(
       }
 
     </span>
-
   `;
-
 }
 
 
@@ -3021,10 +1361,8 @@ function weekSection(
   props,
   expanded
 ) {
-
   const sorted =
     sortProps(props);
-
 
   const status =
     Number(week) ===
@@ -3042,9 +1380,7 @@ function weekSection(
           : 'COMPLETE'
       );
 
-
   return `
-
     <details
       class="lf-week-section"
       data-week="${week}"
@@ -3069,7 +1405,6 @@ function weekSection(
 
       </summary>
 
-
       <div class="cards lf-week-cards">
 
         ${sorted
@@ -3079,29 +1414,1338 @@ function weekSection(
       </div>
 
     </details>
-
   `;
-
 }
 
 
 // ============================================================
-// RENDER
+// FILTERS
+// ============================================================
+
+const filterState = {
+  search: '',
+  week: 'ALL',
+  market: 'ALL',
+  outcome: 'ALL',
+  consensus: 'ALL'
+};
+
+function getAvailableWeeks() {
+  const weeks =
+    (board?.props || [])
+      .flatMap(
+        prop =>
+          prop.weeks ||
+          [prop.week]
+      )
+      .filter(Boolean)
+      .map(Number);
+
+  return [
+    ...new Set(weeks)
+  ].sort(
+    (a, b) => b - a
+  );
+}
+
+function propMatchesFilters(
+  prop
+) {
+  const search =
+    filterState.search
+      .trim()
+      .toLowerCase();
+
+  if (search) {
+    const haystack = [
+      prop.player,
+      prop.market,
+      prop.side,
+      prop.line,
+      ...(prop.analysts || [])
+        .map(
+          analyst =>
+            `${analyst.name} ${analyst.outlet}`
+        )
+    ]
+      .join(' ')
+      .toLowerCase();
+
+    if (
+      !haystack.includes(search)
+    ) {
+      return false;
+    }
+  }
+
+  if (
+    filterState.week !==
+    'ALL'
+  ) {
+    const weeks =
+      prop.weeks ||
+      [prop.week];
+
+    if (
+      !weeks
+        .map(String)
+        .includes(
+          String(filterState.week)
+        )
+    ) {
+      return false;
+    }
+  }
+
+  if (
+    filterState.market !==
+    'ALL' &&
+    prop.market !==
+      filterState.market
+  ) {
+    return false;
+  }
+
+  if (
+    filterState.outcome !==
+    'ALL'
+  ) {
+    const result =
+      getResult(prop);
+
+    if (
+      result !==
+      filterState.outcome
+    ) {
+      return false;
+    }
+  }
+
+  if (
+    filterState.consensus !==
+    'ALL'
+  ) {
+    const percent =
+      Number(prop.percent || 0);
+
+    if (
+      filterState.consensus ===
+      'STRONG' &&
+      percent < 75
+    ) {
+      return false;
+    }
+
+    if (
+      filterState.consensus ===
+      'LEAN' &&
+      (percent < 60 ||
+        percent >= 75)
+    ) {
+      return false;
+    }
+
+    if (
+      filterState.consensus ===
+      'EARLY' &&
+      percent >= 60
+    ) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function updateFilterCount() {
+  const button =
+    $('#lfFilterButton');
+
+  if (!button) {
+    return;
+  }
+
+  let count = 0;
+
+  if (
+    filterState.week !==
+    'ALL'
+  ) count++;
+
+  if (
+    filterState.market !==
+    'ALL'
+  ) count++;
+
+  if (
+    filterState.outcome !==
+    'ALL'
+  ) count++;
+
+  if (
+    filterState.consensus !==
+    'ALL'
+  ) count++;
+
+  button.textContent =
+    count > 0
+      ? `Filters (${count})`
+      : 'Filters';
+}
+
+function configureConsensusFilter() {
+  const oldFilter =
+    $('#confidenceFilter');
+
+  if (!oldFilter) {
+    return;
+  }
+
+  const parent =
+    oldFilter.parentElement;
+
+  if (!parent) {
+    return;
+  }
+
+  const label =
+    parent.querySelector('label');
+
+  if (label) {
+    label.textContent =
+      'Consensus Strength';
+  }
+}
+
+
+// ============================================================
+// LOAD MARKET DATA
+// ============================================================
+
+async function loadMarketData() {
+  try {
+    const response =
+      await fetch(
+        '/market-data.json',
+        {
+          cache: 'no-store'
+        }
+      );
+
+    if (!response.ok) {
+      throw new Error(
+        'Could not load market-data.json'
+      );
+    }
+
+    marketData =
+      await response.json();
+
+    renderMarkets();
+
+  }
+  catch (error) {
+    console.error(
+      'LineFoundry market data failed:',
+      error
+    );
+  }
+}
+
+
+// ============================================================
+// MARKET HELPERS
+// ============================================================
+
+function marketWeek(market) {
+  const value =
+    market?.event?.week ??
+    market?.week ??
+    market?.eventWeek ??
+    market?.seasonWeek;
+
+  if (
+    value === null ||
+    value === undefined
+  ) {
+    return null;
+  }
+
+  const match =
+    String(value).match(/\d+/);
+
+  return match
+    ? Number(match[0])
+    : null;
+}
+
+function marketPlayerName(
+  market
+) {
+  return (
+    market?.player?.name ||
+    market?.playerName ||
+    market?.player?.displayName ||
+    'Unknown Player'
+  );
+}
+
+function marketName(
+  market
+) {
+  return (
+    market?.market?.name ||
+    market?.marketName ||
+    'Player Prop'
+  );
+}
+
+function marketLine(
+  market
+) {
+  return (
+    market?.sides?.over?.line ??
+    market?.sides?.under?.line ??
+    market?.line ??
+    market?.overUnder ??
+    null
+  );
+}
+
+function marketSide(
+  market,
+  side
+) {
+  return (
+    market?.sides?.[
+      side
+    ] || null
+  );
+}
+
+function bestBook(
+  market,
+  side
+) {
+  const value =
+    marketSide(
+      market,
+      side
+    );
+
+  return (
+    value?.bestBook ||
+    value?.bookmaker ||
+    value?.sportsbook ||
+    null
+  );
+}
+
+function gameDescription(
+  market
+) {
+  const event =
+    market?.event || {};
+
+  const away =
+    event?.awayTeam ||
+    event?.away ||
+    event?.teams?.away?.name ||
+    event?.teams?.away?.names?.short ||
+    '';
+
+  const home =
+    event?.homeTeam ||
+    event?.home ||
+    event?.teams?.home?.name ||
+    event?.teams?.home?.names?.short ||
+    '';
+
+  if (
+    away &&
+    home
+  ) {
+    return `${away} @ ${home}`;
+  }
+
+  return (
+    market?.game ||
+    market?.eventName ||
+    ''
+  );
+}
+
+function marketType(
+  market
+) {
+  return (
+    market?.market?.marketType ||
+    market?.marketType ||
+    ''
+  );
+}
+
+
+// ============================================================
+// MARKET CARD
+// ============================================================
+
+function marketCard(
+  market,
+  index
+) {
+  const player =
+    marketPlayerName(
+      market
+    );
+
+  const name =
+    marketName(
+      market
+    );
+
+  const line =
+    marketLine(
+      market
+    );
+
+  const over =
+    marketSide(
+      market,
+      'over'
+    );
+
+  const under =
+    marketSide(
+      market,
+      'under'
+    );
+
+  const yes =
+    marketSide(
+      market,
+      'yes'
+    );
+
+  const week =
+    marketWeek(
+      market
+    );
+
+  const game =
+    gameDescription(
+      market
+    );
+
+  const bestOver =
+    bestBook(
+      market,
+      'over'
+    );
+
+  const bestYes =
+    bestBook(
+      market,
+      'yes'
+    );
+
+  const best =
+    bestOver ||
+    bestYes ||
+    bestBook(
+      market,
+      'under'
+    );
+
+  const id =
+    market.oddID ||
+    market.id ||
+    `market-${index}`;
+
+  const type =
+    marketType(
+      market
+    );
+
+  const isYesNo =
+    type ===
+    'yes_no';
+
+  return `
+    <article
+      class="lf-market-card"
+      data-market-id="${escapeHtml(id)}"
+    >
+
+      <div class="lf-market-top">
+
+        <div class="lf-market-player">
+
+          <strong>
+            ${escapeHtml(
+              player
+            )}
+          </strong>
+
+          <span class="lf-market-game">
+            ${escapeHtml(
+              game
+            )}
+          </span>
+
+        </div>
+
+        ${
+          week
+            ? `
+              <span class="lf-market-week">
+                W${week}
+              </span>
+            `
+            : ''
+        }
+
+      </div>
+
+      <div class="lf-market-type">
+        ${escapeHtml(name)}
+      </div>
+
+      <div class="lf-market-line">
+
+        <span
+          class="lf-market-line-number"
+        >
+          ${
+            isYesNo
+              ? 'YES'
+              : formatNumber(line)
+          }
+        </span>
+
+        ${
+          isYesNo
+            ? `
+              <div class="lf-market-sides">
+
+                <span
+                  class="lf-market-side"
+                >
+                  YES
+                  <b>
+                    ${formatOdds(
+                      yes?.odds
+                    )}
+                  </b>
+                </span>
+
+                ${
+                  marketSide(
+                    market,
+                    'no'
+                  )
+                    ? `
+                      <span
+                        class="lf-market-side"
+                      >
+                        NO
+                        <b>
+                          ${formatOdds(
+                            marketSide(
+                              market,
+                              'no'
+                            )?.odds
+                          )}
+                        </b>
+                      </span>
+                    `
+                    : ''
+                }
+
+              </div>
+            `
+            : `
+              <div class="lf-market-sides">
+
+                <span
+                  class="lf-market-side"
+                >
+                  OVER
+                  <b>
+                    ${formatOdds(
+                      over?.odds
+                    )}
+                  </b>
+                </span>
+
+                <span
+                  class="lf-market-side"
+                >
+                  UNDER
+                  <b>
+                    ${formatOdds(
+                      under?.odds
+                    )}
+                  </b>
+                </span>
+
+              </div>
+            `
+        }
+
+      </div>
+
+      <div
+        class="lf-market-divider"
+      ></div>
+
+      <div class="lf-market-bottom">
+
+        <span class="lf-market-best">
+          Best ${
+            isYesNo
+              ? 'Price'
+              : 'Over'
+          }:
+          <strong>
+            ${escapeHtml(
+              best || '—'
+            )}
+          </strong>
+        </span>
+
+        <button
+          class="lf-market-details"
+          type="button"
+          data-market-details="${escapeHtml(
+            id
+          )}"
+        >
+          Details →
+        </button>
+
+      </div>
+
+    </article>
+  `;
+}
+
+
+// ============================================================
+// MARKET DETAILS
+// ============================================================
+
+function bookmakerRows(
+  market
+) {
+  const bookmakers =
+    market?.bookmakers ||
+    market?.byBookmaker ||
+    {};
+
+  if (
+    Array.isArray(bookmakers)
+  ) {
+    return bookmakers
+      .map(book => {
+        const name =
+          book.name ||
+          book.bookmaker ||
+          book.id ||
+          'Book';
+
+        return `
+          <div class="lf-market-book">
+
+            <strong
+              class="lf-market-book-name"
+            >
+              ${escapeHtml(
+                name
+              )}
+            </strong>
+
+            <span>
+              ${formatNumber(
+                book.overUnder ??
+                book.line ??
+                ''
+              )}
+            </span>
+
+            <span>
+              ${formatOdds(
+                book.odds
+              )}
+            </span>
+
+          </div>
+        `;
+      })
+      .join('');
+  }
+
+  return Object.entries(
+    bookmakers
+  )
+    .map(
+      ([key, book]) => `
+        <div class="lf-market-book">
+
+          <strong
+            class="lf-market-book-name"
+          >
+            ${escapeHtml(
+              book?.name ||
+              key
+            )}
+          </strong>
+
+          <span>
+            ${formatNumber(
+              book?.overUnder ??
+              book?.line ??
+              ''
+            )}
+          </span>
+
+          <span>
+            ${formatOdds(
+              book?.odds
+            )}
+          </span>
+
+        </div>
+      `
+    )
+    .join('');
+}
+
+function alternateLines(
+  market
+) {
+  const lines =
+    market?.alternateLines ||
+    market?.altLines ||
+    market?.sides?.over?.altLines ||
+    [];
+
+  if (
+    !Array.isArray(lines) ||
+    !lines.length
+  ) {
+    return `
+      <div class="lf-market-empty">
+        No alternate lines available.
+      </div>
+    `;
+  }
+
+  const values =
+    lines
+      .map(
+        line =>
+          line?.overUnder ??
+          line?.line ??
+          line
+      )
+      .filter(
+        value =>
+          value !== null &&
+          value !== undefined
+      );
+
+  const unique =
+    [...new Set(
+      values.map(String)
+    )];
+
+  return `
+    <div class="lf-alt-lines">
+
+      ${unique
+        .map(
+          value => `
+            <span class="lf-alt-line">
+              ${escapeHtml(
+                value
+              )}
+            </span>
+          `
+        )
+        .join('')}
+
+    </div>
+  `;
+}
+
+function openMarketDetails(
+  market
+) {
+  const existing =
+    $('#lfMarketModal');
+
+  if (existing) {
+    existing.remove();
+  }
+
+  const player =
+    marketPlayerName(
+      market
+    );
+
+  const name =
+    marketName(
+      market
+    );
+
+  const line =
+    marketLine(
+      market
+    );
+
+  const over =
+    marketSide(
+      market,
+      'over'
+    );
+
+  const under =
+    marketSide(
+      market,
+      'under'
+    );
+
+  const modal =
+    document.createElement('div');
+
+  modal.id =
+    'lfMarketModal';
+
+  modal.className =
+    'lf-market-modal';
+
+  modal.innerHTML = `
+    <div
+      class="lf-market-modal-box"
+      role="dialog"
+      aria-modal="true"
+    >
+
+      <div
+        class="lf-market-modal-head"
+      >
+
+        <div>
+
+          <h3>
+            ${escapeHtml(
+              player
+            )}
+          </h3>
+
+          <div
+            class="lf-market-modal-sub"
+          >
+            ${escapeHtml(
+              name
+            )}
+            ${
+              line !== null
+                ? ` · ${formatNumber(
+                    line
+                  )}`
+                : ''
+            }
+          </div>
+
+        </div>
+
+        <button
+          class="lf-market-close"
+          type="button"
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <div
+        class="lf-market-detail-section"
+      >
+
+        <h4>
+          Current Market
+        </h4>
+
+        <div
+          class="lf-market-book"
+        >
+          <strong
+            class="lf-market-book-name"
+          >
+            Best Over
+          </strong>
+
+          <span>
+            ${formatNumber(
+              over?.line ??
+              line
+            )}
+          </span>
+
+          <span>
+            ${formatOdds(
+              over?.odds
+            )}
+          </span>
+        </div>
+
+        <div
+          class="lf-market-book"
+        >
+          <strong
+            class="lf-market-book-name"
+          >
+            Best Under
+          </strong>
+
+          <span>
+            ${formatNumber(
+              under?.line ??
+              line
+            )}
+          </span>
+
+          <span>
+            ${formatOdds(
+              under?.odds
+            )}
+          </span>
+        </div>
+
+      </div>
+
+      <div
+        class="lf-market-detail-section"
+      >
+
+        <h4>
+          Sportsbook Prices
+        </h4>
+
+        ${
+          bookmakerRows(
+            market
+          ) ||
+          `
+            <div
+              class="lf-market-empty"
+            >
+              Bookmaker detail is not
+              available for this market.
+            </div>
+          `
+        }
+
+      </div>
+
+      <div
+        class="lf-market-detail-section"
+      >
+
+        <h4>
+          Alternate Lines
+        </h4>
+
+        ${alternateLines(
+          market
+        )}
+
+      </div>
+
+      <div
+        class="lf-market-detail-section"
+      >
+
+        <h4>
+          Line Movement
+        </h4>
+
+        <div
+          class="lf-market-book"
+        >
+          <strong
+            class="lf-market-book-name"
+          >
+            Open
+          </strong>
+
+          <span>
+            ${formatNumber(
+              market?.openBookOverUnder ??
+              market?.openFairOverUnder ??
+              '—'
+            )}
+          </span>
+
+          <span>
+            ${formatOdds(
+              market?.openBookOdds ??
+              market?.openFairOdds
+            )}
+          </span>
+        </div>
+
+        <div
+          class="lf-market-book"
+        >
+          <strong
+            class="lf-market-book-name"
+          >
+            Current
+          </strong>
+
+          <span>
+            ${formatNumber(
+              market?.bookOverUnder ??
+              market?.fairOverUnder ??
+              line
+            )}
+          </span>
+
+          <span>
+            ${formatOdds(
+              market?.bookOdds ??
+              market?.fairOdds
+            )}
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+  `;
+
+  document.body.appendChild(
+    modal
+  );
+
+  modal
+    .querySelector(
+      '.lf-market-close'
+    )
+    ?.addEventListener(
+      'click',
+      () => modal.remove()
+    );
+
+  modal.addEventListener(
+    'click',
+    event => {
+      if (
+        event.target ===
+        modal
+      ) {
+        modal.remove();
+      }
+    }
+  );
+
+  document.addEventListener(
+    'keydown',
+    function closeOnEscape(
+      event
+    ) {
+      if (
+        event.key === 'Escape'
+      ) {
+        modal.remove();
+
+        document.removeEventListener(
+          'keydown',
+          closeOnEscape
+        );
+      }
+    }
+  );
+}
+
+
+// ============================================================
+// RENDER MARKETS
+// ============================================================
+
+function renderMarkets() {
+  const container =
+    $('#marketCards');
+
+  if (!container) {
+    return;
+  }
+
+  const markets =
+    marketData?.markets || [];
+
+  const search =
+    $('#lfMarketSearch')?.value
+      ?.trim()
+      .toLowerCase() || '';
+
+  const selectedMarket =
+    $('#lfMarketType')?.value ||
+    'ALL';
+
+  const filtered =
+    markets.filter(
+      market => {
+
+        const player =
+          marketPlayerName(
+            market
+          );
+
+        const name =
+          marketName(
+            market
+          );
+
+        const game =
+          gameDescription(
+            market
+          );
+
+        const haystack =
+          `${player} ${name} ${game}`
+            .toLowerCase();
+
+        if (
+          search &&
+          !haystack.includes(
+            search
+          )
+        ) {
+          return false;
+        }
+
+        if (
+          selectedMarket !==
+          'ALL' &&
+          name !==
+            selectedMarket
+        ) {
+          return false;
+        }
+
+        return true;
+      }
+    );
+
+  if (!filtered.length) {
+    container.innerHTML = `
+      <div
+        class="lf-market-empty"
+      >
+        No markets match your search.
+      </div>
+    `;
+
+    return;
+  }
+
+  container.innerHTML =
+    filtered
+      .map(
+        marketCard
+      )
+      .join('');
+
+  container
+    .querySelectorAll(
+      '[data-market-details]'
+    )
+    .forEach(button => {
+
+      button.addEventListener(
+        'click',
+        () => {
+
+          const id =
+            button.dataset
+              .marketDetails;
+
+          const market =
+            markets.find(
+              item =>
+                String(
+                  item.oddID ||
+                  item.id
+                ) ===
+                String(id)
+            );
+
+          if (market) {
+            openMarketDetails(
+              market
+            );
+          }
+        }
+      );
+
+    });
+}
+
+function configureMarketUI() {
+  const section =
+    $('#nfl');
+
+  if (!section) {
+    return;
+  }
+
+  /*
+    The Market gets its own content directly
+    beneath the NFL Picks heading.
+  */
+
+  if (
+    $('#marketCards')
+  ) {
+    return;
+  }
+
+  const controls =
+    document.createElement(
+      'div'
+    );
+
+  controls.className =
+    'lf-market-controls';
+
+  controls.innerHTML = `
+    <input
+      id="lfMarketSearch"
+      class="lf-market-search"
+      type="search"
+      placeholder="Search players, props..."
+      aria-label="Search NFL player props"
+    >
+
+    <select
+      id="lfMarketType"
+      class="lf-market-filter"
+      aria-label="Filter market type"
+    >
+      <option value="ALL">
+        All Markets
+      </option>
+    </select>
+  `;
+
+  const grid =
+    document.createElement(
+      'div'
+    );
+
+  grid.id =
+    'marketCards';
+
+  grid.className =
+    'lf-market-grid';
+
+  const wrapper =
+    document.createElement(
+      'div'
+    );
+
+  wrapper.className =
+    'lf-market-wrap';
+
+  wrapper.appendChild(
+    controls
+  );
+
+  wrapper.appendChild(
+    grid
+  );
+
+  section.appendChild(
+    wrapper
+  );
+
+  $('#lfMarketSearch')
+    ?.addEventListener(
+      'input',
+      renderMarkets
+    );
+
+  $('#lfMarketType')
+    ?.addEventListener(
+      'change',
+      renderMarkets
+    );
+}
+
+function populateMarketTypes() {
+  const select =
+    $('#lfMarketType');
+
+  if (!select) {
+    return;
+  }
+
+  const names =
+    [
+      ...new Set(
+        (marketData?.markets || [])
+          .map(
+            market =>
+              marketName(
+                market
+              )
+          )
+          .filter(Boolean)
+      )
+    ].sort();
+
+  select.innerHTML = `
+    <option value="ALL">
+      All Markets
+    </option>
+
+    ${names
+      .map(
+        name => `
+          <option
+            value="${escapeHtml(
+              name
+            )}"
+          >
+            ${escapeHtml(
+              name
+            )}
+          </option>
+        `
+      )
+      .join('')}
+  `;
+}
+
+
+// ============================================================
+// RENDER CONSENSUS
 // ============================================================
 
 function render() {
-
   if (!board) {
     return;
   }
 
-
   updateFilterCount();
-
 
   const allProps =
     board.props || [];
-
 
   const filteredProps =
     allProps.filter(
@@ -3111,26 +2755,21 @@ function render() {
         )
     );
 
-
   const sorted =
     sortProps(
       filteredProps
     );
 
-
   const selectedWeek =
     filterState.week;
 
-
   let weeks =
     getAvailableWeeks();
-
 
   if (
     selectedWeek !==
     'ALL'
   ) {
-
     weeks =
       weeks.filter(
         week =>
@@ -3139,20 +2778,16 @@ function render() {
             selectedWeek
           )
       );
-
   }
-
 
   const container =
     $('#propCards');
-
 
   if (container) {
 
     if (!sorted.length) {
 
       container.innerHTML = `
-
         <div class="lf-empty">
 
           <h3>
@@ -3160,11 +2795,11 @@ function render() {
           </h3>
 
           <p>
-            Try changing your search or filters.
+            Try changing your search
+            or filters.
           </p>
 
         </div>
-
       `;
 
     }
@@ -3178,11 +2813,13 @@ function render() {
               const weekProps =
                 sorted.filter(
                   prop =>
-                    prop.weeks.includes(
+                    (
+                      prop.weeks ||
+                      [prop.week]
+                    ).includes(
                       Number(week)
                     )
                 );
-
 
               if (
                 !weekProps.length
@@ -3190,90 +2827,64 @@ function render() {
                 return '';
               }
 
-
               const expanded =
                 selectedWeek !==
-                  'ALL'
+                'ALL'
                   ? true
                   : Number(week) ===
                     currentWeek();
-
 
               return weekSection(
                 week,
                 weekProps,
                 expanded
               );
-
             }
           )
           .filter(Boolean)
           .join('');
 
-
       container.innerHTML =
         sections;
-
     }
-
   }
 
-
   if ($('#pickCount')) {
-
     $('#pickCount')
       .textContent =
       locked.length;
-
   }
 
-
   if ($('#sourceCount')) {
-
     $('#sourceCount')
       .textContent =
       board?.sources?.length ||
       0;
-
   }
 
-
   if ($('#signalCount')) {
-
     $('#signalCount')
       .textContent =
       allProps.length;
-
   }
 
-
   if ($('#lastRefresh')) {
-
     $('#lastRefresh')
       .textContent =
       board?.liveUpdatedAt
-
         ? new Date(
             board.liveUpdatedAt
           ).toLocaleString()
-
         : board?.refreshedAt
-
           ? new Date(
               board.refreshedAt
             ).toLocaleString()
-
           : 'not run';
-
   }
 
-
   renderSources();
-
   renderExperts();
-
   renderRecord();
-
 }
 
 
@@ -3282,28 +2893,23 @@ function render() {
 // ============================================================
 
 function renderSources() {
-
   if (!$('#sourceRows')) {
     return;
   }
-
 
   $('#sourceRows')
     .innerHTML =
       (board?.sources || [])
         .map(
           source => `
-
             <tr>
 
               <td>
-
                 <strong>
                   ${escapeHtml(
                     source.analyst
                   )}
                 </strong>
-
               </td>
 
               <td>
@@ -3313,12 +2919,10 @@ function renderSources() {
               </td>
 
               <td>
-
                 ${Math.round(
                   (source.quality || 0) *
                   100
                 )}/100
-
               </td>
 
               <td>
@@ -3348,11 +2952,9 @@ function renderSources() {
               </td>
 
             </tr>
-
           `
         )
         .join('');
-
 }
 
 
@@ -3361,15 +2963,12 @@ function renderSources() {
 // ============================================================
 
 function renderExperts() {
-
   const expertList =
     experts?.experts || [];
-
 
   if (!$('#expertRows')) {
     return;
   }
-
 
   $('#expertRows')
     .innerHTML =
@@ -3414,19 +3013,15 @@ function renderExperts() {
                   ? 'TRACKING'
                   : 'NEW';
 
-
             return `
-
               <tr>
 
                 <td>
-
                   <strong>
                     ${escapeHtml(
                       expert.name
                     )}
                   </strong>
-
                 </td>
 
                 <td>
@@ -3465,13 +3060,10 @@ function renderExperts() {
                 </td>
 
               </tr>
-
             `;
-
           }
         )
         .join('');
-
 }
 
 
@@ -3480,59 +3072,255 @@ function renderExperts() {
 // ============================================================
 
 function renderRecord() {
-
   const record =
     experts?.record ||
     {};
 
-
   if ($('#wins')) {
-
     $('#wins')
       .textContent =
       record.wins ||
       0;
-
   }
 
-
   if ($('#losses')) {
-
     $('#losses')
       .textContent =
       record.losses ||
       0;
-
   }
 
-
   if ($('#units')) {
-
     $('#units')
       .textContent =
       `${Number(
         record.units ||
         0
       ).toFixed(2)}u`;
-
   }
 
-
   if ($('#roi')) {
-
     $('#roi')
       .textContent =
       record.roi == null
-
         ? '—'
-
         : `${(
             record.roi *
             100
           ).toFixed(1)}%`;
+  }
+}
+
+
+// ============================================================
+// LOAD LINEFOUNDRY DATA
+// ============================================================
+
+async function load() {
+  try {
+
+    const [
+      signalsData,
+      expertsData,
+      resultsData
+    ] =
+      await Promise.all([
+
+        fetch(
+          '/public-signals.json',
+          {
+            cache: 'no-store'
+          }
+        ).then(response => {
+
+          if (!response.ok) {
+            throw new Error(
+              'Could not load public-signals.json'
+            );
+          }
+
+          return response.json();
+        }),
+
+        fetch(
+          '/analyst-profiles.json',
+          {
+            cache: 'no-store'
+          }
+        ).then(response => {
+
+          if (!response.ok) {
+            throw new Error(
+              'Could not load analyst-profiles.json'
+            );
+          }
+
+          return response.json();
+        }),
+
+        fetch(
+          '/results-ledger.json',
+          {
+            cache: 'no-store'
+          }
+        ).then(response => {
+
+          if (!response.ok) {
+            throw new Error(
+              'Could not load results-ledger.json'
+            );
+          }
+
+          return response.json();
+        })
+
+      ]);
+
+    const signals =
+      signalsData.signals ||
+      [];
+
+    const sources =
+      signalsData.sources ||
+      [];
+
+    board = {
+      mode:
+        'public-consensus',
+
+      week:
+        signalsData.week,
+
+      season:
+        signalsData.season,
+
+      refreshedAt:
+        new Date().toISOString(),
+
+      sources,
+
+      rawSignals:
+        signals,
+
+      props:
+        buildConsensusProps(
+          signals,
+          sources
+        )
+    };
+
+    experts =
+      expertsData;
+
+    results =
+      resultsData;
+
+    configureConsensusFilter();
+
+    render();
+
+    await loadLiveResults();
 
   }
+  catch (error) {
 
+    console.error(
+      'LineFoundry data load failed:',
+      error
+    );
+
+    if ($('#propCards')) {
+
+      $('#propCards')
+        .innerHTML = `
+          <div class="empty-state">
+
+            <h3>
+              Unable to load
+              LineFoundry data
+            </h3>
+
+            <p>
+              Please refresh the page
+              and try again.
+            </p>
+
+          </div>
+        `;
+    }
+  }
+}
+
+
+// ============================================================
+// LOAD LIVE ESPN RESULTS
+// ============================================================
+
+async function loadLiveResults() {
+  try {
+
+    const response =
+      await fetch(
+        `${WORKER_URL}?_=${Date.now()}`,
+        {
+          cache: 'no-store'
+        }
+      );
+
+    if (!response.ok) {
+      throw new Error(
+        `Worker returned ${response.status}`
+      );
+    }
+
+    const data =
+      await response.json();
+
+    if (!data.success) {
+      throw new Error(
+        data.error ||
+        'Worker returned an error'
+      );
+    }
+
+    liveResults = {};
+
+    (data.results || [])
+      .forEach(
+        result => {
+
+          if (result.id) {
+
+            liveResults[
+              result.id
+            ] = result;
+
+          }
+        }
+      );
+
+    if (board) {
+
+      board.liveUpdatedAt =
+        data.updatedAt ||
+        new Date().toISOString();
+
+      render();
+    }
+
+    console.log(
+      'LineFoundry live results updated:',
+      data
+    );
+
+  }
+  catch (error) {
+
+    console.error(
+      'LineFoundry live data failed:',
+      error
+    );
+  }
 }
 
 
@@ -3544,42 +3332,34 @@ $('#refreshBoard')
   ?.addEventListener(
     'click',
     async () => {
-
       await load();
-
+      await loadMarketData();
     }
   );
-
 
 $('#howItWorks')
   ?.addEventListener(
     'click',
     () => {
-
       $('#howModal')
         ?.setAttribute(
           'aria-hidden',
           'false'
         );
-
     }
   );
-
 
 $('#closeHow')
   ?.addEventListener(
     'click',
     () => {
-
       $('#howModal')
         ?.setAttribute(
           'aria-hidden',
           'true'
         );
-
     }
   );
-
 
 document
   .querySelector(
@@ -3588,24 +3368,377 @@ document
   ?.addEventListener(
     'click',
     () => {
-
       $('#howModal')
         ?.setAttribute(
           'aria-hidden',
           'true'
         );
-
     }
   );
 
 
 // ============================================================
-// INITIAL LOAD
+// FILTER UI
 // ============================================================
 
-load();
+(function configureFilters() {
+
+  const oldToolbar =
+    document.querySelector(
+      '#props .toolbar'
+    );
+
+  if (
+    oldToolbar
+  ) {
+    oldToolbar.style.display =
+      'none';
+  }
+
+  const propHead =
+    document.querySelector(
+      '#props .section-head'
+    );
+
+  if (
+    !propHead ||
+    $('#lfConsensusControls')
+  ) {
+    return;
+  }
+
+  const controls =
+    document.createElement(
+      'div'
+    );
+
+  controls.id =
+    'lfConsensusControls';
+
+  controls.style.cssText =
+    `
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-top:18px;
+      flex-wrap:wrap;
+    `;
+
+  controls.innerHTML = `
+    <input
+      id="lfConsensusSearch"
+      type="search"
+      placeholder="Search players, props..."
+      style="
+        flex:1;
+        min-width:220px;
+        height:50px;
+        padding:0 16px;
+        border-radius:999px;
+        border:1px solid rgba(255,255,255,.1);
+        background:rgba(255,255,255,.035);
+        color:inherit;
+        font:inherit;
+        outline:none;
+      "
+    >
+
+    <button
+      id="lfFilterButton"
+      class="secondary-btn"
+      type="button"
+      style="
+        height:50px;
+        border-radius:999px;
+      "
+    >
+      Filters
+    </button>
+  `;
+
+  propHead.appendChild(
+    controls
+  );
+
+  const panel =
+    document.createElement(
+      'div'
+    );
+
+  panel.id =
+    'lfFilterPanel';
+
+  panel.hidden =
+    true;
+
+  panel.style.cssText =
+    `
+      margin-top:12px;
+      padding:16px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      background:rgba(255,255,255,.025);
+    `;
+
+  panel.innerHTML = `
+
+    <div
+      style="
+        display:grid;
+        grid-template-columns:
+          repeat(4,minmax(0,1fr));
+        gap:10px;
+      "
+    >
+
+      <select
+        id="lfWeekFilter"
+        class="secondary-btn"
+      >
+        <option value="ALL">
+          All Weeks
+        </option>
+      </select>
+
+      <select
+        id="lfMarketFilter"
+        class="secondary-btn"
+      >
+        <option value="ALL">
+          All Markets
+        </option>
+      </select>
+
+      <select
+        id="lfOutcomeFilter"
+        class="secondary-btn"
+      >
+        <option value="ALL">
+          All Results
+        </option>
+        <option value="HIT">
+          Bet Hit
+        </option>
+        <option value="MISS">
+          Bet Miss
+        </option>
+        <option value="LIVE">
+          Live
+        </option>
+        <option value="PENDING">
+          Pending
+        </option>
+      </select>
+
+      <select
+        id="lfConsensusFilter"
+        class="secondary-btn"
+      >
+        <option value="ALL">
+          All Consensus
+        </option>
+        <option value="STRONG">
+          Strong 75%+
+        </option>
+        <option value="LEAN">
+          Lean 60–74%
+        </option>
+        <option value="EARLY">
+          Early <60%
+        </option>
+      </select>
+
+    </div>
+  `;
+
+  propHead.appendChild(
+    panel
+  );
+
+  const search =
+    $('#lfConsensusSearch');
+
+  search?.addEventListener(
+    'input',
+    () => {
+      filterState.search =
+        search.value;
+
+      render();
+    }
+  );
+
+  $('#lfFilterButton')
+    ?.addEventListener(
+      'click',
+      () => {
+        panel.hidden =
+          !panel.hidden;
+      }
+    );
+
+  $('#lfWeekFilter')
+    ?.addEventListener(
+      'change',
+      event => {
+        filterState.week =
+          event.target.value;
+
+        render();
+      }
+    );
+
+  $('#lfMarketFilter')
+    ?.addEventListener(
+      'change',
+      event => {
+        filterState.market =
+          event.target.value;
+
+        render();
+      }
+    );
+
+  $('#lfOutcomeFilter')
+    ?.addEventListener(
+      'change',
+      event => {
+        filterState.outcome =
+          event.target.value;
+
+        render();
+      }
+    );
+
+  $('#lfConsensusFilter')
+    ?.addEventListener(
+      'change',
+      event => {
+        filterState.consensus =
+          event.target.value;
+
+        render();
+      }
+    );
+
+})();
+
+
+// ============================================================
+// INITIALIZE MARKET UI
+// ============================================================
+
+injectBoardStyles();
+
+configureMarketUI();
+
+
+// Populate consensus filter options
+function populateConsensusFilters() {
+
+  const weekSelect =
+    $('#lfWeekFilter');
+
+  const marketSelect =
+    $('#lfMarketFilter');
+
+  if (
+    weekSelect &&
+    board
+  ) {
+
+    const weeks =
+      getAvailableWeeks();
+
+    weekSelect.innerHTML = `
+      <option value="ALL">
+        All Weeks
+      </option>
+
+      ${weeks
+        .map(
+          week => `
+            <option value="${week}">
+              Week ${week}
+            </option>
+          `
+        )
+        .join('')}
+    `;
+  }
+
+  if (
+    marketSelect &&
+    board
+  ) {
+
+    const markets =
+      [
+        ...new Set(
+          (board.props || [])
+            .map(
+              prop =>
+                prop.market
+            )
+            .filter(Boolean)
+        )
+      ].sort();
+
+    marketSelect.innerHTML = `
+      <option value="ALL">
+        All Markets
+      </option>
+
+      ${markets
+        .map(
+          market => `
+            <option
+              value="${escapeHtml(
+                market
+              )}"
+            >
+              ${escapeHtml(
+                market
+              )}
+            </option>
+          `
+        )
+        .join('')}
+    `;
+  }
+}
+
+
+// Wrap render so filters stay populated
+const originalRender =
+  render;
+
+
+// ============================================================
+// START
+// ============================================================
+
+load()
+  .then(
+    () => {
+      populateConsensusFilters();
+    }
+  );
+
+loadMarketData()
+  .then(
+    () => {
+      populateMarketTypes();
+      renderMarkets();
+    }
+  );
 
 setTimeout(
   loadLiveResults,
   1500
+);
+
+setInterval(
+  loadLiveResults,
+  60000
 );
