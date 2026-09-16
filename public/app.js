@@ -2332,7 +2332,13 @@ function marketCard(
     <article
       class="lf-market-card"
     >
-
+    
+<div class="lf-market-week">
+  NFL • WEEK ${escapeHtml(
+    String(market?.week || '—')
+      .replace(/^Week\s*/i, '')
+  )}
+</div>
       <div class="lf-market-player">
         ${escapeHtml(
           market?.player?.name ||
