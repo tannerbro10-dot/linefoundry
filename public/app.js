@@ -1934,28 +1934,15 @@ function weekSection(
         a.percent
     );
 
+  const weekNumber = Number(week);
+  const current = currentWeek();
 
   const status =
-    Number(week) ===
-    currentWeek()
-      ? 'CURRENT'
-      : (
-        props.some(
-          prop => {
-
-            const result =
-              getResult(prop);
-
-            return (
-              result === 'PENDING' ||
-              result === 'LIVE'
-            );
-          }
-        )
-          ? 'IN PROGRESS'
-          : 'COMPLETE'
-      );
-
+    weekNumber < current
+      ? 'COMPLETE'
+      : weekNumber === current
+        ? 'CURRENT'
+        : 'UPCOMING';
 
   return `
 
