@@ -1,0 +1,61 @@
+{
+  "season": 2026,
+  "enabled": true,
+  "sources": [
+    {
+      "id": "nypost",
+      "outlet": "NY Post",
+      "domains": [
+        "nypost.com"
+      ],
+      "enabled": true,
+      "quality": 0.82
+    },
+    {
+      "id": "vsin",
+      "outlet": "VSiN",
+      "domains": [
+        "vsin.com"
+      ],
+      "enabled": true,
+      "quality": 0.87
+    },
+    {
+      "id": "talksport",
+      "outlet": "TalkSport",
+      "domains": [
+        "talksport.com"
+      ],
+      "enabled": true,
+      "quality": 0.74
+    },
+    {
+      "id": "action-network",
+      "outlet": "Action Network",
+      "domains": [
+        "actionnetwork.com"
+      ],
+      "enabled": true,
+      "quality": 0.90
+    },
+    {
+      "id": "sharp-football-analysis",
+      "outlet": "Sharp Football Analysis",
+      "domains": [
+        "sharpfootballanalysis.com"
+      ],
+      "enabled": true,
+      "quality": 0.86
+    },
+    {
+      "id": "sportsline",
+      "outlet": "SportsLine",
+      "domains": [
+        "sportsline.com",
+        "cbssports.com"
+      ],
+      "enabled": true,
+      "quality": 0.90
+    }
+  ]
+}
