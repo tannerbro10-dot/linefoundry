@@ -48,17 +48,19 @@ jobs:
             event.teams?.home?.names?.long || "Unknown";
 
           console.log(`Event: ${away} @ ${home}`);
+
           console.log(
             `Week: ${event.info?.seasonWeek || "Unknown"}`
           );
+
           console.log(
             `Event ID: ${event.eventID || "Unknown"}`
           );
+
           console.log(
             `Start: ${event.status?.startsAt || "Unknown"}`
           );
 
-          let oddsCount = 0;
           let playerProps = [];
 
           function scan(value) {
@@ -76,10 +78,17 @@ jobs:
 
             if (
               value.statEntityID &&
-              value.statID
+              value.statID &&
+              ![
+                "all",
+                "home",
+                "away"
+              ].includes(
+                String(
+                  value.statEntityID
+                ).toLowerCase()
+              )
             ) {
-              oddsCount++;
-
               playerProps.push(value);
             }
 
@@ -104,6 +113,7 @@ jobs:
           console.log(
             "FIRST 20 PLAYER PROP RECORDS"
           );
+
           console.log(
             "----------------------------------------"
           );
