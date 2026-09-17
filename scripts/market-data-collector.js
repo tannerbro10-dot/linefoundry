@@ -1,0 +1,579 @@
+/**
+ * LineFoundry Market Data Collector
+ *
+ * MVP:
+ * - NFL only
+ * - Full-game player props only
+ * - No alternate lines
+ * - No quarter/half markets
+ * - No defensive/kicking/punting/fantasy markets
+ *
+ * Output:
+ * - market-data.json
+ *
+ * API:
+ * - SportsGameOdds v2
+ */
+
+const fs = require("fs");
+
+const API_URL =
+  "https://api.sportsgameodds.com/v2/events";
+
+const API_KEY =
+  process.env.SPORTSGAMEODDS_API_KEY;
+
+
+// ============================================================
+// CONFIGURATION
+// ============================================================
+
+const ALLOWED_MARKETS = new Set([
+
+  "passing_yards",
+
+  "passing_attempts",
+
+  "passing_completions",
+
+  "passing_interceptions",
+
+  "passing_touchdowns",
+
+  "rushing_yards",
+
+  "rushing_attempts",
+
+  "rushing_touchdowns",
+
+  "receiving_yards",
+
+  "receiving_receptions",
+
+  "receiving_targets",
+
+  "receiving_touchdowns",
+
+  "rushing+receiving_yards",
+
+  "receiving_longestReception",
+
+  "rushing_longestRush"
+
+]);
+
+
+// ============================================================
+// REQUEST
+// ============================================================
+
+async function fetchEvents(cursor = null) {
+
+  const params =
+    new URLSearchParams({
+
+      leagueID:
+        "NFL",
+
+      oddsAvailable:
+        "true",
+
+      includeAltLines:
+        "false",
+
+      limit:
+        "10"
+
+    });
+
+  if (cursor) {
+
+    params.set(
+      "cursor",
+      cursor
+    );
+
+  }
+
+  const response =
+    await fetch(
+      `${API_URL}?${params.toString()}`,
+      {
+        headers: {
+          "x-api-key":
+            API_KEY
+        }
+      }
+    );
+
+  if (!response.ok) {
+
+    throw new Error(
+      `SportsGameOdds request failed: ${response.status}`
+    );
+
+  }
+
+  const data =
+    await response.json();
+
+  if (!data.success) {
+
+    throw new Error(
+      data.error ||
+      "SportsGameOdds returned an unsuccessful response."
+    );
+
+  }
+
+  return data;
+
+}
+
+
+// ============================================================
+// CHECK PLAYER PROP
+// ============================================================
+
+function isPlayerProp(odd) {
+
+  if (
+    !odd ||
+    !odd.statEntityID
+  ) {
+
+    return false;
+
+  }
+
+  return ![
+    "home",
+    "away",
+    "all"
+  ].includes(
+    String(
+      odd.statEntityID
+    ).toLowerCase()
+  );
+
+}
+
+
+// ============================================================
+// CHECK FULL-GAME CORE MARKET
+// ============================================================
+
+function isAllowedMarket(odd) {
+
+  if (
+    !isPlayerProp(odd)
+  ) {
+
+    return false;
+
+  }
+
+  if (
+    odd.periodID !==
+    "game"
+  ) {
+
+    return false;
+
+  }
+
+  if (
+    !ALLOWED_MARKETS.has(
+      odd.statID
+    )
+  ) {
+
+    return false;
+
+  }
+
+  return true;
+
+}
+
+
+// ============================================================
+// NORMALIZE SIDE
+// ============================================================
+
+function normalizeSide(side) {
+
+  const value =
+    String(
+      side || ""
+    ).toLowerCase();
+
+  if (
+    value === "over"
+  ) {
+
+    return "OVER";
+
+  }
+
+  if (
+    value === "under"
+  ) {
+
+    return "UNDER";
+
+  }
+
+  return value.toUpperCase();
+
+}
+
+
+// ============================================================
+// NORMALIZE MARKET
+// ============================================================
+
+function normalizeMarket(statID) {
+
+  const markets = {
+
+    passing_yards:
+      "Passing Yards",
+
+    passing_attempts:
+      "Passing Attempts",
+
+    passing_completions:
+      "Completions",
+
+    passing_interceptions:
+      "Interceptions",
+
+    passing_touchdowns:
+      "Passing Touchdowns",
+
+    rushing_yards:
+      "Rushing Yards",
+
+    rushing_attempts:
+      "Rushing Attempts",
+
+    rushing_touchdowns:
+      "Rushing Touchdowns",
+
+    receiving_yards:
+      "Receiving Yards",
+
+    receiving_receptions:
+      "Receptions",
+
+    receiving_targets:
+      "Receiving Targets",
+
+    receiving_touchdowns:
+      "Receiving Touchdowns",
+
+    "rushing+receiving_yards":
+      "Rushing + Receiving Yards",
+
+    receiving_longestReception:
+      "Longest Reception",
+
+    rushing_longestRush:
+      "Longest Rush"
+
+  };
+
+  return (
+    markets[statID] ||
+    statID
+  );
+
+}
+
+
+// ============================================================
+// EXTRACT PLAYER NAME
+// ============================================================
+
+function playerName(
+  event,
+  playerID
+) {
+
+  const player =
+    event.players?.[
+      playerID
+    ];
+
+  if (
+    player?.name
+  ) {
+
+    return player.name;
+
+  }
+
+  return String(
+    playerID
+  )
+    .replace(
+      /_1_NFL$/,
+      ""
+    )
+    .replace(
+      /_/g,
+      " "
+    )
+    .replace(
+      /\b\w/g,
+      char =>
+        char.toUpperCase()
+    );
+
+}
+
+
+// ============================================================
+// NORMALIZE PROP
+// ============================================================
+
+function normalizeProp(
+  event,
+  odd
+) {
+
+  const line =
+    odd.bookOverUnder ??
+    odd.fairOverUnder ??
+    null;
+
+  return {
+
+    id:
+      odd.oddID,
+
+    eventId:
+      event.eventID,
+
+    week:
+      event.info?.seasonWeek ||
+      null,
+
+    season:
+      2026,
+
+    player:
+      playerName(
+        event,
+        odd.statEntityID
+      ),
+
+    playerId:
+      odd.statEntityID,
+
+    market:
+      normalizeMarket(
+        odd.statID
+      ),
+
+    statId:
+      odd.statID,
+
+    side:
+      normalizeSide(
+        odd.sideID
+      ),
+
+    line:
+
+      line !== null
+        ? Number(line)
+        : null,
+
+    odds:
+      odd.bookOdds ??
+      odd.fairOdds ??
+      null,
+
+    fairOdds:
+      odd.fairOdds ??
+      null,
+
+    bookmakerOdds:
+      odd.byBookmaker ||
+      {},
+
+    period:
+      odd.periodID,
+
+    updatedAt:
+      new Date()
+        .toISOString()
+
+  };
+
+}
+
+
+// ============================================================
+// COLLECT ALL EVENTS
+// ============================================================
+
+async function collectAllEvents() {
+
+  const events = [];
+
+  let cursor =
+    null;
+
+  do {
+
+    const response =
+      await fetchEvents(
+        cursor
+      );
+
+    if (
+      Array.isArray(
+        response.data
+      )
+    ) {
+
+      events.push(
+        ...response.data
+      );
+
+    }
+
+    cursor =
+      response.nextCursor ||
+      null;
+
+  } while (cursor);
+
+  return events;
+
+}
+
+
+// ============================================================
+// BUILD MARKET DATA
+// ============================================================
+
+async function buildMarketData() {
+
+  if (!API_KEY) {
+
+    throw new Error(
+      "SPORTSGAMEODDS_API_KEY is not set."
+    );
+
+  }
+
+  const events =
+    await collectAllEvents();
+
+  const markets = [];
+
+  for (
+    const event of events
+  ) {
+
+    const odds =
+      event.odds ||
+      {};
+
+    for (
+      const odd of Object.values(
+        odds
+      )
+    ) {
+
+      if (
+        !isAllowedMarket(
+          odd
+        )
+      ) {
+
+        continue;
+
+      }
+
+      markets.push(
+        normalizeProp(
+          event,
+          odd
+        )
+      );
+
+    }
+
+  }
+
+  return {
+
+    success:
+      true,
+
+    source:
+      "SportsGameOdds",
+
+    season:
+      2026,
+
+    refreshedAt:
+      new Date()
+        .toISOString(),
+
+    eventCount:
+      events.length,
+
+    marketCount:
+      markets.length,
+
+    markets
+
+  };
+
+}
+
+
+// ============================================================
+// MAIN
+// ============================================================
+
+async function main() {
+
+  const output =
+    await buildMarketData();
+
+  fs.writeFileSync(
+
+    "market-data.json",
+
+    JSON.stringify(
+      output,
+      null,
+      2
+    )
+
+  );
+
+  console.log(
+    `Collected ${output.marketCount} full-game player props across ${output.eventCount} NFL events.`
+  );
+
+}
+
+
+main()
+  .catch(error => {
+
+    console.error(
+      error.message
+    );
+
+    process.exit(1);
+
+  });
