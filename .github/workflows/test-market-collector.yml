@@ -57,9 +57,39 @@ jobs:
             .slice(0, 25)
             .forEach((market, index) => {
 
-              console.log(
-                `${index + 1}. ${market.player} | ${market.market} | ${market.side} ${market.line}`
-              );
+                        const player =
+                market.player?.name ||
+                "Unknown Player";
+
+              const marketName =
+                market.market?.name ||
+                "Unknown Market";
+
+              const over =
+                market.sides?.over;
+
+              const under =
+                market.sides?.under;
+
+              const yes =
+                market.sides?.yes;
+
+              const no =
+                market.sides?.no;
+
+              if (yes || no) {
+
+                console.log(
+                  `${index + 1}. ${player} | ${marketName} | YES ${yes?.odds ?? "—"} | NO ${no?.odds ?? "—"}`
+                );
+
+              } else {
+
+                console.log(
+                  `${index + 1}. ${player} | ${marketName} | ${over?.line ?? "—"} | OVER ${over?.odds ?? "—"} | UNDER ${under?.odds ?? "—"}`
+                );
+
+              }
 
             });
 
