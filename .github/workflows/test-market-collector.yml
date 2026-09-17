@@ -1,0 +1,67 @@
+name: Test Market Collector
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Run Market Collector Test
+        env:
+          SPORTSGAMEODDS_API_KEY: ${{ secrets.SPORTSGAMEODDS_API_KEY }}
+        run: |
+          node scripts/market-data-collector.js
+
+      - name: Show Market Summary
+        run: |
+          node <<'NODE'
+          const fs = require("fs");
+
+          const data =
+            JSON.parse(
+              fs.readFileSync(
+                "market-data.json",
+                "utf8"
+              )
+            );
+
+          console.log("");
+          console.log("========================================");
+          console.log("MARKET COLLECTOR TEST");
+          console.log("========================================");
+
+          console.log(
+            `Events: ${data.eventCount}`
+          );
+
+          console.log(
+            `Markets: ${data.marketCount}`
+          );
+
+          console.log("");
+          console.log("FIRST 25 MARKETS");
+          console.log("----------------------------------------");
+
+          data.markets
+            .slice(0, 25)
+            .forEach((market, index) => {
+
+              console.log(
+                `${index + 1}. ${market.player} | ${market.market} | ${market.side} ${market.line}`
+              );
+
+            });
+
+          console.log("");
+          console.log("========================================");
+          NODE
