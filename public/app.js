@@ -536,26 +536,71 @@ function injectBoardStyles() {
       font-weight: 800;
     }
 
-    .lf-market-odds {
-      display: flex;
-      gap: 15px;
-      color: #b9c8d5;
-      font-size: 12px;
-    }
+  .lf-market-odds {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
 
-    .lf-market-odds .over {
-      color: #75efb4;
-    }
+.lf-market-price {
+  min-width: 0;
+  padding: 10px 11px;
+  border-radius: 8px;
+  border: 1px solid rgba(120,150,175,.14);
+  background: rgba(255,255,255,.025);
+}
 
-    .lf-market-odds .under {
-      color: #ff9c9c;
-    }
+.lf-market-price-label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+}
 
-    .lf-market-best {
-      margin-top: 16px;
-      color: #7f92a5;
-      font-size: 10px;
-    }
+.lf-market-price strong {
+  display: block;
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.lf-market-price.over {
+  border-color: rgba(117,239,180,.16);
+}
+
+.lf-market-price.over .lf-market-price-label,
+.lf-market-price.over strong {
+  color: #75efb4;
+}
+
+.lf-market-price.under {
+  border-color: rgba(255,156,156,.14);
+}
+
+.lf-market-price.under .lf-market-price-label,
+.lf-market-price.under strong {
+  color: #ff9c9c;
+}
+
+.lf-market-best {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+  color: #7f92a5;
+  font-size: 10px;
+}
+
+.lf-market-best strong {
+  color: #dce7ef;
+  font-size: 10px;
+  font-weight: 800;
+  text-align: right;
+}
 
     .lf-market-result {
       margin-top: 13px;
@@ -2375,51 +2420,83 @@ function marketCard(
       </div>
 
 
-      ${
-        td
-          ? `
-            <div class="lf-market-odds">
+     ${
+  td
+    ? `
+      <div class="lf-market-odds lf-market-odds-yn">
 
-              <span class="over">
-                YES ${
-                  market?.sides?.yes?.odds ||
-                  market?.sides?.yes?.bestBookOdds ||
-                  '—'
-                }
-              </span>
+        <div class="lf-market-price over">
 
-              <span class="under">
-                NO ${
-                  market?.sides?.no?.odds ||
-                  market?.sides?.no?.bestBookOdds ||
-                  '—'
-                }
-              </span>
+          <span class="lf-market-price-label">
+            YES
+          </span>
 
-            </div>
-          `
-          : `
-            <div class="lf-market-odds">
+          <strong>
+            ${
+              market?.sides?.yes?.odds ||
+              market?.sides?.yes?.bestBookOdds ||
+              '—'
+            }
+          </strong>
 
-              <span class="over">
-                OVER ${
-                  market?.sides?.over?.odds ||
-                  market?.sides?.over?.bestBookOdds ||
-                  '—'
-                }
-              </span>
+        </div>
 
-              <span class="under">
-                UNDER ${
-                  market?.sides?.under?.odds ||
-                  market?.sides?.under?.bestBookOdds ||
-                  '—'
-                }
-              </span>
+        <div class="lf-market-price under">
 
-            </div>
-          `
-      }
+          <span class="lf-market-price-label">
+            NO
+          </span>
+
+          <strong>
+            ${
+              market?.sides?.no?.odds ||
+              market?.sides?.no?.bestBookOdds ||
+              '—'
+            }
+          </strong>
+
+        </div>
+
+      </div>
+    `
+    : `
+      <div class="lf-market-odds">
+
+        <div class="lf-market-price over">
+
+          <span class="lf-market-price-label">
+            OVER
+          </span>
+
+          <strong>
+            ${
+              market?.sides?.over?.odds ||
+              market?.sides?.over?.bestBookOdds ||
+              '—'
+            }
+          </strong>
+
+        </div>
+
+        <div class="lf-market-price under">
+
+          <span class="lf-market-price-label">
+            UNDER
+          </span>
+
+          <strong>
+            ${
+              market?.sides?.under?.odds ||
+              market?.sides?.under?.bestBookOdds ||
+              '—'
+            }
+          </strong>
+
+        </div>
+
+      </div>
+    `
+}
 
 
       ${
