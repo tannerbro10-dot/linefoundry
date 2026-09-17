@@ -374,6 +374,12 @@ function normalizeProp(
     odd.fairOverUnder ??
     null;
 
+  const isAnytimeTD =
+    odd.statID ===
+      "touchdowns" &&
+    odd.betTypeID ===
+      "yn";
+
   return {
 
     id:
@@ -389,22 +395,50 @@ function normalizeProp(
     season:
       2026,
 
-    player:
-      playerName(
-        event,
-        odd.statEntityID
-      ),
+    player: {
+      id:
+        odd.statEntityID,
 
-    playerId:
-      odd.statEntityID,
+      name:
+        playerName(
+          event,
+          odd.statEntityID
+        )
+    },
 
-    market:
-      normalizeMarket(
-        odd.statID
-      ),
+    game: {
 
-    statId:
-      odd.statID,
+      eventId:
+        event.eventID,
+
+      awayTeam:
+        event.teams?.away?.name ||
+        event.teams?.away?.displayName ||
+        "",
+
+      homeTeam:
+        event.teams?.home?.name ||
+        event.teams?.home?.displayName ||
+        ""
+
+    },
+
+    market: {
+
+      name:
+        isAnytimeTD
+          ? "Anytime TD"
+          : normalizeMarket(
+              odd.statID
+            ),
+
+      statId:
+        odd.statID,
+
+      betType:
+        odd.betTypeID
+
+    },
 
     side:
       normalizeSide(
@@ -413,9 +447,13 @@ function normalizeProp(
 
     line:
 
-      line !== null
-        ? Number(line)
-        : null,
+      isAnytimeTD
+        ? null
+        : (
+            line !== null
+              ? Number(line)
+              : null
+          ),
 
     odds:
       odd.bookOdds ??
@@ -426,7 +464,7 @@ function normalizeProp(
       odd.fairOdds ??
       null,
 
-    bookmakerOdds:
+    sportsbooks:
       odd.byBookmaker ||
       {},
 
@@ -440,7 +478,6 @@ function normalizeProp(
   };
 
 }
-
 
 // ============================================================
 // COLLECT ALL EVENTS
@@ -500,7 +537,7 @@ async function buildMarketData() {
   const events =
     await collectAllEvents();
 
-  const markets = [];
+  const props = [];
 
   for (
     const event of events
@@ -526,7 +563,7 @@ async function buildMarketData() {
 
       }
 
-      markets.push(
+      props.push(
         normalizeProp(
           event,
           odd
@@ -536,6 +573,197 @@ async function buildMarketData() {
     }
 
   }
+
+
+  // ============================================================
+  // GROUP PROP SIDES
+  // ============================================================
+
+  const grouped =
+    new Map();
+
+  for (
+    const prop of props
+  ) {
+
+    const isAnytimeTD =
+      prop.market?.statId ===
+        "touchdowns" &&
+      prop.market?.betType ===
+        "yn";
+
+    const key =
+      [
+        prop.eventId,
+        prop.player?.id,
+        prop.market?.statId,
+        isAnytimeTD
+          ? "TD"
+          : prop.line
+      ].join("|");
+
+    if (
+      !grouped.has(
+        key
+      )
+    ) {
+
+      grouped.set(
+        key,
+        {
+
+          id:
+            key,
+
+          eventId:
+            prop.eventId,
+
+          week:
+            prop.week,
+
+          season:
+            prop.season,
+
+          player:
+            prop.player,
+
+          game:
+            prop.game,
+
+          market:
+            prop.market,
+
+          sides: {},
+
+          period:
+            prop.period,
+
+          updatedAt:
+            prop.updatedAt
+
+        }
+      );
+
+    }
+
+
+    const market =
+      grouped.get(
+        key
+      );
+
+
+    // ----------------------------------------------------------
+    // ANYTIME TD
+    // ----------------------------------------------------------
+
+    if (
+      isAnytimeTD
+    ) {
+
+      if (
+        prop.side ===
+        "YES"
+      ) {
+
+        market.sides.yes = {
+
+          odds:
+            prop.odds,
+
+          fairOdds:
+            prop.fairOdds,
+
+          sportsbooks:
+            prop.sportsbooks
+
+        };
+
+      }
+
+      if (
+        prop.side ===
+        "NO"
+      ) {
+
+        market.sides.no = {
+
+          odds:
+            prop.odds,
+
+          fairOdds:
+            prop.fairOdds,
+
+          sportsbooks:
+            prop.sportsbooks
+
+        };
+
+      }
+
+      continue;
+
+    }
+
+
+    // ----------------------------------------------------------
+    // OVER / UNDER
+    // ----------------------------------------------------------
+
+    if (
+      prop.side ===
+      "OVER"
+    ) {
+
+      market.sides.over = {
+
+        line:
+          prop.line,
+
+        odds:
+          prop.odds,
+
+        fairOdds:
+          prop.fairOdds,
+
+        sportsbooks:
+          prop.sportsbooks
+
+      };
+
+    }
+
+    if (
+      prop.side ===
+      "UNDER"
+    ) {
+
+      market.sides.under = {
+
+        line:
+          prop.line,
+
+        odds:
+          prop.odds,
+
+        fairOdds:
+          prop.fairOdds,
+
+        sportsbooks:
+          prop.sportsbooks
+
+      };
+
+    }
+
+  }
+
+
+  const markets =
+    Array.from(
+      grouped.values()
+    );
+
 
   return {
 
