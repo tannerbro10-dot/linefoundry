@@ -1,0 +1,21 @@
+name: Test Expert Collector
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run Expert Collector
+        run: |
+          node scripts/expert-source-collector.js "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-bets-week-2-2026-expert-predictions-spread-parlays-prop-bets/"
