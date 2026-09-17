@@ -17,5 +17,139 @@ jobs:
             "https://api.sportsgameodds.com/v2/events?leagueID=NFL&oddsAvailable=true&includeAltLines=false&limit=1" \
             -o response.json
 
-          echo "SportsGameOdds response:"
-          cat response.json
+          node <<'NODE'
+          const fs = require("fs");
+
+          const response = JSON.parse(
+            fs.readFileSync("response.json", "utf8")
+          );
+
+          if (!response.success) {
+            console.error("SportsGameOdds request failed");
+            process.exit(1);
+          }
+
+          const event = response.data?.[0];
+
+          if (!event) {
+            console.log("No events returned.");
+            process.exit(0);
+          }
+
+          console.log("");
+          console.log("========================================");
+          console.log("SPORTSGAMEODDS MARKET TEST");
+          console.log("========================================");
+
+          const away =
+            event.teams?.away?.names?.long || "Unknown";
+
+          const home =
+            event.teams?.home?.names?.long || "Unknown";
+
+          console.log(`Event: ${away} @ ${home}`);
+          console.log(
+            `Week: ${event.info?.seasonWeek || "Unknown"}`
+          );
+          console.log(
+            `Event ID: ${event.eventID || "Unknown"}`
+          );
+          console.log(
+            `Start: ${event.status?.startsAt || "Unknown"}`
+          );
+
+          let oddsCount = 0;
+          let playerProps = [];
+
+          function scan(value) {
+
+            if (!value || typeof value !== "object") {
+              return;
+            }
+
+            if (Array.isArray(value)) {
+              for (const item of value) {
+                scan(item);
+              }
+              return;
+            }
+
+            if (
+              value.statEntityID &&
+              value.statID
+            ) {
+              oddsCount++;
+
+              playerProps.push(value);
+            }
+
+            for (const child of Object.values(value)) {
+              if (
+                child &&
+                typeof child === "object"
+              ) {
+                scan(child);
+              }
+            }
+          }
+
+          scan(event.odds);
+
+          console.log("");
+          console.log(
+            `Player prop records found: ${playerProps.length}`
+          );
+
+          console.log("");
+          console.log(
+            "FIRST 20 PLAYER PROP RECORDS"
+          );
+          console.log(
+            "----------------------------------------"
+          );
+
+          playerProps
+            .slice(0, 20)
+            .forEach((odd, index) => {
+
+              console.log(
+                `${index + 1}.`
+              );
+
+              console.log(
+                `   oddID: ${odd.oddID || "Unknown"}`
+              );
+
+              console.log(
+                `   statID: ${odd.statID || "Unknown"}`
+              );
+
+              console.log(
+                `   statEntityID: ${odd.statEntityID || "Unknown"}`
+              );
+
+              console.log(
+                `   marketName: ${odd.marketName || "Unknown"}`
+              );
+
+              console.log(
+                `   betTypeID: ${odd.betTypeID || "Unknown"}`
+              );
+
+              console.log(
+                `   sideID: ${odd.sideID || "Unknown"}`
+              );
+
+              console.log(
+                `   bookOverUnder: ${
+                  odd.bookOverUnder ?? "Unknown"
+                }`
+              );
+
+              console.log("");
+            });
+
+          console.log(
+            "========================================"
+          );
+          NODE
