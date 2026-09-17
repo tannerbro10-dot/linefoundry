@@ -19,6 +19,7 @@ jobs:
       - name: Run Market Collector Test
         env:
           SPORTSGAMEODDS_API_KEY: ${{ secrets.SPORTSGAMEODDS_API_KEY }}
+          TEST_EVENT_ID: FznP2IcFgXu9TcHvvja3
         run: |
           node scripts/market-data-collector.js
 
