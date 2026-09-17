@@ -319,7 +319,60 @@ function deduplicateProps(
   );
 
 }
+// ============================================================
+// EXTRACT EXPERT / ANALYST
+// ============================================================
 
+function extractAnalyst(
+  text,
+  props
+) {
+
+  const normalized =
+    normalizeText(text);
+
+  /*
+   * Look for common article language that
+   * identifies the expert making the pick.
+   */
+
+  const patterns = [
+
+    /Top Week 2 expert NFL props from\s+([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})/i,
+
+    /Top Week 2 NFL expert picks from\s+([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})/i,
+
+    /expert picks from\s+([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})/i,
+
+    /(?:from|by)\s+([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})[^.]{0,120}(?:prop|pick|bet)/i
+
+  ];
+
+  for (
+    const pattern of patterns
+  ) {
+
+    const match =
+      normalized.match(
+        pattern
+      );
+
+    if (
+      match &&
+      match[1]
+    ) {
+
+      return normalizeText(
+        match[1]
+      );
+
+    }
+
+  }
+
+  return null;
+
+}
 
 // ============================================================
 // MAIN EXTRACTION FUNCTION
@@ -343,9 +396,17 @@ function extractProps(
       rawProps
     );
 
+  const analyst =
+    extractAnalyst(
+      text,
+      props
+    );
+
   return {
 
     success: true,
+
+    analyst,
 
     source: {
       url:
