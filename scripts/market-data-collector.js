@@ -58,7 +58,9 @@ const ALLOWED_MARKETS = new Set([
 
   "receiving_longestReception",
 
-  "rushing_longestRush"
+  "rushing_longestRush",
+
+  "touchdowns"
 
 ]);
 
@@ -192,6 +194,18 @@ function isAllowedMarket(odd) {
   }
 
   if (
+    odd.statID ===
+    "touchdowns"
+  ) {
+
+    return (
+      odd.betTypeID ===
+      "yn"
+    );
+
+  }
+
+  if (
     !ALLOWED_MARKETS.has(
       odd.statID
     )
@@ -281,6 +295,9 @@ function normalizeMarket(statID) {
 
     receiving_touchdowns:
       "Receiving Touchdowns",
+    
+     touchdowns:
+      "Anytime TD",
 
     "rushing+receiving_yards":
       "Rushing + Receiving Yards",
