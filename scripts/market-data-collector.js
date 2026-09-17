@@ -86,6 +86,15 @@ async function fetchEvents(cursor = null) {
 
     });
 
+  if (process.env.TEST_EVENT_ID) {
+
+    params.set(
+      "eventID",
+      process.env.TEST_EVENT_ID
+    );
+
+  }
+
   if (cursor) {
 
     params.set(
