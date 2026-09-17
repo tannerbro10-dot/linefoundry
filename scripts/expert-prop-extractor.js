@@ -39,6 +39,14 @@ function normalizePlayerName(name) {
 
   return normalizeText(name)
     .replace(/^["']+|["']+$/g, "")
+    .replace(
+      /^(?:NFL|QB|RB|WR|TE|FB|K|DEF|DST)\s+/i,
+      ""
+    )
+    .replace(
+      /^(?:[A-Z][A-Za-z'-]+)\s+(?:QB|RB|WR|TE|FB|K|DEF|DST)\s+/i,
+      ""
+    )
     .trim();
 
 }
