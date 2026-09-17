@@ -109,9 +109,34 @@ jobs:
             `Player prop records found: ${playerProps.length}`
           );
 
+                  console.log("");
+          console.log("PLAYER PROP MARKET INVENTORY");
+          console.log("----------------------------------------");
+
+          const marketCounts = {};
+
+          for (const odd of playerProps) {
+
+            const key =
+              `${odd.statID || "Unknown"} | ${odd.marketName || "Unknown"}`;
+
+            marketCounts[key] =
+              (marketCounts[key] || 0) + 1;
+          }
+
+          Object.entries(marketCounts)
+            .sort((a, b) => b[1] - a[1])
+            .forEach(([market, count]) => {
+
+              console.log(
+                `${String(count).padStart(4)}  ${market}`
+              );
+
+            });
+
           console.log("");
           console.log(
-            "FIRST 20 PLAYER PROP RECORDS"
+            "========================================"
           );
 
           console.log(
