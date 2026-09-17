@@ -14,8 +14,15 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
-      - name: Run Expert Collector
+      - name: Collect Expert Article
         run: |
-          node scripts/expert-source-collector.js "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-bets-week-2-2026-expert-predictions-spread-parlays-prop-bets/"
+          node scripts/expert-source-collector.js \
+            "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-bets-week-2-2026-expert-predictions-spread-parlays-prop-bets/" \
+            > scripts/test-article.json
+
+      - name: Extract Expert Props
+        run: |
+          node scripts/expert-prop-extractor.js \
+            scripts/test-article.json
