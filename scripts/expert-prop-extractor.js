@@ -323,6 +323,10 @@ function deduplicateProps(
 // EXTRACT EXPERT / ANALYST
 // ============================================================
 
+// ============================================================
+// EXTRACT EXPERT / ANALYST
+// ============================================================
+
 function extractAnalyst(
   text,
   props
@@ -332,24 +336,28 @@ function extractAnalyst(
     normalizeText(text);
 
   /*
-   * Look for common article language that
-   * identifies the expert making the pick.
+   * First look specifically for the expert
+   * attached to an NFL props section.
+   *
+   * This must come before generic "expert picks"
+   * patterns because an article may contain several
+   * different experts.
    */
 
-  const patterns = [
+  const propPatterns = [
 
-    /Top Week 2 expert NFL props from\s+([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})/i,
+    /Top Week 2 expert NFL props from\s+([A-Z][A-Za-z.'-]+)(?:\s+"[^"]+")?\s+([A-Z][A-Za-z.'-]+)/i,
 
-    /Top Week 2 NFL expert picks from\s+([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})/i,
+    /Top Week 2 expert NFL props from\s+([A-Z][A-Za-z.'-]+)\s+([A-Z][A-Za-z.'-]+)/i,
 
-    /expert picks from\s+([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})/i,
+    /expert NFL props from\s+([A-Z][A-Za-z.'-]+)(?:\s+"[^"]+")?\s+([A-Z][A-Za-z.'-]+)/i,
 
-    /(?:from|by)\s+([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})[^.]{0,120}(?:prop|pick|bet)/i
+    /NFL props from\s+([A-Z][A-Za-z.'-]+)(?:\s+"[^"]+")?\s+([A-Z][A-Za-z.'-]+)/i
 
   ];
 
   for (
-    const pattern of patterns
+    const pattern of propPatterns
   ) {
 
     const match =
@@ -359,11 +367,48 @@ function extractAnalyst(
 
     if (
       match &&
-      match[1]
+      match[1] &&
+      match[2]
     ) {
 
       return normalizeText(
-        match[1]
+        `${match[1]} ${match[2]}`
+      );
+
+    }
+
+  }
+
+  /*
+   * Fallback patterns for articles that don't
+   * use the exact Week 2 props heading.
+   */
+
+  const fallbackPatterns = [
+
+    /expert picks from\s+([A-Z][A-Za-z.'-]+)\s+([A-Z][A-Za-z.'-]+)/i,
+
+    /props from\s+([A-Z][A-Za-z.'-]+)\s+([A-Z][A-Za-z.'-]+)/i
+
+  ];
+
+  for (
+    const pattern of fallbackPatterns
+  ) {
+
+    const match =
+      normalized.match(
+        pattern
+      );
+
+    if (
+      match &&
+      match[1] &&
+      match[2]
+    ) {
+
+      return normalizeText(
+        `${match[1]} ${match[2]}`
       );
 
     }
