@@ -874,9 +874,8 @@ async function load() {
         signalsData.season ||
         2026,
 
-      week:
-        signalsData.week ||
-        1,
+     week:
+  currentWeek(),
 
       refreshedAt:
         new Date().toISOString(),
