@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-09-14T20:00:00Z",
+  "refreshedAt": "2026-09-17T23:45:00Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -82,6 +82,31 @@
       "quality": 0.9,
       "verification": "reported",
       "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-parlays-props-best-bets/"
+    },
+
+    {
+      "id": "zachary-cohen-vsin-week2",
+      "analyst": "Zachary Cohen",
+      "outlet": "VSiN",
+      "quality": 0.86,
+      "verification": "reported",
+      "url": "https://vsin.com/nfl/expert-nfl-picks-week-2-best-bets-predictions-and-player-props-from-zachary-cohen/"
+    },
+    {
+      "id": "doug-kralstein-sportsline-week2",
+      "analyst": "Doug Kralstein",
+      "outlet": "SportsLine",
+      "quality": 0.9,
+      "verification": "reported",
+      "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-bets-week-2-2026-expert-predictions-spread-parlays-props/"
+    },
+    {
+      "id": "kody-malstrom-talksport-week2",
+      "analyst": "Kody Malstrom",
+      "outlet": "TalkSport",
+      "quality": 0.74,
+      "verification": "reported",
+      "url": "https://talksport.com/nfl/4586091/tips-best-nfl-bets-buffalo-bills-vs-detroit-lions/"
     }
   ],
   "signals": [
@@ -185,7 +210,6 @@
       "sourceId": "kody-malstrom-talksport",
       "note": "Over 73.5 rushing yards."
     },
-
     {
       "id": "andrei-iosivas-receptions-sean-koerner",
       "player": "Andrei Iosivas",
@@ -246,7 +270,6 @@
       "sourceId": "sean-koerner-action-network",
       "note": "Over 16.5 rushing yards."
     },
-
     {
       "id": "baker-mayfield-interceptions-nick-giffen",
       "player": "Baker Mayfield",
@@ -267,7 +290,6 @@
       "sourceId": "nick-giffen-action-network",
       "note": "Under 19.5 rushing yards."
     },
-
     {
       "id": "christian-watson-receiving-yards-josh-shepardson",
       "player": "Christian Watson",
@@ -298,7 +320,6 @@
       "sourceId": "josh-shepardson-sharp",
       "note": "Over 23.5 receiving yards."
     },
-
     {
       "id": "jalen-hurts-rushing-attempts-doug-kralstein",
       "player": "Jalen Hurts",
@@ -308,6 +329,73 @@
       "analyst": "Doug Kralstein",
       "sourceId": "doug-kralstein-sportsline",
       "note": "Over 6.5 carries."
+    },
+
+    {
+      "id": "saquon-barkley-rushing-yards-zachary-cohen-w2",
+      "player": "Saquon Barkley",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 75.5,
+      "analyst": "Zachary Cohen",
+      "sourceId": "zachary-cohen-vsin-week2",
+      "week": 2,
+      "note": "VSiN Week 2 player prop."
+    },
+    {
+      "id": "dawson-knox-receiving-yards-zachary-cohen-w2",
+      "player": "Dawson Knox",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 12.5,
+      "analyst": "Zachary Cohen",
+      "sourceId": "zachary-cohen-vsin-week2",
+      "week": 2,
+      "note": "VSiN Week 2 player prop."
+    },
+    {
+      "id": "adonai-mitchell-receiving-yards-zachary-cohen-w2",
+      "player": "Adonai Mitchell",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 33.5,
+      "analyst": "Zachary Cohen",
+      "sourceId": "zachary-cohen-vsin-week2",
+      "week": 2,
+      "note": "VSiN Week 2 player prop."
+    },
+    {
+      "id": "jeremiyah-love-rushing-yards-zachary-cohen-w2",
+      "player": "Jeremiyah Love",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 35.5,
+      "analyst": "Zachary Cohen",
+      "sourceId": "zachary-cohen-vsin-week2",
+      "week": 2,
+      "note": "VSiN Week 2 player prop."
+    },
+    {
+      "id": "puka-nacua-receptions-doug-kralstein-w2",
+      "player": "Puka Nacua",
+      "market": "Receptions",
+      "side": "OVER",
+      "line": 6.5,
+      "analyst": "Doug Kralstein",
+      "sourceId": "doug-kralstein-sportsline-week2",
+      "week": 2,
+      "note": "SportsLine Week 2 player prop."
+    },
+    {
+      "id": "josh-allen-passing-yards-kody-malstrom-w2",
+      "player": "Josh Allen",
+      "market": "Passing Yards",
+      "side": "OVER",
+      "line": 254.5,
+      "analyst": "Kody Malstrom",
+      "sourceId": "kody-malstrom-talksport-week2",
+      "week": 2,
+      "note": "TalkSport Week 2 Bills-Lions player prop."
     }
   ]
 }
