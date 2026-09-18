@@ -56,6 +56,105 @@
       ],
       "enabled": true,
       "quality": 0.90
+    },
+    {
+      "id": "bettingpros",
+      "outlet": "BettingPros",
+      "domains": [
+        "bettingpros.com"
+      ],
+      "enabled": true,
+      "quality": 0.84
+    },
+    {
+      "id": "pff",
+      "outlet": "PFF",
+      "domains": [
+        "pff.com"
+      ],
+      "enabled": true,
+      "quality": 0.88
+    },
+    {
+      "id": "sports-betting-dime",
+      "outlet": "Sports Betting Dime",
+      "domains": [
+        "sportsbettingdime.com"
+      ],
+      "enabled": true,
+      "quality": 0.80
+    },
+    {
+      "id": "sporting-news",
+      "outlet": "Sporting News",
+      "domains": [
+        "sportingnews.com"
+      ],
+      "enabled": true,
+      "quality": 0.78
+    },
+    {
+      "id": "si-betting",
+      "outlet": "Sports Illustrated Betting",
+      "domains": [
+        "si.com"
+      ],
+      "enabled": true,
+      "quality": 0.78
+    },
+    {
+      "id": "yahoo-sports",
+      "outlet": "Yahoo Sports",
+      "domains": [
+        "sports.yahoo.com"
+      ],
+      "enabled": true,
+      "quality": 0.76
+    },
+    {
+      "id": "fantasypros",
+      "outlet": "FantasyPros",
+      "domains": [
+        "fantasypros.com"
+      ],
+      "enabled": true,
+      "quality": 0.80
+    },
+    {
+      "id": "rotowire",
+      "outlet": "RotoWire",
+      "domains": [
+        "rotowire.com"
+      ],
+      "enabled": true,
+      "quality": 0.80
+    },
+    {
+      "id": "usa-today",
+      "outlet": "USA Today",
+      "domains": [
+        "usatoday.com"
+      ],
+      "enabled": true,
+      "quality": 0.74
+    },
+    {
+      "id": "nbc-sports",
+      "outlet": "NBC Sports",
+      "domains": [
+        "nbcsports.com"
+      ],
+      "enabled": true,
+      "quality": 0.78
+    },
+    {
+      "id": "rotoworld",
+      "outlet": "Rotoworld",
+      "domains": [
+        "rotoworld.com"
+      ],
+      "enabled": true,
+      "quality": 0.78
     }
   ]
 }
