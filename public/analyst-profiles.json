@@ -251,6 +251,205 @@
       "publicRecord": null,
       "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
       "status": "TRACKING"
+    },
+
+    {
+      "id": "jason-bobbitt-action-network",
+      "name": "Jason Bobbitt",
+      "outlet": "Action Network",
+      "specialties": ["NFL betting", "player props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "jeff-ratcliffe-action-network",
+      "name": "Jeff Ratcliffe",
+      "outlet": "Action Network",
+      "specialties": ["NFL", "player props", "fantasy football"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "brandon-muto-action-network",
+      "name": "Brandon Muto",
+      "outlet": "Action Network",
+      "specialties": ["NFL betting", "NFL props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+
+    {
+      "id": "patrick-everson-sportsline",
+      "name": "Patrick Everson",
+      "outlet": "SportsLine",
+      "specialties": ["NFL betting", "NFL props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "john-bollman-sportsline",
+      "name": "John Bollman",
+      "outlet": "SportsLine",
+      "specialties": ["NFL betting", "player props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+
+    {
+      "id": "jordan-mcnamara-pff",
+      "name": "Jordan McNamara",
+      "outlet": "PFF",
+      "specialties": ["NFL analytics", "player props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "mason-cameron-pff",
+      "name": "Mason Cameron",
+      "outlet": "PFF",
+      "specialties": ["NFL analytics", "player props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+
+    {
+      "id": "eric-frott-sports-betting-dime",
+      "name": "Eric Froton",
+      "outlet": "Sports Betting Dime",
+      "specialties": ["NFL betting", "player props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "jake-ostrovsky-sports-betting-dime",
+      "name": "Jake Ostrovsky",
+      "outlet": "Sports Betting Dime",
+      "specialties": ["NFL props", "NFL betting"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+
+    {
+      "id": "jason-chen-sporting-news",
+      "name": "Jason Chen",
+      "outlet": "Sporting News",
+      "specialties": ["NFL betting", "NFL props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "bill-bender-sporting-news",
+      "name": "Bill Bender",
+      "outlet": "Sporting News",
+      "specialties": ["NFL betting", "NFL picks"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+
+    {
+      "id": "jason-burt-si",
+      "name": "Jason Burt",
+      "outlet": "Sports Illustrated Betting",
+      "specialties": ["NFL betting", "NFL props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "kyle-wood-si",
+      "name": "Kyle Wood",
+      "outlet": "Sports Illustrated Betting",
+      "specialties": ["NFL betting", "player props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+
+    {
+      "id": "jared-smith-yahoo-sports",
+      "name": "Jared Smith",
+      "outlet": "Yahoo Sports",
+      "specialties": ["NFL betting", "NFL analytics"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "nick-shook-yahoo-sports",
+      "name": "Nick Shook",
+      "outlet": "Yahoo Sports",
+      "specialties": ["NFL analytics", "player props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+
+    {
+      "id": "matt-harmon-fantasypros",
+      "name": "Matt Harmon",
+      "outlet": "FantasyPros",
+      "specialties": ["NFL", "player props", "fantasy football"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "james-kyle-fantasypros",
+      "name": "James Kyle",
+      "outlet": "FantasyPros",
+      "specialties": ["NFL", "player props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+
+    {
+      "id": "john-hansen-nbc-sports",
+      "name": "John Hansen",
+      "outlet": "NBC Sports",
+      "specialties": ["NFL", "player props", "fantasy football"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "drew-dinsick-nbc-sports",
+      "name": "Drew Dinsick",
+      "outlet": "NBC Sports",
+      "specialties": ["NFL betting", "NFL analytics"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+
+    {
+      "id": "matthew-freedman-rotowire",
+      "name": "Matthew Freedman",
+      "outlet": "RotoWire",
+      "specialties": ["NFL props", "NFL analytics"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
+    },
+    {
+      "id": "jeff-erickson-rotowire",
+      "name": "Jeff Erickson",
+      "outlet": "RotoWire",
+      "specialties": ["NFL", "fantasy football", "player props"],
+      "publicRecord": null,
+      "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+      "status": "TRACKING"
     }
   ]
 }
