@@ -848,13 +848,19 @@ async function load() {
     const resultsData =
       await resultsResponse.json();
 
-    let marketJson = null;
+   let marketJson = null;
 
-    if (marketResponse.ok) {
-      marketJson =
-        await marketResponse.json();
-    }
-
+if (marketResponse.ok) {
+  try {
+    marketJson = await marketResponse.json();
+  } catch (error) {
+    console.warn(
+      'LineFoundry market-data.json could not be parsed:',
+      error
+    );
+    marketJson = null;
+  }
+}
 
     experts =
       expertsData;
