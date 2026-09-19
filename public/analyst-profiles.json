@@ -358,7 +358,96 @@
   "publicRecord": null,
   "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
   "status": "TRACKING"
+},
+{
+  "id": "jensen-lewis-vsin",
+  "name": "Jensen Lewis",
+  "outlet": "VSiN",
+  "specialties": ["NFL betting", "NFL picks", "sports betting"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "colby-dant-vsin",
+  "name": "Colby Dant",
+  "outlet": "VSiN",
+  "specialties": ["NFL betting", "college football betting", "sports betting"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "eric-cohen-vsin",
+  "name": "Eric Cohen",
+  "outlet": "VSiN",
+  "specialties": ["NFL betting", "NFL picks", "sports betting"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "brad-taylor-vsin",
+  "name": "Brad Taylor",
+  "outlet": "VSiN",
+  "specialties": ["NFL betting", "NFL picks", "sports betting"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "ryan-kramer-vsin",
+  "name": "Ryan Kramer",
+  "outlet": "VSiN",
+  "specialties": ["NFL betting", "NFL picks", "sports betting"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "steve-wyss-vsin",
+  "name": "Steve Wyss",
+  "outlet": "VSiN",
+  "specialties": ["NFL betting", "NFL analytics", "sports betting"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "will-hill-vsin",
+  "name": "Will Hill",
+  "outlet": "VSiN",
+  "specialties": ["NFL betting", "NFL picks", "sports betting"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "josh-appelbaum-vsin",
+  "name": "Josh Appelbaum",
+  "outlet": "VSiN",
+  "specialties": ["NFL betting", "line movement", "sports betting"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "bill-adee-vsin",
+  "name": "Bill Adee",
+  "outlet": "VSiN",
+  "specialties": ["NFL betting", "NFL analytics", "sports betting"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "prop-bet-guy-sportsline",
+  "name": "Prop Bet Guy",
+  "outlet": "SportsLine",
+  "specialties": ["NFL player props", "NFL betting", "player props"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
 }
-
 
 }
