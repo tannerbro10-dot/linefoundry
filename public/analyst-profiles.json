@@ -90,7 +90,7 @@
   "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
   "status": "TRACKING"
 
-  ,
+},
 {
   "id": "bucky-brooks-nfl",
   "name": "Bucky Brooks",
@@ -450,8 +450,6 @@
   "publicRecord": null,
   "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
   "status": "TRACKING"
-}
-
 }
   
 ]
