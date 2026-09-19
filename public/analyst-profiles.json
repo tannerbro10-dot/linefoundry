@@ -178,5 +178,95 @@
   "publicRecord": null,
   "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
   "status": "TRACKING"
+},
+{
+  "id": "rj-white-sportsline",
+  "name": "R.J. White",
+  "outlet": "SportsLine",
+  "specialties": ["NFL picks", "NFL props", "NFL analytics"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "megan-shoup-sportsline",
+  "name": "Megan Shoup",
+  "outlet": "SportsLine",
+  "specialties": ["NFL props", "fantasy football", "DFS", "Anytime TD"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "mike-mcclure-sportsline",
+  "name": "Mike McClure",
+  "outlet": "SportsLine",
+  "specialties": ["NFL picks", "NFL analytics", "sports betting"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "todd-fuhrman-sportsline",
+  "name": "Todd Fuhrman",
+  "outlet": "SportsLine",
+  "specialties": ["NFL betting", "NFL picks", "sports betting"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "david-bearman-sportsline",
+  "name": "David Bearman",
+  "outlet": "SportsLine",
+  "specialties": ["NFL picks", "NFL props", "sports betting"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "matt-severance-sportsline",
+  "name": "Matt Severance",
+  "outlet": "SportsLine",
+  "specialties": ["NFL picks", "NFL analysis", "sports betting"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "larry-hartstein-sportsline",
+  "name": "Larry Hartstein",
+  "outlet": "SportsLine",
+  "specialties": ["NFL picks", "NFL betting", "sports betting"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "alex-selesnick-sportsline",
+  "name": "Alex Selesnick",
+  "outlet": "SportsLine",
+  "specialties": ["NFL props", "NFL betting", "player props"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "dave-richard-sportsline",
+  "name": "Dave Richard",
+  "outlet": "SportsLine",
+  "specialties": ["NFL", "fantasy football", "player analysis"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "adam-thompson-sportsline",
+  "name": "Adam Thompson",
+  "outlet": "SportsLine",
+  "specialties": ["NFL betting", "NFL analytics", "sports betting"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
 }
 }
