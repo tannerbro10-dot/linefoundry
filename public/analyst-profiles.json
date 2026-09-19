@@ -268,5 +268,97 @@
   "publicRecord": null,
   "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
   "status": "TRACKING"
+},
+{
+  "id": "frank-ammirante-action-network",
+  "name": "Frank Ammirante",
+  "outlet": "Action Network",
+  "specialties": ["NFL betting", "NFL props", "NFL analytics"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "anthony-dabbundo-action-network",
+  "name": "Anthony Dabbundo",
+  "outlet": "Action Network",
+  "specialties": ["NFL betting", "NFL analytics", "NFL picks"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "brandon-kravitz-action-network",
+  "name": "Brandon Kravitz",
+  "outlet": "Action Network",
+  "specialties": ["NFL betting", "NFL props", "fantasy football"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "matt-moore-action-network",
+  "name": "Matt Moore",
+  "outlet": "Action Network",
+  "specialties": ["NFL betting", "NFL picks", "NFL analysis"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "john-feltman-action-network",
+  "name": "John Feltman",
+  "outlet": "Action Network",
+  "specialties": ["NFL betting", "NFL picks", "NFL analysis"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "pauly-howard-vsin",
+  "name": "Pauly Howard",
+  "outlet": "VSiN",
+  "specialties": ["NFL betting", "NFL props", "sports betting"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "dustin-swedelson-vsin",
+  "name": "Dustin Swedelson",
+  "outlet": "VSiN",
+  "specialties": ["NFL player props", "NFL betting", "sports betting"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "jonathan-von-tobel-vsin",
+  "name": "Jonathan Von Tobel",
+  "outlet": "VSiN",
+  "specialties": ["NFL betting", "NFL picks", "sports betting"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "chris-fallica-vsin",
+  "name": "Chris Fallica",
+  "outlet": "VSiN",
+  "specialties": ["NFL picks", "sports betting", "game analysis"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "sean-green-vsin",
+  "name": "Sean Green",
+  "outlet": "VSiN",
+  "specialties": ["NFL betting", "NFL picks", "sports betting"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
 }
+
+
 }
