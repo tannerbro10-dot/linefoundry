@@ -87,4 +87,96 @@
   "publicRecord": null,
   "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
   "status": "TRACKING"
+
+  ,
+{
+  "id": "bucky-brooks-nfl",
+  "name": "Bucky Brooks",
+  "outlet": "NFL Media",
+  "specialties": ["NFL analysis", "player evaluation", "game analysis"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "trevor-sikkema-nfl",
+  "name": "Trevor Sikkema",
+  "outlet": "NFL Media",
+  "specialties": ["NFL analysis", "NFL analytics", "player evaluation"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "brett-kollmann-nfl",
+  "name": "Brett Kollmann",
+  "outlet": "NFL Media",
+  "specialties": ["NFL analysis", "film analysis", "player evaluation"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "gregg-rosenthal-nfl",
+  "name": "Gregg Rosenthal",
+  "outlet": "NFL Media",
+  "specialties": ["NFL analysis", "NFL picks", "team analysis"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "lance-zierlein-nfl",
+  "name": "Lance Zierlein",
+  "outlet": "NFL Media",
+  "specialties": ["NFL analysis", "player evaluation", "NFL projections"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "nick-shook-nfl",
+  "name": "Nick Shook",
+  "outlet": "NFL Media",
+  "specialties": ["NFL analytics", "player analysis", "team analysis"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "brian-baldinger-nfl",
+  "name": "Brian Baldinger",
+  "outlet": "NFL Network",
+  "specialties": ["NFL analysis", "film analysis", "player evaluation"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "cynthia-frelund-nfl",
+  "name": "Cynthia Frelund",
+  "outlet": "NFL Network",
+  "specialties": ["NFL analytics", "NFL projections", "game analysis"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "daniel-jeremiah-nfl",
+  "name": "Daniel Jeremiah",
+  "outlet": "NFL Network",
+  "specialties": ["NFL analysis", "player evaluation", "team analysis"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+},
+{
+  "id": "adam-rank-nfl",
+  "name": "Adam Rank",
+  "outlet": "NFL Network",
+  "specialties": ["NFL", "fantasy football", "NFL picks"],
+  "publicRecord": null,
+  "tracked": {"picks": 0, "wins": 0, "losses": 0, "pushes": 0, "units": 0},
+  "status": "TRACKING"
+}
 }
