@@ -96,3 +96,14 @@ jobs:
           console.log("");
           console.log("========================================");
           NODE
+
+                - name: Commit Market Data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add market-data.json
+
+          git diff --cached --quiet || git commit -m "Update market data"
+
+          git push
