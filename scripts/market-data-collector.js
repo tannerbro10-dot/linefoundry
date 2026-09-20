@@ -106,32 +106,16 @@ async function fetchEvents(cursor = null) {
 
   }
 
- let response;
-
-  try {
-
-    response =
-      await fetch(
-        `${API_URL}?${params.toString()}`,
-        {
-          headers: {
-            "x-api-key":
-              API_KEY
-          }
+  const response =
+    await fetch(
+      `${API_URL}?${params.toString()}`,
+      {
+        headers: {
+          "x-api-key":
+            API_KEY
         }
-      );
-
-  }
-  catch (error) {
-
-    console.error(
-      "SportsGameOdds fetch error:",
-      error
+      }
     );
-
-    throw error;
-
-  }
 
   if (!response.ok) {
 
@@ -143,13 +127,6 @@ async function fetchEvents(cursor = null) {
 
   const data =
     await response.json();
-
-  console.log(
-  "SportsGameOdds events:",
-  data?.data?.length || 0,
-  "cursor:",
-  data?.nextCursor || null
-);
 
   if (!data.success) {
 
@@ -163,7 +140,6 @@ async function fetchEvents(cursor = null) {
   return data;
 
 }
-
 
 // ============================================================
 // CHECK PLAYER PROP
