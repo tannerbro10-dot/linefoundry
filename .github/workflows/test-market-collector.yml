@@ -23,7 +23,7 @@ jobs:
         run: |
           node scripts/market-data-collector.js
 
-           - name: Show Market Summary
+      - name: Show Market Summary
         run: |
           node <<'NODE'
           const fs = require("fs");
