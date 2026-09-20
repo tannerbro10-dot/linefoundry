@@ -332,24 +332,19 @@ function extractAnalyst(
     normalizeText(text);
 
   /*
-   * Look for an explicit author / analyst attribution.
-   *
-   * The goal is to discover the analyst from the
-   * article itself rather than depending on Week-specific
-   * wording.
+   * Prefer explicit author/byline language.
+   * These patterns are intentionally conservative.
    */
 
   const analystPatterns = [
 
-    /(?:written|authored|reported|analysis)\s+by\s+([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})/i,
+    /(?:written|authored|reported)\s+by\s+([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})/i,
 
-    /(?:by|from)\s+([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3}),?\s+(?:NFL|sports|betting|fantasy)\s+(?:analyst|expert|writer)/i,
+    /(?:analysis|picks?|props?|predictions?|bets?)\s+by\s+([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})/i,
 
-    /([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})\s+(?:NFL|sports|betting|fantasy)\s+(?:analyst|expert|writer)/i,
+    /(?:picks?|props?|predictions?|bets?)\s+from\s+([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})/i,
 
-    /(?:NFL|sports|betting|fantasy)\s+(?:analyst|expert|writer)\s+([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})/i,
-
-    /expert\s+(?:picks?|props?|predictions?|bets?)\s+(?:from|by)\s+([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})/i
+    /(?:expert|analyst)\s+([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})/i
 
   ];
 
@@ -373,25 +368,21 @@ function extractAnalyst(
         );
 
       /*
-       * Reject obvious non-person matches.
+       * Candidate must look like a person's name:
+       * exactly 2–4 words, each beginning with a letter.
        */
 
-      const invalidNames = [
-        "NFL",
-        "NFL Week",
-        "Week 2",
-        "Week 1",
-        "SportsLine",
-        "CBS Sports",
-        "Fantasy Points Team Bets",
-        "GAME NFL NBA MLB"
-      ];
+      const words =
+        candidate
+          .split(/\s+/)
+          .filter(Boolean);
 
       if (
-        !invalidNames.some(
-          invalid =>
-            candidate.toLowerCase() ===
-            invalid.toLowerCase()
+        words.length >= 2 &&
+        words.length <= 4 &&
+        words.every(
+          word =>
+            /^[A-Z][A-Za-z.'-]*$/.test(word)
         )
       ) {
 
