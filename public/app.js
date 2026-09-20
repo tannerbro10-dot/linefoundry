@@ -1266,6 +1266,8 @@ async function loadLiveResults() {
     const data =
       await response.json();
 
+    window.__LINEFOUNDRY_WEEK__ =
+  Number(data.week) || null;
 
     if (!data.success) {
       throw new Error(
