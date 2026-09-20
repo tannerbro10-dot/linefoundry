@@ -323,10 +323,6 @@ function deduplicateProps(
 // EXTRACT EXPERT / ANALYST
 // ============================================================
 
-// ============================================================
-// EXTRACT EXPERT / ANALYST
-// ============================================================
-
 function extractAnalyst(
   text,
   props
@@ -336,28 +332,29 @@ function extractAnalyst(
     normalizeText(text);
 
   /*
-   * First look specifically for the expert
-   * attached to an NFL props section.
+   * Look for an explicit author / analyst attribution.
    *
-   * This must come before generic "expert picks"
-   * patterns because an article may contain several
-   * different experts.
+   * The goal is to discover the analyst from the
+   * article itself rather than depending on Week-specific
+   * wording.
    */
 
-  const propPatterns = [
+  const analystPatterns = [
 
-    /Top Week 2 expert NFL props from\s+([A-Z][A-Za-z.'-]+)(?:\s+"[^"]+")?\s+([A-Z][A-Za-z.'-]+)/i,
+    /(?:written|authored|reported|analysis)\s+by\s+([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})/i,
 
-    /Top Week 2 expert NFL props from\s+([A-Z][A-Za-z.'-]+)\s+([A-Z][A-Za-z.'-]+)/i,
+    /(?:by|from)\s+([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3}),?\s+(?:NFL|sports|betting|fantasy)\s+(?:analyst|expert|writer)/i,
 
-    /expert NFL props from\s+([A-Z][A-Za-z.'-]+)(?:\s+"[^"]+")?\s+([A-Z][A-Za-z.'-]+)/i,
+    /([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})\s+(?:NFL|sports|betting|fantasy)\s+(?:analyst|expert|writer)/i,
 
-    /NFL props from\s+([A-Z][A-Za-z.'-]+)(?:\s+"[^"]+")?\s+([A-Z][A-Za-z.'-]+)/i
+    /(?:NFL|sports|betting|fantasy)\s+(?:analyst|expert|writer)\s+([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})/i,
+
+    /expert\s+(?:picks?|props?|predictions?|bets?)\s+(?:from|by)\s+([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})/i
 
   ];
 
   for (
-    const pattern of propPatterns
+    const pattern of analystPatterns
   ) {
 
     const match =
@@ -367,49 +364,40 @@ function extractAnalyst(
 
     if (
       match &&
-      match[1] &&
-      match[2]
+      match[1]
     ) {
 
-      return normalizeText(
-        `${match[1]} ${match[2]}`
-      );
+      const candidate =
+        normalizeText(
+          match[1]
+        );
 
-    }
+      /*
+       * Reject obvious non-person matches.
+       */
 
-  }
+      const invalidNames = [
+        "NFL",
+        "NFL Week",
+        "Week 2",
+        "Week 1",
+        "SportsLine",
+        "CBS Sports",
+        "Fantasy Points Team Bets",
+        "GAME NFL NBA MLB"
+      ];
 
-  /*
-   * Fallback patterns for articles that don't
-   * use the exact Week 2 props heading.
-   */
+      if (
+        !invalidNames.some(
+          invalid =>
+            candidate.toLowerCase() ===
+            invalid.toLowerCase()
+        )
+      ) {
 
-  const fallbackPatterns = [
+        return candidate;
 
-    /expert picks from\s+([A-Z][A-Za-z.'-]+)\s+([A-Z][A-Za-z.'-]+)/i,
-
-    /props from\s+([A-Z][A-Za-z.'-]+)\s+([A-Z][A-Za-z.'-]+)/i
-
-  ];
-
-  for (
-    const pattern of fallbackPatterns
-  ) {
-
-    const match =
-      normalized.match(
-        pattern
-      );
-
-    if (
-      match &&
-      match[1] &&
-      match[2]
-    ) {
-
-      return normalizeText(
-        `${match[1]} ${match[2]}`
-      );
+      }
 
     }
 
