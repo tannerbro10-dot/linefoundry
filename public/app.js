@@ -101,19 +101,7 @@ function normalizeWeek(value) {
 
 
 function currentWeek() {
-  // Week 1 remains current through Monday Night Football.
-  const now = new Date();
-
-  const kickoff =
-    new Date(
-      '2026-09-15T00:15:00Z'
-    );
-
-  if (now <= kickoff) {
-    return 1;
-  }
-
-  return 2;
+  return window.__LINEFOUNDRY_WEEK__ || null;
 }
 
 
