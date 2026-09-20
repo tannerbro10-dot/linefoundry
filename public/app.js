@@ -830,6 +830,17 @@ async function load() {
     const signalsData =
       await signalsResponse.json();
 
+    const normalizedSignals =
+  (signalsData.signals || [])
+    .map(signal => ({
+      ...signal,
+      week:
+        signal.week ??
+        signal.seasonWeek ??
+        signalsData.week ??
+        1
+    }));
+
     const expertsData =
       await expertsResponse.json();
 
@@ -878,13 +889,12 @@ if (marketResponse.ok) {
         signalsData.sources ||
         [],
 
-      rawSignals:
-        signalsData.signals ||
-        [],
+     rawSignals:
+  normalizedSignals,
 
-  props:
+ props:
   buildConsensusProps(
-    signalsData.signals || [],
+    normalizedSignals,
     signalsData.sources || []
   )
     };
@@ -933,7 +943,7 @@ const week =
   normalizeWeek(
     signal.week ??
     signal.seasonWeek ??
-    signalsData.week ??
+    board?.week ??
     1
   );
 
