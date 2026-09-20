@@ -128,6 +128,13 @@ async function fetchEvents(cursor = null) {
   const data =
     await response.json();
 
+  console.log(
+  "SportsGameOdds events:",
+  data?.data?.length || 0,
+  "cursor:",
+  data?.nextCursor || null
+);
+
   if (!data.success) {
 
     throw new Error(
