@@ -882,22 +882,9 @@ if (marketResponse.ok) {
         signalsData.signals ||
         [],
 
-     props:
+  props:
   buildConsensusProps(
-    (signalsData.signals || [])
-      .filter(
-        signal =>
-          normalizeWeek(
-            signal.week ??
-            signal.seasonWeek ??
-            signalsData.week ??
-            1
-          ) ===
-          normalizeWeek(
-            signalsData.week ??
-            1
-          )
-      ),
+    signalsData.signals || [],
     signalsData.sources || []
   )
     };
