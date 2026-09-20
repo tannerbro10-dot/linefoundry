@@ -106,16 +106,32 @@ async function fetchEvents(cursor = null) {
 
   }
 
-  const response =
-    await fetch(
-      `${API_URL}?${params.toString()}`,
-      {
-        headers: {
-          "x-api-key":
-            API_KEY
+ let response;
+
+  try {
+
+    response =
+      await fetch(
+        `${API_URL}?${params.toString()}`,
+        {
+          headers: {
+            "x-api-key":
+              API_KEY
+          }
         }
-      }
+      );
+
+  }
+  catch (error) {
+
+    console.error(
+      "SportsGameOdds fetch error:",
+      error
     );
+
+    throw error;
+
+  }
 
   if (!response.ok) {
 
