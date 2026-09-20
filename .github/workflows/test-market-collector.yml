@@ -23,7 +23,7 @@ jobs:
         run: |
           node scripts/market-data-collector.js
 
-      - name: Show Market Summary
+           - name: Show Market Summary
         run: |
           node <<'NODE'
           const fs = require("fs");
@@ -57,7 +57,7 @@ jobs:
             .slice(0, 25)
             .forEach((market, index) => {
 
-                        const player =
+              const player =
                 market.player?.name ||
                 "Unknown Player";
 
@@ -97,7 +97,7 @@ jobs:
           console.log("========================================");
           NODE
 
-                - name: Commit Market Data
+      - name: Commit Market Data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
