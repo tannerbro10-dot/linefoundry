@@ -1298,12 +1298,24 @@ async function loadLiveResults() {
       });
 
 
-    if (board) {
+  if (board) {
 
-      board.liveUpdatedAt =
-        data.updatedAt ||
-        new Date().toISOString();
-    }
+  if (
+    data.week !== undefined &&
+    data.week !== null
+  ) {
+
+    board.week =
+      normalizeWeek(
+        data.week
+      );
+
+  }
+
+  board.liveUpdatedAt =
+    data.updatedAt ||
+    new Date().toISOString();
+}
 
 
     render();
