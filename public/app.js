@@ -1358,12 +1358,6 @@ function getResult(prop) {
     return 'PENDING';
   }
 
-
-  // Expert result IDs may not exactly
-  // match the consensus ID, so first
-  // check the raw signals that make up
-  // this consensus.
-
   const matching =
     (board?.rawSignals || [])
       .filter(signal => {
@@ -1389,40 +1383,43 @@ function getResult(prop) {
           signalWeek ===
           Number(prop.week)
         );
+
       });
 
-
-  for (const signal of matching) {
+  for (
+    const signal
+    of matching
+  ) {
 
     const live =
       liveResults[signal.id];
 
-    if (live) {
-
-      if (
-        live.status === 'HIT'
-      ) {
-        return 'HIT';
-      }
-
-      if (
-        live.status === 'MISS'
-      ) {
-        return 'MISS';
-      }
-
-      if (
-        live.status === 'LIVE'
-      ) {
-        return 'LIVE';
-      }
+    if (!live) {
+      continue;
     }
-  }
 
+    if (
+      live.status === 'HIT'
+    ) {
+      return 'HIT';
+    }
+
+    if (
+      live.status === 'MISS'
+    ) {
+      return 'MISS';
+    }
+
+    if (
+      live.status === 'LIVE'
+    ) {
+      return 'LIVE';
+    }
+
+  }
 
   return 'PENDING';
 }
-
 
 // ============================================================
 // EXPERT LIVE DISPLAY
