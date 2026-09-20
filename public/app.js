@@ -929,13 +929,13 @@ function buildConsensusProps(
 
   signals.forEach(signal => {
 
-    const week =
-      normalizeWeek(
-        signal.week ??
-        signal.seasonWeek ??
-        board?.week ??
-        1
-      );
+const week =
+  normalizeWeek(
+    signal.week ??
+    signal.seasonWeek ??
+    signalsData.week ??
+    1
+  );
 
     const player =
       String(
