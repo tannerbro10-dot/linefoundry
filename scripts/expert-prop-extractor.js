@@ -47,10 +47,7 @@ function normalizePlayerName(name) {
       /^(?:[A-Z][A-Za-z'-]+)\s+(?:QB|RB|WR|TE|FB|K|DEF|DST)\s+/i,
       ""
     )
-     .replace(
-      /^(?:[A-Z][A-Za-z'-]+)\s+vs\.?\s+(?:[A-Z][A-Za-z'-]+)\s+/i,
-      ""
-    )
+    
     .trim();
 
 }
