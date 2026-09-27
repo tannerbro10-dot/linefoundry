@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-09-27T19:26:50.570Z",
+  "refreshedAt": "2026-09-27T20:25:58.046Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -505,76 +505,40 @@
       "note": "Hard Rock Bet Week 2 player prop."
     },
     {
-      "id": "pm-et-zay-flowers-receptions-under-5-5-yep-w3",
-      "player": "PM ET Zay Flowers",
+      "id": "dk-metcalf-receptions-over-4-5-yep-w3",
+      "player": "DK Metcalf",
       "market": "Receptions",
-      "side": "UNDER",
-      "line": 5.5,
+      "side": "OVER",
+      "line": 4.5,
       "analyst": "Unknown Analyst",
       "sourceId": "yep-unknown",
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.dimers.com/nfl/props"
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
     },
     {
-      "id": "pm-et-zay-flowers-receiving-yards-under-72-5-yep-w3",
-      "player": "PM ET Zay Flowers",
-      "market": "Receiving Yards",
-      "side": "UNDER",
-      "line": 72.5,
+      "id": "he-has-gone-rushing-yards-over-83-5-yep-w3",
+      "player": "He has gone",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 83.5,
       "analyst": "Unknown Analyst",
       "sourceId": "yep-unknown",
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.dimers.com/nfl/props"
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
     },
     {
-      "id": "pm-et-zay-flowers-receiving-yards-under-71-5-yep-w3",
-      "player": "PM ET Zay Flowers",
-      "market": "Receiving Yards",
+      "id": "tyler-shough-completions-under-21-5-yep-w3",
+      "player": "Tyler Shough",
+      "market": "Completions",
       "side": "UNDER",
-      "line": 71.5,
+      "line": 21.5,
       "analyst": "Unknown Analyst",
       "sourceId": "yep-unknown",
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.dimers.com/nfl/props"
-    },
-    {
-      "id": "zay-flowers-receptions-under-5-5-yep-w3",
-      "player": "Zay Flowers",
-      "market": "Receptions",
-      "side": "UNDER",
-      "line": 5.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.dimers.com/nfl/props"
-    },
-    {
-      "id": "followed-by-zay-flowers-receiving-yards-under-72-5-yep-w3",
-      "player": "followed by Zay Flowers",
-      "market": "Receiving Yards",
-      "side": "UNDER",
-      "line": 72.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.dimers.com/nfl/props"
-    },
-    {
-      "id": "and-zay-flowers-receiving-yards-under-71-5-yep-w3",
-      "player": "and Zay Flowers",
-      "market": "Receiving Yards",
-      "side": "UNDER",
-      "line": 71.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.dimers.com/nfl/props"
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
     },
     {
       "id": "michael-penix-jr-interceptions-over-0-5-yep-w3",

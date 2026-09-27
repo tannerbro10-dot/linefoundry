@@ -1,71 +1,41 @@
 {
   "success": true,
-  "generatedAt": "2026-09-27T19:26:50.571Z",
+  "generatedAt": "2026-09-27T20:25:58.047Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 5,
-  "excludedArticleCount": 15,
+  "includedArticleCount": 4,
+  "excludedArticleCount": 16,
   "extractionFailureCount": 0,
-  "propCount": 11,
-  "publishedWeek3SignalCount": 11,
+  "propCount": 8,
+  "publishedWeek3SignalCount": 8,
   "props": [
     {
-      "player": "PM ET Zay Flowers",
+      "player": "DK Metcalf",
       "market": "Receptions",
-      "side": "UNDER",
-      "line": 5.5,
+      "side": "OVER",
+      "line": 4.5,
       "week": 3,
       "source": {
-        "url": "https://www.dimers.com/nfl/props"
+        "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
       }
     },
     {
-      "player": "PM ET Zay Flowers",
-      "market": "Receiving Yards",
-      "side": "UNDER",
-      "line": 72.5,
+      "player": "He has gone",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 83.5,
       "week": 3,
       "source": {
-        "url": "https://www.dimers.com/nfl/props"
+        "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
       }
     },
     {
-      "player": "PM ET Zay Flowers",
-      "market": "Receiving Yards",
+      "player": "Tyler Shough",
+      "market": "Completions",
       "side": "UNDER",
-      "line": 71.5,
+      "line": 21.5,
       "week": 3,
       "source": {
-        "url": "https://www.dimers.com/nfl/props"
-      }
-    },
-    {
-      "player": "Zay Flowers",
-      "market": "Receptions",
-      "side": "UNDER",
-      "line": 5.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.dimers.com/nfl/props"
-      }
-    },
-    {
-      "player": "followed by Zay Flowers",
-      "market": "Receiving Yards",
-      "side": "UNDER",
-      "line": 72.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.dimers.com/nfl/props"
-      }
-    },
-    {
-      "player": "and Zay Flowers",
-      "market": "Receiving Yards",
-      "side": "UNDER",
-      "line": 71.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.dimers.com/nfl/props"
+        "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
       }
     },
     {
@@ -121,8 +91,8 @@
   ],
   "includedArticles": [
     {
-      "url": "https://www.dimers.com/nfl/props",
-      "title": "Best NFL Player Props Today & NFL Prop Bets",
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum",
+      "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 3 (Invest in Blake Corum)",
       "week": 3
     },
     {
@@ -138,11 +108,6 @@
     {
       "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/",
       "title": "2026 NFL Receiving Prop Bets: Best Overs to Target",
-      "week": 3
-    },
-    {
-      "url": "https://sports.yahoo.com/articles/nfl-player-props-9-over-134800543.html",
-      "title": "NFL player props: 9 over/under bets entering 2026 season - Yahoo Sports",
       "week": 3
     }
   ],
@@ -168,11 +133,6 @@
       "week": 2
     },
     {
-      "url": "https://www.rotowire.com/football/article/best-patriots-vs-seahawks-nfl-player-props-week-1-2026-133326",
-      "title": "Best Patriots vs Seahawks NFL Player Props (Week 1) | RotoWire",
-      "week": 1
-    },
-    {
       "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
       "title": "Week 1 NFL Player Props: Best Prop Bets & Predictions",
       "week": 1
@@ -193,9 +153,9 @@
       "week": 2
     },
     {
-      "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
-      "title": "",
-      "week": 1
+      "url": "https://www.rotowire.com/cfootball/article/college-football-picks-best-week-3-player-prop-bets-on-rebet-135297",
+      "title": "College Football Picks: Best Week 3 Player Prop Bets on ReBet | RotoWire",
+      "week": 3
     },
     {
       "url": "https://www.sportsbookreview.com/picks/college-football/ncaaf-player-props-best-bets-week-1-2026/",
@@ -208,18 +168,28 @@
       "week": 2
     },
     {
-      "url": "https://sports.yahoo.com/articles/player-props-nfl-week-2-200150001.html",
-      "title": "Player Props for NFL Week 2: Aaron Rodgers, Jeremiyah Love, Christian McCaffrey - Yahoo Sports",
+      "url": "https://www.si.com/betting/lions-vs-bills-best-nfl-prop-bets-for-thursday-night-football-in-week-2-bet-on-josh-allen-amon-ra-st-brown",
+      "title": "Lions vs. Bills Best NFL Prop Bets for Thursday Night Football in Week 2 (Bet on Josh Allen, Amon-Ra. St Brown)",
       "week": 2
     },
     {
-      "url": "https://www.oddschecker.com/us/insight/football/nfl/20260917-bet365-prop-protect-promo-get-your-bet-protected-if-a-player-is-injured-during-lions-vs-bills",
+      "url": "https://www.actionnetwork.com/nfl/nfl-week-1-sunday-mega-preview-brandon-anderson-picks-props-same-game-parlays",
+      "title": "",
+      "week": 1
+    },
+    {
+      "url": "https://www.actionnetwork.com/nfl/nfl-props-week-1-daniel-jones-dandre-swift-braelon-allen-more",
+      "title": "",
+      "week": 1
+    },
+    {
+      "url": "https://www.forbes.com/sites/juancarlosblanco/2026/09/05/nfl-2026-bets-team-win-total-props-for-dallas-cowboys-denver-broncos/",
       "week": null
     },
     {
-      "url": "https://www.actionnetwork.com/nfl/cowboys-vs-giants-picks-props-odds-predictions-sunday-night-football-sept-13",
-      "title": "",
-      "week": null
+      "url": "https://www.thelines.com/betting/guides/nfl-prop-bets/",
+      "title": "NFL Prop Bets Explained: How To Bet on Team & Player Props",
+      "week": 1
     }
   ],
   "extractionFailures": []
