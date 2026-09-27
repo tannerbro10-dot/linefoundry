@@ -159,15 +159,15 @@ async function fetchArticle(url) {
 function cleanPlayerName(player) {
   let value = String(player || "").trim();
 
-  value = value
-    .replace(
-      /^(via\s+)?(?:FanDuel|DraftKings|BetMGM|Caesars|BetRivers|ESPN BET)\s+/i,
-      ""
-    )
-    .replace(
-      /^(best\s+odds|odds)\s+/i,
-      ""
-    )
+   value = value
+  .replace(
+    /^(via\s+)?(?:FanDuel|DraftKings|BetMGM|Caesars|BetRivers|ESPN BET)\s+/i,
+    ""
+  )
+  .replace(
+    /^(best\s+odds|odds|projection\s+edge|prop\s+bets?|bets\s+card|card\s+includes)\s+/i,
+    ""
+  )
     .split(/\.\s+/)
     .pop()
     .trim();
