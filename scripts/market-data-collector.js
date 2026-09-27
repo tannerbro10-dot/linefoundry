@@ -387,9 +387,14 @@ function normalizeProp(
     eventId:
       event.eventID,
 
-    week:
-      event.info?.seasonWeek ||
-      null,
+   week:
+  String(
+    event.info?.seasonWeek ||
+    ""
+  )
+    .replace(/^NFL\s+/i, "")
+    .trim() ||
+  null,
 
     season:
       2026,
@@ -405,22 +410,22 @@ function normalizeProp(
         )
     },
 
-    game: {
+  game: {
 
-      eventId:
-        event.eventID,
+  eventId:
+    event.eventID,
 
-      awayTeam:
-        event.teams?.away?.name ||
-        event.teams?.away?.displayName ||
-        "",
+  awayTeam:
+    event.teams?.away?.names?.long ||
+    event.teams?.away?.names?.medium ||
+    "",
 
-      homeTeam:
-        event.teams?.home?.name ||
-        event.teams?.home?.displayName ||
-        ""
+  homeTeam:
+    event.teams?.home?.names?.long ||
+    event.teams?.home?.names?.medium ||
+    ""
 
-    },
+},
 
     market: {
 
