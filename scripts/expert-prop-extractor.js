@@ -223,7 +223,7 @@ function extractPropPhrases(text) {
    */
 
   const pattern =
-    /\b([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,2})\s+(Over|Under)\s+(\d+(?:\.\d+)?)\s+(receptions?|receiving yards?|rushing yards?|rushing attempts?|carries|rush attempts|passing yards?|passing attempts?|completions?|interceptions?)\b/gi;
+    /\b([A-Z][A-Za-z.'-]+(?:\s+[A-Z][A-Za-z.'-]+){1,3})\s+(Over|Under)\s+(\d+(?:\.\d+)?)\s+(receptions?|receiving yards?|rushing yards?|rushing attempts?|carries|rush attempts|passing yards?|passing attempts?|completions?|interceptions?)\b/gi;
 
 
   let match;
