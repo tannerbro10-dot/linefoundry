@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-09-27T08:27:12.877Z",
+  "generatedAt": "2026-09-27T12:31:08.142Z",
   "inputArticleCount": 20,
   "includedArticleCount": 5,
   "excludedArticleCount": 15,
@@ -153,6 +153,11 @@
       "week": 2
     },
     {
+      "url": "https://www.rotowire.com/football/article/best-patriots-vs-seahawks-nfl-player-props-week-1-2026-133326",
+      "title": "Best Patriots vs Seahawks NFL Player Props (Week 1) | RotoWire",
+      "week": 1
+    },
+    {
       "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
       "title": "NFL Thursday Night Football Player Props & Bets: Lions vs. Bills | BettingPros",
       "week": 2
@@ -163,19 +168,24 @@
       "week": 1
     },
     {
-      "url": "https://www.rotowire.com/cfl/article/cfl-betting-cfl-bets-and-player-props-for-week-12-129094",
-      "title": "CFL Betting: CFL Bets and Player Props for Week 12 | RotoWire",
-      "week": 12
-    },
-    {
-      "url": "https://www.bettingpros.com/picks/prizepicks/nfl/",
-      "title": "Best NFL PrizePicks Player Prop Bets Today (9/27/2026) | BettingPros",
+      "url": "https://www.actionnetwork.com/nfl/nfl-predictions-props-futures-32-teams",
+      "title": "",
       "week": null
     },
     {
-      "url": "https://www.rotowire.com/cfl/article/cfl-betting-cfl-bets-and-player-props-for-week-17-136661",
-      "title": "CFL Betting: CFL Bets and Player Props for Week 17 | RotoWire",
-      "week": 17
+      "url": "https://www.actionnetwork.com/nfl/lions-vs-bills-player-props-dalton-kincaid-jahmyr-gibbs",
+      "title": "",
+      "week": null
+    },
+    {
+      "url": "https://www.rotowire.com/cfootball/article/college-football-picks-best-week-3-player-prop-bets-on-rebet-135297",
+      "title": "College Football Picks: Best Week 3 Player Prop Bets on ReBet | RotoWire",
+      "week": 3
+    },
+    {
+      "url": "https://www.bettingpros.com/articles/nfl-monday-night-football-player-props-broncos-vs-chiefs-week-1-2026/",
+      "title": "NFL Monday Night Football Player Props: Broncos vs. Chiefs | BettingPros",
+      "week": 1
     },
     {
       "url": "https://www.fantasypros.com/2026/09/nfl-player-props-monday-night-football-giants-vs-rams-week-2-2026/",
@@ -193,22 +203,14 @@
       "week": 1
     },
     {
-      "url": "https://sports.yahoo.com/articles/player-props-nfl-week-2-200150001.html",
-      "title": "Player Props for NFL Week 2: Aaron Rodgers, Jeremiyah Love, Christian McCaffrey - Yahoo Sports",
-      "week": 2
+      "url": "https://www.sportsbookreview.com/picks/nfl/futures-bets-to-make-before-training-camp-2026/",
+      "title": "NFL Futures Bets to Make Before Training Camp: Playoff Picks & Player Props",
+      "week": 15
     },
     {
-      "url": "https://www.oddschecker.com/us/insight/football/nfl/20260917-bet365-prop-protect-promo-get-your-bet-protected-if-a-player-is-injured-during-lions-vs-bills",
-      "week": null
-    },
-    {
-      "url": "https://www.actionnetwork.com/nfl/nfl-week-1-sunday-mega-preview-brandon-anderson-picks-props-same-game-parlays",
-      "title": "",
-      "week": 1
-    },
-    {
-      "url": "https://www.oddschecker.com/us/insight/football/nfl/20260920-draftkings-nfl-sunday-slatebreaker-promo-win-a-share-of-$2-million-in-bonus-bets",
-      "week": null
+      "url": "https://dknetwork.draftkings.com/2026/09/04/best-mlb-player-prop-bets-for-friday-9-04-26/",
+      "title": "Best MLB player prop bets for Friday 9/04/26",
+      "week": 3
     }
   ],
   "extractionFailures": []
