@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-09-27T13:33:39.238Z",
+  "refreshedAt": "2026-09-27T13:54:43.631Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -899,42 +899,6 @@
       "week": 3,
       "note": "Week 3 expert prop discovered by TinyFish.",
       "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-3-2026/"
-    },
-    {
-      "id": "dk-metcalf-receptions-over-4-5-https-www-si-com-betting-player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-",
-      "player": "DK Metcalf",
-      "market": "Receptions",
-      "side": "OVER",
-      "line": 4.5,
-      "analyst": "Expert Analyst",
-      "sourceId": "tinyfish-expert",
-      "week": 3,
-      "note": "Week 3 expert prop discovered by TinyFish.",
-      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
-    },
-    {
-      "id": "he-has-gone-rushing-yards-over-83-5-https-www-si-com-betting-player-prop-countdown-top-10-nfl-player-props-for-week-3-in",
-      "player": "He has gone",
-      "market": "Rushing Yards",
-      "side": "OVER",
-      "line": 83.5,
-      "analyst": "Expert Analyst",
-      "sourceId": "tinyfish-expert",
-      "week": 3,
-      "note": "Week 3 expert prop discovered by TinyFish.",
-      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
-    },
-    {
-      "id": "tyler-shough-completions-under-21-5-https-www-si-com-betting-player-prop-countdown-top-10-nfl-player-props-for-week-3-in",
-      "player": "Tyler Shough",
-      "market": "Completions",
-      "side": "UNDER",
-      "line": 21.5,
-      "analyst": "Expert Analyst",
-      "sourceId": "tinyfish-expert",
-      "week": 3,
-      "note": "Week 3 expert prop discovered by TinyFish.",
-      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
     },
     {
       "id": "player-props-derrick-henry-rushing-yards-over-89-5-https-www-cbssports-com-betting-news-will-brinsons-nfl-week-3-predict",
