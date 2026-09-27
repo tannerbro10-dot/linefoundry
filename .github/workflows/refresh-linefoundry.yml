@@ -8,13 +8,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      # ============================================================
+      # CHECKOUT
+      # ============================================================
+
       - name: Checkout repository
         uses: actions/checkout@v4
+
+
+      # ============================================================
+      # NODE
+      # ============================================================
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 24
+
+
+      # ============================================================
+      # STEP 1 - YEP SEARCH
+      # ============================================================
 
       - name: Run Yep Search
         env:
@@ -22,41 +37,79 @@ jobs:
         run: |
           node scripts/yep-search.js
 
+
+      # ============================================================
+      # STEP 2 - COLLECT ARTICLES
+      # ============================================================
+
       - name: Collect Yep Articles
         run: |
           node scripts/yep-article-collector.js
 
-      - name: Show Collection Summary
+
+      # ============================================================
+      # STEP 3 - FILTER + EXTRACT EXPERT PROPS
+      # ============================================================
+
+      - name: Extract NFL Expert Props
         run: |
-          node <<'NODE'
-          const fs = require("fs");
+          node scripts/yep-expert-prop-runner.js
 
-          const data = JSON.parse(
-            fs.readFileSync(
-              "yep-articles.json",
-              "utf8"
-            )
-          );
 
-          console.log("");
-          console.log("========================================");
-          console.log("YEP ARTICLE COLLECTION");
-          console.log("========================================");
-          console.log(`Search results: ${data.resultCount}`);
-          console.log(`Unique URLs: ${data.urlCount}`);
-          console.log(`Successful: ${data.successfulCount}`);
-          console.log(`Failed: ${data.failedCount}`);
-          console.log("========================================");
-          NODE
+      # ============================================================
+      # SHOW RESULTS
+      # ============================================================
+
+      - name: Show LineFoundry Results
+        run: |
+          echo "========================================"
+          echo "LINEFOUNDRY REFRESH COMPLETE"
+          echo "========================================"
+
+          echo ""
+          echo "Yep Search:"
+          ls -lh yep-results.json
+
+          echo ""
+          echo "Collected Articles:"
+          ls -lh yep-articles.json
+
+          echo ""
+          echo "Expert Props:"
+          ls -lh expert-props.json
+
+          echo ""
+          echo "Expert Prop Summary:"
+          node -e "
+            const fs = require('fs');
+            const data = JSON.parse(fs.readFileSync('expert-props.json', 'utf8'));
+
+            console.log('Input articles:', data.inputArticleCount);
+            console.log('Included NFL prop articles:', data.includedArticleCount);
+            console.log('Excluded articles:', data.excludedArticleCount);
+            console.log('Extraction failures:', data.extractionFailureCount);
+            console.log('Extracted props:', data.propCount);
+          "
+
+
+      # ============================================================
+      # COMMIT RESULTS
+      # ============================================================
 
       - name: Commit Results
         run: |
+
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add yep-results.json
-          git add yep-articles.json
+          git config user.email \
+            "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git diff --cached --quiet || git commit -m "Refresh Yep articles"
+          git add \
+            yep-results.json \
+            yep-articles.json \
+            expert-props.json
+
+          git diff --cached --quiet || \
+            git commit -m "Refresh Yep NFL expert props"
 
           git push
