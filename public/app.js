@@ -3299,11 +3299,45 @@ function renderMarkets() {
   }
 
 
+   const games = new Map();
+
+  filtered.forEach(market => {
+    const key =
+      market?.eventId ||
+      gameLabel(market);
+
+    if (!games.has(key)) {
+      games.set(key, []);
+    }
+
+    games.get(key).push(market);
+  });
+
   grid.innerHTML =
-    filtered
-      .map(
-        marketCard
-      )
+    Array.from(games.entries())
+      .map(([gameId, gameMarkets]) => {
+        const game = gameMarkets[0];
+
+        return `
+          <section class="lf-market-game-group">
+
+            <div class="lf-market-game-header">
+              <h3>
+                ${escapeHtml(
+                  gameLabel(game)
+                )}
+              </h3>
+            </div>
+
+            <div class="lf-market-grid">
+              ${gameMarkets
+                .map(marketCard)
+                .join('')}
+            </div>
+
+          </section>
+        `;
+      })
       .join('');
 
 
