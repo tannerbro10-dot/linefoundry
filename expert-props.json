@@ -1,14 +1,51 @@
 {
   "success": true,
-  "generatedAt": "2026-09-27T05:15:15.314Z",
+  "generatedAt": "2026-09-27T05:20:32.464Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 0,
-  "excludedArticleCount": 20,
+  "includedArticleCount": 3,
+  "excludedArticleCount": 17,
   "extractionFailureCount": 0,
-  "propCount": 0,
-  "publishedWeek3SignalCount": 0,
-  "props": [],
-  "includedArticles": [],
+  "propCount": 2,
+  "publishedWeek3SignalCount": 2,
+  "props": [
+    {
+      "player": "Michael Penix Jr.",
+      "market": "Interceptions",
+      "side": "OVER",
+      "line": 0.5,
+      "week": 3,
+      "source": {
+        "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/"
+      }
+    },
+    {
+      "player": "Jordan Love",
+      "market": "Passing Yards",
+      "side": "OVER",
+      "line": 231.5,
+      "week": 3,
+      "source": {
+        "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/"
+      }
+    }
+  ],
+  "includedArticles": [
+    {
+      "url": "https://sports.betmgm.com/en/blog/nfl/player-props-week-3-picks-bm16/",
+      "title": "2 Best NFL Player Prop Picks for Week 3 | BetMGM",
+      "week": 3
+    },
+    {
+      "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/",
+      "title": "2 Best NFL Player Props for TNF: Packers vs Falcons | BetMGM",
+      "week": 3
+    },
+    {
+      "url": "https://sports.yahoo.com/articles/nfl-player-props-9-over-134800543.html",
+      "title": "NFL player props: 9 over/under bets entering 2026 season - Yahoo Sports",
+      "week": 3
+    }
+  ],
   "excludedArticles": [
     {
       "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-totals-moneyline-parlays-props-bets/",
@@ -24,11 +61,6 @@
       "url": "https://www.sportsline.com/insiders/nfl-picks-jayden-daniels-prop-among-sportsline-expert-propbetguys-best-bets-for-week-2-of-2026-season/",
       "title": "NFL picks: Jayden Daniels prop among SportsLine expert PropBetGuy&#x27;s best bets for Week 2 of 2026 season - SportsLine.com",
       "week": 2
-    },
-    {
-      "url": "https://sports.betmgm.com/en/blog/nfl/player-props-week-3-picks-bm16/",
-      "title": "2 Best NFL Player Prop Picks for Week 3 | BetMGM",
-      "week": 3
     },
     {
       "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
@@ -56,11 +88,6 @@
       "week": 1
     },
     {
-      "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/",
-      "title": "2 Best NFL Player Props for TNF: Packers vs Falcons | BetMGM",
-      "week": 3
-    },
-    {
       "url": "https://www.fantasypros.com/2026/09/nfl-player-props-monday-night-football-giants-vs-rams-week-2-2026/",
       "title": "NFL Player Props: Monday Night Football (Giants vs. Rams) - FantasyPros",
       "week": 2
@@ -83,11 +110,6 @@
     {
       "url": "https://www.oddschecker.com/us/insight/football/nfl/20260917-bet365-prop-protect-promo-get-your-bet-protected-if-a-player-is-injured-during-lions-vs-bills",
       "week": null
-    },
-    {
-      "url": "https://sports.yahoo.com/articles/nfl-player-props-9-over-134800543.html",
-      "title": "NFL player props: 9 over/under bets entering 2026 season - Yahoo Sports",
-      "week": 3
     },
     {
       "url": "https://www.sportsbookreview.com/picks/nfl/futures-bets-to-make-before-training-camp-2026/",
