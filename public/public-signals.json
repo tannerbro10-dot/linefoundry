@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-09-27T06:31:53.547Z",
+  "refreshedAt": "2026-09-27T08:27:12.876Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -505,76 +505,40 @@
       "note": "Hard Rock Bet Week 2 player prop."
     },
     {
-      "id": "pm-et-lajohntay-wester-receptions-under-1-5-yep-w3",
-      "player": "PM ET LaJohntay Wester",
+      "id": "dk-metcalf-receptions-over-4-5-yep-w3",
+      "player": "DK Metcalf",
       "market": "Receptions",
-      "side": "UNDER",
-      "line": 1.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.dimers.com/nfl/props"
-    },
-    {
-      "id": "pm-et-terrance-ferguson-receptions-under-4-5-yep-w3",
-      "player": "PM ET Terrance Ferguson",
-      "market": "Receptions",
-      "side": "UNDER",
+      "side": "OVER",
       "line": 4.5,
       "analyst": "Unknown Analyst",
       "sourceId": "yep-unknown",
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.dimers.com/nfl/props"
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
     },
     {
-      "id": "pm-et-isaiah-likely-receptions-under-4-5-yep-w3",
-      "player": "PM ET Isaiah Likely",
-      "market": "Receptions",
-      "side": "UNDER",
-      "line": 4.5,
+      "id": "he-has-gone-rushing-yards-over-83-5-yep-w3",
+      "player": "He has gone",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 83.5,
       "analyst": "Unknown Analyst",
       "sourceId": "yep-unknown",
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.dimers.com/nfl/props"
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
     },
     {
-      "id": "lajohntay-wester-receptions-under-1-5-yep-w3",
-      "player": "LaJohntay Wester",
-      "market": "Receptions",
+      "id": "tyler-shough-completions-under-21-5-yep-w3",
+      "player": "Tyler Shough",
+      "market": "Completions",
       "side": "UNDER",
-      "line": 1.5,
+      "line": 21.5,
       "analyst": "Unknown Analyst",
       "sourceId": "yep-unknown",
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.dimers.com/nfl/props"
-    },
-    {
-      "id": "followed-by-terrance-ferguson-receptions-under-4-5-yep-w3",
-      "player": "followed by Terrance Ferguson",
-      "market": "Receptions",
-      "side": "UNDER",
-      "line": 4.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.dimers.com/nfl/props"
-    },
-    {
-      "id": "and-isaiah-likely-receptions-under-4-5-yep-w3",
-      "player": "and Isaiah Likely",
-      "market": "Receptions",
-      "side": "UNDER",
-      "line": 4.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.dimers.com/nfl/props"
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
     },
     {
       "id": "michael-penix-jr-interceptions-over-0-5-yep-w3",
