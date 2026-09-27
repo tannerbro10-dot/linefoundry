@@ -376,14 +376,6 @@ async function main() {
           candidate.url
         );
 
-      console.log(
-  "ARTICLE DEBUG:",
-  article.url,
-  article.text.match(
-    /.{0,150}Smith-Njigba.{0,150}/i
-  )?.[0]
-);
-
       const tempFile = path.join(
         os.tmpdir(),
         `linefoundry-tinyfish-${Date.now()}-${Math.random()
