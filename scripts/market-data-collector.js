@@ -368,6 +368,11 @@ function normalizeProp(
   odd
 ) {
 
+  const eventPlayer =
+  event.players?.[
+    odd.statEntityID
+  ] || {};
+
   const line =
     odd.bookOverUnder ??
     odd.fairOverUnder ??
@@ -387,30 +392,37 @@ function normalizeProp(
     eventId:
       event.eventID,
 
-   week:
+  week:
   String(
     event.info?.seasonWeek ||
     ""
   )
-    .replace(/^NFL\s+/i, "")
+    .replace(
+      /^NFL\s+/i,
+      ""
+    )
     .trim() ||
   null,
 
     season:
       2026,
 
-    player: {
-      id:
-        odd.statEntityID,
+  player: {
+  id:
+    odd.statEntityID,
 
-      name:
-        playerName(
-          event,
-          odd.statEntityID
-        )
-    },
+  name:
+    playerName(
+      event,
+      odd.statEntityID
+    ),
 
-  game: {
+  teamId:
+    eventPlayer.teamID ||
+    null
+},
+
+game: {
 
   eventId:
     event.eventID,
