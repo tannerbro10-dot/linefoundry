@@ -3,6 +3,9 @@ name: Refresh LineFoundry
 on:
   workflow_dispatch:
 
+  schedule:
+    - cron: "17 0,2,4,6,8,10,12,14,16,18,20,22 * * *"
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -80,15 +83,40 @@ jobs:
 
           echo ""
           echo "Expert Prop Summary:"
+
           node -e "
             const fs = require('fs');
-            const data = JSON.parse(fs.readFileSync('expert-props.json', 'utf8'));
+            const data = JSON.parse(
+              fs.readFileSync(
+                'expert-props.json',
+                'utf8'
+              )
+            );
 
-            console.log('Input articles:', data.inputArticleCount);
-            console.log('Included NFL prop articles:', data.includedArticleCount);
-            console.log('Excluded articles:', data.excludedArticleCount);
-            console.log('Extraction failures:', data.extractionFailureCount);
-            console.log('Extracted props:', data.propCount);
+            console.log(
+              'Input articles:',
+              data.inputArticleCount
+            );
+
+            console.log(
+              'Included NFL prop articles:',
+              data.includedArticleCount
+            );
+
+            console.log(
+              'Excluded articles:',
+              data.excludedArticleCount
+            );
+
+            console.log(
+              'Extraction failures:',
+              data.extractionFailureCount
+            );
+
+            console.log(
+              'Extracted props:',
+              data.propCount
+            );
           "
 
 
