@@ -68,27 +68,39 @@ function combinedArticleText(article) {
 }
 
 function isExcluded(article) {
-  const combined = combinedArticleText(article);
+  const classificationText = [
+    article.url,
+    article.title,
+    article.description
+  ]
+    .map(text)
+    .join(' ');
 
   return EXCLUDE_KEYWORDS.some(keyword =>
-    combined.includes(keyword)
+    classificationText.includes(keyword)
   );
 }
 
 function isNFLPropArticle(article) {
-  const combined = combinedArticleText(article);
+  const classificationText = [
+    article.url,
+    article.title,
+    article.description
+  ]
+    .map(text)
+    .join(' ');
 
   const hasNFL =
-    combined.includes('nfl') ||
-    combined.includes('national football league');
+    classificationText.includes('nfl') ||
+    classificationText.includes('national football league');
 
   const hasProp =
-    combined.includes('player prop') ||
-    combined.includes('player props') ||
-    combined.includes('player-prop') ||
-    combined.includes('player-props') ||
-    combined.includes('prop bet') ||
-    combined.includes('prop bets');
+    classificationText.includes('player prop') ||
+    classificationText.includes('player props') ||
+    classificationText.includes('player-prop') ||
+    classificationText.includes('player-props') ||
+    classificationText.includes('prop bet') ||
+    classificationText.includes('prop bets');
 
   return hasNFL && hasProp;
 }
