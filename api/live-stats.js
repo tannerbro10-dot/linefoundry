@@ -1,12 +1,31 @@
 export default async function handler(req, res) {
   try {
-    const season = 2026;
-    const week = 1;
+    
+const season = 2026;
+const NFL_WEEKS = [
+  { week: 1, start: "2026-09-09", end: "2026-09-14" },
+  { week: 2, start: "2026-09-15", end: "2026-09-21" },
+  { week: 3, start: "2026-09-22", end: "2026-09-28" },
+  { week: 4, start: "2026-09-29", end: "2026-10-05" },
+  // ...your existing weeks
+];
+
+const today = new Date().toISOString().slice(0, 10);
+
+const currentWeek = NFL_WEEKS.find(
+  w => today >= w.start && today <= w.end
+);
+
+if (!currentWeek) {
+  throw new Error(`No NFL week found for ${today}`);
+}
+
+const week = currentWeek.week;
 
     // Get today's NFL scoreboard from ESPN
     const scoreboardUrl =
       `https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard` +
-      `?dates=20260913`;
+     `?dates=${today}`;
 
     const scoreboardResponse = await fetch(scoreboardUrl);
 
