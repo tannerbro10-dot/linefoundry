@@ -1,0 +1,657 @@
+{
+  "success": true,
+  "generatedAt": "2026-09-27T04:55:35.981Z",
+  "inputArticleCount": 20,
+  "includedArticleCount": 13,
+  "excludedArticleCount": 7,
+  "extractionFailureCount": 0,
+  "propCount": 17,
+  "props": [
+    {
+      "player": "Jalen Hurts going",
+      "market": "Rushing Attempts",
+      "side": "OVER",
+      "line": 6.5,
+      "analyst": "Picks Odds Props Teams",
+      "source": {
+        "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-totals-moneyline-parlays-props-bets/",
+        "outlet": "SportsLine",
+        "sourceId": "sportsline",
+        "quality": 0.9,
+        "title": "NFL expert picks, odds, predictions, player props, betting guide for Week 1 - CBS Sports"
+      }
+    },
+    {
+      "player": "game script. Buffalo allowed",
+      "market": "Passing Yards",
+      "side": "OVER",
+      "line": 375,
+      "analyst": "NFL Game Picks NFL",
+      "source": {
+        "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
+        "outlet": "BettingPros",
+        "sourceId": "bettingpros",
+        "quality": 0.84,
+        "title": "NFL Thursday Night Football Player Props & Bets: Lions vs. Bills | BettingPros"
+      }
+    },
+    {
+      "player": "Picks Christian Watson",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 55.5,
+      "analyst": "Josh Shepardson",
+      "source": {
+        "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
+        "outlet": "Sharp Football Analysis",
+        "sourceId": "sharp-football-analysis",
+        "quality": 0.86,
+        "title": "Week 1 NFL Player Props: Best Prop Bets & Predictions"
+      }
+    },
+    {
+      "player": "Juwan Johnson",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 41.5,
+      "analyst": "Josh Shepardson",
+      "source": {
+        "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
+        "outlet": "Sharp Football Analysis",
+        "sourceId": "sharp-football-analysis",
+        "quality": 0.86,
+        "title": "Week 1 NFL Player Props: Best Prop Bets & Predictions"
+      }
+    },
+    {
+      "player": "Chase Brown",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 23.5,
+      "analyst": "Josh Shepardson",
+      "source": {
+        "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
+        "outlet": "Sharp Football Analysis",
+        "sourceId": "sharp-football-analysis",
+        "quality": 0.86,
+        "title": "Week 1 NFL Player Props: Best Prop Bets & Predictions"
+      }
+    },
+    {
+      "player": "Christian Watson",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 55.5,
+      "analyst": "Josh Shepardson",
+      "source": {
+        "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
+        "outlet": "Sharp Football Analysis",
+        "sourceId": "sharp-football-analysis",
+        "quality": 0.86,
+        "title": "Week 1 NFL Player Props: Best Prop Bets & Predictions"
+      }
+    },
+    {
+      "player": "Hribar shouted out Brown",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 23.5,
+      "analyst": "Josh Shepardson",
+      "source": {
+        "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
+        "outlet": "Sharp Football Analysis",
+        "sourceId": "sharp-football-analysis",
+        "quality": 0.86,
+        "title": "Week 1 NFL Player Props: Best Prop Bets & Predictions"
+      }
+    },
+    {
+      "player": "putting him",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 23.5,
+      "analyst": "Josh Shepardson",
+      "source": {
+        "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
+        "outlet": "Sharp Football Analysis",
+        "sourceId": "sharp-football-analysis",
+        "quality": 0.86,
+        "title": "Week 1 NFL Player Props: Best Prop Bets & Predictions"
+      }
+    },
+    {
+      "player": "Props Michael Penix Jr.",
+      "market": "Interceptions",
+      "side": "OVER",
+      "line": 0.5,
+      "analyst": null,
+      "source": {
+        "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/",
+        "outlet": null,
+        "sourceId": null,
+        "quality": null,
+        "title": "2 Best NFL Player Props for TNF: Packers vs Falcons | BetMGM"
+      }
+    },
+    {
+      "player": "from injury. Jordan Love",
+      "market": "Passing Yards",
+      "side": "OVER",
+      "line": 231.5,
+      "analyst": null,
+      "source": {
+        "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/",
+        "outlet": null,
+        "sourceId": null,
+        "quality": null,
+        "title": "2 Best NFL Player Props for TNF: Packers vs Falcons | BetMGM"
+      }
+    },
+    {
+      "player": "Moore Prop Bet Recommendation",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 824.5,
+      "analyst": "Tucker Bagley",
+      "source": {
+        "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/",
+        "outlet": "Sharp Football Analysis",
+        "sourceId": "sharp-football-analysis",
+        "quality": 0.86,
+        "title": "2026 NFL Receiving Prop Bets: Best Overs to Target"
+      }
+    },
+    {
+      "player": "Loveland Prop Bet Recommendation",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 824.5,
+      "analyst": "Tucker Bagley",
+      "source": {
+        "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/",
+        "outlet": "Sharp Football Analysis",
+        "sourceId": "sharp-football-analysis",
+        "quality": 0.86,
+        "title": "2026 NFL Receiving Prop Bets: Best Overs to Target"
+      }
+    },
+    {
+      "player": "Colston Loveland Longshot Recommendation",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 1000,
+      "analyst": "Tucker Bagley",
+      "source": {
+        "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/",
+        "outlet": "Sharp Football Analysis",
+        "sourceId": "sharp-football-analysis",
+        "quality": 0.86,
+        "title": "2026 NFL Receiving Prop Bets: Best Overs to Target"
+      }
+    },
+    {
+      "player": "Josh Allen",
+      "market": "Passing Yards",
+      "side": "OVER",
+      "line": 220.5,
+      "analyst": null,
+      "source": {
+        "url": "https://www.sportsbettingdime.com/news/nfl/early-props-target-week-2-2026/",
+        "outlet": "Sports Betting Dime",
+        "sourceId": "sports-betting-dime",
+        "quality": 0.8,
+        "title": "Early NFL Props to Target for Week 2: Josh Allen, Derrick Henry & More"
+      }
+    },
+    {
+      "player": "Derrick Henry",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 78.5,
+      "analyst": null,
+      "source": {
+        "url": "https://www.sportsbettingdime.com/news/nfl/early-props-target-week-2-2026/",
+        "outlet": "Sports Betting Dime",
+        "sourceId": "sports-betting-dime",
+        "quality": 0.8,
+        "title": "Early NFL Props to Target for Week 2: Josh Allen, Derrick Henry & More"
+      }
+    },
+    {
+      "player": "Caleb Williams",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 20.5,
+      "analyst": null,
+      "source": {
+        "url": "https://www.sportsbettingdime.com/news/nfl/early-props-target-week-2-2026/",
+        "outlet": "Sports Betting Dime",
+        "sourceId": "sports-betting-dime",
+        "quality": 0.8,
+        "title": "Early NFL Props to Target for Week 2: Josh Allen, Derrick Henry & More"
+      }
+    },
+    {
+      "player": "needs to average just",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 52.9,
+      "analyst": null,
+      "source": {
+        "url": "https://sports.yahoo.com/articles/nfl-player-props-9-over-134800543.html",
+        "outlet": "Yahoo Sports",
+        "sourceId": "yahoo-sports",
+        "quality": 0.76,
+        "title": "NFL player props: 9 over/under bets entering 2026 season - Yahoo Sports"
+      }
+    }
+  ],
+  "includedArticles": [
+    {
+      "article": {
+        "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-totals-moneyline-parlays-props-bets/",
+        "title": "NFL expert picks, odds, predictions, player props, betting guide for Week 1 - CBS Sports",
+        "outlet": "SportsLine"
+      },
+      "extraction": {
+        "success": true,
+        "analyst": "Picks Odds Props Teams",
+        "source": {
+          "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-totals-moneyline-parlays-props-bets/",
+          "outlet": "SportsLine",
+          "sourceId": "sportsline",
+          "quality": 0.9,
+          "title": "NFL expert picks, odds, predictions, player props, betting guide for Week 1 - CBS Sports"
+        },
+        "propCount": 1,
+        "props": [
+          {
+            "player": "Jalen Hurts going",
+            "market": "Rushing Attempts",
+            "side": "OVER",
+            "line": 6.5
+          }
+        ]
+      }
+    },
+    {
+      "article": {
+        "url": "https://www.sportsline.com/insiders/nfl-picks-jayden-daniels-prop-among-sportsline-expert-propbetguys-best-bets-for-week-2-of-2026-season/",
+        "title": "NFL picks: Jayden Daniels prop among SportsLine expert PropBetGuy&#x27;s best bets for Week 2 of 2026 season - SportsLine.com",
+        "outlet": "SportsLine"
+      },
+      "extraction": {
+        "success": true,
+        "analyst": "Prop Bet Guy Doug",
+        "source": {
+          "url": "https://www.sportsline.com/insiders/nfl-picks-jayden-daniels-prop-among-sportsline-expert-propbetguys-best-bets-for-week-2-of-2026-season/",
+          "outlet": "SportsLine",
+          "sourceId": "sportsline",
+          "quality": 0.9,
+          "title": "NFL picks: Jayden Daniels prop among SportsLine expert PropBetGuy&#x27;s best bets for Week 2 of 2026 season - SportsLine.com"
+        },
+        "propCount": 0,
+        "props": []
+      }
+    },
+    {
+      "article": {
+        "url": "https://sports.betmgm.com/en/blog/nfl/player-props-week-3-picks-bm16/",
+        "title": "2 Best NFL Player Prop Picks for Week 3 | BetMGM",
+        "outlet": null
+      },
+      "extraction": {
+        "success": true,
+        "analyst": null,
+        "source": {
+          "url": "https://sports.betmgm.com/en/blog/nfl/player-props-week-3-picks-bm16/",
+          "outlet": null,
+          "sourceId": null,
+          "quality": null,
+          "title": "2 Best NFL Player Prop Picks for Week 3 | BetMGM"
+        },
+        "propCount": 0,
+        "props": []
+      }
+    },
+    {
+      "article": {
+        "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
+        "title": "NFL Thursday Night Football Player Props & Bets: Lions vs. Bills | BettingPros",
+        "outlet": "BettingPros"
+      },
+      "extraction": {
+        "success": true,
+        "analyst": "NFL Game Picks NFL",
+        "source": {
+          "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
+          "outlet": "BettingPros",
+          "sourceId": "bettingpros",
+          "quality": 0.84,
+          "title": "NFL Thursday Night Football Player Props & Bets: Lions vs. Bills | BettingPros"
+        },
+        "propCount": 1,
+        "props": [
+          {
+            "player": "game script. Buffalo allowed",
+            "market": "Passing Yards",
+            "side": "OVER",
+            "line": 375
+          }
+        ]
+      }
+    },
+    {
+      "article": {
+        "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
+        "title": "Week 1 NFL Player Props: Best Prop Bets & Predictions",
+        "outlet": "Sharp Football Analysis"
+      },
+      "extraction": {
+        "success": true,
+        "analyst": "Josh Shepardson",
+        "source": {
+          "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
+          "outlet": "Sharp Football Analysis",
+          "sourceId": "sharp-football-analysis",
+          "quality": 0.86,
+          "title": "Week 1 NFL Player Props: Best Prop Bets & Predictions"
+        },
+        "propCount": 6,
+        "props": [
+          {
+            "player": "Picks Christian Watson",
+            "market": "Receiving Yards",
+            "side": "OVER",
+            "line": 55.5
+          },
+          {
+            "player": "Juwan Johnson",
+            "market": "Receiving Yards",
+            "side": "OVER",
+            "line": 41.5
+          },
+          {
+            "player": "Chase Brown",
+            "market": "Receiving Yards",
+            "side": "OVER",
+            "line": 23.5
+          },
+          {
+            "player": "Christian Watson",
+            "market": "Receiving Yards",
+            "side": "OVER",
+            "line": 55.5
+          },
+          {
+            "player": "Hribar shouted out Brown",
+            "market": "Receiving Yards",
+            "side": "OVER",
+            "line": 23.5
+          },
+          {
+            "player": "putting him",
+            "market": "Receiving Yards",
+            "side": "OVER",
+            "line": 23.5
+          }
+        ]
+      }
+    },
+    {
+      "article": {
+        "url": "https://www.bettingpros.com/picks/prizepicks/nfl/",
+        "title": "Best NFL PrizePicks Player Prop Bets Today (9/27/2026) | BettingPros",
+        "outlet": "BettingPros"
+      },
+      "extraction": {
+        "success": true,
+        "analyst": null,
+        "source": {
+          "url": "https://www.bettingpros.com/picks/prizepicks/nfl/",
+          "outlet": "BettingPros",
+          "sourceId": "bettingpros",
+          "quality": 0.84,
+          "title": "Best NFL PrizePicks Player Prop Bets Today (9/27/2026) | BettingPros"
+        },
+        "propCount": 0,
+        "props": []
+      }
+    },
+    {
+      "article": {
+        "url": "https://www.rotowire.com/football/article/best-patriots-vs-seahawks-nfl-player-props-week-1-2026-133326",
+        "title": "Best Patriots vs Seahawks NFL Player Props (Week 1) | RotoWire",
+        "outlet": "RotoWire"
+      },
+      "extraction": {
+        "success": true,
+        "analyst": "Fantasy Football News NFL",
+        "source": {
+          "url": "https://www.rotowire.com/football/article/best-patriots-vs-seahawks-nfl-player-props-week-1-2026-133326",
+          "outlet": "RotoWire",
+          "sourceId": "rotowire",
+          "quality": 0.8,
+          "title": "Best Patriots vs Seahawks NFL Player Props (Week 1) | RotoWire"
+        },
+        "propCount": 0,
+        "props": []
+      }
+    },
+    {
+      "article": {
+        "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/",
+        "title": "2 Best NFL Player Props for TNF: Packers vs Falcons | BetMGM",
+        "outlet": null
+      },
+      "extraction": {
+        "success": true,
+        "analyst": null,
+        "source": {
+          "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/",
+          "outlet": null,
+          "sourceId": null,
+          "quality": null,
+          "title": "2 Best NFL Player Props for TNF: Packers vs Falcons | BetMGM"
+        },
+        "propCount": 2,
+        "props": [
+          {
+            "player": "Props Michael Penix Jr.",
+            "market": "Interceptions",
+            "side": "OVER",
+            "line": 0.5
+          },
+          {
+            "player": "from injury. Jordan Love",
+            "market": "Passing Yards",
+            "side": "OVER",
+            "line": 231.5
+          }
+        ]
+      }
+    },
+    {
+      "article": {
+        "url": "https://www.fantasypros.com/2026/09/nfl-player-props-monday-night-football-giants-vs-rams-week-2-2026/",
+        "title": "NFL Player Props: Monday Night Football (Giants vs. Rams) - FantasyPros",
+        "outlet": "FantasyPros"
+      },
+      "extraction": {
+        "success": true,
+        "analyst": "NFL Game Picks NFL",
+        "source": {
+          "url": "https://www.fantasypros.com/2026/09/nfl-player-props-monday-night-football-giants-vs-rams-week-2-2026/",
+          "outlet": "FantasyPros",
+          "sourceId": "fantasypros",
+          "quality": 0.8,
+          "title": "NFL Player Props: Monday Night Football (Giants vs. Rams) - FantasyPros"
+        },
+        "propCount": 0,
+        "props": []
+      }
+    },
+    {
+      "article": {
+        "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/",
+        "title": "2026 NFL Receiving Prop Bets: Best Overs to Target",
+        "outlet": "Sharp Football Analysis"
+      },
+      "extraction": {
+        "success": true,
+        "analyst": "Tucker Bagley",
+        "source": {
+          "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/",
+          "outlet": "Sharp Football Analysis",
+          "sourceId": "sharp-football-analysis",
+          "quality": 0.86,
+          "title": "2026 NFL Receiving Prop Bets: Best Overs to Target"
+        },
+        "propCount": 3,
+        "props": [
+          {
+            "player": "Moore Prop Bet Recommendation",
+            "market": "Receiving Yards",
+            "side": "OVER",
+            "line": 824.5
+          },
+          {
+            "player": "Loveland Prop Bet Recommendation",
+            "market": "Receiving Yards",
+            "side": "OVER",
+            "line": 824.5
+          },
+          {
+            "player": "Colston Loveland Longshot Recommendation",
+            "market": "Receiving Yards",
+            "side": "OVER",
+            "line": 1000
+          }
+        ]
+      }
+    },
+    {
+      "article": {
+        "url": "https://www.sportsbettingdime.com/news/nfl/early-props-target-week-2-2026/",
+        "title": "Early NFL Props to Target for Week 2: Josh Allen, Derrick Henry & More",
+        "outlet": "Sports Betting Dime"
+      },
+      "extraction": {
+        "success": true,
+        "analyst": null,
+        "source": {
+          "url": "https://www.sportsbettingdime.com/news/nfl/early-props-target-week-2-2026/",
+          "outlet": "Sports Betting Dime",
+          "sourceId": "sports-betting-dime",
+          "quality": 0.8,
+          "title": "Early NFL Props to Target for Week 2: Josh Allen, Derrick Henry & More"
+        },
+        "propCount": 3,
+        "props": [
+          {
+            "player": "Josh Allen",
+            "market": "Passing Yards",
+            "side": "OVER",
+            "line": 220.5
+          },
+          {
+            "player": "Derrick Henry",
+            "market": "Rushing Yards",
+            "side": "OVER",
+            "line": 78.5
+          },
+          {
+            "player": "Caleb Williams",
+            "market": "Rushing Yards",
+            "side": "OVER",
+            "line": 20.5
+          }
+        ]
+      }
+    },
+    {
+      "article": {
+        "url": "https://sports.yahoo.com/articles/nfl-player-props-9-over-134800543.html",
+        "title": "NFL player props: 9 over/under bets entering 2026 season - Yahoo Sports",
+        "outlet": "Yahoo Sports"
+      },
+      "extraction": {
+        "success": true,
+        "analyst": null,
+        "source": {
+          "url": "https://sports.yahoo.com/articles/nfl-player-props-9-over-134800543.html",
+          "outlet": "Yahoo Sports",
+          "sourceId": "yahoo-sports",
+          "quality": 0.76,
+          "title": "NFL player props: 9 over/under bets entering 2026 season - Yahoo Sports"
+        },
+        "propCount": 1,
+        "props": [
+          {
+            "player": "needs to average just",
+            "market": "Receiving Yards",
+            "side": "OVER",
+            "line": 52.9
+          }
+        ]
+      }
+    },
+    {
+      "article": {
+        "url": "https://www.actionnetwork.com/nfl/nfl-week-1-sunday-mega-preview-brandon-anderson-picks-props-same-game-parlays",
+        "title": "NFL Betting Preview: Anderson’s Week 1 Picks, Prop Bets & SGPs",
+        "outlet": "Action Network"
+      },
+      "extraction": {
+        "success": true,
+        "analyst": null,
+        "source": {
+          "url": "https://www.actionnetwork.com/nfl/nfl-week-1-sunday-mega-preview-brandon-anderson-picks-props-same-game-parlays",
+          "outlet": "Action Network",
+          "sourceId": "action-network",
+          "quality": 0.9,
+          "title": null
+        },
+        "propCount": 0,
+        "props": []
+      }
+    }
+  ],
+  "excludedArticles": [
+    {
+      "url": "https://www.cbssports.com/betting/news/2026-nfl-draft-prop-picks-expert-locks-in-best-bets-predictions-including-epic-30-1-pick/",
+      "title": "2026 NFL Draft prop picks: Expert locks in best bets and predictions, including epic 30-1 pick - CBS Sports",
+      "reason": "NFL Draft"
+    },
+    {
+      "url": "https://www.rotowire.com/cfl/article/cfl-betting-cfl-bets-and-player-props-for-week-12-129094",
+      "title": "CFL Betting: CFL Bets and Player Props for Week 12 | RotoWire",
+      "reason": "CFL"
+    },
+    {
+      "url": "https://www.sportsbookreview.com/picks/college-football/ncaaf-player-props-best-bets-week-1-2026/",
+      "title": "College Football Player Props Week 1 | Best Prop Bets",
+      "reason": "College Football"
+    },
+    {
+      "url": "https://www.oddschecker.com/us/insight/football/nfl/20260917-bet365-prop-protect-promo-get-your-bet-protected-if-a-player-is-injured-during-lions-vs-bills",
+      "reason": "Article Collection Failed"
+    },
+    {
+      "url": "https://www.sportsbookreview.com/picks/nfl/futures-bets-to-make-before-training-camp-2026/",
+      "title": "NFL Futures Bets to Make Before Training Camp: Playoff Picks & Player Props",
+      "reason": "Futures"
+    },
+    {
+      "url": "https://www.thelines.com/mlb/player-props/mlb-todays-best-bets-for-june-5-home-run-picks-top-player-props/",
+      "title": "MLB Today’s Best Bets 06/05: Home Run Picks & Top Player Props",
+      "reason": "MLB/Baseball"
+    },
+    {
+      "url": "https://dknetwork.draftkings.com/2026/09/04/best-mlb-player-prop-bets-for-friday-9-04-26/",
+      "title": "Best MLB player prop bets for Friday 9/04/26",
+      "reason": "MLB/Baseball"
+    }
+  ],
+  "extractionFailures": []
+}
