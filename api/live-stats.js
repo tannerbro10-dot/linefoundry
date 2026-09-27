@@ -2,12 +2,26 @@ export default async function handler(req, res) {
   try {
     
 const season = 2026;
+    
 const NFL_WEEKS = [
   { week: 1, start: "2026-09-09", end: "2026-09-14" },
   { week: 2, start: "2026-09-15", end: "2026-09-21" },
   { week: 3, start: "2026-09-22", end: "2026-09-28" },
   { week: 4, start: "2026-09-29", end: "2026-10-05" },
-  // ...your existing weeks
+  { week: 5, start: "2026-10-06", end: "2026-10-12" },
+  { week: 6, start: "2026-10-13", end: "2026-10-19" },
+  { week: 7, start: "2026-10-20", end: "2026-10-26" },
+  { week: 8, start: "2026-10-27", end: "2026-11-02" },
+  { week: 9, start: "2026-11-03", end: "2026-11-09" },
+  { week: 10, start: "2026-11-10", end: "2026-11-16" },
+  { week: 11, start: "2026-11-17", end: "2026-11-23" },
+  { week: 12, start: "2026-11-24", end: "2026-11-30" },
+  { week: 13, start: "2026-12-01", end: "2026-12-07" },
+  { week: 14, start: "2026-12-08", end: "2026-12-14" },
+  { week: 15, start: "2026-12-15", end: "2026-12-21" },
+  { week: 16, start: "2026-12-22", end: "2026-12-28" },
+  { week: 17, start: "2026-12-29", end: "2027-01-04" },
+  { week: 18, start: "2027-01-05", end: "2027-01-11" }
 ];
 
 const today = new Date().toISOString().slice(0, 10);
