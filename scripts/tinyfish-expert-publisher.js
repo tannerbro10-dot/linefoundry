@@ -254,16 +254,26 @@ function publishSignals(signals) {
         Number(signal.week || 1) !== CURRENT_WEEK
     );
 
-  const seen = new Set();
+const seen = new Set();
 
-  const weekSignals = signals.filter(signal => {
-    if (seen.has(signal.id)) {
-      return false;
-    }
+const weekSignals = signals.filter(signal => {
+  const key = [
+    signal.url,
+    signal.player,
+    signal.market,
+    signal.side,
+    signal.line ?? "any"
+  ]
+    .join("|")
+    .toLowerCase();
 
-    seen.add(signal.id);
-    return true;
-  });
+  if (seen.has(key)) {
+    return false;
+  }
+
+  seen.add(key);
+  return true;
+});
 
   const updated = {
     ...publicData,
