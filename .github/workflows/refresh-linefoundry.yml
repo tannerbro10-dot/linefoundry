@@ -1,1 +1,2 @@
-${{ secrets.YEP_API_KEY }}
+env:
+  YEP_API_KEY: ${{ secrets.YEP_API_KEY }}
