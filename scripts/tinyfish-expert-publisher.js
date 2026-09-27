@@ -165,8 +165,8 @@ function cleanPlayerName(player) {
     ""
   )
   .replace(
-    /^(best\s+odds|odds|projection\s+edge|prop\s+bets?|bets\s+card|card\s+includes)\s+/i,
-    ""
+    /^(best\s+odds|odds|projection\s+edge|player\s+props?|prop\s+bets?|bets\s+card|card\s+includes)\s+/i,
+  ""
   )
     .split(/\.\s+/)
     .pop()
