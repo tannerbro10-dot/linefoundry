@@ -1,17 +1,128 @@
 {
   "success": true,
-  "generatedAt": "2026-09-27T14:25:39.002Z",
+  "generatedAt": "2026-09-27T18:29:01.271Z",
   "inputArticleCount": 20,
   "includedArticleCount": 5,
   "excludedArticleCount": 15,
-  "extractionFailureCount": 4,
-  "propCount": 0,
-  "publishedWeek3SignalCount": 0,
-  "props": [],
+  "extractionFailureCount": 0,
+  "propCount": 11,
+  "publishedWeek3SignalCount": 11,
+  "props": [
+    {
+      "player": "PM ET Zay Flowers",
+      "market": "Receptions",
+      "side": "UNDER",
+      "line": 5.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.dimers.com/nfl/props"
+      }
+    },
+    {
+      "player": "PM ET Zay Flowers",
+      "market": "Receiving Yards",
+      "side": "UNDER",
+      "line": 72.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.dimers.com/nfl/props"
+      }
+    },
+    {
+      "player": "PM ET Zay Flowers",
+      "market": "Receiving Yards",
+      "side": "UNDER",
+      "line": 71.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.dimers.com/nfl/props"
+      }
+    },
+    {
+      "player": "Zay Flowers",
+      "market": "Receptions",
+      "side": "UNDER",
+      "line": 5.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.dimers.com/nfl/props"
+      }
+    },
+    {
+      "player": "followed by Zay Flowers",
+      "market": "Receiving Yards",
+      "side": "UNDER",
+      "line": 72.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.dimers.com/nfl/props"
+      }
+    },
+    {
+      "player": "and Zay Flowers",
+      "market": "Receiving Yards",
+      "side": "UNDER",
+      "line": 71.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.dimers.com/nfl/props"
+      }
+    },
+    {
+      "player": "Michael Penix Jr.",
+      "market": "Interceptions",
+      "side": "OVER",
+      "line": 0.5,
+      "week": 3,
+      "source": {
+        "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/"
+      }
+    },
+    {
+      "player": "Jordan Love",
+      "market": "Passing Yards",
+      "side": "OVER",
+      "line": 231.5,
+      "week": 3,
+      "source": {
+        "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/"
+      }
+    },
+    {
+      "player": "Moore Prop Bet",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 824.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/"
+      }
+    },
+    {
+      "player": "Loveland Prop Bet",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 824.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/"
+      }
+    },
+    {
+      "player": "Colston Loveland Longshot",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 1000,
+      "week": 3,
+      "source": {
+        "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/"
+      }
+    }
+  ],
   "includedArticles": [
     {
-      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum",
-      "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 3 (Invest in Blake Corum)",
+      "url": "https://www.dimers.com/nfl/props",
+      "title": "Best NFL Player Props Today & NFL Prop Bets",
       "week": 3
     },
     {
@@ -25,8 +136,8 @@
       "week": 3
     },
     {
-      "url": "https://www.si.com/betting/falcons-vs-packers-best-nfl-prop-bets-for-thursday-night-football-in-week-3-bet-on-christian-watson",
-      "title": "Falcons vs. Packers Best NFL Prop Bets for Thursday Night Football in Week 3 (Bet on Christian Watson)",
+      "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/",
+      "title": "2026 NFL Receiving Prop Bets: Best Overs to Target",
       "week": 3
     },
     {
@@ -52,14 +163,14 @@
       "week": 2
     },
     {
-      "url": "https://www.rotowire.com/football/article/best-patriots-vs-seahawks-nfl-player-props-week-1-2026-133326",
-      "title": "Best Patriots vs Seahawks NFL Player Props (Week 1) | RotoWire",
-      "week": 1
-    },
-    {
       "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
       "title": "NFL Thursday Night Football Player Props & Bets: Lions vs. Bills | BettingPros",
       "week": 2
+    },
+    {
+      "url": "https://www.rotowire.com/football/article/best-patriots-vs-seahawks-nfl-player-props-week-1-2026-133326",
+      "title": "Best Patriots vs Seahawks NFL Player Props (Week 1) | RotoWire",
+      "week": 1
     },
     {
       "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
@@ -67,19 +178,14 @@
       "week": 1
     },
     {
-      "url": "https://www.actionnetwork.com/nfl/nfl-predictions-props-futures-32-teams",
-      "title": "",
+      "url": "https://www.rotowire.com/cfl/article/cfl-betting-cfl-bets-and-player-props-for-week-12-129094",
+      "title": "CFL Betting: CFL Bets and Player Props for Week 12 | RotoWire",
+      "week": 12
+    },
+    {
+      "url": "https://www.bettingpros.com/picks/prizepicks/nfl/",
+      "title": "Best NFL PrizePicks Player Prop Bets Today (9/27/2026) | BettingPros",
       "week": null
-    },
-    {
-      "url": "https://www.rotowire.com/cfl/article/cfl-betting-cfl-bets-and-player-props-for-week-17-136661",
-      "title": "CFL Betting: CFL Bets and Player Props for Week 17 | RotoWire",
-      "week": 17
-    },
-    {
-      "url": "https://www.bettingpros.com/articles/nfl-monday-night-football-player-props-broncos-vs-chiefs-week-1-2026/",
-      "title": "NFL Monday Night Football Player Props: Broncos vs. Chiefs | BettingPros",
-      "week": 1
     },
     {
       "url": "https://www.fantasypros.com/2026/09/nfl-player-props-monday-night-football-giants-vs-rams-week-2-2026/",
@@ -87,14 +193,19 @@
       "week": 2
     },
     {
-      "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/",
-      "title": "2026 NFL Receiving Prop Bets: Best Overs to Target",
-      "week": 4
+      "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
+      "title": "",
+      "week": 1
     },
     {
       "url": "https://www.sportsbookreview.com/picks/college-football/ncaaf-player-props-best-bets-week-1-2026/",
       "title": "College Football Player Props Week 1 | Best Prop Bets",
       "week": 1
+    },
+    {
+      "url": "https://www.sportsbettingdime.com/news/nfl/early-props-target-week-2-2026/",
+      "title": "Early NFL Props to Target for Week 2: Josh Allen, Derrick Henry & More",
+      "week": 2
     },
     {
       "url": "https://sports.yahoo.com/articles/player-props-nfl-week-2-200150001.html",
@@ -106,31 +217,10 @@
       "week": null
     },
     {
-      "url": "https://www.actionnetwork.com/nfl/broncos-vs-chiefs-player-props-kenneth-walker-evan-engram-bo-nix",
+      "url": "https://www.actionnetwork.com/nfl/cowboys-vs-giants-picks-props-odds-predictions-sunday-night-football-sept-13",
       "title": "",
       "week": null
     }
   ],
-  "extractionFailures": [
-    {
-      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum",
-      "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 3 (Invest in Blake Corum)",
-      "error": "Unexpected token 'R', \"RAW MATCH:\"... is not valid JSON"
-    },
-    {
-      "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/",
-      "title": "2 Best NFL Player Props for TNF: Packers vs Falcons | BetMGM",
-      "error": "Unexpected token 'R', \"RAW MATCH:\"... is not valid JSON"
-    },
-    {
-      "url": "https://www.si.com/betting/falcons-vs-packers-best-nfl-prop-bets-for-thursday-night-football-in-week-3-bet-on-christian-watson",
-      "title": "Falcons vs. Packers Best NFL Prop Bets for Thursday Night Football in Week 3 (Bet on Christian Watson)",
-      "error": "Unexpected token 'R', \"RAW MATCH:\"... is not valid JSON"
-    },
-    {
-      "url": "https://sports.yahoo.com/articles/nfl-player-props-9-over-134800543.html",
-      "title": "NFL player props: 9 over/under bets entering 2026 season - Yahoo Sports",
-      "error": "Unexpected token 'R', \"RAW MATCH:\"... is not valid JSON"
-    }
-  ]
+  "extractionFailures": []
 }
