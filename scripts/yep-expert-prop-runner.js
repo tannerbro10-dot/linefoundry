@@ -1,568 +1,508 @@
-/**
- * LineFoundry Yep Expert Prop Runner
- *
- * Purpose:
- * - Read collected Yep articles
- * - Filter to NFL player-prop content
- * - Exclude unwanted sports/content
- * - Send qualifying articles to the existing
- *   expert-prop-extractor.js
- * - Save combined results to expert-props.json
- *
- * IMPORTANT:
- * - Does NOT extract props itself.
- * - Uses expert-prop-extractor.js for all prop extraction.
- * - Does NOT modify public-signals.json.
- * - Does NOT modify market data.
- */
+const fs = require('fs');
+const path = require('path');
+const os = require('os');
+const { execFileSync } = require('child_process');
 
-const fs = require("fs");
-const path = require("path");
-const { execFileSync } = require("child_process");
+const INPUT = path.join(__dirname, '..', 'yep-articles.json');
+const OUTPUT = path.join(__dirname, '..', 'expert-props.json');
+const PUBLIC_SIGNALS = path.join(
+  __dirname,
+  '..',
+  'public',
+  'public-signals.json'
+);
 
+const EXTRACTOR = path.join(
+  __dirname,
+  'expert-prop-extractor.js'
+);
 
-// ============================================================
-// CONFIGURATION
-// ============================================================
+const NFL_KEYWORDS = [
+  'nfl',
+  'football',
+  'player prop',
+  'player props',
+  'player-prop',
+  'player-props'
+];
 
-const INPUT_FILE =
-  "yep-articles.json";
+const EXCLUDE_KEYWORDS = [
+  'cfl',
+  'college football',
+  'ncaa',
+  'draft',
+  'nfl draft',
+  'mlb',
+  'baseball',
+  'promotion',
+  'promo',
+  'futures',
+  'super bowl futures'
+];
 
-const OUTPUT_FILE =
-  "expert-props.json";
-
-const EXTRACTOR =
-  path.resolve(
-    "scripts/expert-prop-extractor.js"
-  );
-
-const TEMP_DIR =
-  path.resolve(
-    ".tmp-expert-props"
-  );
-
-
-// ============================================================
-// LOAD ARTICLES
-// ============================================================
-
-function loadArticles() {
-
-  if (
-    !fs.existsSync(
-      INPUT_FILE
-    )
-  ) {
-
-    throw new Error(
-      `${INPUT_FILE} not found.`
-    );
-
-  }
-
-  const raw =
-    fs.readFileSync(
-      INPUT_FILE,
-      "utf8"
-    );
-
-  const data =
-    JSON.parse(
-      raw
-    );
-
-  if (
-    !Array.isArray(
-      data.articles
-    )
-  ) {
-
-    throw new Error(
-      "Yep article response does not contain an articles array."
-    );
-
-  }
-
-  return data.articles;
-
+function readJson(file) {
+  return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
 
+function writeJson(file, data) {
+  fs.writeFileSync(
+    file,
+    JSON.stringify(data, null, 2) + '\n'
+  );
+}
 
-// ============================================================
-// ARTICLE FILTER
-// ============================================================
+function text(value) {
+  return String(value || '').toLowerCase();
+}
 
-function classifyArticle(
-  article
-) {
+function combinedArticleText(article) {
+  return [
+    article.url,
+    article.title,
+    article.description,
+    article.text,
+    ...(article.highlights || [])
+  ]
+    .map(text)
+    .join(' ');
+}
 
-  const url =
-    String(
-      article.url ||
-      ""
-    ).toLowerCase();
+function isExcluded(article) {
+  const combined = combinedArticleText(article);
 
-  const title =
-    String(
-      article.title ||
-      article.yep?.title ||
-      ""
-    ).toLowerCase();
+  return EXCLUDE_KEYWORDS.some(keyword =>
+    combined.includes(keyword)
+  );
+}
 
-  const description =
-    String(
-      article.description ||
-      article.yep?.description ||
-      ""
-    ).toLowerCase();
+function isNFLPropArticle(article) {
+  const combined = combinedArticleText(article);
 
-  const text =
-    String(
-      article.text ||
-      ""
-    ).toLowerCase();
+  const hasNFL =
+    combined.includes('nfl') ||
+    combined.includes('national football league');
 
-  const combined =
-    [
-      url,
-      title,
-      description
-    ].join(" ");
+  const hasProp =
+    combined.includes('player prop') ||
+    combined.includes('player props') ||
+    combined.includes('player-prop') ||
+    combined.includes('player-props') ||
+    combined.includes('prop bet') ||
+    combined.includes('prop bets');
 
-  // ----------------------------------------------------------
-  // EXCLUDE NON-NFL SPORTS
-  // ----------------------------------------------------------
+  return hasNFL && hasProp;
+}
 
-  if (
-    /\/cfl\b|cfl\b|canadian football/.test(
-      combined
-    )
-  ) {
+function detectWeek(article) {
+  const combined = combinedArticleText(article);
 
-    return {
-      include: false,
-      reason: "CFL"
-    };
+  const match = combined.match(
+    /\bweek[\s-]*(\d{1,2})\b/i
+  );
 
+  if (!match) return null;
+
+  return Number(match[1]);
+}
+
+function cleanPlayerName(player) {
+  let value = String(player || '').trim();
+
+  // Remove common extraction garbage that can appear before a real name.
+  value = value.replace(
+    /^(props?|picks?|recommendation|player props?)\s+/i,
+    ''
+  );
+
+  // If extraction captured a sentence before the player,
+  // use the final sentence fragment containing the likely name.
+  value = value
+    .split(/\.\s+/)
+    .pop()
+    .trim();
+
+  // Remove trailing prose.
+  value = value.replace(
+    /\s+(going|needs|allowed|shouted|putting|recommendation|pick|selection)\b.*$/i,
+    ''
+  );
+
+  value = value.replace(/\s+/g, ' ').trim();
+
+  return value;
+}
+
+function looksLikePlayerName(player) {
+  const value = String(player || '').trim();
+
+  if (!value) return false;
+
+  if (value.length < 5 || value.length > 40) {
+    return false;
   }
 
-  if (
-    /college football|ncaaf|ncaa football|\/college-football\b/.test(
-      combined
-    )
-  ) {
+  const words = value.split(/\s+/);
 
-    return {
-      include: false,
-      reason: "College Football"
-    };
-
+  if (words.length < 2 || words.length > 4) {
+    return false;
   }
 
-  if (
-    /\/mlb\b|mlb\b|major league baseball|baseball/.test(
-      combined
-    )
-  ) {
-
-    return {
-      include: false,
-      reason: "MLB/Baseball"
-    };
-
+  // A player name should consist primarily of name-like characters.
+  if (!/^[A-Za-zÀ-ÿ.'’-]+(?:\s+[A-Za-zÀ-ÿ.'’-]+){1,3}$/.test(value)) {
+    return false;
   }
 
-  // ----------------------------------------------------------
-  // EXCLUDE NFL DRAFT
-  // ----------------------------------------------------------
+  const badFragments = [
+    'props',
+    'picks',
+    'recommendation',
+    'allowed',
+    'injury',
+    'average',
+    'putting',
+    'shouted',
+    'game script'
+  ];
 
-  if (
-    /nfl draft|\/draft\b|draft prop|draft picks/.test(
-      combined
-    )
-  ) {
+  const lower = value.toLowerCase();
 
-    return {
-      include: false,
-      reason: "NFL Draft"
-    };
+  return !badFragments.some(fragment =>
+    lower.includes(fragment)
+  );
+}
 
-  }
+function validMarket(market) {
+  const allowed = [
+    'Receptions',
+    'Receiving Yards',
+    'Rushing Yards',
+    'Rushing Attempts',
+    'Passing Yards',
+    'Passing Attempts',
+    'Completions',
+    'Interceptions',
+    'Anytime TD'
+  ];
 
-  // ----------------------------------------------------------
-  // EXCLUDE PROMOTIONS
-  // ----------------------------------------------------------
+  return allowed.includes(market);
+}
 
-  if (
-    /promotion|promo|bet protection|bet protected|protected if|bonus|bonus bet|deposit match|odds boost|free bet/.test(
-      combined
-    )
-  ) {
+function makeSignalId(prop) {
+  return [
+    cleanPlayerName(prop.player),
+    prop.market,
+    prop.side,
+    prop.line ?? 'any',
+    prop.source?.sourceId || 'yep',
+    'w3'
+  ]
+    .join('-')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+    .slice(0, 100);
+}
 
-    return {
-      include: false,
-      reason: "Promotion"
-    };
-
-  }
-
-  // ----------------------------------------------------------
-  // EXCLUDE FUTURES
-  // ----------------------------------------------------------
-
-  if (
-    /futures|super bowl winner|division winner|conference winner|mvp odds|rookie of the year/.test(
-      combined
-    )
-  ) {
-
-    return {
-      include: false,
-      reason: "Futures"
-    };
-
-  }
-
-  // ----------------------------------------------------------
-  // REQUIRE NFL CONTENT
-  // ----------------------------------------------------------
-
-  const nflMatch =
-    /nfl|national football league/.test(
-      combined
-    );
-
-  if (
-    !nflMatch
-  ) {
-
-    return {
-      include: false,
-      reason: "Not NFL"
-    };
-
-  }
-
-  // ----------------------------------------------------------
-  // REQUIRE PROP/BET CONTENT
-  // ----------------------------------------------------------
-
-  const propMatch =
-    /player prop|player props|prop bet|prop bets|player betting|player pick|player picks/.test(
-      combined
-    );
-
-  if (
-    !propMatch
-  ) {
-
-    return {
-      include: false,
-      reason: "Not Player Prop Content"
-    };
-
-  }
+function sourceFromProp(prop) {
+  const source = prop.source || {};
 
   return {
-    include: true,
-    reason: "NFL Player Props"
+    id: source.sourceId || `yep-${source.outlet || 'unknown'}`,
+    analyst:
+      prop.analyst ||
+      source.title ||
+      source.outlet ||
+      'Unknown Analyst',
+    outlet:
+      source.outlet ||
+      'Yep-discovered source',
+    quality:
+      typeof source.quality === 'number'
+        ? source.quality
+        : 0.75,
+    verification: 'discovered',
+    url: source.url || null
   };
-
 }
 
+function convertToSignal(prop, article) {
+  const player = cleanPlayerName(prop.player);
 
-// ============================================================
-// RUN EXISTING EXPERT PROP EXTRACTOR
-// ============================================================
+  if (!looksLikePlayerName(player)) {
+    return null;
+  }
 
-function extractProps(
-  article,
-  index
-) {
+  if (!validMarket(prop.market)) {
+    return null;
+  }
 
-  const tempFile =
-    path.join(
-      TEMP_DIR,
-      `article-${index}.json`
+  if (!['OVER', 'UNDER', 'YES', 'NO'].includes(prop.side)) {
+    return null;
+  }
+
+  const source = sourceFromProp(prop);
+
+  return {
+    id: makeSignalId({
+      ...prop,
+      player,
+      source
+    }),
+    player,
+    market: prop.market,
+    side: prop.side,
+    line:
+      prop.line === undefined
+        ? null
+        : prop.line,
+    analyst:
+      prop.analyst ||
+      source.analyst,
+    sourceId: source.id,
+    week: 3,
+    note:
+      prop.note ||
+      `Yep-discovered Week 3 expert prop from ${source.outlet}.`,
+    url: article.url
+  };
+}
+
+function loadExistingSignals() {
+  try {
+    return readJson(PUBLIC_SIGNALS);
+  } catch (error) {
+    throw new Error(
+      `Could not read ${PUBLIC_SIGNALS}: ${error.message}`
     );
+  }
+}
 
-  fs.writeFileSync(
-    tempFile,
-    JSON.stringify(
-      article,
-      null,
-      2
-    )
+function publishWeek3Signals(signals) {
+  const publicData = loadExistingSignals();
+
+  const existingSignals = Array.isArray(publicData.signals)
+    ? publicData.signals
+    : [];
+
+  // Preserve Week 1 and Week 2 exactly as they are.
+  const historicalSignals = existingSignals.filter(
+    signal => Number(signal.week || 1) !== 3
   );
 
-  try {
+  const mergedSignals = [
+    ...historicalSignals,
+    ...signals
+  ];
 
-    const output =
-      execFileSync(
-        "node",
-        [
-          EXTRACTOR,
-          tempFile
-        ],
+  // Remove duplicate Week 3 signals by ID.
+  const seen = new Set();
+
+  const dedupedSignals = mergedSignals.filter(signal => {
+    if (seen.has(signal.id)) {
+      return false;
+    }
+
+    seen.add(signal.id);
+    return true;
+  });
+
+  const existingSources = Array.isArray(publicData.sources)
+    ? publicData.sources
+    : [];
+
+  const sourceMap = new Map(
+    existingSources.map(source => [source.id, source])
+  );
+
+  for (const signal of signals) {
+    if (!sourceMap.has(signal.sourceId)) {
+      sourceMap.set(signal.sourceId, {
+        id: signal.sourceId,
+        analyst: signal.analyst,
+        outlet: 'Yep-discovered source',
+        quality: 0.75,
+        verification: 'discovered',
+        url: signal.url || null
+      });
+    }
+  }
+
+  const updated = {
+    ...publicData,
+    refreshedAt: new Date().toISOString(),
+    sources: Array.from(sourceMap.values()),
+    signals: dedupedSignals
+  };
+
+  writeJson(PUBLIC_SIGNALS, updated);
+
+  return updated;
+}
+
+function main() {
+  const input = readJson(INPUT);
+
+  const articles = Array.isArray(input)
+    ? input
+    : input.articles || [];
+
+  const includedArticles = [];
+  const excludedArticles = [];
+  const extractionFailures = [];
+  const props = [];
+
+  for (const article of articles) {
+    const week = detectWeek(article);
+
+    if (
+      week !== 3 ||
+      isExcluded(article) ||
+      !isNFLPropArticle(article)
+    ) {
+      excludedArticles.push({
+        url: article.url,
+        title: article.title,
+        week
+      });
+      continue;
+    }
+
+    includedArticles.push({
+      url: article.url,
+      title: article.title,
+      week
+    });
+
+    const tempFile = path.join(
+      os.tmpdir(),
+      `linefoundry-expert-${Date.now()}-${Math.random()
+        .toString(36)
+        .slice(2)}.json`
+    );
+
+    try {
+      fs.writeFileSync(
+        tempFile,
+        JSON.stringify(article, null, 2)
+      );
+
+      const raw = execFileSync(
+        'node',
+        [EXTRACTOR, tempFile],
         {
-          encoding: "utf8",
-          maxBuffer:
-            10 * 1024 * 1024
+          encoding: 'utf8',
+          maxBuffer: 10 * 1024 * 1024
         }
       );
 
-    return JSON.parse(
-      output
-    );
-
-  } finally {
-
-    if (
-      fs.existsSync(
-        tempFile
-      )
-    ) {
-
-      fs.unlinkSync(
-        tempFile
-      );
-
-    }
-
-  }
-
-}
-
-
-// ============================================================
-// MAIN
-// ============================================================
-
-function main() {
-
-  const articles =
-    loadArticles();
-
-  fs.mkdirSync(
-    TEMP_DIR,
-    {
-      recursive: true
-    }
-  );
-
-  const included = [];
-  const excluded = [];
-  const extractionFailures = [];
-
-  articles.forEach(
-    (article, index) => {
+      const result = JSON.parse(raw);
 
       if (
-        article.success === false
+        result &&
+        Array.isArray(result.props)
       ) {
-
-        excluded.push({
-          url:
-            article.url ||
-            null,
-
-          reason:
-            "Article Collection Failed"
-        });
-
-        return;
-
-      }
-
-      const classification =
-        classifyArticle(
-          article
-        );
-
-      if (
-        !classification.include
-      ) {
-
-        excluded.push({
-          url:
-            article.url ||
-            null,
-
-          title:
-            article.title ||
-            article.yep?.title ||
-            null,
-
-          reason:
-            classification.reason
-        });
-
-        return;
-
-      }
-
-      console.log(
-        `Including: ${
-          article.title ||
-          article.yep?.title ||
-          article.url
-        }`
-      );
-
-      try {
-
-        const result =
-          extractProps(
-            article,
-            index
+        for (const prop of result.props) {
+          const signal = convertToSignal(
+            prop,
+            article
           );
 
-        included.push({
-          article: {
-            url:
-              article.url ||
-              null,
-
-            title:
-              article.title ||
-              article.yep?.title ||
-              null,
-
-            outlet:
-              article.outlet ||
-              null
-          },
-
-          extraction:
-            result
-        });
-
-      } catch (error) {
-
-        extractionFailures.push({
-          url:
-            article.url ||
-            null,
-
-          error:
-            error.message
-        });
-
+          if (signal) {
+            props.push({
+              ...prop,
+              player: signal.player,
+              week: 3,
+              source: {
+                ...(prop.source || {}),
+                url:
+                  prop.source?.url ||
+                  article.url
+              }
+            });
+          }
+        }
       }
-
+    } catch (error) {
+      extractionFailures.push({
+        url: article.url,
+        title: article.title,
+        error: error.message
+      });
+    } finally {
+      try {
+        fs.unlinkSync(tempFile);
+      } catch {}
     }
-  );
+  }
 
-  const props =
-    included.flatMap(
+  const signals = [];
+
+  for (const prop of props) {
+    const article = includedArticles.find(
       item =>
-        Array.isArray(
-          item.extraction?.props
-        )
-          ? item.extraction.props.map(
-              prop => ({
-                ...prop,
+        item.url ===
+        prop.source?.url
+    ) || {
+      url: prop.source?.url
+    };
 
-                analyst:
-                  item.extraction.analyst ||
-                  null,
-
-                source:
-                  item.extraction.source ||
-                  null
-              })
-            )
-          : []
+    const signal = convertToSignal(
+      prop,
+      article
     );
 
+    if (signal) {
+      signals.push(signal);
+    }
+  }
+
+  const publicData =
+    publishWeek3Signals(signals);
+
   const output = {
-
     success: true,
-
-    generatedAt:
-      new Date()
-        .toISOString(),
-
-    inputArticleCount:
-      articles.length,
-
+    generatedAt: new Date().toISOString(),
+    inputArticleCount: articles.length,
     includedArticleCount:
-      included.length,
-
+      includedArticles.length,
     excludedArticleCount:
-      excluded.length,
-
+      excludedArticles.length,
     extractionFailureCount:
       extractionFailures.length,
-
-    propCount:
-      props.length,
-
+    propCount: props.length,
+    publishedWeek3SignalCount:
+      signals.length,
     props,
-
-    includedArticles:
-      included,
-
-    excludedArticles:
-      excluded,
-
+    includedArticles,
+    excludedArticles,
     extractionFailures
-
   };
 
-  fs.writeFileSync(
-    OUTPUT_FILE,
+  writeJson(OUTPUT, output);
+
+  console.log(
     JSON.stringify(
-      output,
+      {
+        success: true,
+        inputArticles: articles.length,
+        week3Articles:
+          includedArticles.length,
+        extractedProps: props.length,
+        publishedWeek3Signals:
+          signals.length,
+        publicSignalCount:
+          publicData.signals.length
+      },
       null,
       2
     )
   );
-
-  fs.rmSync(
-    TEMP_DIR,
-    {
-      recursive: true,
-      force: true
-    }
-  );
-
-  console.log("");
-  console.log(
-    "========================================"
-  );
-  console.log(
-    "YEP EXPERT PROP RUNNER"
-  );
-  console.log(
-    "========================================"
-  );
-
-  console.log(
-    `Input articles: ${articles.length}`
-  );
-
-  console.log(
-    `Included NFL prop articles: ${included.length}`
-  );
-
-  console.log(
-    `Excluded articles: ${excluded.length}`
-  );
-
-  console.log(
-    `Extraction failures: ${extractionFailures.length}`
-  );
-
-  console.log(
-    `Extracted props: ${props.length}`
-  );
-
-  console.log(
-    `Saved: ${OUTPUT_FILE}`
-  );
-
 }
 
+if (require.main === module) {
+  main();
+}
 
-main();
+module.exports = {
+  main
+};
