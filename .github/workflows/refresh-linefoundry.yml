@@ -124,18 +124,13 @@ jobs:
       # COMMIT RESULTS
       # ============================================================
 
-      - name: Commit Results
+          - name: Commit Results
         run: |
-
           git config user.name "github-actions[bot]"
-
           git config user.email \
             "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add \
-            yep-results.json \
-            yep-articles.json \
-            expert-props.json
+          git add yep-results.json yep-articles.json expert-props.json public/public-signals.json
 
           git diff --cached --quiet || \
             git commit -m "Refresh Yep NFL expert props"
