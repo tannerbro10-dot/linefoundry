@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-09-17T23:45:00Z",
+  "refreshedAt": "2026-09-27T05:29:05.097Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -83,7 +83,6 @@
       "verification": "reported",
       "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-parlays-props-best-bets/"
     },
-
     {
       "id": "zachary-cohen-vsin-week2",
       "analyst": "Zachary Cohen",
@@ -108,8 +107,7 @@
       "verification": "reported",
       "url": "https://talksport.com/nfl/4586091/tips-best-nfl-bets-buffalo-bills-vs-detroit-lions/"
     },
-
-        {
+    {
       "id": "josh-shepardson-sharp-week2",
       "analyst": "Josh Shepardson",
       "outlet": "Sharp Football Analysis",
@@ -132,9 +130,16 @@
       "quality": 0.86,
       "verification": "reported",
       "url": "https://www.hardrock.bet/news/ariel-epsteins-top-5-nfl-props-best-bets-predictions-for-week-2/"
+    },
+    {
+      "id": "yep-unknown",
+      "analyst": "Unknown Analyst",
+      "outlet": "Yep-discovered source",
+      "quality": 0.75,
+      "verification": "discovered",
+      "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/"
     }
   ],
-  
   "signals": [
     {
       "id": "omarion-hampton-anytd-erich-richter",
@@ -356,7 +361,6 @@
       "sourceId": "doug-kralstein-sportsline",
       "note": "Over 6.5 carries."
     },
-
     {
       "id": "saquon-barkley-rushing-yards-zachary-cohen-w2",
       "player": "Saquon Barkley",
@@ -423,8 +427,7 @@
       "week": 2,
       "note": "TalkSport Week 2 Bills-Lions player prop."
     },
-
-        {
+    {
       "id": "rashee-rice-receiving-yards-josh-shepardson-w2",
       "player": "Rashee Rice",
       "market": "Receiving Yards",
@@ -500,7 +503,30 @@
       "sourceId": "ariel-epstein-hardrock-week2",
       "week": 2,
       "note": "Hard Rock Bet Week 2 player prop."
+    },
+    {
+      "id": "michael-penix-jr-interceptions-over-0-5-yep-w3",
+      "player": "Michael Penix Jr.",
+      "market": "Interceptions",
+      "side": "OVER",
+      "line": 0.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/"
+    },
+    {
+      "id": "jordan-love-passing-yards-over-231-5-yep-w3",
+      "player": "Jordan Love",
+      "market": "Passing Yards",
+      "side": "OVER",
+      "line": 231.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/"
     }
-    
   ]
 }
