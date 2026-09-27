@@ -2412,13 +2412,6 @@ function marketCard(
         )}
       </div>
 
-      <div class="lf-market-game">
-        ${escapeHtml(
-          gameLabel(market)
-        )}
-      </div>
-
-
       <div class="lf-market-type">
         ${escapeHtml(
           marketTypeName(
