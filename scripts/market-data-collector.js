@@ -84,7 +84,7 @@ async function fetchEvents(cursor = null) {
         "false",
 
       limit:
-        "100"
+        "10"
 
     });
 
