@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-09-27T14:33:16.588Z",
+  "refreshedAt": "2026-09-27T14:47:21.167Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -503,78 +503,6 @@
       "sourceId": "ariel-epstein-hardrock-week2",
       "week": 2,
       "note": "Hard Rock Bet Week 2 player prop."
-    },
-    {
-      "id": "panthers-vs-browns-watson-passing-yards-under-199-5-https-www-covers-com-nfl-expert-prop-picks-week-3-w3",
-      "player": "Panthers vs Browns Watson",
-      "market": "Passing Yards",
-      "side": "UNDER",
-      "line": 199.5,
-      "analyst": "Expert Analyst",
-      "sourceId": "tinyfish-expert",
-      "week": 3,
-      "note": "Week 3 expert prop discovered by TinyFish.",
-      "url": "https://www.covers.com/nfl/expert-prop-picks-week-3"
-    },
-    {
-      "id": "seahawks-vs-commanders-smith-njigba-receiving-yards-over-88-5-https-www-covers-com-nfl-expert-prop-picks-week-3-w3",
-      "player": "Seahawks vs Commanders Smith-Njigba",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 88.5,
-      "analyst": "Expert Analyst",
-      "sourceId": "tinyfish-expert",
-      "week": 3,
-      "note": "Week 3 expert prop discovered by TinyFish.",
-      "url": "https://www.covers.com/nfl/expert-prop-picks-week-3"
-    },
-    {
-      "id": "vikings-vs-buccaneers-murray-passing-yards-under-199-5-https-www-covers-com-nfl-expert-prop-picks-week-3-w3",
-      "player": "Vikings vs Buccaneers Murray",
-      "market": "Passing Yards",
-      "side": "UNDER",
-      "line": 199.5,
-      "analyst": "Expert Analyst",
-      "sourceId": "tinyfish-expert",
-      "week": 3,
-      "note": "Week 3 expert prop discovered by TinyFish.",
-      "url": "https://www.covers.com/nfl/expert-prop-picks-week-3"
-    },
-    {
-      "id": "deshaun-watson-passing-yards-under-199-5-https-www-covers-com-nfl-expert-prop-picks-week-3-w3",
-      "player": "Deshaun Watson",
-      "market": "Passing Yards",
-      "side": "UNDER",
-      "line": 199.5,
-      "analyst": "Expert Analyst",
-      "sourceId": "tinyfish-expert",
-      "week": 3,
-      "note": "Week 3 expert prop discovered by TinyFish.",
-      "url": "https://www.covers.com/nfl/expert-prop-picks-week-3"
-    },
-    {
-      "id": "jaxon-smith-njigba-receiving-yards-over-88-5-https-www-covers-com-nfl-expert-prop-picks-week-3-w3",
-      "player": "Jaxon Smith-Njigba",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 88.5,
-      "analyst": "Expert Analyst",
-      "sourceId": "tinyfish-expert",
-      "week": 3,
-      "note": "Week 3 expert prop discovered by TinyFish.",
-      "url": "https://www.covers.com/nfl/expert-prop-picks-week-3"
-    },
-    {
-      "id": "kyler-murray-passing-yards-under-199-5-https-www-covers-com-nfl-expert-prop-picks-week-3-w3",
-      "player": "Kyler Murray",
-      "market": "Passing Yards",
-      "side": "UNDER",
-      "line": 199.5,
-      "analyst": "Expert Analyst",
-      "sourceId": "tinyfish-expert",
-      "week": 3,
-      "note": "Week 3 expert prop discovered by TinyFish.",
-      "url": "https://www.covers.com/nfl/expert-prop-picks-week-3"
     },
     {
       "id": "tony-pollard-rushing-attempts-under-11-5-https-milehighsports-com-sunday-nfl-bets-week-3-expert-picks-odds-and-player-pr",
