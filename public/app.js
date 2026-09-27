@@ -982,8 +982,7 @@ const week =
       );
     }
 
-
-    groups
+      groups
       .get(key)
       .signals
       .push(signal);
@@ -1230,7 +1229,7 @@ const week =
 
       rationale:
         expertsCount === 1
-          ? 'One tracked source currently supports this direction; treat as an early signal until more sources agree.'
+          ? 'One tracked source currently supports this direction; treat it as an early signal until more sources agree.'
           : `${percent}% of tracked analysts support this direction.`,
 
       sourceIds:
@@ -1966,6 +1965,22 @@ function weekSummary(props) {
       }
 
       ${
+        pending
+          ? ` • ${pending} pending`
+          : ''
+      }
+
+      ${
+        percentage !== null
+          ? ` • ${percentage}% settled`
+          : ''
+      }
+
+    </span>
+
+  `;
+}
+
         pending
           ? ` • ${pending} pending`
           : ''
@@ -2984,6 +2999,803 @@ function openMarketDetails(
   modal.classList.add(
     'open'
   );
+}
+
+
+// ============================================================
+// MARKET SECTION
+// ============================================================
+
+function ensureMarketSection() {
+
+  let section =
+    $('#lfMarketSection');
+
+
+  if (section) {
+    return section;
+  }
+
+
+  const anchor =
+    $('#propCards');
+
+
+  if (!anchor) {
+    return null;
+  }
+
+
+  section =
+    document.createElement(
+      'section'
+    );
+
+  section.id =
+    'lfMarketSection';
+
+
+  section.innerHTML = `
+
+    <div class="section-header">
+
+      <div>
+
+        <div class="eyebrow">
+          MARKET
+        </div>
+
+        <h2>
+          The Market
+        </h2>
+
+        <p>
+          Current sportsbook pricing,
+          line movement, and results.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="lf-market-toolbar">
+
+      <input
+        id="lfMarketSearch"
+        type="search"
+        placeholder="Search player or market..."
+      >
+
+      <select
+        id="lfMarketType"
+      >
+        <option value="">
+          All Markets
+        </option>
+      </select>
+
+    </div>
+
+
+    <div
+      id="lfMarketGrid"
+      class="lf-market-grid"
+    ></div>
+
+
+    <div
+      id="lfMarketModal"
+      class="lf-market-modal"
+    ></div>
+
+  `;
+
+
+  anchor.parentNode.insertBefore(
+    section,
+    anchor.nextSibling
+  );
+
+
+  section.addEventListener(
+    'click',
+    event => {
+
+      const close =
+        event.target.closest(
+          '[data-market-close]'
+        );
+
+      if (close) {
+
+        const modal =
+          $('#lfMarketModal');
+
+        if (modal) {
+          modal.classList.remove(
+            'open'
+          );
+        }
+
+        return;
+      }
+
+
+      const details =
+        event.target.closest(
+          '.lf-market-details'
+        );
+
+      if (details) {
+
+        event.preventDefault();
+
+        openMarketDetails(
+          details.dataset.marketId
+        );
+
+      }
+
+    }
+  );
+
+
+  const search =
+    $('#lfMarketSearch');
+
+  const type =
+    $('#lfMarketType');
+
+
+  if (search) {
+    search.addEventListener(
+      'input',
+      renderMarkets
+    );
+  }
+
+  if (type) {
+    type.addEventListener(
+      'change',
+      renderMarkets
+    );
+  }
+
+
+  return section;
+}
+
+
+// ============================================================
+// MARKET FILTER OPTIONS
+// ============================================================
+
+function populateMarketTypes() {
+
+  const select =
+    $('#lfMarketType');
+
+
+  if (!select) {
+    return;
+  }
+
+
+  const types =
+    [
+      ...new Set(
+        marketData
+          .map(
+            market =>
+              marketTypeName(
+                market
+              )
+          )
+          .filter(Boolean)
+      )
+    ]
+      .sort();
+
+
+  select.innerHTML = `
+    <option value="">
+      All Markets
+    </option>
+
+    ${
+      types
+        .map(
+          type => `
+            <option
+              value="${escapeHtml(
+                type
+              )}"
+            >
+              ${escapeHtml(
+                type
+              )}
+            </option>
+          `
+        )
+        .join('')
+    }
+  `;
+}
+
+
+// ============================================================
+// MARKET RENDER
+// ============================================================
+
+function renderMarkets() {
+
+  const section =
+    ensureMarketSection();
+
+
+  if (!section) {
+    return;
+  }
+
+
+  populateMarketTypes();
+
+
+  const grid =
+    $('#lfMarketGrid');
+
+
+  if (!grid) {
+    return;
+  }
+
+
+  const search =
+    String(
+      $('#lfMarketSearch')?.value ||
+      ''
+    )
+      .trim()
+      .toLowerCase();
+
+
+  const type =
+    String(
+      $('#lfMarketType')?.value ||
+      ''
+    );
+
+
+  const current =
+    normalizeWeek(
+      board?.week ||
+      currentWeek() ||
+      1
+    );
+
+
+  const currentWeekMarkets =
+    marketData.filter(
+      market =>
+        normalizeWeek(
+          market.week
+        ) === current
+    );
+
+
+  const filtered =
+    currentWeekMarkets
+      .filter(
+        market => {
+
+          if (
+            type &&
+            marketTypeName(
+              market
+            ) !== type
+          ) {
+            return false;
+          }
+
+
+          if (!search) {
+            return true;
+          }
+
+
+          const haystack =
+            [
+              market?.player?.name,
+              marketTypeName(
+                market
+              ),
+              gameLabel(
+                market
+              )
+            ]
+              .join(' ')
+              .toLowerCase();
+
+
+          return haystack.includes(
+            search
+          );
+        }
+      )
+      .sort(
+        (a,b) =>
+          String(
+            a?.player?.name ||
+            ''
+          ).localeCompare(
+            String(
+              b?.player?.name ||
+              ''
+            )
+          )
+      );
+
+
+  if (!filtered.length) {
+
+    grid.innerHTML = `
+
+      <div class="lf-empty">
+
+        No current-week market data
+        is available.
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+
+  grid.innerHTML =
+    filtered
+      .map(
+        market =>
+          marketCard(
+            market
+          )
+      )
+      .join('');
+}
+
+
+// ============================================================
+// RENDER SOURCES
+// ============================================================
+
+function renderSources() {
+
+  const container =
+    $('#sourcesList');
+
+  if (!container) {
+    return;
+  }
+
+
+  const sourceList =
+    board?.sources || [];
+
+
+  container.innerHTML =
+    sourceList
+      .map(
+        source => `
+
+          <div class="source-row">
+
+            <strong>
+              ${escapeHtml(
+                source.name
+              )}
+            </strong>
+
+            <span>
+              ${escapeHtml(
+                source.outlet ||
+                ''
+              )}
+            </span>
+
+            ${
+              source.url
+                ? `
+                  <a
+                    href="${escapeHtml(
+                      source.url
+                    )}"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Visit Source ↗
+                  </a>
+                `
+                : ''
+            }
+
+          </div>
+
+        `
+      )
+      .join('');
+}
+
+
+// ============================================================
+// RENDER EXPERTS
+// ============================================================
+
+function renderExperts() {
+
+  const container =
+    $('#expertsList');
+
+
+  if (!container) {
+    return;
+  }
+
+
+  const list =
+    Array.isArray(
+      experts
+    )
+      ? experts
+      : (
+          experts?.analysts ||
+          []
+        );
+
+
+  container.innerHTML =
+    list
+      .map(
+        expert => `
+
+          <div class="expert-row">
+
+            <div>
+
+              <strong>
+                ${escapeHtml(
+                  expert.name ||
+                  'Analyst'
+                )}
+              </strong>
+
+              <span>
+                ${escapeHtml(
+                  expert.outlet ||
+                  ''
+                )}
+              </span>
+
+            </div>
+
+            ${
+              expert.url
+                ? `
+                  <a
+                    href="${escapeHtml(
+                      expert.url
+                    )}"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Profile ↗
+                  </a>
+                `
+                : ''
+            }
+
+          </div>
+
+        `
+      )
+      .join('');
+}
+
+
+// ============================================================
+// RECORD
+// ============================================================
+
+function renderRecord() {
+
+  const container =
+    $('#recordList');
+
+
+  if (!container) {
+    return;
+  }
+
+
+  const props =
+    board?.props ||
+    [];
+
+
+  const settled =
+    props.filter(
+      prop => {
+
+        const result =
+          getResult(prop);
+
+        return (
+          result === 'HIT' ||
+          result === 'MISS'
+        );
+      }
+    );
+
+
+  const hits =
+    settled.filter(
+      prop =>
+        getResult(prop) ===
+        'HIT'
+    ).length;
+
+
+  const misses =
+    settled.filter(
+      prop =>
+        getResult(prop) ===
+        'MISS'
+    ).length;
+
+
+  const percentage =
+    settled.length
+      ? Math.round(
+          (hits / settled.length) *
+          100
+        )
+      : null;
+
+
+  container.innerHTML = `
+
+    <div class="record-stat">
+
+      <strong>
+        ${
+          percentage === null
+            ? '—'
+            : `${percentage}%`
+        }
+      </strong>
+
+      <span>
+        Overall Hit Rate
+      </span>
+
+    </div>
+
+
+    <div class="record-stat">
+
+      <strong>
+        ${hits}
+      </strong>
+
+      <span>
+        Hits
+      </span>
+
+    </div>
+
+
+    <div class="record-stat">
+
+      <strong>
+        ${misses}
+      </strong>
+
+      <span>
+        Misses
+      </span>
+
+    </div>
+
+
+    <div class="record-stat">
+
+      <strong>
+        ${settled.length}
+      </strong>
+
+      <span>
+        Settled
+      </span>
+
+    </div>
+
+  `;
+}
+
+
+// ============================================================
+// MAIN RENDER
+// ============================================================
+
+function render() {
+
+  if (!board) {
+    return;
+  }
+
+
+  const container =
+    $('#propCards');
+
+
+  if (!container) {
+    return;
+  }
+
+
+  const grouped =
+    new Map();
+
+
+  board.props
+    .forEach(
+      prop => {
+
+        const week =
+          normalizeWeek(
+            prop.week
+          );
+
+
+        if (!grouped.has(
+          week
+        )) {
+
+          grouped.set(
+            week,
+            []
+          );
+
+        }
+
+
+        grouped
+          .get(week)
+          .push(prop);
+
+      }
+    );
+
+
+  const weeks =
+    [...grouped.keys()]
+      .sort(
+        (a,b) =>
+          b-a
+      );
+
+
+  const current =
+    normalizeWeek(
+      board.week ||
+      currentWeek() ||
+      1
+    );
+
+
+  container.innerHTML =
+    weeks
+      .map(
+        week =>
+          weekSection(
+            week,
+            grouped.get(week),
+            Number(week) ===
+              current
+          )
+      )
+      .join('');
+
+
+  renderSources();
+
+  renderExperts();
+
+  renderRecord();
+
+  renderMarkets();
+}
+
+
+// ============================================================
+// MARKET MODAL GLOBAL CLOSE
+// ============================================================
+
+document.addEventListener(
+  'keydown',
+  event => {
+
+    if (
+      event.key !== 'Escape'
+    ) {
+      return;
+    }
+
+
+    const modal =
+      $('#lfMarketModal');
+
+
+    if (modal) {
+
+      modal.classList.remove(
+        'open'
+      );
+
+    }
+
+  }
+);
+
+
+// ============================================================
+// INITIAL LOAD
+// ============================================================
+
+injectBoardStyles();
+
+load();
+
+setTimeout(
+  loadLiveResults,
+  1500
+);
+
+                  current
+                )
+              )}
+            </b>
+            <span>
+              Current
+            </span>
+          </div>
+
+          <div>
+            <b>
+              ${escapeHtml(
+                String(
+                  closing
+                )
+              )}
+            </b>
+            <span>
+              Closing
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  modal.classList.add(
+    'open'
+  );
 
 
   modal
@@ -3181,7 +3993,7 @@ function populateMarketTypes() {
                   type
                 )}
               </option>
-            `
+          `
           )
           .join('')
       }
@@ -3933,3 +4745,4 @@ setTimeout(
   loadLiveResults,
   1500
 );
+                  
