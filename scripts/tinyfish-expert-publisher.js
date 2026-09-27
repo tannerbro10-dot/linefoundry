@@ -156,6 +156,25 @@ async function fetchArticle(url) {
   };
 }
 
+function cleanPlayerName(player) {
+  let value = String(player || "").trim();
+
+  value = value
+    .replace(
+      /^(via\s+)?(?:FanDuel|DraftKings|BetMGM|Caesars|BetRivers|ESPN BET)\s+/i,
+      ""
+    )
+    .replace(
+      /^(best\s+odds|odds)\s+/i,
+      ""
+    )
+    .split(/\.\s+/)
+    .pop()
+    .trim();
+
+  return value.replace(/\s+/g, " ").trim();
+}
+
 function convertPropToSignal(prop, article) {
   if (!prop || !prop.player || !prop.market) {
     return null;
@@ -169,7 +188,7 @@ function convertPropToSignal(prop, article) {
     return null;
   }
 
-  const player = String(prop.player).trim();
+  cconst player = cleanPlayerName(prop.player);
 
   if (
     player.length < 5 ||
