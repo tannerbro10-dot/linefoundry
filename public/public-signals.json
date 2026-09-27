@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-09-27T13:27:19.676Z",
+  "refreshedAt": "2026-09-27T13:33:39.238Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -577,18 +577,6 @@
       "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
     },
     {
-      "id": "c-j-stroud-passing-yards-under-218-5-https-milehighsports-com-sunday-nfl-bets-week-3-expert-picks-odds-and-player-props-",
-      "player": "C.J. Stroud",
-      "market": "Passing Yards",
-      "side": "UNDER",
-      "line": 218.5,
-      "analyst": "Expert Analyst",
-      "sourceId": "tinyfish-expert",
-      "week": 3,
-      "note": "Week 3 expert prop discovered by TinyFish.",
-      "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
-    },
-    {
       "id": "chris-godwin-receiving-yards-over-42-5-https-milehighsports-com-sunday-nfl-bets-week-3-expert-picks-odds-and-player-prop",
       "player": "Chris Godwin",
       "market": "Receiving Yards",
@@ -721,8 +709,8 @@
       "url": "https://ftnfantasy.com/nfl/best-nfl-week-3-player-prop-bets-3-picks-for-sunday"
     },
     {
-      "id": "best-odds-dalton-kincaid-receiving-yards-over-52-5-https-www-sportsbookreview-com-picks-nfl-player-props-week-3-2026-w3",
-      "player": "Best odds Dalton Kincaid",
+      "id": "dalton-kincaid-receiving-yards-over-52-5-https-www-sportsbookreview-com-picks-nfl-player-props-week-3-2026-w3",
+      "player": "Dalton Kincaid",
       "market": "Receiving Yards",
       "side": "OVER",
       "line": 52.5,
@@ -733,8 +721,8 @@
       "url": "https://www.sportsbookreview.com/picks/nfl/player-props-week-3-2026/"
     },
     {
-      "id": "via-fanduel-geno-smith-passing-yards-over-221-5-https-www-sportsbookreview-com-picks-nfl-player-props-week-3-2026-w3",
-      "player": "via FanDuel Geno Smith",
+      "id": "geno-smith-passing-yards-over-221-5-https-www-sportsbookreview-com-picks-nfl-player-props-week-3-2026-w3",
+      "player": "Geno Smith",
       "market": "Passing Yards",
       "side": "OVER",
       "line": 221.5,
@@ -745,8 +733,8 @@
       "url": "https://www.sportsbookreview.com/picks/nfl/player-props-week-3-2026/"
     },
     {
-      "id": "fanduel-kenneth-walker-iii-rushing-yards-over-85-5-https-www-sportsbookreview-com-picks-nfl-player-props-week-3-2026-w3",
-      "player": "FanDuel Kenneth Walker III",
+      "id": "kenneth-walker-iii-rushing-yards-over-85-5-https-www-sportsbookreview-com-picks-nfl-player-props-week-3-2026-w3",
+      "player": "Kenneth Walker III",
       "market": "Rushing Yards",
       "side": "OVER",
       "line": 85.5,
@@ -757,8 +745,8 @@
       "url": "https://www.sportsbookreview.com/picks/nfl/player-props-week-3-2026/"
     },
     {
-      "id": "via-betmgm-derrick-henry-rushing-yards-over-89-5-https-www-sportsbookreview-com-picks-nfl-player-props-week-3-2026-w3",
-      "player": "via BetMGM Derrick Henry",
+      "id": "derrick-henry-rushing-yards-over-89-5-https-www-sportsbookreview-com-picks-nfl-player-props-week-3-2026-w3",
+      "player": "Derrick Henry",
       "market": "Rushing Yards",
       "side": "OVER",
       "line": 89.5,
@@ -769,8 +757,8 @@
       "url": "https://www.sportsbookreview.com/picks/nfl/player-props-week-3-2026/"
     },
     {
-      "id": "your-area-dalton-kincaid-receiving-yards-over-54-5-https-www-sportsbookreview-com-picks-nfl-player-props-week-3-2026-w3",
-      "player": "your area. Dalton Kincaid",
+      "id": "dalton-kincaid-receiving-yards-over-54-5-https-www-sportsbookreview-com-picks-nfl-player-props-week-3-2026-w3",
+      "player": "Dalton Kincaid",
       "market": "Receiving Yards",
       "side": "OVER",
       "line": 54.5,
@@ -781,8 +769,8 @@
       "url": "https://www.sportsbookreview.com/picks/nfl/player-props-week-3-2026/"
     },
     {
-      "id": "thus-far-geno-smith-passing-yards-over-216-5-https-www-sportsbookreview-com-picks-nfl-player-props-week-3-2026-w3",
-      "player": "thus far. Geno Smith",
+      "id": "geno-smith-passing-yards-over-216-5-https-www-sportsbookreview-com-picks-nfl-player-props-week-3-2026-w3",
+      "player": "Geno Smith",
       "market": "Passing Yards",
       "side": "OVER",
       "line": 216.5,
@@ -865,30 +853,6 @@
       "url": "https://www.fanduel.com/research/nfl-prop-bets-3-best-nfl-player-props-for-week-3"
     },
     {
-      "id": "alternate-market-chris-godwin-receiving-yards-over-35-5-https-www-fanduel-com-research-nfl-prop-bets-3-best-nfl-player-p",
-      "player": "alternate market. Chris Godwin",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 35.5,
-      "analyst": "Expert Analyst",
-      "sourceId": "tinyfish-expert",
-      "week": 3,
-      "note": "Week 3 expert prop discovered by TinyFish.",
-      "url": "https://www.fanduel.com/research/nfl-prop-bets-3-best-nfl-player-props-for-week-3"
-    },
-    {
-      "id": "from-him-juwan-johnson-receiving-yards-under-35-5-https-www-fanduel-com-research-nfl-prop-bets-3-best-nfl-player-props-f",
-      "player": "from him. Juwan Johnson",
-      "market": "Receiving Yards",
-      "side": "UNDER",
-      "line": 35.5,
-      "analyst": "Expert Analyst",
-      "sourceId": "tinyfish-expert",
-      "week": 3,
-      "note": "Week 3 expert prop discovered by TinyFish.",
-      "url": "https://www.fanduel.com/research/nfl-prop-bets-3-best-nfl-player-props-for-week-3"
-    },
-    {
       "id": "picks-tony-pollard-rushing-yards-over-48-5-https-www-sharpfootballanalysis-com-betting-nfl-player-props-picks-week-3-202",
       "player": "Picks Tony Pollard",
       "market": "Rushing Yards",
@@ -949,8 +913,8 @@
       "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
     },
     {
-      "id": "ground-he-has-gone-rushing-yards-over-83-5-https-www-si-com-betting-player-prop-countdown-top-10-nfl-player-props-for-we",
-      "player": "ground. He has gone",
+      "id": "he-has-gone-rushing-yards-over-83-5-https-www-si-com-betting-player-prop-countdown-top-10-nfl-player-props-for-week-3-in",
+      "player": "He has gone",
       "market": "Rushing Yards",
       "side": "OVER",
       "line": 83.5,
@@ -985,8 +949,8 @@
       "url": "https://www.cbssports.com/betting/news/will-brinsons-nfl-week-3-predictions-picks-best-bets-player-props-anytime-touchdown-scorers-for-sunday/"
     },
     {
-      "id": "ladder-situation-chuba-hubbard-receptions-over-2-5-https-www-cbssports-com-betting-news-will-brinsons-nfl-week-3-predict",
-      "player": "ladder situation. Chuba Hubbard",
+      "id": "chuba-hubbard-receptions-over-2-5-https-www-cbssports-com-betting-news-will-brinsons-nfl-week-3-predictions-picks-best-b",
+      "player": "Chuba Hubbard",
       "market": "Receptions",
       "side": "OVER",
       "line": 2.5,
