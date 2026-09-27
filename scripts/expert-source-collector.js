@@ -287,19 +287,6 @@ async function collectArticle(
   const registry =
     loadSourceRegistry();
 
-  if (
-    !isApprovedUrl(
-      url,
-      registry
-    )
-  ) {
-
-    throw new Error(
-      "Source is not in the approved expert source registry."
-    );
-
-  }
-
   const source =
     identifySource(
       url,
