@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-09-27T14:12:21.971Z",
+  "refreshedAt": "2026-09-27T14:20:24.867Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -505,8 +505,8 @@
       "note": "Hard Rock Bet Week 2 player prop."
     },
     {
-      "id": "panthers-vs-browns-watson-passing-yards-under-199-5-https-www-covers-com-nfl-expert-prop-picks-week-3-w3",
-      "player": "Panthers vs Browns Watson",
+      "id": "vs-browns-watson-passing-yards-under-199-5-https-www-covers-com-nfl-expert-prop-picks-week-3-w3",
+      "player": "vs Browns Watson",
       "market": "Passing Yards",
       "side": "UNDER",
       "line": 199.5,
@@ -517,8 +517,8 @@
       "url": "https://www.covers.com/nfl/expert-prop-picks-week-3"
     },
     {
-      "id": "seahawks-vs-commanders-smith-njigba-receiving-yards-over-88-5-https-www-covers-com-nfl-expert-prop-picks-week-3-w3",
-      "player": "Seahawks vs Commanders Smith-Njigba",
+      "id": "vs-commanders-smith-njigba-receiving-yards-over-88-5-https-www-covers-com-nfl-expert-prop-picks-week-3-w3",
+      "player": "vs Commanders Smith-Njigba",
       "market": "Receiving Yards",
       "side": "OVER",
       "line": 88.5,
@@ -529,8 +529,8 @@
       "url": "https://www.covers.com/nfl/expert-prop-picks-week-3"
     },
     {
-      "id": "vikings-vs-buccaneers-murray-passing-yards-under-199-5-https-www-covers-com-nfl-expert-prop-picks-week-3-w3",
-      "player": "Vikings vs Buccaneers Murray",
+      "id": "vs-buccaneers-murray-passing-yards-under-199-5-https-www-covers-com-nfl-expert-prop-picks-week-3-w3",
+      "player": "vs Buccaneers Murray",
       "market": "Passing Yards",
       "side": "UNDER",
       "line": 199.5,
@@ -709,8 +709,8 @@
       "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
     },
     {
-      "id": "tee-higgins-receiving-yards-over-52-5-https-ftnfantasy-com-nfl-best-nfl-week-3-player-prop-bets-3-picks-for-sunday-w3",
-      "player": "Tee Higgins",
+      "id": "bets-tee-higgins-receiving-yards-over-52-5-https-ftnfantasy-com-nfl-best-nfl-week-3-player-prop-bets-3-picks-for-sunday-",
+      "player": "Bets Tee Higgins",
       "market": "Receiving Yards",
       "side": "OVER",
       "line": 52.5,
@@ -726,6 +726,54 @@
       "market": "Receptions",
       "side": "OVER",
       "line": 3.5,
+      "analyst": "Expert Analyst",
+      "sourceId": "tinyfish-expert",
+      "week": 3,
+      "note": "Week 3 expert prop discovered by TinyFish.",
+      "url": "https://ftnfantasy.com/nfl/best-nfl-week-3-player-prop-bets-3-picks-for-sunday"
+    },
+    {
+      "id": "edge-tee-higgins-receiving-yards-over-52-5-https-ftnfantasy-com-nfl-best-nfl-week-3-player-prop-bets-3-picks-for-sunday-",
+      "player": "Edge Tee Higgins",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 52.5,
+      "analyst": "Expert Analyst",
+      "sourceId": "tinyfish-expert",
+      "week": 3,
+      "note": "Week 3 expert prop discovered by TinyFish.",
+      "url": "https://ftnfantasy.com/nfl/best-nfl-week-3-player-prop-bets-3-picks-for-sunday"
+    },
+    {
+      "id": "tee-higgins-receiving-yards-over-52-5-https-ftnfantasy-com-nfl-best-nfl-week-3-player-prop-bets-3-picks-for-sunday-w3",
+      "player": "Tee Higgins",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 52.5,
+      "analyst": "Expert Analyst",
+      "sourceId": "tinyfish-expert",
+      "week": 3,
+      "note": "Week 3 expert prop discovered by TinyFish.",
+      "url": "https://ftnfantasy.com/nfl/best-nfl-week-3-player-prop-bets-3-picks-for-sunday"
+    },
+    {
+      "id": "card-tee-higgins-receiving-yards-over-52-5-https-ftnfantasy-com-nfl-best-nfl-week-3-player-prop-bets-3-picks-for-sunday-",
+      "player": "Card Tee Higgins",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 52.5,
+      "analyst": "Expert Analyst",
+      "sourceId": "tinyfish-expert",
+      "week": 3,
+      "note": "Week 3 expert prop discovered by TinyFish.",
+      "url": "https://ftnfantasy.com/nfl/best-nfl-week-3-player-prop-bets-3-picks-for-sunday"
+    },
+    {
+      "id": "includes-tee-higgins-receiving-yards-over-52-5-https-ftnfantasy-com-nfl-best-nfl-week-3-player-prop-bets-3-picks-for-sun",
+      "player": "includes Tee Higgins",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 52.5,
       "analyst": "Expert Analyst",
       "sourceId": "tinyfish-expert",
       "week": 3,
@@ -925,8 +973,8 @@
       "url": "https://www.fanduel.com/research/nfl-prop-bets-3-best-nfl-player-props-for-week-3"
     },
     {
-      "id": "derrick-henry-rushing-yards-over-89-5-https-www-cbssports-com-betting-news-will-brinsons-nfl-week-3-predictions-picks-be",
-      "player": "Derrick Henry",
+      "id": "props-derrick-henry-rushing-yards-over-89-5-https-www-cbssports-com-betting-news-will-brinsons-nfl-week-3-predictions-pi",
+      "player": "props Derrick Henry",
       "market": "Rushing Yards",
       "side": "OVER",
       "line": 89.5,
