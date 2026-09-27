@@ -22,10 +22,32 @@ jobs:
         run: |
           node scripts/yep-search.js
 
-      - name: Show Yep Results
+      - name: Collect Yep Articles
         run: |
-          echo "Yep search completed."
-          ls -lh yep-results.json
+          node scripts/yep-article-collector.js
+
+      - name: Show Collection Summary
+        run: |
+          node <<'NODE'
+          const fs = require("fs");
+
+          const data = JSON.parse(
+            fs.readFileSync(
+              "yep-articles.json",
+              "utf8"
+            )
+          );
+
+          console.log("");
+          console.log("========================================");
+          console.log("YEP ARTICLE COLLECTION");
+          console.log("========================================");
+          console.log(`Search results: ${data.resultCount}`);
+          console.log(`Unique URLs: ${data.urlCount}`);
+          console.log(`Successful: ${data.successfulCount}`);
+          console.log(`Failed: ${data.failedCount}`);
+          console.log("========================================");
+          NODE
 
       - name: Commit Results
         run: |
@@ -33,7 +55,8 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add yep-results.json
+          git add yep-articles.json
 
-          git diff --cached --quiet || git commit -m "Refresh Yep search results"
+          git diff --cached --quiet || git commit -m "Refresh Yep articles"
 
           git push
