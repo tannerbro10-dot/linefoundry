@@ -43,6 +43,10 @@ function normalizePlayerName(name) {
       /^(?:NFL|QB|RB|WR|TE|FB|K|DEF|DST)\s+/i,
       ""
     )
+     .replace(
+       /^(?:Picks?|Best Picks?)\s+/i,
+      ""
+)
     .replace(
       /^(?:[A-Z][A-Za-z'-]+)\s+(?:QB|RB|WR|TE|FB|K|DEF|DST)\s+/i,
       ""
