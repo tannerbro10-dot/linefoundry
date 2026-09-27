@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-09-27T21:00:54.898Z",
+  "refreshedAt": "2026-09-27T22:26:31.609Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -599,6 +599,54 @@
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
       "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/"
+    },
+    {
+      "id": "draftkings-sportsbook-christian-watson-receptions-over-4-5-yep-w3",
+      "player": "DraftKings Sportsbook Christian Watson",
+      "market": "Receptions",
+      "side": "OVER",
+      "line": 4.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.si.com/betting/falcons-vs-packers-best-nfl-prop-bets-for-thursday-night-football-in-week-3-bet-on-christian-watson"
+    },
+    {
+      "id": "bijan-robinson-rushing-yards-under-78-5-yep-w3",
+      "player": "Bijan Robinson",
+      "market": "Rushing Yards",
+      "side": "UNDER",
+      "line": 78.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.si.com/betting/falcons-vs-packers-best-nfl-prop-bets-for-thursday-night-football-in-week-3-bet-on-christian-watson"
+    },
+    {
+      "id": "marshawn-lloyd-rushing-yards-under-28-5-yep-w3",
+      "player": "MarShawn Lloyd",
+      "market": "Rushing Yards",
+      "side": "UNDER",
+      "line": 28.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.si.com/betting/falcons-vs-packers-best-nfl-prop-bets-for-thursday-night-football-in-week-3-bet-on-christian-watson"
+    },
+    {
+      "id": "christian-watson-receptions-over-4-5-yep-w3",
+      "player": "Christian Watson",
+      "market": "Receptions",
+      "side": "OVER",
+      "line": 4.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.si.com/betting/falcons-vs-packers-best-nfl-prop-bets-for-thursday-night-football-in-week-3-bet-on-christian-watson"
     }
   ]
 }
