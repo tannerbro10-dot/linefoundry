@@ -172,6 +172,11 @@ function cleanPlayerName(player) {
     .pop()
     .trim();
 
+  value = value.replace(
+  /\s+(Texans|Bengals|Ravens|Steelers|Browns|Bills|Dolphins|Patriots|Jets|Colts|Jaguars|Titans|Broncos|Chiefs|Raiders|Chargers|Cowboys|Giants|Eagles|Commanders|Bears|Lions|Packers|Vikings|Falcons|Panthers|Saints|Buccaneers|Cardinals|Rams|49ers|Seahawks)\s*$/i,
+  ""
+);
+
   return value.replace(/\s+/g, " ").trim();
 }
 
