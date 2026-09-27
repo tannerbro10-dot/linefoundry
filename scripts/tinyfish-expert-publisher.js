@@ -18,6 +18,10 @@ const EXTRACTOR = path.join(
 const CURRENT_WEEK = 3;
 const CURRENT_SEASON = 2026;
 
+const ESPN_SCOREBOARD_URL =
+  `https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=${CURRENT_WEEK}&seasontype=2&limit=100`;
+
+let PLAYER_INDEX = [];
 const SEARCH_QUERIES = [
   `NFL Week ${CURRENT_WEEK} ${CURRENT_SEASON} player prop expert picks`,
   `NFL Week ${CURRENT_WEEK} ${CURRENT_SEASON} receiving rushing passing prop picks`,
@@ -180,7 +184,183 @@ function cleanPlayerName(player) {
   return value.replace(/\s+/g, " ").trim();
 }
 
-function convertPropToSignal(prop, article) {
+async function loadPlayerIndex() {
+  const response = await fetch(
+    ESPN_SCOREBOARD_URL,
+    {
+      headers: {
+        "Accept": "application/json",
+        "User-Agent": "LineFoundry/1.0"
+      }
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `ESPN scoreboard failed (${response.status})`
+    );
+  }
+
+  const data = await response.json();
+
+  const events =
+    data?.events ||
+    data?.content?.sbData?.events ||
+    [];
+
+  const teamIds = new Set();
+
+  for (const event of events) {
+    for (const competitor of event?.competitions?.[0]?.competitors || []) {
+      const teamId =
+        competitor?.team?.id;
+
+      if (teamId) {
+        teamIds.add(String(teamId));
+      }
+    }
+  }
+
+  const rosters = await Promise.all(
+    [...teamIds].map(async teamId => {
+      const rosterResponse = await fetch(
+        `https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/${teamId}/roster`,
+        {
+          headers: {
+            "Accept": "application/json",
+            "User-Agent": "LineFoundry/1.0"
+          }
+        }
+      );
+
+      if (!rosterResponse.ok) {
+        return [];
+      }
+
+      const roster =
+        await rosterResponse.json();
+
+      const players = [];
+
+      for (const group of roster.athletes || []) {
+        for (const athlete of group.items || []) {
+          if (!athlete?.fullName) {
+            continue;
+          }
+
+          players.push({
+            name: athlete.fullName,
+            teamId,
+            position:
+              athlete.position?.abbreviation ||
+              ""
+          });
+        }
+      }
+
+      return players;
+    })
+  );
+
+  PLAYER_INDEX =
+    rosters.flat();
+
+  return PLAYER_INDEX;
+}
+
+function normalizeName(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "");
+}
+
+function marketPositions(market) {
+  switch (market) {
+    case "Passing Yards":
+    case "Passing Attempts":
+    case "Completions":
+    case "Interceptions":
+      return ["QB"];
+
+    case "Receiving Yards":
+    case "Receptions":
+      return ["WR", "TE", "RB", "FB"];
+
+    case "Rushing Yards":
+    case "Rushing Attempts":
+      return ["RB", "QB", "WR", "TE", "FB"];
+
+    default:
+      return [];
+  }
+}
+
+function resolvePlayerName(rawPlayer, market) {
+  const raw =
+    String(rawPlayer || "").trim();
+
+  if (!raw) {
+    return null;
+  }
+
+  const exact =
+    PLAYER_INDEX.find(
+      player =>
+        normalizeName(player.name) ===
+        normalizeName(raw)
+    );
+
+  if (exact) {
+    return exact.name;
+  }
+
+  const matchup =
+    raw.match(
+      /^(.+?)\s+vs\.?\s+(.+?)\s+([A-Z][A-Za-z.'-]+)$/i
+    );
+
+  if (!matchup) {
+    return raw;
+  }
+
+  const surname =
+    matchup[3];
+
+  const positions =
+    marketPositions(market);
+
+  const candidates =
+    PLAYER_INDEX.filter(player => {
+      const lastName =
+        player.name
+          .split(/\s+/)
+          .pop();
+
+      if (
+        normalizeName(lastName) !==
+        normalizeName(surname)
+      ) {
+        return false;
+      }
+
+      if (
+        positions.length &&
+        !positions.includes(player.position)
+      ) {
+        return false;
+      }
+
+      return true;
+    });
+
+  if (candidates.length === 1) {
+    return candidates[0].name;
+  }
+
+  return null;
+}
+
+async function convertPropToSignal(prop, article) {
   if (!prop || !prop.player || !prop.market) {
     return null;
   }
@@ -193,7 +373,14 @@ function convertPropToSignal(prop, article) {
     return null;
   }
 
-  const player = cleanPlayerName(prop.player);
+const cleanedPlayer =
+  cleanPlayerName(prop.player);
+
+const player =
+  resolvePlayerName(
+    cleanedPlayer,
+    prop.market
+  );
 
   if (
     player.length < 5 ||
@@ -307,6 +494,8 @@ async function main() {
     );
   }
 
+  await loadPlayerIndex();
+
   const discovered = [];
 
   for (const query of SEARCH_QUERIES) {
@@ -415,11 +604,8 @@ async function main() {
           Array.isArray(result.props)
         ) {
           for (const prop of result.props) {
-            const signal =
-              convertPropToSignal(
-                prop,
-                article
-              );
+         const signal =
+  await convertPropToSignal(prop, article);
 
             if (signal) {
               signals.push(signal);
