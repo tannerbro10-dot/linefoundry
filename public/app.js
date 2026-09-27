@@ -1279,6 +1279,13 @@ async function loadLiveResults() {
     window.__LINEFOUNDRY_WEEK__ =
   Number(data.week) || null;
 
+    const weekElement = $('#currentWeek');
+
+if (weekElement) {
+  weekElement.textContent =
+    `WEEK ${Number(data.week)}`;
+}
+
     if (!data.success) {
       throw new Error(
         data.error ||
