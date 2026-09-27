@@ -188,7 +188,7 @@ function convertPropToSignal(prop, article) {
     return null;
   }
 
-  cconst player = cleanPlayerName(prop.player);
+  const player = cleanPlayerName(prop.player);
 
   if (
     player.length < 5 ||
