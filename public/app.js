@@ -3322,11 +3322,44 @@ function renderMarkets() {
               </h3>
             </div>
 
-            <div class="lf-market-grid">
-              ${gameMarkets
-                .map(marketCard)
-                .join('')}
-            </div>
+           ${(() => {
+
+  const teams = new Map();
+
+  gameMarkets.forEach(market => {
+
+    const teamId =
+      market?.player?.teamId ||
+      'UNKNOWN';
+
+    if (!teams.has(teamId)) {
+      teams.set(teamId, []);
+    }
+
+    teams.get(teamId).push(market);
+  });
+
+  return Array.from(teams.entries())
+    .map(([teamId, teamMarkets]) => `
+      
+      <div class="lf-market-team-group">
+
+        <div class="lf-market-team-header">
+          ${escapeHtml(teamId)}
+        </div>
+
+        <div class="lf-market-grid">
+          ${teamMarkets
+            .map(marketCard)
+            .join('')}
+        </div>
+
+      </div>
+
+    `)
+    .join('');
+
+})()}
 
           </section>
         `;
