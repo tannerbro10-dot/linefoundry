@@ -233,6 +233,8 @@ function extractPropPhrases(text) {
       pattern.exec(normalized)) !== null
   ) {
 
+        console.log("RAW MATCH:", match[1]);
+
     const player =
       normalizePlayerName(
         match[1]
