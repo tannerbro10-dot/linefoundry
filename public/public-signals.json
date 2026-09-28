@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-09-28T04:29:16.123Z",
+  "refreshedAt": "2026-09-28T06:36:14.684Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -539,78 +539,6 @@
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
       "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
-    },
-    {
-      "id": "pm-et-kyle-monangai-rushing-attempts-over-8-5-yep-w3",
-      "player": "PM ET Kyle Monangai",
-      "market": "Rushing Attempts",
-      "side": "OVER",
-      "line": 8.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.dimers.com/nfl/props"
-    },
-    {
-      "id": "pm-et-colston-loveland-receptions-under-3-5-yep-w3",
-      "player": "PM ET Colston Loveland",
-      "market": "Receptions",
-      "side": "UNDER",
-      "line": 3.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.dimers.com/nfl/props"
-    },
-    {
-      "id": "pm-et-devonta-smith-receptions-under-5-5-yep-w3",
-      "player": "PM ET DeVonta Smith",
-      "market": "Receptions",
-      "side": "UNDER",
-      "line": 5.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.dimers.com/nfl/props"
-    },
-    {
-      "id": "kyle-monangai-rushing-attempts-over-8-5-yep-w3",
-      "player": "Kyle Monangai",
-      "market": "Rushing Attempts",
-      "side": "OVER",
-      "line": 8.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.dimers.com/nfl/props"
-    },
-    {
-      "id": "followed-by-colston-loveland-receptions-under-3-5-yep-w3",
-      "player": "followed by Colston Loveland",
-      "market": "Receptions",
-      "side": "UNDER",
-      "line": 3.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.dimers.com/nfl/props"
-    },
-    {
-      "id": "and-devonta-smith-receptions-under-5-5-yep-w3",
-      "player": "and DeVonta Smith",
-      "market": "Receptions",
-      "side": "UNDER",
-      "line": 5.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.dimers.com/nfl/props"
     },
     {
       "id": "michael-penix-jr-interceptions-over-0-5-yep-w3",
