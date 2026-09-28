@@ -1,12 +1,12 @@
 {
   "success": true,
-  "generatedAt": "2026-09-28T02:28:10.821Z",
+  "generatedAt": "2026-09-28T04:29:16.124Z",
   "inputArticleCount": 20,
   "includedArticleCount": 4,
   "excludedArticleCount": 16,
   "extractionFailureCount": 0,
-  "propCount": 8,
-  "publishedWeek3SignalCount": 8,
+  "propCount": 14,
+  "publishedWeek3SignalCount": 14,
   "props": [
     {
       "player": "DK Metcalf",
@@ -36,6 +36,66 @@
       "week": 3,
       "source": {
         "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
+      }
+    },
+    {
+      "player": "PM ET Kyle Monangai",
+      "market": "Rushing Attempts",
+      "side": "OVER",
+      "line": 8.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.dimers.com/nfl/props"
+      }
+    },
+    {
+      "player": "PM ET Colston Loveland",
+      "market": "Receptions",
+      "side": "UNDER",
+      "line": 3.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.dimers.com/nfl/props"
+      }
+    },
+    {
+      "player": "PM ET DeVonta Smith",
+      "market": "Receptions",
+      "side": "UNDER",
+      "line": 5.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.dimers.com/nfl/props"
+      }
+    },
+    {
+      "player": "Kyle Monangai",
+      "market": "Rushing Attempts",
+      "side": "OVER",
+      "line": 8.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.dimers.com/nfl/props"
+      }
+    },
+    {
+      "player": "followed by Colston Loveland",
+      "market": "Receptions",
+      "side": "UNDER",
+      "line": 3.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.dimers.com/nfl/props"
+      }
+    },
+    {
+      "player": "and DeVonta Smith",
+      "market": "Receptions",
+      "side": "UNDER",
+      "line": 5.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.dimers.com/nfl/props"
       }
     },
     {
@@ -96,8 +156,8 @@
       "week": 3
     },
     {
-      "url": "https://sports.betmgm.com/en/blog/nfl/player-props-week-3-picks-bm16/",
-      "title": "2 Best NFL Player Prop Picks for Week 3 | BetMGM",
+      "url": "https://www.dimers.com/nfl/props",
+      "title": "Best NFL Player Props Today & NFL Prop Bets",
       "week": 3
     },
     {
@@ -172,6 +232,11 @@
       "week": 2
     },
     {
+      "url": "https://www.actionnetwork.com/nfl/giants-vs-rams-player-props-jaxson-dart-malik-nabers-kyren-williams",
+      "title": "",
+      "week": null
+    },
+    {
       "url": "https://sports.yahoo.com/articles/player-props-nfl-week-2-200150001.html",
       "title": "Player Props for NFL Week 2: Aaron Rodgers, Jeremiyah Love, Christian McCaffrey - Yahoo Sports",
       "week": 2
@@ -179,11 +244,6 @@
     {
       "url": "https://sportsbook.draftkings.com/page/super-bowl-prop-bets",
       "title": "Super Bowl Prop Bets 2026 | DraftKings Sportsbook",
-      "week": 1
-    },
-    {
-      "url": "https://www.sportsbookreview.com/picks/college-football/ncaaf-player-props-best-bets-week-1-2026/",
-      "title": "College Football Player Props Week 1 | Best Prop Bets",
       "week": 1
     },
     {
