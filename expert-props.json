@@ -1,12 +1,12 @@
 {
   "success": true,
-  "generatedAt": "2026-09-28T16:30:59.393Z",
+  "generatedAt": "2026-09-28T18:32:00.384Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 3,
-  "excludedArticleCount": 17,
+  "includedArticleCount": 4,
+  "excludedArticleCount": 16,
   "extractionFailureCount": 0,
-  "propCount": 5,
-  "publishedWeek3SignalCount": 5,
+  "propCount": 10,
+  "publishedWeek3SignalCount": 10,
   "props": [
     {
       "player": "Michael Penix Jr.",
@@ -57,6 +57,56 @@
       "source": {
         "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/"
       }
+    },
+    {
+      "player": "DraftKings Sportsbook Christian Watson",
+      "market": "Receptions",
+      "side": "OVER",
+      "line": 4.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.si.com/betting/falcons-vs-packers-best-nfl-prop-bets-for-thursday-night-football-in-week-3-bet-on-christian-watson"
+      }
+    },
+    {
+      "player": "Bijan Robinson",
+      "market": "Rushing Yards",
+      "side": "UNDER",
+      "line": 78.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.si.com/betting/falcons-vs-packers-best-nfl-prop-bets-for-thursday-night-football-in-week-3-bet-on-christian-watson"
+      }
+    },
+    {
+      "player": "MarShawn Lloyd",
+      "market": "Rushing Yards",
+      "side": "UNDER",
+      "line": 28.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.si.com/betting/falcons-vs-packers-best-nfl-prop-bets-for-thursday-night-football-in-week-3-bet-on-christian-watson"
+      }
+    },
+    {
+      "player": "Christian Watson",
+      "market": "Receptions",
+      "side": "OVER",
+      "line": 4.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.si.com/betting/falcons-vs-packers-best-nfl-prop-bets-for-thursday-night-football-in-week-3-bet-on-christian-watson"
+      }
+    },
+    {
+      "player": "MarShawn Lloyd",
+      "market": "Rushing Yards",
+      "side": "UNDER",
+      "line": 28.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.si.com/betting/falcons-vs-packers-best-nfl-prop-bets-for-thursday-night-football-in-week-3-bet-on-christian-watson"
+      }
     }
   ],
   "includedArticles": [
@@ -73,6 +123,11 @@
     {
       "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/",
       "title": "2026 NFL Receiving Prop Bets: Best Overs to Target",
+      "week": 3
+    },
+    {
+      "url": "https://www.si.com/betting/falcons-vs-packers-best-nfl-prop-bets-for-thursday-night-football-in-week-3-bet-on-christian-watson",
+      "title": "Falcons vs. Packers Best NFL Prop Bets for Thursday Night Football in Week 3 (Bet on Christian Watson)",
       "week": 3
     }
   ],
@@ -98,9 +153,9 @@
       "week": 3
     },
     {
-      "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
-      "title": "NFL Thursday Night Football Player Props & Bets: Lions vs. Bills | BettingPros",
-      "week": 2
+      "url": "https://www.rotowire.com/football/article/best-49ers-vs-rams-nfl-player-props-week-1-2026-133548",
+      "title": "Best 49ers vs Rams NFL Player Props (Week 1) | RotoWire",
+      "week": 1
     },
     {
       "url": "https://www.rotowire.com/football/article/best-patriots-vs-seahawks-nfl-player-props-week-1-2026-133326",
@@ -118,14 +173,14 @@
       "week": null
     },
     {
-      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-2-bet-on-baker-mayfield-to-torch-his-former-team",
-      "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 2 (Bet on Baker Mayfield to Torch His Former Team)",
+      "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
+      "title": "NFL Thursday Night Football Player Props & Bets: Lions vs. Bills | BettingPros",
       "week": 2
     },
     {
-      "url": "https://www.rotowire.com/cfl/article/cfl-betting-cfl-bets-and-player-props-for-week-12-129094",
-      "title": "CFL Betting: CFL Bets and Player Props for Week 12 | RotoWire",
-      "week": 12
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-2-bet-on-baker-mayfield-to-torch-his-former-team",
+      "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 2 (Bet on Baker Mayfield to Torch His Former Team)",
+      "week": 2
     },
     {
       "url": "https://www.fantasypros.com/2026/09/nfl-player-props-monday-night-football-giants-vs-rams-week-2-2026/",
@@ -155,11 +210,6 @@
     {
       "url": "https://www.oddschecker.com/us/insight/football/nfl/20260917-bet365-prop-protect-promo-get-your-bet-protected-if-a-player-is-injured-during-lions-vs-bills",
       "week": null
-    },
-    {
-      "url": "https://vsin.com/mlb/best-mlb-player-props-today-august-16-2026-picks-predictions/",
-      "title": "Best MLB Player Props Today (August 16, 2026): Picks & Predictions - VSiN",
-      "week": 5
     }
   ],
   "extractionFailures": []
