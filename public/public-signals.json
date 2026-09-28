@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-09-28T18:32:00.383Z",
+  "refreshedAt": "2026-09-28T20:26:59.559Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -505,6 +505,42 @@
       "note": "Hard Rock Bet Week 2 player prop."
     },
     {
+      "id": "dk-metcalf-receptions-over-4-5-yep-w3",
+      "player": "DK Metcalf",
+      "market": "Receptions",
+      "side": "OVER",
+      "line": 4.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
+    },
+    {
+      "id": "he-has-gone-rushing-yards-over-83-5-yep-w3",
+      "player": "He has gone",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 83.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
+    },
+    {
+      "id": "tyler-shough-completions-under-21-5-yep-w3",
+      "player": "Tyler Shough",
+      "market": "Completions",
+      "side": "UNDER",
+      "line": 21.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
+    },
+    {
       "id": "michael-penix-jr-interceptions-over-0-5-yep-w3",
       "player": "Michael Penix Jr.",
       "market": "Interceptions",
@@ -527,90 +563,6 @@
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
       "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/"
-    },
-    {
-      "id": "moore-prop-bet-receiving-yards-over-824-5-yep-w3",
-      "player": "Moore Prop Bet",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 824.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/"
-    },
-    {
-      "id": "loveland-prop-bet-receiving-yards-over-824-5-yep-w3",
-      "player": "Loveland Prop Bet",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 824.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/"
-    },
-    {
-      "id": "colston-loveland-longshot-receiving-yards-over-1000-yep-w3",
-      "player": "Colston Loveland Longshot",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 1000,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/"
-    },
-    {
-      "id": "draftkings-sportsbook-christian-watson-receptions-over-4-5-yep-w3",
-      "player": "DraftKings Sportsbook Christian Watson",
-      "market": "Receptions",
-      "side": "OVER",
-      "line": 4.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.si.com/betting/falcons-vs-packers-best-nfl-prop-bets-for-thursday-night-football-in-week-3-bet-on-christian-watson"
-    },
-    {
-      "id": "bijan-robinson-rushing-yards-under-78-5-yep-w3",
-      "player": "Bijan Robinson",
-      "market": "Rushing Yards",
-      "side": "UNDER",
-      "line": 78.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.si.com/betting/falcons-vs-packers-best-nfl-prop-bets-for-thursday-night-football-in-week-3-bet-on-christian-watson"
-    },
-    {
-      "id": "marshawn-lloyd-rushing-yards-under-28-5-yep-w3",
-      "player": "MarShawn Lloyd",
-      "market": "Rushing Yards",
-      "side": "UNDER",
-      "line": 28.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.si.com/betting/falcons-vs-packers-best-nfl-prop-bets-for-thursday-night-football-in-week-3-bet-on-christian-watson"
-    },
-    {
-      "id": "christian-watson-receptions-over-4-5-yep-w3",
-      "player": "Christian Watson",
-      "market": "Receptions",
-      "side": "OVER",
-      "line": 4.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.si.com/betting/falcons-vs-packers-best-nfl-prop-bets-for-thursday-night-football-in-week-3-bet-on-christian-watson"
     }
   ]
 }
