@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-09-28T20:26:59.560Z",
+  "generatedAt": "2026-09-28T22:26:22.744Z",
   "inputArticleCount": 20,
   "includedArticleCount": 3,
   "excludedArticleCount": 17,
@@ -83,9 +83,19 @@
       "week": 1
     },
     {
-      "url": "https://www.cbssports.com/betting/news/giants-rams-picks-prediction-player-props-experts-best-bets-monday-night-football-nfl-week-2/",
-      "title": "Giants vs. Rams picks, prediction, player props: Expert's best bets for Monday Night Football in NFL Week 2 - CBS Sports",
-      "week": 2
+      "url": "https://www.cbssports.com/betting/news/2026-minnesota-vikings-betting-preview-predictions-four-nfl-player-props-to-target-before-week-1/",
+      "title": "2026 Minnesota Vikings betting preview, predictions: Four NFL player props to target before Week 1 - CBS Sports",
+      "week": 1
+    },
+    {
+      "url": "https://www.sportsbookreview.com/picks/nfl/cowboys-vs-giants-player-prop-bets-week-1-2026/",
+      "title": "Cowboys vs. Giants Player Props & Best Bets | NFL Week 1 Prop Bets",
+      "week": 1
+    },
+    {
+      "url": "https://www.rotowire.com/cfl/article/cfl-betting-cfl-bets-and-player-props-for-week-8-124231",
+      "title": "CFL Betting: CFL Bets and Player Props for Week 8 | RotoWire",
+      "week": 8
     },
     {
       "url": "https://www.sportsline.com/insiders/nfl-picks-jayden-daniels-prop-among-sportsline-expert-propbetguys-best-bets-for-week-2-of-2026-season/",
@@ -98,16 +108,6 @@
       "week": 3
     },
     {
-      "url": "https://www.rotowire.com/football/article/best-49ers-vs-rams-nfl-player-props-week-1-2026-133548",
-      "title": "Best 49ers vs Rams NFL Player Props (Week 1) | RotoWire",
-      "week": 1
-    },
-    {
-      "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
-      "title": "NFL Thursday Night Football Player Props & Bets: Lions vs. Bills | BettingPros",
-      "week": 2
-    },
-    {
       "url": "https://www.rotowire.com/football/article/best-patriots-vs-seahawks-nfl-player-props-week-1-2026-133326",
       "title": "Best Patriots vs Seahawks NFL Player Props (Week 1) | RotoWire",
       "week": 1
@@ -118,9 +118,9 @@
       "week": 1
     },
     {
-      "url": "https://www.bettingpros.com/picks/prizepicks/nfl/",
-      "title": "Best NFL PrizePicks Player Prop Bets Today (9/28/2026) | BettingPros",
-      "week": null
+      "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
+      "title": "NFL Thursday Night Football Player Props & Bets: Lions vs. Bills | BettingPros",
+      "week": 2
     },
     {
       "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-2-bet-on-baker-mayfield-to-torch-his-former-team",
@@ -128,14 +128,14 @@
       "week": 2
     },
     {
+      "url": "https://www.bettingpros.com/articles/nfl-monday-night-football-player-props-broncos-vs-chiefs-week-1-2026/",
+      "title": "NFL Monday Night Football Player Props: Broncos vs. Chiefs | BettingPros",
+      "week": 1
+    },
+    {
       "url": "https://www.fantasypros.com/2026/09/nfl-player-props-monday-night-football-giants-vs-rams-week-2-2026/",
       "title": "NFL Player Props: Monday Night Football (Giants vs. Rams) - FantasyPros",
       "week": 2
-    },
-    {
-      "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
-      "title": "",
-      "week": 1
     },
     {
       "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/",
@@ -153,13 +153,14 @@
       "week": 2
     },
     {
+      "url": "https://vsin.com/mlb/best-mlb-player-props-today-august-4-2026-picks-predictions/",
+      "title": "Best MLB Player Props Today (August 4, 2026): Picks & Predictions - VSiN",
+      "week": 5
+    },
+    {
       "url": "https://sports.yahoo.com/articles/player-props-nfl-week-2-200150001.html",
       "title": "Player Props for NFL Week 2: Aaron Rodgers, Jeremiyah Love, Christian McCaffrey - Yahoo Sports",
       "week": 2
-    },
-    {
-      "url": "https://www.oddschecker.com/us/insight/football/nfl/20260917-bet365-prop-protect-promo-get-your-bet-protected-if-a-player-is-injured-during-lions-vs-bills",
-      "week": null
     }
   ],
   "extractionFailures": []
