@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-09-28T14:31:29.642Z",
+  "generatedAt": "2026-09-28T16:30:59.393Z",
   "inputArticleCount": 20,
   "includedArticleCount": 3,
   "excludedArticleCount": 17,
@@ -8,36 +8,6 @@
   "propCount": 5,
   "publishedWeek3SignalCount": 5,
   "props": [
-    {
-      "player": "DK Metcalf",
-      "market": "Receptions",
-      "side": "OVER",
-      "line": 4.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
-      }
-    },
-    {
-      "player": "He has gone",
-      "market": "Rushing Yards",
-      "side": "OVER",
-      "line": 83.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
-      }
-    },
-    {
-      "player": "Tyler Shough",
-      "market": "Completions",
-      "side": "UNDER",
-      "line": 21.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
-      }
-    },
     {
       "player": "Michael Penix Jr.",
       "market": "Interceptions",
@@ -57,14 +27,39 @@
       "source": {
         "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/"
       }
+    },
+    {
+      "player": "Moore Prop Bet",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 824.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/"
+      }
+    },
+    {
+      "player": "Loveland Prop Bet",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 824.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/"
+      }
+    },
+    {
+      "player": "Colston Loveland Longshot",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 1000,
+      "week": 3,
+      "source": {
+        "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/"
+      }
     }
   ],
   "includedArticles": [
-    {
-      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum",
-      "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 3 (Invest in Blake Corum)",
-      "week": 3
-    },
     {
       "url": "https://sports.betmgm.com/en/blog/nfl/player-props-week-3-picks-bm16/",
       "title": "2 Best NFL Player Prop Picks for Week 3 | BetMGM",
@@ -73,6 +68,11 @@
     {
       "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/",
       "title": "2 Best NFL Player Props for TNF: Packers vs Falcons | BetMGM",
+      "week": 3
+    },
+    {
+      "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/",
+      "title": "2026 NFL Receiving Prop Bets: Best Overs to Target",
       "week": 3
     }
   ],
@@ -83,13 +83,8 @@
       "week": 1
     },
     {
-      "url": "https://www.cbssports.com/betting/news/giants-rams-picks-prediction-player-props-experts-best-bets-monday-night-football-nfl-week-2/",
-      "title": "Giants vs. Rams picks, prediction, player props: Expert's best bets for Monday Night Football in NFL Week 2 - CBS Sports",
-      "week": 2
-    },
-    {
-      "url": "https://www.sportsbookreview.com/picks/nfl/cowboys-vs-giants-player-prop-bets-week-1-2026/",
-      "title": "Cowboys vs. Giants Player Props & Best Bets | NFL Week 1 Prop Bets",
+      "url": "https://www.cbssports.com/betting/news/2026-minnesota-vikings-betting-preview-predictions-four-nfl-player-props-to-target-before-week-1/",
+      "title": "2026 Minnesota Vikings betting preview, predictions: Four NFL player props to target before Week 1 - CBS Sports",
       "week": 1
     },
     {
@@ -101,11 +96,6 @@
       "url": "https://www.sportsline.com/insiders/2026-nfl-week-3-props-predictions-picks-titans-running-back-tony-pollard-among-propstarzs-best-bets/",
       "title": "2026 NFL Week 3 props, predictions, picks: Titans running back Tony Pollard among PropStarz&#x27;s best bets - SportsLine.com",
       "week": 3
-    },
-    {
-      "url": "https://www.rotowire.com/football/article/best-49ers-vs-rams-nfl-player-props-week-1-2026-133548",
-      "title": "Best 49ers vs Rams NFL Player Props (Week 1) | RotoWire",
-      "week": 1
     },
     {
       "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
@@ -123,14 +113,24 @@
       "week": 1
     },
     {
+      "url": "https://www.bettingpros.com/picks/prizepicks/nfl/",
+      "title": "Best NFL PrizePicks Player Prop Bets Today (9/28/2026) | BettingPros",
+      "week": null
+    },
+    {
       "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-2-bet-on-baker-mayfield-to-torch-his-former-team",
       "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 2 (Bet on Baker Mayfield to Torch His Former Team)",
       "week": 2
     },
     {
-      "url": "https://www.bettingpros.com/articles/nfl-monday-night-football-player-props-broncos-vs-chiefs-week-1-2026/",
-      "title": "NFL Monday Night Football Player Props: Broncos vs. Chiefs | BettingPros",
-      "week": 1
+      "url": "https://www.rotowire.com/cfl/article/cfl-betting-cfl-bets-and-player-props-for-week-12-129094",
+      "title": "CFL Betting: CFL Bets and Player Props for Week 12 | RotoWire",
+      "week": 12
+    },
+    {
+      "url": "https://www.fantasypros.com/2026/09/nfl-player-props-monday-night-football-giants-vs-rams-week-2-2026/",
+      "title": "NFL Player Props: Monday Night Football (Giants vs. Rams) - FantasyPros",
+      "week": 2
     },
     {
       "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
@@ -143,6 +143,16 @@
       "week": 1
     },
     {
+      "url": "https://www.sportsbettingdime.com/news/nfl/early-props-target-week-2-2026/",
+      "title": "Early NFL Props to Target for Week 2: Josh Allen, Derrick Henry & More",
+      "week": 2
+    },
+    {
+      "url": "https://sports.yahoo.com/articles/player-props-nfl-week-2-200150001.html",
+      "title": "Player Props for NFL Week 2: Aaron Rodgers, Jeremiyah Love, Christian McCaffrey - Yahoo Sports",
+      "week": 2
+    },
+    {
       "url": "https://www.oddschecker.com/us/insight/football/nfl/20260917-bet365-prop-protect-promo-get-your-bet-protected-if-a-player-is-injured-during-lions-vs-bills",
       "week": null
     },
@@ -150,16 +160,6 @@
       "url": "https://vsin.com/mlb/best-mlb-player-props-today-august-16-2026-picks-predictions/",
       "title": "Best MLB Player Props Today (August 16, 2026): Picks & Predictions - VSiN",
       "week": 5
-    },
-    {
-      "url": "https://vsin.com/mlb/best-mlb-player-props-today-september-5-2026-picks-predictions/",
-      "title": "Best MLB Player Props Today (September 5, 2026): Picks & Predictions - VSiN",
-      "week": 1
-    },
-    {
-      "url": "https://www.actionnetwork.com/nfl/player-props-for-nfl-week-2-aaron-rodgers-jeremiyah-love",
-      "title": "",
-      "week": 2
     }
   ],
   "extractionFailures": []
