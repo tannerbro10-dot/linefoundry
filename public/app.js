@@ -1215,14 +1215,14 @@ const week =
           ? 'HIGH'
           : percent >= 60
             ? 'MEDIUM'
-            : 'EARLY',
+            : 'LOW',
 
       confidence:
         percent >= 75
           ? 'HIGH'
           : percent >= 60
             ? 'MEDIUM'
-            : 'EARLY',
+            : 'LOW',
 
       analysts:
         analystList,
@@ -3249,6 +3249,12 @@ function renderMarkets() {
       ''
     );
 
+  const confidenceFilter =
+  String(
+    $('#confidenceFilter')?.value ||
+    'ALL'
+  );
+
 
   const current =
     normalizeWeek(
@@ -3267,19 +3273,77 @@ function renderMarkets() {
     );
 
 
-  const filtered =
-    currentWeekMarkets
-      .filter(
-        market => {
+const filtered =
+  currentWeekMarkets
+    .filter(
+      market => {
+
+        if (
+          type &&
+          marketTypeName(
+            market
+          ) !== type
+        ) {
+          return false;
+        }
+
+
+        if (
+          confidenceFilter !== 'ALL'
+        ) {
+
+          const marketPlayer =
+            String(
+              market?.player?.name ||
+              ''
+            )
+              .trim()
+              .toLowerCase();
+
+          const marketName =
+            String(
+              marketTypeName(
+                market
+              ) ||
+              ''
+            )
+              .trim()
+              .toLowerCase();
+
+          const matchingProp =
+            (board?.props || [])
+              .find(
+                prop =>
+                  String(
+                    prop?.player ||
+                    ''
+                  )
+                    .trim()
+                    .toLowerCase() ===
+                  marketPlayer &&
+
+                  String(
+                    prop?.market ||
+                    ''
+                  )
+                    .trim()
+                    .toLowerCase() ===
+                  marketName &&
+
+                  normalizeWeek(
+                    prop?.week
+                  ) ===
+                  current
+              );
 
           if (
-            type &&
-            marketTypeName(
-              market
-            ) !== type
+            !matchingProp ||
+            matchingProp.confidence !==
+              confidenceFilter
           ) {
             return false;
           }
+        }
 
 
           if (!search) {
