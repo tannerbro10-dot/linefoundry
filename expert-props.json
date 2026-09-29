@@ -1,9 +1,9 @@
 {
   "success": true,
-  "generatedAt": "2026-09-29T00:34:43.956Z",
+  "generatedAt": "2026-09-29T02:26:09.677Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 3,
-  "excludedArticleCount": 17,
+  "includedArticleCount": 2,
+  "excludedArticleCount": 18,
   "extractionFailureCount": 0,
   "propCount": 2,
   "publishedWeek3SignalCount": 2,
@@ -31,11 +31,6 @@
   ],
   "includedArticles": [
     {
-      "url": "https://www.cbssports.com/nfl/news/nfl-picks-today-patriots-seahawks-odds-2026-super-bowl-expert-predictions-bets-nfl-player-props/",
-      "title": "NFL picks today, Patriots vs. Seahawks odds: 2026 Super Bowl expert predictions against the spread, prop bets - CBS Sports",
-      "week": 3
-    },
-    {
       "url": "https://sports.betmgm.com/en/blog/nfl/player-props-week-3-picks-bm16/",
       "title": "2 Best NFL Player Prop Picks for Week 3 | BetMGM",
       "week": 3
@@ -53,6 +48,11 @@
       "week": 1
     },
     {
+      "url": "https://www.cbssports.com/betting/news/giants-rams-picks-prediction-player-props-experts-best-bets-monday-night-football-nfl-week-2/",
+      "title": "Giants vs. Rams picks, prediction, player props: Expert's best bets for Monday Night Football in NFL Week 2 - CBS Sports",
+      "week": 2
+    },
+    {
       "url": "https://www.sportsline.com/insiders/nfl-picks-jayden-daniels-prop-among-sportsline-expert-propbetguys-best-bets-for-week-2-of-2026-season/",
       "title": "NFL picks: Jayden Daniels prop among SportsLine expert PropBetGuy&#x27;s best bets for Week 2 of 2026 season - SportsLine.com",
       "week": 2
@@ -63,14 +63,14 @@
       "week": 3
     },
     {
-      "url": "https://www.rotowire.com/football/article/best-49ers-vs-rams-nfl-player-props-week-1-2026-133548",
-      "title": "Best 49ers vs Rams NFL Player Props (Week 1) | RotoWire",
-      "week": 1
-    },
-    {
       "url": "https://www.rotowire.com/football/article/best-patriots-vs-seahawks-nfl-player-props-week-1-2026-133326",
       "title": "Best Patriots vs Seahawks NFL Player Props (Week 1) | RotoWire",
       "week": 1
+    },
+    {
+      "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
+      "title": "NFL Thursday Night Football Player Props & Bets: Lions vs. Bills | BettingPros",
+      "week": 2
     },
     {
       "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
@@ -78,9 +78,19 @@
       "week": 1
     },
     {
-      "url": "https://www.bettingpros.com/picks/prizepicks/nfl/",
-      "title": "Best NFL PrizePicks Player Prop Bets Today (9/29/2026) | BettingPros",
-      "week": null
+      "url": "https://www.rotowire.com/football/article/best-49ers-vs-rams-nfl-player-props-week-1-2026-133548",
+      "title": "Best 49ers vs Rams NFL Player Props (Week 1) | RotoWire",
+      "week": 1
+    },
+    {
+      "url": "https://www.docsports.com/2026/nfl-draft-betting-predictions-best-bets-props.html",
+      "title": "2026 NFL Draft Betting Predictions: Best Bets for Props",
+      "week": 3
+    },
+    {
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-2-bet-on-baker-mayfield-to-torch-his-former-team",
+      "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 2 (Bet on Baker Mayfield to Torch His Former Team)",
+      "week": 2
     },
     {
       "url": "https://www.bettingpros.com/articles/nfl-monday-night-football-player-props-broncos-vs-chiefs-week-1-2026/",
@@ -96,11 +106,6 @@
       "url": "https://www.fantasypros.com/2026/09/nfl-player-props-monday-night-football-giants-vs-rams-week-2-2026/",
       "title": "NFL Player Props: Monday Night Football (Giants vs. Rams) - FantasyPros",
       "week": 2
-    },
-    {
-      "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
-      "title": "",
-      "week": 1
     },
     {
       "url": "https://www.sportsbookreview.com/picks/college-football/ncaaf-player-props-best-bets-week-1-2026/",
@@ -126,11 +131,6 @@
       "url": "https://sportsbook.draftkings.com/page/super-bowl-prop-bets",
       "title": "Super Bowl Prop Bets 2026 | DraftKings Sportsbook",
       "week": 1
-    },
-    {
-      "url": "https://sports.yahoo.com/articles/player-props-nfl-week-2-200150001.html",
-      "title": "Player Props for NFL Week 2: Aaron Rodgers, Jeremiyah Love, Christian McCaffrey - Yahoo Sports",
-      "week": 2
     }
   ],
   "extractionFailures": []
