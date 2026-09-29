@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-09-28T22:26:22.743Z",
+  "refreshedAt": "2026-09-29T00:34:43.956Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -503,42 +503,6 @@
       "sourceId": "ariel-epstein-hardrock-week2",
       "week": 2,
       "note": "Hard Rock Bet Week 2 player prop."
-    },
-    {
-      "id": "dk-metcalf-receptions-over-4-5-yep-w3",
-      "player": "DK Metcalf",
-      "market": "Receptions",
-      "side": "OVER",
-      "line": 4.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
-    },
-    {
-      "id": "he-has-gone-rushing-yards-over-83-5-yep-w3",
-      "player": "He has gone",
-      "market": "Rushing Yards",
-      "side": "OVER",
-      "line": 83.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
-    },
-    {
-      "id": "tyler-shough-completions-under-21-5-yep-w3",
-      "player": "Tyler Shough",
-      "market": "Completions",
-      "side": "UNDER",
-      "line": 21.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
     },
     {
       "id": "michael-penix-jr-interceptions-over-0-5-yep-w3",

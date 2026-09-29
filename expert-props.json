@@ -1,43 +1,13 @@
 {
   "success": true,
-  "generatedAt": "2026-09-28T22:26:22.744Z",
+  "generatedAt": "2026-09-29T00:34:43.956Z",
   "inputArticleCount": 20,
   "includedArticleCount": 3,
   "excludedArticleCount": 17,
   "extractionFailureCount": 0,
-  "propCount": 5,
-  "publishedWeek3SignalCount": 5,
+  "propCount": 2,
+  "publishedWeek3SignalCount": 2,
   "props": [
-    {
-      "player": "DK Metcalf",
-      "market": "Receptions",
-      "side": "OVER",
-      "line": 4.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
-      }
-    },
-    {
-      "player": "He has gone",
-      "market": "Rushing Yards",
-      "side": "OVER",
-      "line": 83.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
-      }
-    },
-    {
-      "player": "Tyler Shough",
-      "market": "Completions",
-      "side": "UNDER",
-      "line": 21.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
-      }
-    },
     {
       "player": "Michael Penix Jr.",
       "market": "Interceptions",
@@ -61,8 +31,8 @@
   ],
   "includedArticles": [
     {
-      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum",
-      "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 3 (Invest in Blake Corum)",
+      "url": "https://www.cbssports.com/nfl/news/nfl-picks-today-patriots-seahawks-odds-2026-super-bowl-expert-predictions-bets-nfl-player-props/",
+      "title": "NFL picks today, Patriots vs. Seahawks odds: 2026 Super Bowl expert predictions against the spread, prop bets - CBS Sports",
       "week": 3
     },
     {
@@ -83,21 +53,6 @@
       "week": 1
     },
     {
-      "url": "https://www.cbssports.com/betting/news/2026-minnesota-vikings-betting-preview-predictions-four-nfl-player-props-to-target-before-week-1/",
-      "title": "2026 Minnesota Vikings betting preview, predictions: Four NFL player props to target before Week 1 - CBS Sports",
-      "week": 1
-    },
-    {
-      "url": "https://www.sportsbookreview.com/picks/nfl/cowboys-vs-giants-player-prop-bets-week-1-2026/",
-      "title": "Cowboys vs. Giants Player Props & Best Bets | NFL Week 1 Prop Bets",
-      "week": 1
-    },
-    {
-      "url": "https://www.rotowire.com/cfl/article/cfl-betting-cfl-bets-and-player-props-for-week-8-124231",
-      "title": "CFL Betting: CFL Bets and Player Props for Week 8 | RotoWire",
-      "week": 8
-    },
-    {
       "url": "https://www.sportsline.com/insiders/nfl-picks-jayden-daniels-prop-among-sportsline-expert-propbetguys-best-bets-for-week-2-of-2026-season/",
       "title": "NFL picks: Jayden Daniels prop among SportsLine expert PropBetGuy&#x27;s best bets for Week 2 of 2026 season - SportsLine.com",
       "week": 2
@@ -106,6 +61,11 @@
       "url": "https://www.sportsline.com/insiders/2026-nfl-week-3-props-predictions-picks-titans-running-back-tony-pollard-among-propstarzs-best-bets/",
       "title": "2026 NFL Week 3 props, predictions, picks: Titans running back Tony Pollard among PropStarz&#x27;s best bets - SportsLine.com",
       "week": 3
+    },
+    {
+      "url": "https://www.rotowire.com/football/article/best-49ers-vs-rams-nfl-player-props-week-1-2026-133548",
+      "title": "Best 49ers vs Rams NFL Player Props (Week 1) | RotoWire",
+      "week": 1
     },
     {
       "url": "https://www.rotowire.com/football/article/best-patriots-vs-seahawks-nfl-player-props-week-1-2026-133326",
@@ -118,14 +78,9 @@
       "week": 1
     },
     {
-      "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
-      "title": "NFL Thursday Night Football Player Props & Bets: Lions vs. Bills | BettingPros",
-      "week": 2
-    },
-    {
-      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-2-bet-on-baker-mayfield-to-torch-his-former-team",
-      "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 2 (Bet on Baker Mayfield to Torch His Former Team)",
-      "week": 2
+      "url": "https://www.bettingpros.com/picks/prizepicks/nfl/",
+      "title": "Best NFL PrizePicks Player Prop Bets Today (9/29/2026) | BettingPros",
+      "week": null
     },
     {
       "url": "https://www.bettingpros.com/articles/nfl-monday-night-football-player-props-broncos-vs-chiefs-week-1-2026/",
@@ -133,14 +88,19 @@
       "week": 1
     },
     {
+      "url": "https://www.sharpfootballanalysis.com/betting/nfl-quarterback-player-prop-unders/",
+      "title": "2026 NFL Quarterback Prop Bets: Best Unders to Target",
+      "week": 4
+    },
+    {
       "url": "https://www.fantasypros.com/2026/09/nfl-player-props-monday-night-football-giants-vs-rams-week-2-2026/",
       "title": "NFL Player Props: Monday Night Football (Giants vs. Rams) - FantasyPros",
       "week": 2
     },
     {
-      "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/",
-      "title": "2026 NFL Receiving Prop Bets: Best Overs to Target",
-      "week": 5
+      "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
+      "title": "",
+      "week": 1
     },
     {
       "url": "https://www.sportsbookreview.com/picks/college-football/ncaaf-player-props-best-bets-week-1-2026/",
@@ -153,9 +113,19 @@
       "week": 2
     },
     {
+      "url": "https://www.si.com/betting/lions-vs-bills-best-nfl-prop-bets-for-thursday-night-football-in-week-2-bet-on-josh-allen-amon-ra-st-brown",
+      "title": "Lions vs. Bills Best NFL Prop Bets for Thursday Night Football in Week 2 (Bet on Josh Allen, Amon-Ra. St Brown)",
+      "week": 2
+    },
+    {
       "url": "https://vsin.com/mlb/best-mlb-player-props-today-august-4-2026-picks-predictions/",
       "title": "Best MLB Player Props Today (August 4, 2026): Picks & Predictions - VSiN",
-      "week": 5
+      "week": null
+    },
+    {
+      "url": "https://sportsbook.draftkings.com/page/super-bowl-prop-bets",
+      "title": "Super Bowl Prop Bets 2026 | DraftKings Sportsbook",
+      "week": 1
     },
     {
       "url": "https://sports.yahoo.com/articles/player-props-nfl-week-2-200150001.html",
