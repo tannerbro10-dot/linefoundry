@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-09-29T02:26:09.676Z",
+  "refreshedAt": "2026-09-29T04:28:51.527Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -503,6 +503,18 @@
       "sourceId": "ariel-epstein-hardrock-week2",
       "week": 2,
       "note": "Hard Rock Bet Week 2 player prop."
+    },
+    {
+      "id": "he-has-gone-rushing-yards-over-83-5-yep-w3",
+      "player": "He has gone",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 83.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3"
     },
     {
       "id": "michael-penix-jr-interceptions-over-0-5-yep-w3",
