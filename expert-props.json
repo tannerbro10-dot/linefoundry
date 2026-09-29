@@ -1,13 +1,23 @@
 {
   "success": true,
-  "generatedAt": "2026-09-29T04:28:51.527Z",
+  "generatedAt": "2026-09-29T06:33:58.258Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 3,
-  "excludedArticleCount": 17,
+  "includedArticleCount": 4,
+  "excludedArticleCount": 16,
   "extractionFailureCount": 0,
-  "propCount": 3,
-  "publishedWeek3SignalCount": 3,
+  "propCount": 4,
+  "publishedWeek3SignalCount": 4,
   "props": [
+    {
+      "player": "Kyren Williams",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 12.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.cbssports.com/betting/news/broncos-vs-rams-picks-prediction-player-props-experts-best-bets-for-sunday-night-football-in-nfl-week-3/"
+      }
+    },
     {
       "player": "He has gone",
       "market": "Rushing Yards",
@@ -41,6 +51,11 @@
   ],
   "includedArticles": [
     {
+      "url": "https://www.cbssports.com/betting/news/broncos-vs-rams-picks-prediction-player-props-experts-best-bets-for-sunday-night-football-in-nfl-week-3/",
+      "title": "Broncos vs. Rams picks, prediction, player props: Expert's best bets for Sunday Night Football in NFL Week 3 - CBS Sports",
+      "week": 3
+    },
+    {
       "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3",
       "title": "Chargers vs. Bills Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 3",
       "week": 3
@@ -63,15 +78,6 @@
       "week": 1
     },
     {
-      "url": "https://www.cbssports.com/betting/news/giants-rams-picks-prediction-player-props-experts-best-bets-monday-night-football-nfl-week-2/",
-      "title": "Giants vs. Rams picks, prediction, player props: Expert's best bets for Monday Night Football in NFL Week 2 - CBS Sports",
-      "week": 2
-    },
-    {
-      "url": "https://www.sportsgamblingpodcast.com/2026/09/26/pro-football-pick-of-the-day-september-26th-nfl-week-3-prop-bet/",
-      "week": 3
-    },
-    {
       "url": "https://www.sportsline.com/insiders/nfl-picks-jayden-daniels-prop-among-sportsline-expert-propbetguys-best-bets-for-week-2-of-2026-season/",
       "title": "NFL picks: Jayden Daniels prop among SportsLine expert PropBetGuy&#x27;s best bets for Week 2 of 2026 season - SportsLine.com",
       "week": 2
@@ -92,14 +98,19 @@
       "week": 1
     },
     {
+      "url": "https://www.rotowire.com/football/article/best-49ers-vs-rams-nfl-player-props-week-1-2026-133548",
+      "title": "Best 49ers vs Rams NFL Player Props (Week 1) | RotoWire",
+      "week": 1
+    },
+    {
       "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
       "title": "NFL Thursday Night Football Player Props & Bets: Lions vs. Bills | BettingPros",
       "week": 2
     },
     {
-      "url": "https://www.rotowire.com/football/article/best-49ers-vs-rams-nfl-player-props-week-1-2026-133548",
-      "title": "Best 49ers vs Rams NFL Player Props (Week 1) | RotoWire",
-      "week": 1
+      "url": "https://www.docsports.com/2026/nfl-draft-betting-predictions-best-bets-props.html",
+      "title": "2026 NFL Draft Betting Predictions: Best Bets for Props",
+      "week": 3
     },
     {
       "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-2-bet-on-baker-mayfield-to-torch-his-former-team",
@@ -117,9 +128,9 @@
       "week": 4
     },
     {
-      "url": "https://dknetwork.draftkings.com/2026/08/24/best-afc-west-bets-for-the-2026-nfl-season/",
-      "title": "Best AFC West Bets & Betting Splits for 2026",
-      "week": 18
+      "url": "https://www.fantasypros.com/2026/09/nfl-player-props-monday-night-football-giants-vs-rams-week-2-2026/",
+      "title": "NFL Player Props: Monday Night Football (Giants vs. Rams) - FantasyPros",
+      "week": 2
     },
     {
       "url": "https://www.sportsbookreview.com/picks/college-football/ncaaf-player-props-best-bets-week-1-2026/",
@@ -127,18 +138,19 @@
       "week": 1
     },
     {
-      "url": "https://www.oddschecker.com/us/insight/football/nfl/20260917-bet365-prop-protect-promo-get-your-bet-protected-if-a-player-is-injured-during-lions-vs-bills",
-      "week": null
+      "url": "https://dknetwork.draftkings.com/2026/08/24/best-afc-west-bets-for-the-2026-nfl-season/",
+      "title": "Best AFC West Bets & Betting Splits for 2026",
+      "week": 18
     },
     {
-      "url": "https://sports.yahoo.com/articles/nfl-player-props-9-over-134800543.html",
-      "title": "NFL player props: 9 over/under bets entering 2026 season - Yahoo Sports",
-      "week": 4
+      "url": "https://www.sportsbettingdime.com/news/nfl/early-props-target-week-2-2026/",
+      "title": "Early NFL Props to Target for Week 2: Josh Allen, Derrick Henry & More",
+      "week": 2
     },
     {
-      "url": "https://dknetwork.draftkings.com/2026/06/25/mlb-prop-bets-today-june-25-2026/",
-      "title": "Best MLB Prop Bets Today (June 25, 2026) | Picks & Odds",
-      "week": 3
+      "url": "https://sportsbook.draftkings.com/page/super-bowl-prop-bets",
+      "title": "Super Bowl Prop Bets 2026 | DraftKings Sportsbook",
+      "week": 1
     }
   ],
   "extractionFailures": []
