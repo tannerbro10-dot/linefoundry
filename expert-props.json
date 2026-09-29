@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-09-29T10:30:08.763Z",
+  "generatedAt": "2026-09-29T12:35:12.004Z",
   "inputArticleCount": 20,
   "includedArticleCount": 4,
   "excludedArticleCount": 16,
@@ -143,13 +143,13 @@
       "week": 1
     },
     {
-      "url": "https://www.sportsbookreview.com/picks/college-football/ncaaf-player-props-best-bets-week-1-2026/",
-      "title": "College Football Player Props Week 1 | Best Prop Bets",
-      "week": 1
-    },
-    {
       "url": "https://www.oddschecker.com/us/insight/football/nfl/20260917-bet365-prop-protect-promo-get-your-bet-protected-if-a-player-is-injured-during-lions-vs-bills",
       "week": null
+    },
+    {
+      "url": "https://sports.yahoo.com/articles/nfl-player-props-9-over-134800543.html",
+      "title": "NFL player props: 9 over/under bets entering 2026 season - Yahoo Sports",
+      "week": 4
     }
   ],
   "extractionFailures": []
