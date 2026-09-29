@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-09-29T20:29:54.303Z",
+  "refreshedAt": "2026-09-29T22:27:41.207Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -505,16 +505,16 @@
       "note": "Hard Rock Bet Week 2 player prop."
     },
     {
-      "id": "kyren-williams-receiving-yards-over-12-5-yep-w3",
-      "player": "Kyren Williams",
+      "id": "dontayvion-wicks-receiving-yards-over-39-5-yep-w3",
+      "player": "Dontayvion Wicks",
       "market": "Receiving Yards",
       "side": "OVER",
-      "line": 12.5,
+      "line": 39.5,
       "analyst": "Unknown Analyst",
       "sourceId": "yep-unknown",
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.cbssports.com/betting/news/broncos-vs-rams-picks-prediction-player-props-experts-best-bets-for-sunday-night-football-in-nfl-week-3/"
+      "url": "https://www.cbssports.com/betting/news/nfl-picks-today-best-bets-week-3-2026-expert-predictions-spread-total-money-line-parlays-player-props/"
     },
     {
       "id": "dk-metcalf-receptions-over-4-5-yep-w3",
