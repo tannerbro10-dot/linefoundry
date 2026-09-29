@@ -1,12 +1,12 @@
 {
   "success": true,
-  "generatedAt": "2026-09-29T16:31:28.849Z",
+  "generatedAt": "2026-09-29T18:32:52.934Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 3,
-  "excludedArticleCount": 17,
+  "includedArticleCount": 4,
+  "excludedArticleCount": 16,
   "extractionFailureCount": 0,
-  "propCount": 5,
-  "publishedWeek3SignalCount": 5,
+  "propCount": 7,
+  "publishedWeek3SignalCount": 7,
   "props": [
     {
       "player": "Kyren Williams",
@@ -57,6 +57,26 @@
       "source": {
         "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3"
       }
+    },
+    {
+      "player": "Michael Penix Jr.",
+      "market": "Interceptions",
+      "side": "OVER",
+      "line": 0.5,
+      "week": 3,
+      "source": {
+        "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/"
+      }
+    },
+    {
+      "player": "Jordan Love",
+      "market": "Passing Yards",
+      "side": "OVER",
+      "line": 231.5,
+      "week": 3,
+      "source": {
+        "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/"
+      }
     }
   ],
   "includedArticles": [
@@ -74,6 +94,11 @@
       "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3",
       "title": "Chargers vs. Bills Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 3",
       "week": 3
+    },
+    {
+      "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/",
+      "title": "2 Best NFL Player Props for TNF: Packers vs Falcons | BetMGM",
+      "week": 3
     }
   ],
   "excludedArticles": [
@@ -86,15 +111,6 @@
       "url": "https://www.sportsbookreview.com/picks/nfl/cowboys-vs-giants-player-prop-bets-week-1-2026/",
       "title": "Cowboys vs. Giants Player Props & Best Bets | NFL Week 1 Prop Bets",
       "week": 1
-    },
-    {
-      "url": "https://www.dimers.com/nfl/props",
-      "title": "Best NFL Player Props Today & NFL Prop Bets",
-      "week": 4
-    },
-    {
-      "url": "https://www.sportsgamblingpodcast.com/2026/09/26/pro-football-pick-of-the-day-september-26th-nfl-week-3-prop-bet/",
-      "week": 3
     },
     {
       "url": "https://www.sportsline.com/insiders/nfl-picks-jayden-daniels-prop-among-sportsline-expert-propbetguys-best-bets-for-week-2-of-2026-season/",
@@ -112,11 +128,6 @@
       "week": 1
     },
     {
-      "url": "https://www.rotoballer.com/nfl-betting-picks-week-1-player-props-and-parlays-for-monday-night-football-2026/1925282",
-      "title": "NFL Betting Picks: Week 1 Player Props and Parlays for Monday Night Football (2026)",
-      "week": 1
-    },
-    {
       "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
       "title": "NFL Thursday Night Football Player Props & Bets: Lions vs. Bills | BettingPros",
       "week": 2
@@ -127,24 +138,24 @@
       "week": 12
     },
     {
-      "url": "https://www.bettingpros.com/articles/nfl-monday-night-football-player-props-broncos-vs-chiefs-week-1-2026/",
-      "title": "NFL Monday Night Football Player Props: Broncos vs. Chiefs | BettingPros",
-      "week": 1
-    },
-    {
       "url": "https://www.rotowire.com/cfootball/article/college-football-picks-best-week-3-player-prop-bets-on-rebet-135297",
       "title": "College Football Picks: Best Week 3 Player Prop Bets on ReBet | RotoWire",
       "week": 3
     },
     {
-      "url": "https://www.syracuse.com/betting/2026/09/experts-release-new-bills-vs-chargers-prediction-as-allen-herbert-top-polymarket-player-props.html",
-      "title": "Experts release new Bills vs. Chargers prediction as Allen, Herbert top Polymarket player props - syracuse.com",
-      "week": 3
+      "url": "https://www.sharpfootballanalysis.com/betting/nfl-quarterback-player-prop-unders/",
+      "title": "2026 NFL Quarterback Prop Bets: Best Unders to Target",
+      "week": 4
     },
     {
-      "url": "https://www.sharpfootballanalysis.com/betting/nfl-receiving-player-prop-overs/",
-      "title": "2026 NFL Receiving Prop Bets: Best Overs to Target",
-      "week": 5
+      "url": "https://www.bettingpros.com/articles/best-nfl-player-props-monday-night-football-giants-vs-rams-2026/",
+      "title": "Best NFL Player Props: Monday Night Football (Giants vs. Rams) | BettingPros",
+      "week": 2
+    },
+    {
+      "url": "https://dknetwork.draftkings.com/2026/08/24/best-afc-west-bets-for-the-2026-nfl-season/",
+      "title": "Best AFC West Bets & Betting Splits for 2026",
+      "week": 18
     },
     {
       "url": "https://www.sportsbettingdime.com/news/nfl/early-props-target-week-2-2026/",
@@ -152,13 +163,23 @@
       "week": 2
     },
     {
-      "url": "https://www.sportsgamblingpodcast.com/2026/09/26/top-2026-nfl-week-3-prop-bets/",
+      "url": "https://sportsbook.draftkings.com/page/super-bowl-prop-bets",
+      "title": "Super Bowl Prop Bets 2026 | DraftKings Sportsbook",
+      "week": 1
+    },
+    {
+      "url": "https://www.sportsbookreview.com/picks/nfl/futures-bets-to-make-before-training-camp-2026/",
+      "title": "NFL Futures Bets to Make Before Training Camp: Playoff Picks & Player Props",
+      "week": 15
+    },
+    {
+      "url": "https://www.forbes.com/sites/juancarlosblanco/2026/09/27/nfl-week-3-best-bets-td-props-for-jaxon-smith-njigba-derrick-henry/",
       "week": 3
     },
     {
-      "url": "https://www.fantasyalarm.com/articles/nfl/nfl-best-bets/nfl-best-bets-today-august-21-2026-preseason-week-2-picks-predictions-player-props/194271",
-      "title": "NFL Best Bets Today, 8/21: 2026 NFL Preseason Week 2 Picks, Predictions & Player Props",
-      "week": 2
+      "url": "https://www.sportsbettingdime.com/news/college-football/clemson-vs-lsu-player-props-top-picks-same-game-parlay/",
+      "title": "Clemson vs LSU Player Props - Top Picks & Same-Game Parlay",
+      "week": 4
     }
   ],
   "extractionFailures": []
