@@ -1,41 +1,21 @@
 {
   "success": true,
-  "generatedAt": "2026-09-30T04:29:55.419Z",
+  "generatedAt": "2026-09-30T06:34:23.307Z",
   "inputArticleCount": 20,
   "includedArticleCount": 5,
   "excludedArticleCount": 15,
   "extractionFailureCount": 0,
-  "propCount": 6,
-  "publishedWeek3SignalCount": 6,
+  "propCount": 4,
+  "publishedWeek3SignalCount": 4,
   "props": [
     {
-      "player": "Dontayvion Wicks",
+      "player": "Kyren Williams",
       "market": "Receiving Yards",
       "side": "OVER",
-      "line": 39.5,
+      "line": 12.5,
       "week": 3,
       "source": {
-        "url": "https://www.cbssports.com/betting/news/nfl-picks-today-best-bets-week-3-2026-expert-predictions-spread-total-money-line-parlays-player-props/"
-      }
-    },
-    {
-      "player": "Jacoby Brissett",
-      "market": "Passing Yards",
-      "side": "UNDER",
-      "line": 226.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick"
-      }
-    },
-    {
-      "player": "Christian McCaffrey",
-      "market": "Rushing Attempts",
-      "side": "OVER",
-      "line": 13.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick"
+        "url": "https://www.cbssports.com/betting/news/broncos-vs-rams-picks-prediction-player-props-experts-best-bets-for-sunday-night-football-in-nfl-week-3/"
       }
     },
     {
@@ -71,13 +51,8 @@
   ],
   "includedArticles": [
     {
-      "url": "https://www.cbssports.com/betting/news/nfl-picks-today-best-bets-week-3-2026-expert-predictions-spread-total-money-line-parlays-player-props/",
-      "title": "NFL expert picks, odds, predictions, player props, betting guide for Week 3 - CBS Sports",
-      "week": 3
-    },
-    {
-      "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick",
-      "title": "49ers vs Cardinals Week 3: Expert Prop Bets, Spread Pick",
+      "url": "https://www.cbssports.com/betting/news/broncos-vs-rams-picks-prediction-player-props-experts-best-bets-for-sunday-night-football-in-nfl-week-3/",
+      "title": "Broncos vs. Rams picks, prediction, player props: Expert's best bets for Sunday Night Football in NFL Week 3 - CBS Sports",
       "week": 3
     },
     {
@@ -93,6 +68,11 @@
     {
       "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/",
       "title": "2 Best NFL Player Props for TNF: Packers vs Falcons | BetMGM",
+      "week": 3
+    },
+    {
+      "url": "https://sports.yahoo.com/articles/nfl-player-props-9-over-134800543.html",
+      "title": "NFL player props: 9 over/under bets entering 2026 season - Yahoo Sports",
       "week": 3
     }
   ],
@@ -118,11 +98,6 @@
       "week": 1
     },
     {
-      "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
-      "title": "NFL Player Props | DraftKings Sportsbook",
-      "week": 1
-    },
-    {
       "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
       "title": "Week 1 NFL Player Props: Best Prop Bets & Predictions",
       "week": 1
@@ -133,8 +108,18 @@
       "week": 1
     },
     {
+      "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
+      "title": "NFL Player Props | DraftKings Sportsbook",
+      "week": 1
+    },
+    {
       "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
       "title": "NFL Thursday Night Football Player Props & Bets: Lions vs. Bills | BettingPros",
+      "week": 2
+    },
+    {
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-2-bet-on-baker-mayfield-to-torch-his-former-team",
+      "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 2 (Bet on Baker Mayfield to Torch His Former Team)",
       "week": 2
     },
     {
@@ -166,10 +151,6 @@
       "url": "https://dknetwork.draftkings.com/2026/08/24/best-afc-west-bets-for-the-2026-nfl-season/",
       "title": "Best AFC West Bets & Betting Splits for 2026",
       "week": 18
-    },
-    {
-      "url": "https://www.oddschecker.com/us/insight/football/nfl/20260917-bet365-prop-protect-promo-get-your-bet-protected-if-a-player-is-injured-during-lions-vs-bills",
-      "week": null
     }
   ],
   "extractionFailures": []

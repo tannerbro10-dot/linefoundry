@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-09-30T04:29:55.419Z",
+  "refreshedAt": "2026-09-30T06:34:23.307Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -505,40 +505,16 @@
       "note": "Hard Rock Bet Week 2 player prop."
     },
     {
-      "id": "dontayvion-wicks-receiving-yards-over-39-5-yep-w3",
-      "player": "Dontayvion Wicks",
+      "id": "kyren-williams-receiving-yards-over-12-5-yep-w3",
+      "player": "Kyren Williams",
       "market": "Receiving Yards",
       "side": "OVER",
-      "line": 39.5,
+      "line": 12.5,
       "analyst": "Unknown Analyst",
       "sourceId": "yep-unknown",
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.cbssports.com/betting/news/nfl-picks-today-best-bets-week-3-2026-expert-predictions-spread-total-money-line-parlays-player-props/"
-    },
-    {
-      "id": "jacoby-brissett-passing-yards-under-226-5-yep-w3",
-      "player": "Jacoby Brissett",
-      "market": "Passing Yards",
-      "side": "UNDER",
-      "line": 226.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick"
-    },
-    {
-      "id": "christian-mccaffrey-rushing-attempts-over-13-5-yep-w3",
-      "player": "Christian McCaffrey",
-      "market": "Rushing Attempts",
-      "side": "OVER",
-      "line": 13.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick"
+      "url": "https://www.cbssports.com/betting/news/broncos-vs-rams-picks-prediction-player-props-experts-best-bets-for-sunday-night-football-in-nfl-week-3/"
     },
     {
       "id": "he-has-gone-rushing-yards-over-83-5-yep-w3",
