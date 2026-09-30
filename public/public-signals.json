@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-09-30T20:28:55.064Z",
+  "refreshedAt": "2026-09-30T22:29:02.910Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -539,6 +539,18 @@
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
       "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3"
+    },
+    {
+      "id": "jaylen-waddle-receptions-over-4-5-yep-w3",
+      "player": "Jaylen Waddle",
+      "market": "Receptions",
+      "side": "OVER",
+      "line": 4.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.si.com/betting/rams-vs-broncos-best-nfl-prop-bets-for-sunday-night-football-in-week-3-bet-on-jaylen-waddle"
     },
     {
       "id": "michael-penix-jr-interceptions-over-0-5-yep-w3",
