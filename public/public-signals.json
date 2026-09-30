@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-09-29T22:27:41.207Z",
+  "refreshedAt": "2026-09-30T00:36:48.115Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -515,6 +515,30 @@
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
       "url": "https://www.cbssports.com/betting/news/nfl-picks-today-best-bets-week-3-2026-expert-predictions-spread-total-money-line-parlays-player-props/"
+    },
+    {
+      "id": "jacoby-brissett-passing-yards-under-226-5-yep-w3",
+      "player": "Jacoby Brissett",
+      "market": "Passing Yards",
+      "side": "UNDER",
+      "line": 226.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick"
+    },
+    {
+      "id": "christian-mccaffrey-rushing-attempts-over-13-5-yep-w3",
+      "player": "Christian McCaffrey",
+      "market": "Rushing Attempts",
+      "side": "OVER",
+      "line": 13.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick"
     },
     {
       "id": "dk-metcalf-receptions-over-4-5-yep-w3",
