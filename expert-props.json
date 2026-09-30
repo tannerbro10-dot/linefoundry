@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-09-30T10:30:22.804Z",
+  "generatedAt": "2026-09-30T12:38:15.162Z",
   "inputArticleCount": 20,
   "includedArticleCount": 4,
   "excludedArticleCount": 16,
@@ -98,11 +98,6 @@
       "week": 1
     },
     {
-      "url": "https://www.rotowire.com/football/article/best-49ers-vs-rams-nfl-player-props-week-1-2026-133548",
-      "title": "Best 49ers vs Rams NFL Player Props (Week 1) | RotoWire",
-      "week": 1
-    },
-    {
       "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
       "title": "NFL Player Props | DraftKings Sportsbook",
       "week": 1
@@ -151,6 +146,11 @@
       "url": "https://sports.yahoo.com/articles/player-props-nfl-week-2-200150001.html",
       "title": "Player Props for NFL Week 2: Aaron Rodgers, Jeremiyah Love, Christian McCaffrey - Yahoo Sports",
       "week": 2
+    },
+    {
+      "url": "https://www.fantasypros.com/2026/09/nfl-player-props-monday-night-football-broncos-vs-chiefs/",
+      "title": "NFL Player Props: Monday Night Football (Broncos vs. Chiefs) - FantasyPros",
+      "week": 1
     }
   ],
   "extractionFailures": []
