@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-10-01T04:30:15.073Z",
+  "refreshedAt": "2026-10-01T06:36:21.024Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -529,6 +529,18 @@
       "url": "https://www.cbssports.com/betting/news/eagles-vs-bears-picks-player-props-experts-best-bets-for-monday-night-football-in-nfl-week-3/"
     },
     {
+      "id": "dontayvion-wicks-receiving-yards-over-39-5-yep-w3",
+      "player": "Dontayvion Wicks",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 39.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.cbssports.com/betting/news/nfl-picks-today-best-bets-week-3-2026-expert-predictions-spread-total-money-line-parlays-player-props/"
+    },
+    {
       "id": "has-gone-passing-yards-over-239-5-yep-w3",
       "player": "has gone",
       "market": "Passing Yards",
@@ -551,30 +563,6 @@
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
       "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3"
-    },
-    {
-      "id": "michael-penix-jr-interceptions-over-0-5-yep-w3",
-      "player": "Michael Penix Jr.",
-      "market": "Interceptions",
-      "side": "OVER",
-      "line": 0.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/"
-    },
-    {
-      "id": "jordan-love-passing-yards-over-231-5-yep-w3",
-      "player": "Jordan Love",
-      "market": "Passing Yards",
-      "side": "OVER",
-      "line": 231.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/"
     }
   ]
 }
