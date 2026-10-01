@@ -1,12 +1,12 @@
 {
   "success": true,
-  "generatedAt": "2026-09-30T22:29:02.969Z",
+  "generatedAt": "2026-10-01T00:38:05.210Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 5,
-  "excludedArticleCount": 15,
+  "includedArticleCount": 6,
+  "excludedArticleCount": 14,
   "extractionFailureCount": 0,
-  "propCount": 7,
-  "publishedWeek3SignalCount": 7,
+  "propCount": 9,
+  "publishedWeek3SignalCount": 9,
   "props": [
     {
       "player": "Case Keenum",
@@ -29,6 +29,46 @@
       }
     },
     {
+      "player": "has gone",
+      "market": "Passing Yards",
+      "side": "OVER",
+      "line": 239.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.sportsbettingdime.com/news/nfl/best-week-3-player-props-expert/"
+      }
+    },
+    {
+      "player": "DK Metcalf",
+      "market": "Receptions",
+      "side": "OVER",
+      "line": 4.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
+      }
+    },
+    {
+      "player": "He has gone",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 83.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
+      }
+    },
+    {
+      "player": "Tyler Shough",
+      "market": "Completions",
+      "side": "UNDER",
+      "line": 21.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
+      }
+    },
+    {
       "player": "He has gone",
       "market": "Rushing Yards",
       "side": "OVER",
@@ -36,26 +76,6 @@
       "week": 3,
       "source": {
         "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3"
-      }
-    },
-    {
-      "player": "Jaylen Waddle",
-      "market": "Receptions",
-      "side": "OVER",
-      "line": 4.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.si.com/betting/rams-vs-broncos-best-nfl-prop-bets-for-sunday-night-football-in-week-3-bet-on-jaylen-waddle"
-      }
-    },
-    {
-      "player": "Jaylen Waddle",
-      "market": "Receptions",
-      "side": "OVER",
-      "line": 4.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.si.com/betting/rams-vs-broncos-best-nfl-prop-bets-for-sunday-night-football-in-week-3-bet-on-jaylen-waddle"
       }
     },
     {
@@ -86,13 +106,18 @@
       "week": 3
     },
     {
-      "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3",
-      "title": "Chargers vs. Bills Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 3",
+      "url": "https://www.sportsbettingdime.com/news/nfl/best-week-3-player-props-expert/",
+      "title": "Best Week 3 NFL Player Props - Expert Is 5-1 Using This Method",
       "week": 3
     },
     {
-      "url": "https://www.si.com/betting/rams-vs-broncos-best-nfl-prop-bets-for-sunday-night-football-in-week-3-bet-on-jaylen-waddle",
-      "title": "Rams vs. Broncos Best NFL Prop Bets for Sunday Night Football in Week 3 (Bet on Jaylen Waddle)",
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum",
+      "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 3 (Invest in Blake Corum)",
+      "week": 3
+    },
+    {
+      "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3",
+      "title": "Chargers vs. Bills Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 3",
       "week": 3
     },
     {
@@ -171,11 +196,6 @@
       "url": "https://www.sportsbettingdime.com/news/nfl/early-props-target-week-2-2026/",
       "title": "Early NFL Props to Target for Week 2: Josh Allen, Derrick Henry & More",
       "week": 2
-    },
-    {
-      "url": "https://www.thelines.com/nfl/player-props/wednesday-night-week-1-nfl-parlay-picks-player-props-best-patriots-seahawks-bets/",
-      "title": "Wednesday Week 1 NFL Parlay Picks & Props: Pats-Seahawks",
-      "week": 1
     },
     {
       "url": "https://dknetwork.draftkings.com/2026/08/24/best-afc-west-bets-for-the-2026-nfl-season/",
