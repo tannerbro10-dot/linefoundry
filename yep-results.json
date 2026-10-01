@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "9c2b1c769177524bc42c0cd5e0304fad",
+  "request_id": "90197346da1bd8d8c14aa9cce056f43c",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -55,18 +55,6 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.sportsline.com&key=6d499bb51a7b70ae76dc3d38db0615df3f998204c415cac935a08dbfeb69295d"
     },
     {
-      "url": "https://www.sportsgamblingpodcast.com/2026/09/26/pro-football-pick-of-the-day-september-26th-nfl-week-3-prop-bet/",
-      "title": "Pro Football Pick of the Day (September 26th): NFL Week 3 Prop Bet",
-      "description": "If you're looking for a daily football bet, you're in business. We've got your NFL picks for today and we're giving you predictions everyday.",
-      "published_date": "2026-09-26T00:00:00.000Z",
-      "highlights": [
-        "Come check out what we’ve cooked up for you. Go here for more NFL picks CHECK OUT THE SPORTS GAMBLING PODCAST’S DAILY BEST BETS Football Pick of the Day (September 26th): NFL Week 3 Prop Bet San Diego Chargers vs Buffalo Bills 1:00pm – Sunday – September 27th We cashed on our first player prop of Week 3 already when Michael Penix blew past his passing total.We’ll keep it in the quarterback realm for our second prop play for this week.",
-        "They allowed 253 yards to Kirk Cousins in Week 1 and followed up that performance with another 277 to Jacoby Brissett. If those two are tearing this defense apart, Allen should have a field day and cash this one early.NFL Prop Pick (September 26th): Josh Allen 240+ Passing Yards (-113) SGPN Daily Content for September 26th, 2026 MMA Daily Best Bet MLB Daily Dingers MLB NFRI/YRFI Plays Daily Best Bet Don’t Forget About our Free Picks Pages Too!",
-        "NASCAR PICKS – FEEL THE THUNDER UFC PICKS – TAKE DOWN CORPORATE GAMBLING If you’d like even more info to help make your NFL Picks , check out the Sports Gambling Podcast They’re dropping episodes five days a week to make you the smartest guy/gal at the bar."
-      ],
-      "favicon": "https://platform.yep.com/app/favicon?domain=www.sportsgamblingpodcast.com&key=6a57e6cad033bd971817e87e817ada73aef8f471423126b10eee5c7cbe04c073"
-    },
-    {
       "url": "https://www.sportsline.com/insiders/2026-nfl-week-3-props-predictions-picks-titans-running-back-tony-pollard-among-propstarzs-best-bets/",
       "title": "2026 NFL Week 3 props, predictions, picks: Titans running back Tony Pollard among PropStarz's best bets - SportsLine.com",
       "description": "SportsLine expert Alex Selesnick (aka PropStarz) enters Week 3 of the 2026 NFL season on a 77-66 run with his prop picks. Now, he has revealed six top picks for Week 3",
@@ -113,6 +101,18 @@
         "Rushing Yards: OVER 0.5 +154 Puka Nacua Rushing Yards: OVER 0.5 -120 All four of these prop bets received an A or A+ grade from RotoWire's prop betting tool."
       ],
       "favicon": "https://platform.yep.com/app/favicon?domain=www.rotowire.com&key=24daf2e4cdff67ec919545742cc5c82bb2d79e6d40ea6e16432141ddea01f875"
+    },
+    {
+      "url": "https://www.thelines.com/nfl/player-props/tnf-week-1-nfl-parlay-picks-player-props-best-49ers-vs-rams-bets/",
+      "title": "TNF NFL Parlay Picks & Player Props For Rams vs. 49ers",
+      "description": "See our favorite NFL parlay picks and player props for a TNF matchup featuring the Rams vs. 49ers. Los Angeles is a 3.5-point favorite at online sportsbooks.",
+      "published_date": "2026-09-10T17:16:38.000Z",
+      "highlights": [
+        "TNF Week 1 NFL Parlay Picks & Player Props: Best 49ers vs.Rams Bets Written By Jason Green | Published at September 10, 2026 Jan 25, 2026; Seattle, WA, USA; Los Angeles Rams quarterback Matthew Stafford (9) passes against the Seattle Seahawks during the first half in the 2026 NFC Championship Game at Lumen Field.",
+        "For this Thursday night matchup, BetMGM Sportsbook has the Rams as 3.5-point favorites with a total of 48.5. Not only are the Rams favorites tonight, but US sportsbooks are also giving them the best odds to win the Super Bowl.Here, we share our TNF Week 1 NFL parlay picks and player prop bets.Overall, I am taking the Rams to cover the 3,5-point spread.",
+        "That means Brock Purdy will be airing it out more, and he will get to Over 21.5 completions. NFL Thursday Night Parlay Picks in Week 1 We like this three-leg parlay, which offers solid odds on three bets with good value."
+      ],
+      "favicon": "https://platform.yep.com/app/favicon?domain=www.thelines.com&key=28a8cb6768770ed7e4de8ee869ddb6dea7186d3a296467368a61bc9d4f601d45"
     },
     {
       "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
@@ -247,13 +247,13 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.thelines.com&key=28a8cb6768770ed7e4de8ee869ddb6dea7186d3a296467368a61bc9d4f601d45"
     }
   ],
-  "response_time_ms": 420.8,
+  "response_time_ms": 372.07,
   "api_cost": {
     "cost": 0.004,
     "details": "(4/1000)"
   },
   "balance": {
-    "before": "6.1680",
-    "after": 6.164
+    "before": "6.1640",
+    "after": 6.16
   }
 }
