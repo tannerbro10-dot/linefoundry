@@ -1,12 +1,12 @@
 {
   "success": true,
-  "generatedAt": "2026-10-01T00:38:05.210Z",
+  "generatedAt": "2026-10-01T02:28:06.572Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 6,
-  "excludedArticleCount": 14,
+  "includedArticleCount": 5,
+  "excludedArticleCount": 15,
   "extractionFailureCount": 0,
-  "propCount": 9,
-  "publishedWeek3SignalCount": 9,
+  "propCount": 6,
+  "publishedWeek3SignalCount": 6,
   "props": [
     {
       "player": "Case Keenum",
@@ -36,36 +36,6 @@
       "week": 3,
       "source": {
         "url": "https://www.sportsbettingdime.com/news/nfl/best-week-3-player-props-expert/"
-      }
-    },
-    {
-      "player": "DK Metcalf",
-      "market": "Receptions",
-      "side": "OVER",
-      "line": 4.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
-      }
-    },
-    {
-      "player": "He has gone",
-      "market": "Rushing Yards",
-      "side": "OVER",
-      "line": 83.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
-      }
-    },
-    {
-      "player": "Tyler Shough",
-      "market": "Completions",
-      "side": "UNDER",
-      "line": 21.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
       }
     },
     {
@@ -111,11 +81,6 @@
       "week": 3
     },
     {
-      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum",
-      "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 3 (Invest in Blake Corum)",
-      "week": 3
-    },
-    {
       "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3",
       "title": "Chargers vs. Bills Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 3",
       "week": 3
@@ -158,6 +123,11 @@
       "week": 1
     },
     {
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-2-bet-on-baker-mayfield-to-torch-his-former-team",
+      "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 2 (Bet on Baker Mayfield to Torch His Former Team)",
+      "week": 2
+    },
+    {
       "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
       "title": "NFL Thursday Night Football Player Props & Bets: Lions vs. Bills | BettingPros",
       "week": 2
@@ -183,9 +153,9 @@
       "week": 2
     },
     {
-      "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
-      "title": "",
-      "week": 1
+      "url": "https://establishtherun.com/nfl-player-props-we-bet-season-long-2/",
+      "title": "NFL Player Props We Bet: 2026 Season-Long | Establish The Run",
+      "week": 4
     },
     {
       "url": "https://www.sportsbookreview.com/picks/college-football/ncaaf-player-props-best-bets-week-1-2026/",
