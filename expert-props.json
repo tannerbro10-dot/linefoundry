@@ -1,12 +1,12 @@
 {
   "success": true,
-  "generatedAt": "2026-10-01T10:30:21.761Z",
+  "generatedAt": "2026-10-01T12:36:38.998Z",
   "inputArticleCount": 20,
   "includedArticleCount": 6,
   "excludedArticleCount": 14,
   "extractionFailureCount": 0,
-  "propCount": 7,
-  "publishedWeek3SignalCount": 7,
+  "propCount": 6,
+  "publishedWeek3SignalCount": 6,
   "props": [
     {
       "player": "Dontayvion Wicks",
@@ -19,23 +19,13 @@
       }
     },
     {
-      "player": "Case Keenum",
-      "market": "Interceptions",
-      "side": "OVER",
-      "line": 0.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.cbssports.com/betting/news/eagles-vs-bears-picks-player-props-experts-best-bets-for-monday-night-football-in-nfl-week-3/"
-      }
-    },
-    {
-      "player": "Dontayvion Wicks",
+      "player": "Kyren Williams",
       "market": "Receiving Yards",
       "side": "OVER",
-      "line": 41.5,
+      "line": 12.5,
       "week": 3,
       "source": {
-        "url": "https://www.cbssports.com/betting/news/eagles-vs-bears-picks-player-props-experts-best-bets-for-monday-night-football-in-nfl-week-3/"
+        "url": "https://www.cbssports.com/betting/news/broncos-vs-rams-picks-prediction-player-props-experts-best-bets-for-sunday-night-football-in-nfl-week-3/"
       }
     },
     {
@@ -86,8 +76,8 @@
       "week": 3
     },
     {
-      "url": "https://www.cbssports.com/betting/news/eagles-vs-bears-picks-player-props-experts-best-bets-for-monday-night-football-in-nfl-week-3/",
-      "title": "Eagles vs. Bears picks, player props: Expert's best bets for Monday Night Football in NFL Week 3 - CBS Sports",
+      "url": "https://www.cbssports.com/betting/news/broncos-vs-rams-picks-prediction-player-props-experts-best-bets-for-sunday-night-football-in-nfl-week-3/",
+      "title": "Broncos vs. Rams picks, prediction, player props: Expert's best bets for Sunday Night Football in NFL Week 3 - CBS Sports",
       "week": 3
     },
     {
@@ -113,6 +103,11 @@
   ],
   "excludedArticles": [
     {
+      "url": "https://www.dimers.com/nfl/props",
+      "title": "Best NFL Player Props Today & NFL Prop Bets",
+      "week": 4
+    },
+    {
       "url": "https://www.sportsline.com/insiders/nfl-picks-jayden-daniels-prop-among-sportsline-expert-propbetguys-best-bets-for-week-2-of-2026-season/",
       "title": "NFL picks: Jayden Daniels prop among SportsLine expert PropBetGuy&#x27;s best bets for Week 2 of 2026 season - SportsLine.com",
       "week": 2
@@ -121,6 +116,11 @@
       "url": "https://www.sportsline.com/insiders/2026-nfl-week-3-props-predictions-picks-titans-running-back-tony-pollard-among-propstarzs-best-bets/",
       "title": "2026 NFL Week 3 props, predictions, picks: Titans running back Tony Pollard among PropStarz&#x27;s best bets - SportsLine.com",
       "week": 3
+    },
+    {
+      "url": "https://www.rotowire.com/football/article/best-patriots-vs-seahawks-nfl-player-props-week-1-2026-133326",
+      "title": "Best Patriots vs Seahawks NFL Player Props (Week 1) | RotoWire",
+      "week": 1
     },
     {
       "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
@@ -171,16 +171,6 @@
       "url": "https://www.sportsbettingdime.com/news/nfl/early-props-target-week-2-2026/",
       "title": "Early NFL Props to Target for Week 2: Josh Allen, Derrick Henry & More",
       "week": 2
-    },
-    {
-      "url": "https://www.sportsbookreview.com/picks/college-football/ncaaf-player-props-best-bets-week-1-2026/",
-      "title": "College Football Player Props Week 1 | Best Prop Bets",
-      "week": 1
-    },
-    {
-      "url": "https://www.thelines.com/nfl/player-props/wednesday-night-week-1-nfl-parlay-picks-player-props-best-patriots-seahawks-bets/",
-      "title": "Wednesday Week 1 NFL Parlay Picks & Props: Pats-Seahawks",
-      "week": 1
     }
   ],
   "extractionFailures": []
