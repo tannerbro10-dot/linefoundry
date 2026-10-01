@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-01T14:32:35.157Z",
+  "generatedAt": "2026-10-01T16:29:19.969Z",
   "inputArticleCount": 20,
   "includedArticleCount": 5,
   "excludedArticleCount": 15,
@@ -108,6 +108,10 @@
       "week": 2
     },
     {
+      "url": "https://www.sportsgamblingpodcast.com/2026/09/26/pro-football-pick-of-the-day-september-26th-nfl-week-3-prop-bet/",
+      "week": 3
+    },
+    {
       "url": "https://www.sportsline.com/insiders/2026-nfl-week-3-props-predictions-picks-titans-running-back-tony-pollard-among-propstarzs-best-bets/",
       "title": "2026 NFL Week 3 props, predictions, picks: Titans running back Tony Pollard among PropStarz&#x27;s best bets - SportsLine.com",
       "week": 3
@@ -115,11 +119,6 @@
     {
       "url": "https://www.rotowire.com/football/article/best-patriots-vs-seahawks-nfl-player-props-week-1-2026-133326",
       "title": "Best Patriots vs Seahawks NFL Player Props (Week 1) | RotoWire",
-      "week": 1
-    },
-    {
-      "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
-      "title": "NFL Player Props | DraftKings Sportsbook",
       "week": 1
     },
     {
@@ -141,11 +140,6 @@
       "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-2-bet-on-baker-mayfield-to-torch-his-former-team",
       "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 2 (Bet on Baker Mayfield to Torch His Former Team)",
       "week": 2
-    },
-    {
-      "url": "https://www.actionnetwork.com/nfl/lions-vs-bills-player-props-dalton-kincaid-jahmyr-gibbs",
-      "title": "",
-      "week": null
     },
     {
       "url": "https://www.bettingpros.com/articles/nfl-monday-night-football-player-props-broncos-vs-chiefs-week-1-2026/",
@@ -170,6 +164,11 @@
     {
       "url": "https://www.sportsbookreview.com/picks/college-football/ncaaf-player-props-best-bets-week-1-2026/",
       "title": "College Football Player Props Week 1 | Best Prop Bets",
+      "week": 1
+    },
+    {
+      "url": "https://www.thelines.com/nfl/player-props/wednesday-night-week-1-nfl-parlay-picks-player-props-best-patriots-seahawks-bets/",
+      "title": "Wednesday Week 1 NFL Parlay Picks & Props: Pats-Seahawks",
       "week": 1
     }
   ],
