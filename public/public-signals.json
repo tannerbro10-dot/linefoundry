@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-10-01T08:32:42.137Z",
+  "refreshedAt": "2026-10-01T10:30:21.761Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -503,6 +503,18 @@
       "sourceId": "ariel-epstein-hardrock-week2",
       "week": 2,
       "note": "Hard Rock Bet Week 2 player prop."
+    },
+    {
+      "id": "dontayvion-wicks-receiving-yards-over-39-5-yep-w3",
+      "player": "Dontayvion Wicks",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 39.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.cbssports.com/betting/news/nfl-picks-today-best-bets-week-3-2026-expert-predictions-spread-total-money-line-parlays-player-props/"
     },
     {
       "id": "case-keenum-interceptions-over-0-5-yep-w3",
