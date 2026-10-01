@@ -1,9 +1,9 @@
 {
   "success": true,
-  "generatedAt": "2026-10-01T20:30:36.585Z",
+  "generatedAt": "2026-10-01T22:26:17.760Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 5,
-  "excludedArticleCount": 15,
+  "includedArticleCount": 6,
+  "excludedArticleCount": 14,
   "extractionFailureCount": 0,
   "propCount": 6,
   "publishedWeek3SignalCount": 6,
@@ -81,6 +81,11 @@
       "week": 3
     },
     {
+      "url": "https://www.sportsline.com/insiders/nfl-picks-stefon-diggs-prop-among-sportsline-expert-propbetguys-best-bets-for-week-3-of-2026-season/",
+      "title": "NFL picks: Stefon Diggs prop among SportsLine expert PropBetGuy&#x27;s best bets for Week 3 of 2026 season - SportsLine.com",
+      "week": 3
+    },
+    {
       "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3",
       "title": "Chargers vs. Bills Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 3",
       "week": 3
@@ -108,8 +113,7 @@
       "week": 2
     },
     {
-      "url": "https://www.sportsline.com/insiders/2026-nfl-week-3-props-predictions-picks-titans-running-back-tony-pollard-among-propstarzs-best-bets/",
-      "title": "2026 NFL Week 3 props, predictions, picks: Titans running back Tony Pollard among PropStarz&#x27;s best bets - SportsLine.com",
+      "url": "https://www.sportsgamblingpodcast.com/2026/09/26/pro-football-pick-of-the-day-september-26th-nfl-week-3-prop-bet/",
       "week": 3
     },
     {
@@ -155,11 +159,6 @@
     {
       "url": "https://www.fantasypros.com/2026/09/nfl-player-props-monday-night-football-giants-vs-rams-week-2-2026/",
       "title": "NFL Player Props: Monday Night Football (Giants vs. Rams) - FantasyPros",
-      "week": 2
-    },
-    {
-      "url": "https://www.sportsbettingdime.com/news/nfl/early-props-target-week-2-2026/",
-      "title": "Early NFL Props to Target for Week 2: Josh Allen, Derrick Henry & More",
       "week": 2
     },
     {
