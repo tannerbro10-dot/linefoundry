@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-10-01T22:26:17.759Z",
+  "refreshedAt": "2026-10-02T00:36:14.341Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -505,28 +505,16 @@
       "note": "Hard Rock Bet Week 2 player prop."
     },
     {
-      "id": "case-keenum-interceptions-over-0-5-yep-w3",
-      "player": "Case Keenum",
-      "market": "Interceptions",
-      "side": "OVER",
-      "line": 0.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.cbssports.com/betting/news/eagles-vs-bears-picks-player-props-experts-best-bets-for-monday-night-football-in-nfl-week-3/"
-    },
-    {
-      "id": "dontayvion-wicks-receiving-yards-over-41-5-yep-w3",
-      "player": "Dontayvion Wicks",
+      "id": "kyren-williams-receiving-yards-over-12-5-yep-w3",
+      "player": "Kyren Williams",
       "market": "Receiving Yards",
       "side": "OVER",
-      "line": 41.5,
+      "line": 12.5,
       "analyst": "Unknown Analyst",
       "sourceId": "yep-unknown",
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.cbssports.com/betting/news/eagles-vs-bears-picks-player-props-experts-best-bets-for-monday-night-football-in-nfl-week-3/"
+      "url": "https://www.cbssports.com/betting/news/broncos-vs-rams-picks-prediction-player-props-experts-best-bets-for-sunday-night-football-in-nfl-week-3/"
     },
     {
       "id": "has-gone-passing-yards-over-239-5-yep-w3",
