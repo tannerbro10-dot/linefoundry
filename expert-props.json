@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-02T18:33:04.455Z",
+  "generatedAt": "2026-10-02T20:27:47.821Z",
   "inputArticleCount": 20,
   "includedArticleCount": 3,
   "excludedArticleCount": 17,
@@ -78,6 +78,11 @@
       "week": 1
     },
     {
+      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-4-picks-best-bets-every-game-wills-wagers",
+      "title": "2026 NFL Week 4 Picks: Best Bets For Every Game — Will&#x27;s Wagers | FOX Sports",
+      "week": 4
+    },
+    {
       "url": "https://bleacherreport.com/articles/25497230-bleacher-reports-expert-week-1-2026-nfl-picks",
       "title": "Bleacher Report&#x27;s Expert Week 1 2026 NFL Picks",
       "week": 1
@@ -116,11 +121,6 @@
       "url": "https://sportsbook.draftkings.com/page/super-bowl-prop-bets",
       "title": "Super Bowl Prop Bets 2026 | DraftKings Sportsbook",
       "week": 1
-    },
-    {
-      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-odds-week-4-lines-spreads-results-all-16-games",
-      "title": "2026 NFL Odds Week 4: Lines, Spreads, Results For All 16 Games | FOX Sports",
-      "week": 4
     },
     {
       "url": "https://sports.yahoo.com/articles/nfl-player-props-9-over-134800543.html",

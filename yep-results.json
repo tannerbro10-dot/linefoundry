@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "911991c005991c89c8e473962ec998a5",
+  "request_id": "4b63773a018d56d76e4eac232a53dbdb",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -41,6 +41,18 @@
         "Many of the Week 1 NFL spreads also span the gamut, so having some NFL betting advice would help navigate the opening slate of the year. Before locking in any Week 1 NFL picks or NFL prop bets, be sure to check out the Week 1 NFL best bets and predictions from SportsLine's red-hot Vegas experts Paramount+ Premium is now included with every SportsLine membership!"
       ],
       "favicon": "https://platform.yep.com/app/favicon?domain=www.cbssports.com&key=62f83a14c8ef581e1570ef2347c0a0b566503b5cbab389dabf5e5fdf5462a1e1"
+    },
+    {
+      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-4-picks-best-bets-every-game-wills-wagers",
+      "title": "2026 NFL Week 4 Picks: Best Bets For Every Game — Will's Wagers",
+      "description": "Will Hill is back with his best bet for every NFL Week 4 game.",
+      "published_date": "2026-10-01T00:00:00.000Z",
+      "highlights": [
+        "There are several barnburners on tap for NFL Week 4.Here's where I'm putting my money.This page may contain affiliate links to legal sports betting partners.If you sign up or place a wager, FOX Sports may be compensated.",
+        "I’l bet on them to bounce back. Hill's Pick: Patriots +6.5 If the Titans aren’t the worst team in the NFL, they’re pretty close to it.At 0-3, their offense has been anemic, and I don’t expect it to improve this week in Baltimore.Hill's Pick: Titans Under 15.5 The quarterbacks for this game are familiar with each other.",
+        "With an elite offense and very suspect defense, I like another Lions Over. Hill's Pick: Over 51.5 The Saints gave up over 100 yards rushing last week and now face perhaps the most dynamic running back in the NFL.Look for Bijan Robinson to have another big game on the ground.Hill's Pick: Bijan Robinson Over 85.5 Rushing Yards Get more from the National Football League Follow your favorites to get information about games, news and more"
+      ],
+      "favicon": "https://platform.yep.com/app/favicon?domain=www.foxsports.com&key=c732155f966297350c701fea846c30db05fc0a377eb9c3490eaf3674bc160d70"
     },
     {
       "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick",
@@ -163,18 +175,6 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=sportsbook.draftkings.com&key=fe477e563e05aa45bae97d07fe4f1c6a55f26a79fb0e1cd9b65b94506db38e76"
     },
     {
-      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-odds-week-4-lines-spreads-results-all-16-games",
-      "title": "2026 NFL Odds Week 4: Lines, Spreads, Results For All 16 Games",
-      "description": "Check out the odds for every NFL Week 4 contest.",
-      "published_date": "2026-09-27T00:00:00.000Z",
-      "highlights": [
-        "All that remains in Week 3 is a Monday Night Football matchup between the Eagles and Bears, before Week 4 kicks off with a Thursday tilt between the Steelers and Browns.Here are the lines for every Week 4 matchup at bet365 Sportsbook as of Sept.30.This page may contain affiliate links to legal sports betting partners.If you sign up or place a wager, FOX Sports may be compensated.Read more about Sports Betting on FOX Sports Thursday, Oct.",
-        "Spread: Packers -3.5 Moneyline: Packers -200, Buccaneers +165 O/U: 39.5 Spread: Bengals -2.5 Moneyline: Bengals -140, Jaguars +120 O/U: 51.5 Spread: Rams -3 Moneyline: Rams -165, Eagles +140 O/U: 43.5 Spread: Bills -6.5 Moneyline: Bills -300, Patriots +240 O/U: 48.5 Spread: Bears -3.5 Moneyline: Bears -170, Jets +145 O/U: 42.5 Spread: Ravens -11.5 Moneyline: Ravens -700, Titans +500 O/U: 43.5 Spread: Vikings -10.5 Moneyline: Vikings -650, Dolphins +47",
-        "Moneyline: Chiefs -220, Raiders +180 O/U: 47.5 Spread: Seahakws -7 Moneyline: Seahawks -340, Chargers +270 O/U: 42.5 Spread: Lions -3.5 Moneyline: Lions -200, Panthers +165 O/U: 50.5 Monday, Oct. 5 Spread: Saints -2.5 Moneyline: Saints -150, Falcons +125 O/U: 48.5 Get more from the National Football League Follow your favorites to get information about games, news and more"
-      ],
-      "favicon": "https://platform.yep.com/app/favicon?domain=www.foxsports.com&key=c732155f966297350c701fea846c30db05fc0a377eb9c3490eaf3674bc160d70"
-    },
-    {
       "url": "https://sports.yahoo.com/articles/nfl-player-props-9-over-134800543.html",
       "title": "NFL player props: 9 over/under bets entering 2026 season",
       "description": "9 players props to bet on ahead of the 2026 NFL season.",
@@ -247,13 +247,13 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.nfl.com&key=d1e6886d2414b5e984ad13633c35a877dc931bc7c368a04a364ecbe3892fd281"
     }
   ],
-  "response_time_ms": 408.46,
+  "response_time_ms": 938.5,
   "api_cost": {
     "cost": 0.004,
     "details": "(4/1000)"
   },
   "balance": {
-    "before": "6.1200",
-    "after": 6.116
+    "before": "6.1160",
+    "after": 6.112
   }
 }
