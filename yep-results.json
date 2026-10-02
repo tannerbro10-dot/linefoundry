@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "ab71aad71dc7321c1bfb7e6d8fde38ae",
+  "request_id": "911991c005991c89c8e473962ec998a5",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -19,18 +19,6 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=vsin.com&key=6cbf4966e1fce1e46f22e6c5a968e414e14ab4f54e7d87a9dcbd009e3198d1f0"
     },
     {
-      "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-totals-moneyline-parlays-props-bets/",
-      "title": "NFL picks today, odds, lines, bets: Week 1, 2026 expert predictions against the spread, parlays, prop bets",
-      "description": "SportsLine's top NFL experts reveal their best bets and player props for Week 1",
-      "published_date": "2026-09-13T15:14:48.000Z",
-      "highlights": [
-        "SportsLine's top NFL experts reveal their NFL picks, NFL predictions, NFL betting tips and NFL best bets for Week 1 By Sep 13, 2026 at 11:14 am ET 4 min read The 2026 NFL season has finally arrived as bettors are scrambling to make their Week 1 NFL picks if they haven't already.While ATS predictions will get most of the attention for games like Bills vs.",
-        "Now, with the Week 1 NFL schedule quickly approaching, SportsLine's top NFL betting experts have already locking in their picks. Go to SportsLine to see them all now Top Week 1 expert NFL prop picks from Doug \"Prop Bet Guy\" Kralstein Doug specializes in props across multiple sports and is 69-47 (+1521) with his last 116 NFL player prop bets.",
-        "Many of the Week 1 NFL spreads also span the gamut, so having some NFL betting advice would help navigate the opening slate of the year. Before locking in any Week 1 NFL picks or NFL prop bets, be sure to check out the Week 1 NFL best bets and predictions from SportsLine's red-hot Vegas experts Paramount+ Premium is now included with every SportsLine membership!"
-      ],
-      "favicon": "https://platform.yep.com/app/favicon?domain=www.cbssports.com&key=62f83a14c8ef581e1570ef2347c0a0b566503b5cbab389dabf5e5fdf5462a1e1"
-    },
-    {
       "url": "https://www.cbssports.com/betting/news/eagles-vs-bears-picks-player-props-experts-best-bets-for-monday-night-football-in-nfl-week-3/",
       "title": "Eagles vs. Bears picks, player props: Expert's best bets for Monday Night Football in NFL Week 3",
       "description": "Philadelphia heads to Chicago on Monday Night Football with the Bears starting Case Keenum at quarterback",
@@ -39,6 +27,18 @@
         "Philadelphia heads to Chicago on Monday Night Football with the Bears starting Case Keenum at quarterback By Sep 28, 2026 at 8:08 pm ET 3 min read The NFL season really just moves too fast -- it's hard to believe we've almost already shredded through three weeks of football with just the Eagles and Bears left to play in the Week 3 of the season.",
         "Get a $55 bonus after $25 in trades by claiming the latest Kalshi promo code CBSSPORTS55 here Wager on the NFL with the latest FanDuel promo code and get up to $250 in bonus bets: Best bets for Monday Night Football Eagles -3.5 Road chalk has been BAD so far in Week 3 but I'm not moving off one of my best bets from before the weekend just because of a trend.",
         "Bet on NFL player props and more at BetMGM with promo code CBSSPORTS and get up to $1,500 in bonus bets: Monday Night Football anytime touchdowns Saquon Barkley (-115, DraftKings) I have zero problem laying the juice with the chalky option in Saquon Barkley The Eagles are not going to try and win this game by slinging the ball everywhere and cutting Hurts loose in the"
+      ],
+      "favicon": "https://platform.yep.com/app/favicon?domain=www.cbssports.com&key=62f83a14c8ef581e1570ef2347c0a0b566503b5cbab389dabf5e5fdf5462a1e1"
+    },
+    {
+      "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-totals-moneyline-parlays-props-bets/",
+      "title": "NFL picks today, odds, lines, bets: Week 1, 2026 expert predictions against the spread, parlays, prop bets",
+      "description": "SportsLine's top NFL experts reveal their best bets and player props for Week 1",
+      "published_date": "2026-09-13T15:14:48.000Z",
+      "highlights": [
+        "SportsLine's top NFL experts reveal their NFL picks, NFL predictions, NFL betting tips and NFL best bets for Week 1 By Sep 13, 2026 at 11:14 am ET 4 min read The 2026 NFL season has finally arrived as bettors are scrambling to make their Week 1 NFL picks if they haven't already.While ATS predictions will get most of the attention for games like Bills vs.",
+        "Now, with the Week 1 NFL schedule quickly approaching, SportsLine's top NFL betting experts have already locking in their picks. Go to SportsLine to see them all now Top Week 1 expert NFL prop picks from Doug \"Prop Bet Guy\" Kralstein Doug specializes in props across multiple sports and is 69-47 (+1521) with his last 116 NFL player prop bets.",
+        "Many of the Week 1 NFL spreads also span the gamut, so having some NFL betting advice would help navigate the opening slate of the year. Before locking in any Week 1 NFL picks or NFL prop bets, be sure to check out the Week 1 NFL best bets and predictions from SportsLine's red-hot Vegas experts Paramount+ Premium is now included with every SportsLine membership!"
       ],
       "favicon": "https://platform.yep.com/app/favicon?domain=www.cbssports.com&key=62f83a14c8ef581e1570ef2347c0a0b566503b5cbab389dabf5e5fdf5462a1e1"
     },
@@ -247,13 +247,13 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.nfl.com&key=d1e6886d2414b5e984ad13633c35a877dc931bc7c368a04a364ecbe3892fd281"
     }
   ],
-  "response_time_ms": 489.49,
+  "response_time_ms": 408.46,
   "api_cost": {
     "cost": 0.004,
     "details": "(4/1000)"
   },
   "balance": {
-    "before": "6.1240",
-    "after": 6.12
+    "before": "6.1200",
+    "after": 6.116
   }
 }
