@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "0b3160f89d46ff43554e14bf2c87d1c4",
+  "request_id": "4403b6bdf040c62f917d678721d87f09",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -139,18 +139,6 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.foxsports.com&key=c732155f966297350c701fea846c30db05fc0a377eb9c3490eaf3674bc160d70"
     },
     {
-      "url": "https://www.sportsline.com/insiders/2026-nascar-cup-daytona-500-odds-picks-props-best-bets-from-proven-racing-experts/",
-      "title": "2026 NASCAR Cup Daytona 500 odds, picks, props: best bets from proven racing experts - SportsLine.com",
-      "description": "Racing experts Phil Bobbitt and Steve Greco reveal their picks for the 2026 NASCAR Daytona 500 race on Sunday at Daytona International Speedway",
-      "published_date": "2026-02-11T23:16:06.000Z",
-      "highlights": [
-        "Sunday's race is set to begin at 1:30 p.m. ET after being moved up one hour due to weather.Before entering any 2026 NASCAR Cup Series Championship props or NASCAR picks, be sure to see what elite expert auto racing handicappers Phil Bobbitt and Steve Greco have to say.Bobbitt and Greco built a predictive engine that consistently beats the books.",
-        "Join SportsLine right now to see the NASCAR at Las Vegas Motor Speedway best bets, all from the experts who were up 47 units in 2024 GET VEGAS EXPERT PICKS FOR NFL, MLB, NBA, CBB, GOLF, NHL, HORSE RACING AND MORE - PLUS ADVANCED COMPUTER SIMULATIONS, WINNING TOOLS, AND MORE!JOIN NOW",
-        "Anyone following Bobbitt and Greco could have seen HUGE returns! For the 2026 NASCAR Cup Series Daytona 500 at Daytona International Speedway, we can tell you Bobbitt and Greco are"
-      ],
-      "favicon": "https://platform.yep.com/app/favicon?domain=www.sportsline.com&key=6d499bb51a7b70ae76dc3d38db0615df3f998204c415cac935a08dbfeb69295d"
-    },
-    {
       "url": "https://www.sportsbookreview.com/picks/college-football/ncaaf-player-props-best-bets-week-1-2026/",
       "title": "College Football Player Props Week 1 | Best Prop Bets",
       "description": "See our best college football player props for Week 1, including expert picks and the latest odds for our favorite prop bets.",
@@ -173,6 +161,18 @@
         "The Super Bowl Props don’t end there, though. Have a strong feeling about the Gatorade color that’ll be dumped on the winning coach’s head?There’s a prop for that.Do you believe “tails never fails” — or perhaps the opposite?There’s a prop bet for the opening coin toss.And be on the lookout for cross-sport bets, too!0 BET SLIP Confirm clear all selections Your picks will show up here."
       ],
       "favicon": "https://platform.yep.com/app/favicon?domain=sportsbook.draftkings.com&key=fe477e563e05aa45bae97d07fe4f1c6a55f26a79fb0e1cd9b65b94506db38e76"
+    },
+    {
+      "url": "https://www.sportsline.com/insiders/nfl-survivor-pool-week-1-2026-pick-from-advanced-computer-model/",
+      "title": "NFL Survivor Pool: Week 1, 2026 pick from advanced computer model - SportsLine.com",
+      "description": "Don't lock in your NFL Week 1 survivor pick until you see the play from the SportsLine Projection Model",
+      "published_date": "2026-07-09T04:03:57.000Z",
+      "highlights": [
+        "Content on this page may include affiliate links.If you click and sign up/place a wager, we may receive compensation at no cost to you.Week 1 of the NFL season continues on Sunday, and it could be the most challenging for your NFL survivor picks due to the lack of in-season data.There are also several divisional matchups between rivals, including Packers vs.Vikings (-1.5), Commanders vs.",
+        "Saints and Steelers (-6) vs.Falcons now that Cooper rush is starting at quarterback for Atlanta.Visit our DraftKings promo code review and get $200 in bonus bets as a new user after $5+ in wagers here Before making any Week 1 NFL survivor pool picks or NFL knockout pool picks, you NEED to see which team the SportsLine Projection Model is backing.",
+        "Join now and get it all GET VEGAS EXPERT PICKS FOR NFL, MLB, NBA, CBB, GOLF, NHL, HORSE RACING AND MORE - PLUS ADVANCED COMPUTER SIMULATIONS, WINNING TOOLS, AND MORE!JOIN NOW"
+      ],
+      "favicon": "https://platform.yep.com/app/favicon?domain=www.sportsline.com&key=6d499bb51a7b70ae76dc3d38db0615df3f998204c415cac935a08dbfeb69295d"
     },
     {
       "url": "https://sports.yahoo.com/articles/nfl-player-props-9-over-134800543.html",
@@ -247,13 +247,13 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.nfl.com&key=d1e6886d2414b5e984ad13633c35a877dc931bc7c368a04a364ecbe3892fd281"
     }
   ],
-  "response_time_ms": 380.67,
+  "response_time_ms": 417.46,
   "api_cost": {
     "cost": 0.004,
     "details": "(4/1000)"
   },
   "balance": {
-    "before": "6.1120",
-    "after": 6.108
+    "before": "6.1080",
+    "after": 6.104
   }
 }
