@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-03T08:29:24.390Z",
+  "generatedAt": "2026-10-03T10:27:00.069Z",
   "inputArticleCount": 20,
   "includedArticleCount": 3,
   "excludedArticleCount": 17,
@@ -118,19 +118,14 @@
       "week": null
     },
     {
-      "url": "https://sportsbook.draftkings.com/page/super-bowl-prop-bets",
-      "title": "Super Bowl Prop Bets 2026 | DraftKings Sportsbook",
-      "week": 1
-    },
-    {
       "url": "https://www.sportsbookreview.com/picks/college-football/ncaaf-player-props-best-bets-week-1-2026/",
       "title": "College Football Player Props Week 1 | Best Prop Bets",
       "week": 1
     },
     {
-      "url": "https://sports.yahoo.com/articles/nfl-player-props-9-over-134800543.html",
-      "title": "NFL player props: 9 over/under bets entering 2026 season - Yahoo Sports",
-      "week": 4
+      "url": "https://sportsbook.draftkings.com/page/super-bowl-prop-bets",
+      "title": "Super Bowl Prop Bets 2026 | DraftKings Sportsbook",
+      "week": 1
     },
     {
       "url": "https://www.fantasypros.com/2026/09/the-primer-week-2-edition-2026-fantasy-football/",
@@ -138,14 +133,19 @@
       "week": 2
     },
     {
-      "url": "https://www.bettingpros.com/articles/nfl-player-props-bets-patriots-vs-seahawks-wednesday/",
-      "title": "NFL Player Props & Bets: Patriots vs. Seahawks (Wednesday) | BettingPros",
-      "week": null
-    },
-    {
       "url": "https://sports.yahoo.com/articles/week-2-gambling-preview-bet-000000201.html",
       "title": "Week 2 gambling preview: Bet on George Pickens, plus other picks - Yahoo Sports",
       "week": 2
+    },
+    {
+      "url": "https://www.bettingpros.com/articles/nfl-player-props-bets-patriots-vs-seahawks-wednesday/",
+      "title": "NFL Player Props & Bets: Patriots vs. Seahawks (Wednesday) | BettingPros",
+      "week": 4
+    },
+    {
+      "url": "https://sports.yahoo.com/articles/2026-nfl-draft-predictions-best-131800061.html",
+      "title": "2026 NFL Draft Round 4 Predictions & Best Bets: Nussmeier Lands in the Big Apple - Yahoo Sports",
+      "week": 3
     },
     {
       "url": "https://www.nfl.com/schedules/2026/by-week/week-4",
