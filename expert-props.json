@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-03T10:27:00.069Z",
+  "generatedAt": "2026-10-03T15:06:10.766Z",
   "inputArticleCount": 20,
   "includedArticleCount": 3,
   "excludedArticleCount": 17,
@@ -138,11 +138,6 @@
       "week": 2
     },
     {
-      "url": "https://www.bettingpros.com/articles/nfl-player-props-bets-patriots-vs-seahawks-wednesday/",
-      "title": "NFL Player Props & Bets: Patriots vs. Seahawks (Wednesday) | BettingPros",
-      "week": 4
-    },
-    {
       "url": "https://sports.yahoo.com/articles/2026-nfl-draft-predictions-best-131800061.html",
       "title": "2026 NFL Draft Round 4 Predictions & Best Bets: Nussmeier Lands in the Big Apple - Yahoo Sports",
       "week": 3
@@ -150,6 +145,11 @@
     {
       "url": "https://www.nfl.com/schedules/2026/by-week/week-4",
       "title": "NFL Week 4 Schedule 2026: Games, Times, Matchups & Tickets",
+      "week": 4
+    },
+    {
+      "url": "https://www.bettingpros.com/articles/nfl-player-props-bets-patriots-vs-seahawks-wednesday/",
+      "title": "NFL Player Props & Bets: Patriots vs. Seahawks (Wednesday) | BettingPros",
       "week": 4
     }
   ],

@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "5924349b119aba24c41ef80cc6092d32",
+  "request_id": "a454e7020e9c6d0c0b79f7b7705c944f",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -211,18 +211,6 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=sports.yahoo.com&key=243f3750a675ccd35abb821349f705aed8affe9de3921319fb5e14d7e548dec6"
     },
     {
-      "url": "https://www.bettingpros.com/articles/nfl-player-props-bets-patriots-vs-seahawks-wednesday/",
-      "title": "NFL Player Props & Bets: Patriots vs. Seahawks (Wednesday)",
-      "description": "The NFL season gets underway tonight in a Super Bowl LX rematch between the New England Patriots and Seattle Seahawks. As always, sportsbooks have a plethora of betting markets available for fans to wager on. But I’ll focus on the best NFL player props. After careful consideration of how Super Bowl LX played out and […]",
-      "published_date": "2026-09-09T15:45:52.000Z",
-      "highlights": [
-        "Get instant alerts when a line reaches your target via the BettingPros App >> NFL Player Props & Bets: Patriots vs. Seahawks (odds courtesy of FanDuel Sportsbook Jadarian Price Over 1.5 Receptions +124 Jadarian Price was not much of a pass-catcher in college, but that will likely change in the NFL.",
-        "Doubs and Brown will be the superstars in the passing game, but Henry is the glue that will move the chains and keep drives moving. Bet Feed Featured NFL Prop Bets Current Article 2 min read Next Up: MLB Player Props & Bets: Saturday (9/26) Next Article",
-        "Getting Price on track will be crucial for Seattle’s offense in this game, whether on the ground or in the air.Against the Patriots’ defense, expect it to be harder for him to get on track on the ground in his first taste of NFL action.Kenneth Walker III and Zach Charbonnet combined for 51 receptions last season."
-      ],
-      "favicon": "https://platform.yep.com/app/favicon?domain=www.bettingpros.com&key=146fad4e75d01205980a465997361d82d8bd198e7757b8cdd7a3a2096d0a5aee"
-    },
-    {
       "url": "https://sports.yahoo.com/articles/2026-nfl-draft-predictions-best-131800061.html",
       "title": "2026 NFL Draft Predictions & Best Bets: Mock Draft, Odds, and Expert Picks",
       "description": "Get the latest 2026 NFL Draft predictions, including first overall pick odds for Fernando Mendoza, best bets for Round 1, and expert sleepers. Updated April 17.",
@@ -245,15 +233,27 @@
         "In Week 17, two of the four designated matchups will be played on Saturday at 4:30 PM ET on NBC and 8:00 PM ET on Peacock, with the remainder to be played either on Thursday night (8:15 PM ET), Sunday afternoon (1:00 PM ET and4:25 PM ET), Sunday night (8:20 PM ET), or Monday night (8:15 PM ET). Specific dates and start times for the designated Week 17 matchups will be determined and announced at a later date during the season, no later than immediately after Week 15."
       ],
       "favicon": "https://platform.yep.com/app/favicon?domain=www.nfl.com&key=d1e6886d2414b5e984ad13633c35a877dc931bc7c368a04a364ecbe3892fd281"
+    },
+    {
+      "url": "https://www.bettingpros.com/articles/nfl-player-props-bets-patriots-vs-seahawks-wednesday/",
+      "title": "NFL Player Props & Bets: Patriots vs. Seahawks (Wednesday)",
+      "description": "The NFL season gets underway tonight in a Super Bowl LX rematch between the New England Patriots and Seattle Seahawks. As always, sportsbooks have a plethora of betting markets available for fans to wager on. But I’ll focus on the best NFL player props. After careful consideration of how Super Bowl LX played out and […]",
+      "published_date": "2026-09-09T15:45:52.000Z",
+      "highlights": [
+        "Get instant alerts when a line reaches your target via the BettingPros App >> NFL Player Props & Bets: Patriots vs. Seahawks (odds courtesy of FanDuel Sportsbook Jadarian Price Over 1.5 Receptions +124 Jadarian Price was not much of a pass-catcher in college, but that will likely change in the NFL.",
+        "Doubs and Brown will be the superstars in the passing game, but Henry is the glue that will move the chains and keep drives moving. Bet Feed Featured NFL Prop Bets Current Article 2 min read Next Up: MLB Player Props & Bets: Saturday (9/26) Next Article",
+        "Getting Price on track will be crucial for Seattle’s offense in this game, whether on the ground or in the air.Against the Patriots’ defense, expect it to be harder for him to get on track on the ground in his first taste of NFL action.Kenneth Walker III and Zach Charbonnet combined for 51 receptions last season."
+      ],
+      "favicon": "https://platform.yep.com/app/favicon?domain=www.bettingpros.com&key=146fad4e75d01205980a465997361d82d8bd198e7757b8cdd7a3a2096d0a5aee"
     }
   ],
-  "response_time_ms": 559.61,
+  "response_time_ms": 413.57,
   "api_cost": {
     "cost": 0.004,
     "details": "(4/1000)"
   },
   "balance": {
-    "before": "6.0880",
-    "after": 6.084
+    "before": "6.0840",
+    "after": 6.08
   }
 }
