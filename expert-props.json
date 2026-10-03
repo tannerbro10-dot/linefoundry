@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-03T02:34:25.086Z",
+  "generatedAt": "2026-10-03T04:29:36.403Z",
   "inputArticleCount": 20,
   "includedArticleCount": 3,
   "excludedArticleCount": 17,
@@ -108,6 +108,11 @@
       "week": 3
     },
     {
+      "url": "https://www.rotowire.com/cfootball/article/college-football-picks-best-week-3-player-prop-bets-on-rebet-135297",
+      "title": "College Football Picks: Best Week 3 Player Prop Bets on ReBet | RotoWire",
+      "week": 3
+    },
+    {
       "url": "https://www.sportsbookreview.com/picks/college-football/ncaaf-player-props-best-bets-week-1-2026/",
       "title": "College Football Player Props Week 1 | Best Prop Bets",
       "week": 1
@@ -123,13 +128,13 @@
       "week": 1
     },
     {
-      "url": "https://sports.yahoo.com/articles/nfl-player-props-9-over-134800543.html",
-      "title": "NFL player props: 9 over/under bets entering 2026 season - Yahoo Sports",
-      "week": 4
-    },
-    {
       "url": "https://www.fantasypros.com/2026/09/the-primer-week-2-edition-2026-fantasy-football/",
       "title": "Fantasy Football Primer: Start/Sit Lineup Advice | 2026",
+      "week": 2
+    },
+    {
+      "url": "https://sports.yahoo.com/articles/week-2-gambling-preview-bet-000000201.html",
+      "title": "Week 2 gambling preview: Bet on George Pickens, plus other picks - Yahoo Sports",
       "week": 2
     },
     {
@@ -138,19 +143,14 @@
       "week": 5
     },
     {
-      "url": "https://sports.yahoo.com/articles/week-2-gambling-preview-bet-000000201.html",
-      "title": "Week 2 gambling preview: Bet on George Pickens, plus other picks - Yahoo Sports",
-      "week": 2
+      "url": "https://sports.yahoo.com/articles/2026-nfl-draft-predictions-best-131800061.html",
+      "title": "2026 NFL Draft Round 4 Predictions & Best Bets: Nussmeier Lands in the Big Apple - Yahoo Sports",
+      "week": 3
     },
     {
       "url": "https://www.nfl.com/schedules/2026/by-week/week-4",
       "title": "NFL Week 4 Schedule 2026: Games, Times, Matchups & Tickets",
       "week": 4
-    },
-    {
-      "url": "https://www.nfl.com/news/2026-nfl-schedule-release-complete-slate-of-week-1-games",
-      "title": "2026 NFL schedule release: Complete slate of Week 1 games | Latest NFL News, Analysis & Updates | NFL.com",
-      "week": 1
     }
   ],
   "extractionFailures": []
