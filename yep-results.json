@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "03aae4bcbe9181a7ef011d1563b2d142",
+  "request_id": "be39557d0a9d2c3b85298b5b3baf6b6e",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -91,6 +91,18 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.si.com&key=124c930ebfffd31871299a674e7699e5013877e6a95b10f739ebb721e49644f8"
     },
     {
+      "url": "https://www.sportsbettingdime.com/news/nfl/raiders-vs-saints-anytime-td-picks-player-props/",
+      "title": "Raiders vs Saints Anytime TD Picks & Player Props",
+      "description": "Las Vegas Raiders vs New Orleans Saints predictions and picks for September 27, 2026. Raiders vs Saints player prop bets and latest odds.",
+      "published_date": "2026-09-27T17:30:00.000Z",
+      "highlights": [
+        "The New Orleans Saints welcome the Las Vegas Raiders into the Superdome for this Week 3 matchup Who will put on a show?Tyler Shough or Kirk Cousins?Keep scrolling to see the best prop bets, latest odds, and picks for this tilt Get hyped for a massive Sunday afternoon showdown as the Las Vegas Raiders hit the road to clash with the New Orleans Saints!Kickoff goes down at Caesars Superdome on September 27, 2026, at 4:25 p.m.ET on CBS.",
+        "Cousins watched his passing yards total slide from 213.5 to 211.5.Both quarterbacks carry passing touchdown totals of 1.5.Bettors looking for an edge should monitor NFL passing yards props right up until kickoff.Odds provided by Caesars Sportsbook as of September 27, 2026, at 12:50 PM ET.",
+        "Top Prop Bets for Raiders vs Saints Here are the BEST props to hammer for this matchup. Travis Etienne Jr 40+ Rushing Yards (4 9¢ / +104 at Kalshi Backing Travis Etienne Jr to reach the 40-yard rushing milestone is anchored in remarkable week-to-week consistency."
+      ],
+      "favicon": "https://platform.yep.com/app/favicon?domain=www.sportsbettingdime.com&key=0da67c3d9d95a27223a7489260c712874d94544a0dff536d8a478208bbbd08cc"
+    },
+    {
       "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
       "title": "NFL Player Props Odds, Scores, & Betting Lines | DraftKings Sportsbook",
       "description": "Find the latest NFL player props and more with DraftKings Sportsbook!",
@@ -137,18 +149,6 @@
         "New York's defensive line, on the other hand, should torture the Titans' offensive line.It is going to force Cam Ward into mistakes and make him uncomfortable.The Titans are only 26th in yards per play, and they scored 10 points against the Jets in Week 1 and only 20 against Philly."
       ],
       "favicon": "https://platform.yep.com/app/favicon?domain=www.foxsports.com&key=c732155f966297350c701fea846c30db05fc0a377eb9c3490eaf3674bc160d70"
-    },
-    {
-      "url": "https://www.rotowire.com/cfootball/article/college-football-picks-best-week-3-player-prop-bets-on-rebet-135297",
-      "title": "College Football Picks: Best Week 3 Player Prop Bets on ReBet",
-      "description": "Steve Bulanda breaks down his favorite passing, rushing and receiving props for Week 3, including his top pick for LSU and Mississippi.\nSeptember 19, 2026\nEvery start/sit, every waiver, every trade, p",
-      "published_date": "2026-09-19T10:36:49.000Z",
-      "highlights": [
-        "We make the call. Every week this season I'll share my favorite college football player props right here on RotoWire.After a perfect 3-0 in Week 1, I decided to add a Quick Picks section to go along with my Best Bets analysis.Altogether, we're up to 7-3 for the season.",
-        "Keshaun Singleton over 44.5 receiving yards Week 3 College Football Picks: Here's a recap of my best college football player prop bets for Week 3: Cutter Boley over 233.5 pass yards DeSean Bishop under 114.5 rush yards Winston Watkins over 53.5 receiving yards Results from last week: Drew Mestemaker over 210.5 pass yards - WIN Austyn Dendy over 38.5 rush yards - LOSS Ryan Wingo ov",
-        "For 2026, I'm highlighting the best picks you can make on social sweepstakes sportsbook ReBet specifically.Let's dive into the best value picks in Week 3.QB Cutter Boley, Arizona State The chemistry between Cutter Boley and his top two receivers has exceeded some high expectations."
-      ],
-      "favicon": "https://platform.yep.com/app/favicon?domain=www.rotowire.com&key=24daf2e4cdff67ec919545742cc5c82bb2d79e6d40ea6e16432141ddea01f875"
     },
     {
       "url": "https://vsin.com/nfl/nfl-player-prop-bets-for-week-2-from-adam-burke/",
@@ -247,13 +247,13 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.nfl.com&key=d1e6886d2414b5e984ad13633c35a877dc931bc7c368a04a364ecbe3892fd281"
     }
   ],
-  "response_time_ms": 381.91,
+  "response_time_ms": 761.86,
   "api_cost": {
     "cost": 0.004,
     "details": "(4/1000)"
   },
   "balance": {
-    "before": "6.0680",
-    "after": 6.064
+    "before": "6.0640",
+    "after": 6.06
   }
 }
