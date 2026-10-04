@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "39f7ad912260da41e06bd89bd66f53a6",
+  "request_id": "03aae4bcbe9181a7ef011d1563b2d142",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -163,18 +163,6 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=vsin.com&key=6cbf4966e1fce1e46f22e6c5a968e414e14ab4f54e7d87a9dcbd009e3198d1f0"
     },
     {
-      "url": "https://www.sportsbookreview.com/picks/college-football/ncaaf-player-props-best-bets-week-1-2026/",
-      "title": "College Football Player Props Week 1 | Best Prop Bets",
-      "description": "See our best college football player props for Week 1, including expert picks and the latest odds for our favorite prop bets.",
-      "published_date": "2026-09-04T18:42:00.000Z",
-      "highlights": [
-        "🏈 College football player prop picks: Week 1 See all of our experts' college football picks for Week 0 based on the latest college football odds Pick Bet odds Bet size Kirby Vorhees anytime touchdown +165 via DraftKings 1 unit to win 1.65 units Noah Kim Over 258.5 passing yards -114 via FanDuel 1.14 units to win 1 unit Colton Joseph Under 151.5 passing yards -114 via FanDuel 1.14 units to win 1 unit Total wagered : 3.28 units |",
-        "Max profit : +3.65 units 💰 Best college football player prop bets: Week 1 Search the best college football player prop odds for any team or player across every available market.Kirby Vorhees anytime touchdown (+165 via DraftKings) When suddenly and unexpectedly needing a head coach this winter, the Washington State Cougars hired Missouri offensive coordinator Kirby Moore.",
-        "That faith alone justifies seeing value in this prop pick, as does remembering Vorhees scored a touchdown in five of Washington State’s last seven games as a freshman, a stretch effectively starting when he took on a primary role in the offense.Noah Kim Over 258.5 passing yards (-114 via FanDuel) The San Jose State Spartans really glossed up the scoreboard in Week 0, losing to No.14 USC by “only” 16 points, 42-26."
-      ],
-      "favicon": "https://platform.yep.com/app/favicon?domain=www.sportsbookreview.com&key=af45770c79b53a9889038db7e96a02e3940a2d4dae34b116b2d47ecb5070e131"
-    },
-    {
       "url": "https://sportsbook.draftkings.com/page/super-bowl-prop-bets",
       "title": "Super Bowl Prop Bets Odds, Scores, & Betting Lines | DraftKings Sportsbook",
       "description": "There is more to betting on the Super Bowl than the outcome of the game. Find out about common Super Bowl prop bets including coin toss, Gatorade color, and more with DraftKings Sportsbook.",
@@ -185,6 +173,18 @@
         "The Super Bowl Props don’t end there, though. Have a strong feeling about the Gatorade color that’ll be dumped on the winning coach’s head?There’s a prop for that.Do you believe “tails never fails” — or perhaps the opposite?There’s a prop bet for the opening coin toss.And be on the lookout for cross-sport bets, too!0 BET SLIP Confirm clear all selections Your picks will show up here."
       ],
       "favicon": "https://platform.yep.com/app/favicon?domain=sportsbook.draftkings.com&key=fe477e563e05aa45bae97d07fe4f1c6a55f26a79fb0e1cd9b65b94506db38e76"
+    },
+    {
+      "url": "https://www.sportsbookreview.com/picks/college-football/ncaaf-player-props-best-bets-week-1-2026/",
+      "title": "College Football Player Props Week 1 | Best Prop Bets",
+      "description": "See our best college football player props for Week 1, including expert picks and the latest odds for our favorite prop bets.",
+      "published_date": "2026-09-04T18:42:00.000Z",
+      "highlights": [
+        "🏈 College football player prop picks: Week 1 See all of our experts' college football picks for Week 0 based on the latest college football odds Pick Bet odds Bet size Kirby Vorhees anytime touchdown +165 via DraftKings 1 unit to win 1.65 units Noah Kim Over 258.5 passing yards -114 via FanDuel 1.14 units to win 1 unit Colton Joseph Under 151.5 passing yards -114 via FanDuel 1.14 units to win 1 unit Total wagered : 3.28 units |",
+        "Max profit : +3.65 units 💰 Best college football player prop bets: Week 1 Search the best college football player prop odds for any team or player across every available market.Kirby Vorhees anytime touchdown (+165 via DraftKings) When suddenly and unexpectedly needing a head coach this winter, the Washington State Cougars hired Missouri offensive coordinator Kirby Moore.",
+        "That faith alone justifies seeing value in this prop pick, as does remembering Vorhees scored a touchdown in five of Washington State’s last seven games as a freshman, a stretch effectively starting when he took on a primary role in the offense.Noah Kim Over 258.5 passing yards (-114 via FanDuel) The San Jose State Spartans really glossed up the scoreboard in Week 0, losing to No.14 USC by “only” 16 points, 42-26."
+      ],
+      "favicon": "https://platform.yep.com/app/favicon?domain=www.sportsbookreview.com&key=af45770c79b53a9889038db7e96a02e3940a2d4dae34b116b2d47ecb5070e131"
     },
     {
       "url": "https://www.sportsline.com/insiders/nfl-survivor-pool-week-1-2026-pick-from-advanced-computer-model/",
@@ -247,13 +247,13 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.nfl.com&key=d1e6886d2414b5e984ad13633c35a877dc931bc7c368a04a364ecbe3892fd281"
     }
   ],
-  "response_time_ms": 453.81,
+  "response_time_ms": 381.91,
   "api_cost": {
     "cost": 0.004,
     "details": "(4/1000)"
   },
   "balance": {
-    "before": "6.0720",
-    "after": 6.068
+    "before": "6.0680",
+    "after": 6.064
   }
 }
