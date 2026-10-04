@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "9f06307d765c98456e58a7859cb06b64",
+  "request_id": "39f7ad912260da41e06bd89bd66f53a6",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -139,6 +139,18 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.foxsports.com&key=c732155f966297350c701fea846c30db05fc0a377eb9c3490eaf3674bc160d70"
     },
     {
+      "url": "https://www.rotowire.com/cfootball/article/college-football-picks-best-week-3-player-prop-bets-on-rebet-135297",
+      "title": "College Football Picks: Best Week 3 Player Prop Bets on ReBet",
+      "description": "Steve Bulanda breaks down his favorite passing, rushing and receiving props for Week 3, including his top pick for LSU and Mississippi.\nSeptember 19, 2026\nEvery start/sit, every waiver, every trade, p",
+      "published_date": "2026-09-19T10:36:49.000Z",
+      "highlights": [
+        "We make the call. Every week this season I'll share my favorite college football player props right here on RotoWire.After a perfect 3-0 in Week 1, I decided to add a Quick Picks section to go along with my Best Bets analysis.Altogether, we're up to 7-3 for the season.",
+        "Keshaun Singleton over 44.5 receiving yards Week 3 College Football Picks: Here's a recap of my best college football player prop bets for Week 3: Cutter Boley over 233.5 pass yards DeSean Bishop under 114.5 rush yards Winston Watkins over 53.5 receiving yards Results from last week: Drew Mestemaker over 210.5 pass yards - WIN Austyn Dendy over 38.5 rush yards - LOSS Ryan Wingo ov",
+        "For 2026, I'm highlighting the best picks you can make on social sweepstakes sportsbook ReBet specifically.Let's dive into the best value picks in Week 3.QB Cutter Boley, Arizona State The chemistry between Cutter Boley and his top two receivers has exceeded some high expectations."
+      ],
+      "favicon": "https://platform.yep.com/app/favicon?domain=www.rotowire.com&key=24daf2e4cdff67ec919545742cc5c82bb2d79e6d40ea6e16432141ddea01f875"
+    },
+    {
       "url": "https://vsin.com/nfl/nfl-player-prop-bets-for-week-2-from-adam-burke/",
       "title": "NFL Player Prop Bets for Week 2 from Adam Burke",
       "description": "Player Props NFL Week 2 from Adam Burke, including Caleb Douglas, Jonathon Brooks, and Matt Gay.",
@@ -233,27 +245,15 @@
         "In Week 17, two of the four designated matchups will be played on Saturday at 4:30 PM ET on NBC and 8:00 PM ET on Peacock, with the remainder to be played either on Thursday night (8:15 PM ET), Sunday afternoon (1:00 PM ET and4:25 PM ET), Sunday night (8:20 PM ET), or Monday night (8:15 PM ET). Specific dates and start times for the designated Week 17 matchups will be determined and announced at a later date during the season, no later than immediately after Week 15."
       ],
       "favicon": "https://platform.yep.com/app/favicon?domain=www.nfl.com&key=d1e6886d2414b5e984ad13633c35a877dc931bc7c368a04a364ecbe3892fd281"
-    },
-    {
-      "url": "https://www.bettingpros.com/articles/nfl-player-props-bets-patriots-vs-seahawks-wednesday/",
-      "title": "NFL Player Props & Bets: Patriots vs. Seahawks (Wednesday)",
-      "description": "The NFL season gets underway tonight in a Super Bowl LX rematch between the New England Patriots and Seattle Seahawks. As always, sportsbooks have a plethora of betting markets available for fans to wager on. But I’ll focus on the best NFL player props. After careful consideration of how Super Bowl LX played out and […]",
-      "published_date": "2026-09-09T15:45:52.000Z",
-      "highlights": [
-        "Get instant alerts when a line reaches your target via the BettingPros App >> NFL Player Props & Bets: Patriots vs. Seahawks (odds courtesy of FanDuel Sportsbook Jadarian Price Over 1.5 Receptions +124 Jadarian Price was not much of a pass-catcher in college, but that will likely change in the NFL.",
-        "Doubs and Brown will be the superstars in the passing game, but Henry is the glue that will move the chains and keep drives moving. Bet Feed Featured NFL Prop Bets Current Article 2 min read Next Up: MLB Player Props & Bets: Saturday (9/26) Next Article",
-        "Getting Price on track will be crucial for Seattle’s offense in this game, whether on the ground or in the air.Against the Patriots’ defense, expect it to be harder for him to get on track on the ground in his first taste of NFL action.Kenneth Walker III and Zach Charbonnet combined for 51 receptions last season."
-      ],
-      "favicon": "https://platform.yep.com/app/favicon?domain=www.bettingpros.com&key=146fad4e75d01205980a465997361d82d8bd198e7757b8cdd7a3a2096d0a5aee"
     }
   ],
-  "response_time_ms": 386.81,
+  "response_time_ms": 453.81,
   "api_cost": {
     "cost": 0.004,
     "details": "(4/1000)"
   },
   "balance": {
-    "before": "6.0760",
-    "after": 6.072
+    "before": "6.0720",
+    "after": 6.068
   }
 }
