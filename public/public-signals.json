@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-10-05T16:31:47.514Z",
+  "refreshedAt": "2026-10-05T18:35:10.031Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -541,6 +541,18 @@
       "url": "https://www.sportsbettingdime.com/news/nfl/best-week-3-player-props-expert/"
     },
     {
+      "id": "dk-metcalf-receptions-over-4-5-yep-w3",
+      "player": "DK Metcalf",
+      "market": "Receptions",
+      "side": "OVER",
+      "line": 4.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
+    },
+    {
       "id": "he-has-gone-rushing-yards-over-83-5-yep-w3",
       "player": "He has gone",
       "market": "Rushing Yards",
@@ -550,7 +562,19 @@
       "sourceId": "yep-unknown",
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3"
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
+    },
+    {
+      "id": "tyler-shough-completions-under-21-5-yep-w3",
+      "player": "Tyler Shough",
+      "market": "Completions",
+      "side": "UNDER",
+      "line": 21.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
     },
     {
       "id": "michael-penix-jr-interceptions-over-0-5-yep-w3",
