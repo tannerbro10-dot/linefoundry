@@ -1,12 +1,12 @@
 {
   "success": true,
-  "generatedAt": "2026-10-05T06:40:40.460Z",
+  "generatedAt": "2026-10-05T08:33:36.929Z",
   "inputArticleCount": 20,
   "includedArticleCount": 3,
   "excludedArticleCount": 17,
   "extractionFailureCount": 0,
-  "propCount": 5,
-  "publishedWeek3SignalCount": 5,
+  "propCount": 4,
+  "publishedWeek3SignalCount": 4,
   "props": [
     {
       "player": "Case Keenum",
@@ -47,16 +47,6 @@
       "source": {
         "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick"
       }
-    },
-    {
-      "player": "He has gone",
-      "market": "Rushing Yards",
-      "side": "OVER",
-      "line": 83.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3"
-      }
     }
   ],
   "includedArticles": [
@@ -71,8 +61,8 @@
       "week": 3
     },
     {
-      "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3",
-      "title": "Chargers vs. Bills Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 3",
+      "url": "https://www.si.com/nfl/bills/onsi/betting-week-3-three-bills-player-props-back-josh-allen-dalton-kincaid-khalil-shakir",
+      "title": "Three Bills' Week 3 Player Props: Bet Josh Allen, Dalton Kincaid, Khalil Shakir",
       "week": 3
     }
   ],
@@ -96,10 +86,6 @@
       "url": "https://dknetwork.draftkings.com/2026/09/13/nfl-player-prop-bets-week-1/",
       "title": "Best NFL Player Prop Bets for Week 1",
       "week": 1
-    },
-    {
-      "url": "https://www.sportsgamblingpodcast.com/2026/09/29/2026-nfl-week-4-best-bets-and-a-parlay-that-pays/",
-      "week": 4
     },
     {
       "url": "https://bleacherreport.com/articles/25497230-bleacher-reports-expert-week-1-2026-nfl-picks",
@@ -132,6 +118,11 @@
       "week": 3
     },
     {
+      "url": "https://www.sportsline.com/insiders/2026-nascar-cup-daytona-500-odds-picks-props-best-bets-from-proven-racing-experts/",
+      "title": "2026 NASCAR Cup Daytona 500 odds, picks, props: best bets from proven racing experts - SportsLine.com",
+      "week": null
+    },
+    {
       "url": "https://www.dimers.com/nfl/predictions",
       "title": "NFL Predictions & Computer Picks for This Week's Games",
       "week": 4
@@ -147,19 +138,19 @@
       "week": 1
     },
     {
-      "url": "https://www.sportsline.com/insiders/nfl-survivor-pool-week-1-2026-pick-from-advanced-computer-model/",
-      "title": "NFL Survivor Pool: Week 1, 2026 pick from advanced computer model - SportsLine.com",
-      "week": 1
-    },
-    {
       "url": "https://sports.yahoo.com/articles/nfl-player-props-9-over-134800543.html",
       "title": "NFL player props: 9 over/under bets entering 2026 season - Yahoo Sports",
       "week": 4
     },
     {
-      "url": "https://www.fantasypros.com/2026/09/the-primer-week-2-edition-2026-fantasy-football/",
-      "title": "Fantasy Football Primer: Start/Sit Lineup Advice | 2026",
+      "url": "https://sports.yahoo.com/articles/week-2-gambling-preview-bet-000000201.html",
+      "title": "Week 2 gambling preview: Bet on George Pickens, plus other picks - Yahoo Sports",
       "week": 2
+    },
+    {
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "title": "NFL Week 4 Schedule 2026: Games, Times, Matchups & Tickets",
+      "week": 4
     }
   ],
   "extractionFailures": []
