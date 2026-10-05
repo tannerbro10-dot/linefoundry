@@ -1,12 +1,12 @@
 {
   "success": true,
-  "generatedAt": "2026-10-05T12:37:09.529Z",
+  "generatedAt": "2026-10-05T14:34:46.303Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 5,
-  "excludedArticleCount": 15,
+  "includedArticleCount": 6,
+  "excludedArticleCount": 14,
   "extractionFailureCount": 0,
-  "propCount": 6,
-  "publishedWeek3SignalCount": 6,
+  "propCount": 9,
+  "publishedWeek3SignalCount": 9,
   "props": [
     {
       "player": "Case Keenum",
@@ -36,6 +36,36 @@
       "week": 3,
       "source": {
         "url": "https://www.sportsbettingdime.com/news/nfl/best-week-3-player-props-expert/"
+      }
+    },
+    {
+      "player": "DK Metcalf",
+      "market": "Receptions",
+      "side": "OVER",
+      "line": 4.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
+      }
+    },
+    {
+      "player": "He has gone",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 83.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
+      }
+    },
+    {
+      "player": "Tyler Shough",
+      "market": "Completions",
+      "side": "UNDER",
+      "line": 21.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
       }
     },
     {
@@ -83,6 +113,11 @@
     {
       "url": "https://www.sportsline.com/insiders/nfl-picks-stefon-diggs-prop-among-sportsline-expert-propbetguys-best-bets-for-week-3-of-2026-season/",
       "title": "NFL picks: Stefon Diggs prop among SportsLine expert PropBetGuy&#x27;s best bets for Week 3 of 2026 season - SportsLine.com",
+      "week": 3
+    },
+    {
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum",
+      "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 3 (Invest in Blake Corum)",
       "week": 3
     },
     {
@@ -166,11 +201,6 @@
       "url": "https://vsin.com/nfl/nfl-player-prop-bets-for-week-2-from-adam-burke/",
       "title": "Expert NFL Player Prop Bets for Week 2",
       "week": 2
-    },
-    {
-      "url": "https://www.thelines.com/nfl/player-props/wednesday-night-week-1-nfl-parlay-picks-player-props-best-patriots-seahawks-bets/",
-      "title": "Wednesday Week 1 NFL Parlay Picks & Props: Pats-Seahawks",
-      "week": 1
     }
   ],
   "extractionFailures": []
