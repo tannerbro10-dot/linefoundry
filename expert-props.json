@@ -1,12 +1,12 @@
 {
   "success": true,
-  "generatedAt": "2026-10-05T02:29:24.717Z",
+  "generatedAt": "2026-10-05T04:32:14.519Z",
   "inputArticleCount": 20,
   "includedArticleCount": 3,
   "excludedArticleCount": 17,
   "extractionFailureCount": 0,
-  "propCount": 4,
-  "publishedWeek3SignalCount": 4,
+  "propCount": 5,
+  "publishedWeek3SignalCount": 5,
   "props": [
     {
       "player": "Case Keenum",
@@ -47,6 +47,16 @@
       "source": {
         "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick"
       }
+    },
+    {
+      "player": "He has gone",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 83.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3"
+      }
     }
   ],
   "includedArticles": [
@@ -61,8 +71,8 @@
       "week": 3
     },
     {
-      "url": "https://www.si.com/nfl/bills/onsi/betting-week-3-three-bills-player-props-back-josh-allen-dalton-kincaid-khalil-shakir",
-      "title": "Three Bills' Week 3 Player Props: Bet Josh Allen, Dalton Kincaid, Khalil Shakir",
+      "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3",
+      "title": "Chargers vs. Bills Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 3",
       "week": 3
     }
   ],
@@ -88,23 +98,19 @@
       "week": 1
     },
     {
-      "url": "https://www.sportsgamblingpodcast.com/2026/09/29/2026-nfl-week-4-best-bets-and-a-parlay-that-pays/",
-      "week": 4
-    },
-    {
       "url": "https://bleacherreport.com/articles/25497230-bleacher-reports-expert-week-1-2026-nfl-picks",
       "title": "Bleacher Report&#x27;s Expert Week 1 2026 NFL Picks",
+      "week": 1
+    },
+    {
+      "url": "https://dknetwork.draftkings.com/2026/09/13/saints-vs-lions-nfl-player-prop-bets/",
+      "title": "Saints. vs. Lions NFL Player Prop Bets for Week 1",
       "week": 1
     },
     {
       "url": "https://www.sportsbettingdime.com/news/nfl/raiders-vs-saints-anytime-td-picks-player-props/",
       "title": "Raiders vs Saints Anytime TD Picks & Player Props",
       "week": 5
-    },
-    {
-      "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
-      "title": "NFL Player Props | DraftKings Sportsbook",
-      "week": 1
     },
     {
       "url": "https://www.bettingpros.com/picks/prizepicks/nfl/",
@@ -137,9 +143,9 @@
       "week": 1
     },
     {
-      "url": "https://www.fantasypros.com/2026/09/the-primer-week-2-edition-2026-fantasy-football/",
-      "title": "Fantasy Football Primer: Start/Sit Lineup Advice | 2026",
-      "week": 2
+      "url": "https://www.bettingpros.com/articles/nfl-player-props-bets-patriots-vs-seahawks-wednesday/",
+      "title": "NFL Player Props & Bets: Patriots vs. Seahawks (Wednesday) | BettingPros",
+      "week": 4
     },
     {
       "url": "https://sports.yahoo.com/articles/week-2-gambling-preview-bet-000000201.html",
@@ -149,6 +155,11 @@
     {
       "url": "https://sports.yahoo.com/articles/2026-nfl-draft-predictions-best-131800061.html",
       "title": "2026 NFL Draft Round 4 Predictions & Best Bets: Nussmeier Lands in the Big Apple - Yahoo Sports",
+      "week": 4
+    },
+    {
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+      "title": "NFL Week 4 Schedule 2026: Games, Times, Matchups & Tickets",
       "week": 4
     }
   ],
