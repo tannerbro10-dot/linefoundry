@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-04T22:28:01.325Z",
+  "generatedAt": "2026-10-05T00:39:00.503Z",
   "inputArticleCount": 20,
   "includedArticleCount": 3,
   "excludedArticleCount": 17,
@@ -83,8 +83,22 @@
       "week": 4
     },
     {
+      "url": "https://dknetwork.draftkings.com/2026/09/13/nfl-player-prop-bets-week-1/",
+      "title": "Best NFL Player Prop Bets for Week 1",
+      "week": 1
+    },
+    {
+      "url": "https://www.sportsgamblingpodcast.com/2026/09/29/2026-nfl-week-4-best-bets-and-a-parlay-that-pays/",
+      "week": 4
+    },
+    {
       "url": "https://bleacherreport.com/articles/25497230-bleacher-reports-expert-week-1-2026-nfl-picks",
       "title": "Bleacher Report&#x27;s Expert Week 1 2026 NFL Picks",
+      "week": 1
+    },
+    {
+      "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
+      "title": "NFL Player Props | DraftKings Sportsbook",
       "week": 1
     },
     {
@@ -93,13 +107,8 @@
       "week": 4
     },
     {
-      "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
-      "title": "NFL Player Props | DraftKings Sportsbook",
-      "week": 1
-    },
-    {
       "url": "https://www.bettingpros.com/picks/prizepicks/nfl/",
-      "title": "Best NFL PrizePicks Player Prop Bets Today (10/4/2026) | BettingPros",
+      "title": "Best NFL PrizePicks Player Prop Bets Today (10/5/2026) | BettingPros",
       "week": null
     },
     {
@@ -118,11 +127,6 @@
       "week": 2
     },
     {
-      "url": "https://sportsbook.draftkings.com/page/super-bowl-prop-bets",
-      "title": "Super Bowl Prop Bets 2026 | DraftKings Sportsbook",
-      "week": 1
-    },
-    {
       "url": "https://www.sportsbookreview.com/picks/college-football/ncaaf-player-props-best-bets-week-1-2026/",
       "title": "College Football Player Props Week 1 | Best Prop Bets",
       "week": 1
@@ -133,9 +137,9 @@
       "week": 1
     },
     {
-      "url": "https://www.fantasypros.com/2026/09/the-primer-week-2-edition-2026-fantasy-football/",
-      "title": "Fantasy Football Primer: Start/Sit Lineup Advice | 2026",
-      "week": 2
+      "url": "https://www.bettingpros.com/articles/nfl-player-props-bets-patriots-vs-seahawks-wednesday/",
+      "title": "NFL Player Props & Bets: Patriots vs. Seahawks (Wednesday) | BettingPros",
+      "week": 4
     },
     {
       "url": "https://sports.yahoo.com/articles/week-2-gambling-preview-bet-000000201.html",
@@ -145,11 +149,6 @@
     {
       "url": "https://sports.yahoo.com/articles/2026-nfl-draft-predictions-best-131800061.html",
       "title": "2026 NFL Draft Round 4 Predictions & Best Bets: Nussmeier Lands in the Big Apple - Yahoo Sports",
-      "week": 4
-    },
-    {
-      "url": "https://www.nfl.com/schedules/2026/by-week/week-4",
-      "title": "NFL Week 4 Schedule 2026: Games, Times, Matchups & Tickets",
       "week": 4
     }
   ],
