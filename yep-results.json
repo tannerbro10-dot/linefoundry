@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "0b91da53e9e131c1d9f2833ecc77ff6f",
+  "request_id": "c31b60521feae545f0f585f4e604cb40",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -67,18 +67,6 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=dknetwork.draftkings.com&key=e2a1d1255285e29468c20b22206f7a01bf3090a0964f58844fedf2a578751606"
     },
     {
-      "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-odds-picks-predictions/",
-      "title": "Week 4 NFL Player Prop Odds & Picks: Lines & Best Bets",
-      "description": "Compare NFL player prop odds across five sportsbooks, then get Josh Shepardson's and Curtis Hirsch's best bets for this week. Lines update all week.",
-      "published_date": "2026-09-06T00:00:01.000Z",
-      "highlights": [
-        "Confirm the number at the sportsbook before you bet. Josh Shepardson's NFL Player Prop Picks: Week 4 Best Bets Bo Nix Under 225.5 Passing Yards (-112) George Kittle Over 64.5 Receiving Yards (-113) Rashee Rice Over 55.5 Receiving Yards (-114)",
-        "Parlay Picks & Same Game Parlays Weather Betting Impact Odds & Picks Prop Odds & Picks Implied Totals Matchups Tool Fantasy Cheat Sheet NFL Player Prop Odds FAQ What Are NFL Player Props?NFL player props are bets on a specific statistical outcome for a specific NFL player.We cover passing yards, rushing yards, receiving yards, and anytime touchdowns in our tool, but there are countless other betting opportunities every week.",
-        "Finally, the Falcons have allowed 3 receiving touchdowns to tight ends this year, permitting 1 to Pat Freiermuth and 2 to Darren Waller Bet it now +230 Click here for all of our touchdown predictions Sharp NFL Betting Picks Best Bets: ATS & Game Total Picks Player Props & Predictions Referee Assignments & Penalty Trends Key NFL Injuries: Betting Impact & Picks Passing Yards Leader Odds Receiving Yards Leader Odds Rushing Yards Leader Odds"
-      ],
-      "favicon": "https://platform.yep.com/app/favicon?domain=www.sharpfootballanalysis.com&key=f8c04cad4d707e81c512c671c9abf80faef1595d274f6203113b55fddcc27d7b"
-    },
-    {
       "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-totals-moneyline-parlays-props-bets/",
       "title": "NFL picks today, odds, lines, bets: Week 1, 2026 expert predictions against the spread, parlays, prop bets",
       "description": "SportsLine's top NFL experts reveal their best bets and player props for Week 1",
@@ -89,6 +77,18 @@
         "Many of the Week 1 NFL spreads also span the gamut, so having some NFL betting advice would help navigate the opening slate of the year. Before locking in any Week 1 NFL picks or NFL prop bets, be sure to check out the Week 1 NFL best bets and predictions from SportsLine's red-hot Vegas experts Paramount+ Premium is now included with every SportsLine membership!"
       ],
       "favicon": "https://platform.yep.com/app/favicon?domain=www.cbssports.com&key=62f83a14c8ef581e1570ef2347c0a0b566503b5cbab389dabf5e5fdf5462a1e1"
+    },
+    {
+      "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-odds-picks-predictions/",
+      "title": "Week 4 NFL Player Prop Odds & Picks: Lines & Best Bets",
+      "description": "Compare NFL player prop odds across five sportsbooks, then get Josh Shepardson's and Curtis Hirsch's best bets for this week. Lines update all week.",
+      "published_date": "2026-09-06T00:00:01.000Z",
+      "highlights": [
+        "Confirm the number at the sportsbook before you bet. Josh Shepardson's NFL Player Prop Picks: Week 4 Best Bets Bo Nix Under 225.5 Passing Yards (-112) George Kittle Over 64.5 Receiving Yards (-113) Rashee Rice Over 55.5 Receiving Yards (-114)",
+        "Parlay Picks & Same Game Parlays Weather Betting Impact Odds & Picks Prop Odds & Picks Implied Totals Matchups Tool Fantasy Cheat Sheet NFL Player Prop Odds FAQ What Are NFL Player Props?NFL player props are bets on a specific statistical outcome for a specific NFL player.We cover passing yards, rushing yards, receiving yards, and anytime touchdowns in our tool, but there are countless other betting opportunities every week.",
+        "Finally, the Falcons have allowed 3 receiving touchdowns to tight ends this year, permitting 1 to Pat Freiermuth and 2 to Darren Waller Bet it now +230 Click here for all of our touchdown predictions Sharp NFL Betting Picks Best Bets: ATS & Game Total Picks Player Props & Predictions Referee Assignments & Penalty Trends Key NFL Injuries: Betting Impact & Picks Passing Yards Leader Odds Receiving Yards Leader Odds Rushing Yards Leader Odds"
+      ],
+      "favicon": "https://platform.yep.com/app/favicon?domain=www.sharpfootballanalysis.com&key=f8c04cad4d707e81c512c671c9abf80faef1595d274f6203113b55fddcc27d7b"
     },
     {
       "url": "https://www.sportsbettingdime.com/news/nfl/nfl-week-2-player-props-picks-best-bets-predictions-all-30-teams/",
@@ -247,13 +247,13 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.bettingpros.com&key=146fad4e75d01205980a465997361d82d8bd198e7757b8cdd7a3a2096d0a5aee"
     }
   ],
-  "response_time_ms": 781.79,
+  "response_time_ms": 373.5,
   "api_cost": {
     "cost": 0.004,
     "details": "(4/1000)"
   },
   "balance": {
-    "before": "5.9960",
-    "after": 5.992
+    "before": "5.9920",
+    "after": 5.988
   }
 }
