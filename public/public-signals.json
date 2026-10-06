@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-10-06T20:30:23.064Z",
+  "refreshedAt": "2026-10-06T22:28:40.690Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -503,42 +503,6 @@
       "sourceId": "ariel-epstein-hardrock-week2",
       "week": 2,
       "note": "Hard Rock Bet Week 2 player prop."
-    },
-    {
-      "id": "jacoby-brissett-passing-yards-under-226-5-yep-w3",
-      "player": "Jacoby Brissett",
-      "market": "Passing Yards",
-      "side": "UNDER",
-      "line": 226.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick"
-    },
-    {
-      "id": "christian-mccaffrey-rushing-attempts-over-13-5-yep-w3",
-      "player": "Christian McCaffrey",
-      "market": "Rushing Attempts",
-      "side": "OVER",
-      "line": 13.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick"
-    },
-    {
-      "id": "he-has-gone-rushing-yards-over-83-5-yep-w3",
-      "player": "He has gone",
-      "market": "Rushing Yards",
-      "side": "OVER",
-      "line": 83.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3"
     }
   ]
 }

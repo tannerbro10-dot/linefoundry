@@ -1,53 +1,17 @@
 {
   "success": true,
-  "generatedAt": "2026-10-06T20:30:23.064Z",
+  "generatedAt": "2026-10-06T22:28:40.690Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 2,
-  "excludedArticleCount": 18,
+  "includedArticleCount": 1,
+  "excludedArticleCount": 19,
   "extractionFailureCount": 0,
-  "propCount": 3,
-  "publishedWeek3SignalCount": 3,
-  "props": [
-    {
-      "player": "Jacoby Brissett",
-      "market": "Passing Yards",
-      "side": "UNDER",
-      "line": 226.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick"
-      }
-    },
-    {
-      "player": "Christian McCaffrey",
-      "market": "Rushing Attempts",
-      "side": "OVER",
-      "line": 13.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick"
-      }
-    },
-    {
-      "player": "He has gone",
-      "market": "Rushing Yards",
-      "side": "OVER",
-      "line": 83.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3"
-      }
-    }
-  ],
+  "propCount": 0,
+  "publishedWeek3SignalCount": 0,
+  "props": [],
   "includedArticles": [
     {
-      "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick",
-      "title": "49ers vs Cardinals Week 3: Expert Prop Bets, Spread Pick",
-      "week": 3
-    },
-    {
-      "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3",
-      "title": "Chargers vs. Bills Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 3",
+      "url": "https://www.sportsline.com/insiders/nfl-picks-stefon-diggs-prop-among-sportsline-expert-propbetguys-best-bets-for-week-3-of-2026-season/",
+      "title": "NFL picks: Stefon Diggs prop among SportsLine expert PropBetGuy&#x27;s best bets for Week 3 of 2026 season - SportsLine.com",
       "week": 3
     }
   ],
@@ -68,9 +32,24 @@
       "week": 4
     },
     {
+      "url": "https://www.dimers.com/nfl/news/nfl-week-4-betting-guide-model-backed-picks-top-player-props-and-sharp-pick-ems",
+      "title": "NFL Week 4 betting guide: Model backed picks, top player props and sharp Pick 'Ems",
+      "week": 4
+    },
+    {
+      "url": "https://www.cbssports.com/nfl/news/nfl-week-4-picks-our-experts-predictions/",
+      "title": "NFL Week 4 picks: Our experts face off on Cowboys at Texans, more - CBS Sports",
+      "week": 4
+    },
+    {
       "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-4-picks-best-bets-every-game-wills-wagers",
       "title": "2026 NFL Week 4 Picks: Best Bets For Every Game — Will&#x27;s Wagers | FOX Sports",
       "week": 4
+    },
+    {
+      "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
+      "title": "NFL Thursday Night Football Player Props & Bets: Lions vs. Bills | BettingPros",
+      "week": 2
     },
     {
       "url": "https://bleacherreport.com/articles/25497230-bleacher-reports-expert-week-1-2026-nfl-picks",
@@ -78,13 +57,13 @@
       "week": 1
     },
     {
-      "url": "https://dknetwork.draftkings.com/2026/09/13/nfl-player-prop-bets-week-1/",
-      "title": "Best NFL Player Prop Bets for Week 1",
-      "week": 1
+      "url": "https://www.cbssports.com/nfl/news/nfl-picks-this-week-vegas-odds-2026-wild-card-expert-predictions-spread-parlay-player-props/",
+      "title": "NFL picks this week, Vegas odds: 2026 Wild Card expert predictions against the spread, parlay, and props - CBS Sports",
+      "week": 10
     },
     {
-      "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-totals-moneyline-parlays-props-bets/",
-      "title": "NFL expert picks, odds, predictions, player props, betting guide for Week 1 - CBS Sports",
+      "url": "https://dknetwork.draftkings.com/2026/09/13/nfl-player-prop-bets-week-1/",
+      "title": "Best NFL Player Prop Bets for Week 1",
       "week": 1
     },
     {
@@ -93,19 +72,24 @@
       "week": 5
     },
     {
+      "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-totals-moneyline-parlays-props-bets/",
+      "title": "NFL expert picks, odds, predictions, player props, betting guide for Week 1 - CBS Sports",
+      "week": 1
+    },
+    {
+      "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
+      "title": "Week 1 NFL Player Props: Best Prop Bets & Predictions",
+      "week": 1
+    },
+    {
+      "url": "https://sports.betmgm.com/en/blog/nfl/expert-picks-week-1-2026-bm16/",
+      "title": "NFL Week 1 Picks 2026: Bets including Vikings, Texans",
+      "week": 1
+    },
+    {
       "url": "https://www.sportsbettingdime.com/news/nfl/nfl-week-2-player-props-picks-best-bets-predictions-all-30-teams/",
       "title": "NFL Week 2 Player Props Picks: Best Bets and Predictions",
       "week": 2
-    },
-    {
-      "url": "https://www.cbssports.com/betting/news/nfl-survivor-picks-knockout-pool-strategy-eliminator-predictions-for-week-4-2026/",
-      "title": "Week 4 NFL survivor picks, knockout pool predictions, projections - CBS Sports",
-      "week": 4
-    },
-    {
-      "url": "https://www.cbssports.com/nfl/news/pete-priscos-week-4-nfl-picks/",
-      "title": "Prisco's Week 4 NFL picks: Eagles upset Rams, Texans over Cowboys, more expert picks - CBS Sports",
-      "week": 4
     },
     {
       "url": "https://www.sportsline.com/insiders/nfl-week-1-score-predictions-expert-reveals-game-picks-for-the-2026-opening-week/",
@@ -118,29 +102,14 @@
       "week": 3
     },
     {
+      "url": "https://www.thelines.com/nfl/player-props/tnf-week-1-nfl-parlay-picks-player-props-best-49ers-vs-rams-bets/",
+      "title": "TNF NFL Parlay Picks & Player Props For Rams vs. 49ers",
+      "week": 1
+    },
+    {
       "url": "https://www.rotowire.com/cfl/article/cfl-betting-cfl-bets-and-player-props-for-week-12-129094",
       "title": "CFL Betting: CFL Bets and Player Props for Week 12 | RotoWire",
       "week": 12
-    },
-    {
-      "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
-      "title": "NFL Player Props | DraftKings Sportsbook",
-      "week": 1
-    },
-    {
-      "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
-      "title": "",
-      "week": 1
-    },
-    {
-      "url": "https://vsin.com/nfl/expert-nfl-picks-week-2-best-bets-predictions-and-player-props-from-zachary-cohen/",
-      "title": "Expert NFL Week 2 Picks: Best Bets, Totals, & Props",
-      "week": 2
-    },
-    {
-      "url": "https://www.bettingpros.com/picks/prizepicks/nfl/",
-      "title": "Best NFL PrizePicks Player Prop Bets Today (10/6/2026) | BettingPros",
-      "week": null
     }
   ],
   "extractionFailures": []
