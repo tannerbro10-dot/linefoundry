@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "b6264c9505e8701fd0f64935f2dd7acf",
+  "request_id": "9dada097b1088ba33b28b94e5efdd57e",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -163,18 +163,6 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.foxsports.com&key=c732155f966297350c701fea846c30db05fc0a377eb9c3490eaf3674bc160d70"
     },
     {
-      "url": "https://www.rotowire.com/cfl/article/cfl-betting-cfl-bets-and-player-props-for-week-12-129094",
-      "title": "CFL Betting: CFL Bets and Player Props for Week 12",
-      "description": "CFL Betting: CFL Bets and Player Props for Week 12",
-      "published_date": "2026-08-20T20:33:14.000Z",
-      "highlights": [
-        "Best bets for Week 12 of the 2026 CFL regular season.Player props, spread and over/under bets courtesy of our betting expert, Juan Pablo Aravena.August 20, 2026 Every start/sit, every waiver, every trade, plus NBA and NHL all winter.We make the call.Every start/sit, every waiver, every trade.We make the call.",
-        "We've narrowed this week's card down to three wagers that stand out thanks to favorable matchups and recent trends, highlighted by a West Division showdown in Edmonton, an East Division rivalry expected to produce points and a clash between two playoff hopefuls in Vancouver.2026 CFL Week 12: Best Bets, Picks and Predictions * All odds from 2:30 p.m.ET on Thursday, August 20, 2026.Winnipeg Blue Bombers vs.",
-        "However, the Tiger-Cats are averaging just 23.7 points per game this season, the second-worst mark in the CFL, and they've been forced to improvise under center due to the absence of Bo Levi Mitchell (ankle), while star wideout Shemar Bridges (hip) has yet to play in 2026.The Argos are favorites and tend to respond well at home after losses, but don't expect this game to be a shootout."
-      ],
-      "favicon": "https://platform.yep.com/app/favicon?domain=www.rotowire.com&key=24daf2e4cdff67ec919545742cc5c82bb2d79e6d40ea6e16432141ddea01f875"
-    },
-    {
       "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick",
       "title": "49ers vs Cardinals Week 3: Expert Prop Bets, Spread Pick",
       "description": "The Arizona Cardinals and San Francisco 49ers will meet in Week 3. Here's what the experts like.",
@@ -235,6 +223,18 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.dimers.com&key=11d22ce09f937f5424b51629eaea70e5796d2bb21aad061b359102d466059f39"
     },
     {
+      "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3",
+      "title": "Chargers vs. Bills Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 3",
+      "description": "Breaking down the best player props to bet on for NFL Week 3 action between the Buffalo Bills and Los Angeles Chargers.",
+      "published_date": "2026-09-26T00:00:00.000Z",
+      "highlights": [
+        "Chargers vs. Bills Best NFL Prop Bets Odds via DraftKings Sportsbook James Cook UNDER 78.5 Rush Yards (-118) Josh Allen 250+ Pass Yards (+110) Joshua Palmer Anytime Touchdown (+360) James Cook UNDER 78.5 Rush Yards (-118) In the Week 3 edition of the Player Prop Countdown",
+        "That should lead to a strong performance by Josh Allen, who's off to a hot start in 2026. He threw for 334 yards in Week 1 against the Texans, and then 248 yards in Week 2 against the Lions.Joshua Palmer Anytime Touchdown (+360)",
+        "Follow Iain on X and Instagram Find Iain's bets, where he placed them, and how to tail them on Juice Reel Register with DraftKings today and get $150 in bonus bets instantly after making a $5 bet Claim this DraftKings Sportsbook promo code offer by making a $5 deposit and making your first $5 wager.Odds refresh periodically and are subject to change."
+      ],
+      "favicon": "https://platform.yep.com/app/favicon?domain=www.si.com&key=124c930ebfffd31871299a674e7699e5013877e6a95b10f739ebb721e49644f8"
+    },
+    {
       "url": "https://www.bettingpros.com/picks/prizepicks/nfl/",
       "title": "Best NFL PrizePicks Player Prop Bets Today (9/21/2026) | BettingPros",
       "description": "Find the best +EV fantasy & pickem prop bets for today using our PrizePicks Optimizer. Compare sportsbook odds, prediction markets, win probabilities, expected value percentages, and BettingPros projections to build optimized PrizePicks slips to help you profit long term.",
@@ -247,13 +247,13 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.bettingpros.com&key=146fad4e75d01205980a465997361d82d8bd198e7757b8cdd7a3a2096d0a5aee"
     }
   ],
-  "response_time_ms": 422.05,
+  "response_time_ms": 436.3,
   "api_cost": {
     "cost": 0.004,
     "details": "(4/1000)"
   },
   "balance": {
-    "before": "5.9880",
-    "after": 5.984
+    "before": "5.9840",
+    "after": 5.98
   }
 }
