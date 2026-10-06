@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "11d2407ecbafd315bcecad86ebd6b566",
+  "request_id": "17bb542567bbd59d6ef040e7e10b4862",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -163,6 +163,18 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.foxsports.com&key=c732155f966297350c701fea846c30db05fc0a377eb9c3490eaf3674bc160d70"
     },
     {
+      "url": "https://www.rotowire.com/cfl/article/cfl-betting-cfl-bets-and-player-props-for-week-12-129094",
+      "title": "CFL Betting: CFL Bets and Player Props for Week 12",
+      "description": "CFL Betting: CFL Bets and Player Props for Week 12",
+      "published_date": "2026-08-20T20:33:14.000Z",
+      "highlights": [
+        "Best bets for Week 12 of the 2026 CFL regular season.Player props, spread and over/under bets courtesy of our betting expert, Juan Pablo Aravena.August 20, 2026 Every start/sit, every waiver, every trade, plus NBA and NHL all winter.We make the call.Every start/sit, every waiver, every trade.We make the call.",
+        "We've narrowed this week's card down to three wagers that stand out thanks to favorable matchups and recent trends, highlighted by a West Division showdown in Edmonton, an East Division rivalry expected to produce points and a clash between two playoff hopefuls in Vancouver.2026 CFL Week 12: Best Bets, Picks and Predictions * All odds from 2:30 p.m.ET on Thursday, August 20, 2026.Winnipeg Blue Bombers vs.",
+        "However, the Tiger-Cats are averaging just 23.7 points per game this season, the second-worst mark in the CFL, and they've been forced to improvise under center due to the absence of Bo Levi Mitchell (ankle), while star wideout Shemar Bridges (hip) has yet to play in 2026.The Argos are favorites and tend to respond well at home after losses, but don't expect this game to be a shootout."
+      ],
+      "favicon": "https://platform.yep.com/app/favicon?domain=www.rotowire.com&key=24daf2e4cdff67ec919545742cc5c82bb2d79e6d40ea6e16432141ddea01f875"
+    },
+    {
       "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick",
       "title": "49ers vs Cardinals Week 3: Expert Prop Bets, Spread Pick",
       "description": "The Arizona Cardinals and San Francisco 49ers will meet in Week 3. Here's what the experts like.",
@@ -211,18 +223,6 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=vsin.com&key=6cbf4966e1fce1e46f22e6c5a968e414e14ab4f54e7d87a9dcbd009e3198d1f0"
     },
     {
-      "url": "https://www.dimers.com/nfl/props",
-      "title": "Best NFL Player Props Today & NFL Prop Bets",
-      "description": "The best NFL player props today, ranked by the gap between our projections and sportsbook prices. See the edge and probability behind every prop, updated through the week.",
-      "published_date": "2026-07-23T02:09:55.000Z",
-      "highlights": [
-        "Best NFL player props this week [10/5] For NFL Week 5, Kenny Gainwell over 9.5 rushing yards is our top player prop, followed by Ted Hurst III under 2.5 receptions and Kenny Gainwell over 10.5 rushing yards.By probability, these are our top three NFL player props for the week: Kenny Gainwell over 9.5 rushing yards: 71.4% probability, 18.5% edge, in Buccaneers vs.Cowboys Ted Hurst III under 2.5 receptions: 68.5% probability, 4.5% edge, in Buccaneers vs.",
-        "NFL lines from major sportsbooks with instant odds shopping.NFL Trends : Track NFL player hot and cold streaks to help with prop betting.NFL Futures : Probabilities and odds for long-term NFL outright bets NFL News : Daily NFL match previews and exclusive picks from our experts.Get unlimited access to all our betting tools by joining Dimers Pro Responsible gambling Elite coaches know when to punt, and disciplined bettors know when to walk away.",
-        "That gap is the edge, so you can clearly see exactly how much value a bet offers.Our NFL player props update through the week as new information lands.Inactives, practice reports, depth-chart changes, and sportsbook line movement all feed back into the projections and can change what qualifies.No player prop is guaranteed to win.One catch, one goal-line carry, or one early blowout can settle a prop regardless of how the numbers looked beforehand."
-      ],
-      "favicon": "https://platform.yep.com/app/favicon?domain=www.dimers.com&key=11d22ce09f937f5424b51629eaea70e5796d2bb21aad061b359102d466059f39"
-    },
-    {
       "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3",
       "title": "Chargers vs. Bills Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 3",
       "description": "Breaking down the best player props to bet on for NFL Week 3 action between the Buffalo Bills and Los Angeles Chargers.",
@@ -247,13 +247,13 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.bettingpros.com&key=146fad4e75d01205980a465997361d82d8bd198e7757b8cdd7a3a2096d0a5aee"
     }
   ],
-  "response_time_ms": 408.74,
+  "response_time_ms": 542.14,
   "api_cost": {
     "cost": 0.004,
     "details": "(4/1000)"
   },
   "balance": {
-    "before": "5.9800",
-    "after": 5.976
+    "before": "5.9760",
+    "after": 5.972
   }
 }
