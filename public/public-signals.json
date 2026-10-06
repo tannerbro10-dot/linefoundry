@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-10-06T12:35:28.451Z",
+  "refreshedAt": "2026-10-06T14:31:33.401Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -551,18 +551,6 @@
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
       "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick"
-    },
-    {
-      "id": "he-has-gone-rushing-yards-over-83-5-yep-w3",
-      "player": "He has gone",
-      "market": "Rushing Yards",
-      "side": "OVER",
-      "line": 83.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3"
     }
   ]
 }
