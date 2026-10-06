@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-10-05T18:35:10.031Z",
+  "refreshedAt": "2026-10-06T02:28:59.778Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -505,52 +505,28 @@
       "note": "Hard Rock Bet Week 2 player prop."
     },
     {
-      "id": "case-keenum-interceptions-over-0-5-yep-w3",
-      "player": "Case Keenum",
-      "market": "Interceptions",
-      "side": "OVER",
-      "line": 0.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.cbssports.com/betting/news/eagles-vs-bears-picks-player-props-experts-best-bets-for-monday-night-football-in-nfl-week-3/"
-    },
-    {
-      "id": "dontayvion-wicks-receiving-yards-over-41-5-yep-w3",
-      "player": "Dontayvion Wicks",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 41.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.cbssports.com/betting/news/eagles-vs-bears-picks-player-props-experts-best-bets-for-monday-night-football-in-nfl-week-3/"
-    },
-    {
-      "id": "has-gone-passing-yards-over-239-5-yep-w3",
-      "player": "has gone",
+      "id": "jacoby-brissett-passing-yards-under-226-5-yep-w3",
+      "player": "Jacoby Brissett",
       "market": "Passing Yards",
-      "side": "OVER",
-      "line": 239.5,
+      "side": "UNDER",
+      "line": 226.5,
       "analyst": "Unknown Analyst",
       "sourceId": "yep-unknown",
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.sportsbettingdime.com/news/nfl/best-week-3-player-props-expert/"
+      "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick"
     },
     {
-      "id": "dk-metcalf-receptions-over-4-5-yep-w3",
-      "player": "DK Metcalf",
-      "market": "Receptions",
+      "id": "christian-mccaffrey-rushing-attempts-over-13-5-yep-w3",
+      "player": "Christian McCaffrey",
+      "market": "Rushing Attempts",
       "side": "OVER",
-      "line": 4.5,
+      "line": 13.5,
       "analyst": "Unknown Analyst",
       "sourceId": "yep-unknown",
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
+      "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick"
     },
     {
       "id": "he-has-gone-rushing-yards-over-83-5-yep-w3",
@@ -562,43 +538,7 @@
       "sourceId": "yep-unknown",
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
-    },
-    {
-      "id": "tyler-shough-completions-under-21-5-yep-w3",
-      "player": "Tyler Shough",
-      "market": "Completions",
-      "side": "UNDER",
-      "line": 21.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-3-invest-in-blake-corum"
-    },
-    {
-      "id": "michael-penix-jr-interceptions-over-0-5-yep-w3",
-      "player": "Michael Penix Jr.",
-      "market": "Interceptions",
-      "side": "OVER",
-      "line": 0.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/"
-    },
-    {
-      "id": "jordan-love-passing-yards-over-231-5-yep-w3",
-      "player": "Jordan Love",
-      "market": "Passing Yards",
-      "side": "OVER",
-      "line": 231.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-packers-vs-falcons-week-3-bm16/"
+      "url": "https://www.si.com/betting/chargers-vs-bills-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-3-01m3aqvyrrs3"
     }
   ]
 }
