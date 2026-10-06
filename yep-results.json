@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "d26ed27123139fe9989a0d7e0ae58991",
+  "request_id": "10986d9a467f752d5ae1975ef0df0f7e",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -77,18 +77,6 @@
         "Sione Vaki and Jacob Saylors — the current RB2 and RB3 on the Lions’ depth chart — have a combined nine carries across their NFL careers. The former Alabama star, 24, had three performances with 18 or more carries last year; with a much clearer runway in 2026, he looks poised to follow suit in Sunday’s season opener."
       ],
       "favicon": "https://platform.yep.com/app/favicon?domain=dknetwork.draftkings.com&key=e2a1d1255285e29468c20b22206f7a01bf3090a0964f58844fedf2a578751606"
-    },
-    {
-      "url": "https://www.sportsgamblingpodcast.com/2026/09/29/2026-nfl-week-4-best-bets-and-a-parlay-that-pays/",
-      "title": "2026 NFL Week 4 Best Bets And A Parlay That Pays!",
-      "description": "NFL Week 4 is here! Let's take a look at some NFL Week 4 bets, plus a parlay at pays +958. Get in on the action for this weekend!",
-      "published_date": "2026-09-29T20:33:58.000Z",
-      "highlights": [
-        "Let’s look at the top NFL Week 4 bets and throw together a parlay as well! 2026 NFL Week 4 Best Bets And A Parlay That Pays!Indianapolis Colts (-3.5) vs.Washington Commanders The Commanders shocked everybody last week, led by Marcus Mariota, as they beat the Seattle Seahawks.It was a great win for this Washington team that needed it.Getting it done at home was even better.",
-        "However, I think both offenses go off. Even if the Lions do what they did last week and get a 31-24 win, we’ll hit the over. NFL Week 4 Parlay For a fun NFL Week 4 parlay to sprinkle a little on in our bets this weekend, I’m taking the two overs and putting them together. Lions/Panthers and Bengals/Jags over. I’m combining those with the Raiders moneyline for a 3-leg parlay that pays +958.",
-        "Give me the Raiders +4.5. This is a field-goal game.Detroit Lions @ Carolina Panthers: Over 50.5 The last pick for the NFL Week 4 bets is on Sunday Night Football in Charlotte."
-      ],
-      "favicon": "https://platform.yep.com/app/favicon?domain=www.sportsgamblingpodcast.com&key=6a57e6cad033bd971817e87e817ada73aef8f471423126b10eee5c7cbe04c073"
     },
     {
       "url": "https://www.rotowire.com/cfl/article/cfl-betting-cfl-bets-and-player-props-for-week-12-129094",
@@ -245,15 +233,27 @@
         "3) Puka Nacua anytime TD /Los Angeles Rams ML (+141) The Los Angeles Rams and New York Giants are coming off complete opposite outcomes in Week 1. The Rams, who are the heavy Super Bowl favorite, got dominated by the San Francisco 49ers"
       ],
       "favicon": "https://platform.yep.com/app/favicon?domain=sports.yahoo.com&key=243f3750a675ccd35abb821349f705aed8affe9de3921319fb5e14d7e548dec6"
+    },
+    {
+      "url": "https://vsin.com/nfl/nfl-player-prop-bets-for-week-2-from-adam-burke/",
+      "title": "NFL Player Prop Bets for Week 2 from Adam Burke",
+      "description": "Player Props NFL Week 2 from Adam Burke, including Caleb Douglas, Jonathon Brooks, and Matt Gay.",
+      "published_date": "2026-09-19T01:20:33.000Z",
+      "highlights": [
+        "NFL Player Props A lot of the usual suspects had big games in Week 1, but there were others who stood out that got off to better starts than expected.Every week gives us a chance to analyze snap counts, usage rates, targets, carries, and all of the other prop betting options that are available.Dustin Swedelson already gave us some of his favorite player prop bets that lined up with our OptaAI projections.",
+        "Gay, who was 2-for-2 on FGs and 3-for-3 on PATs, gets to kick inside again here at SoFi Stadium and he’s kicked at a 91.1% success rate in domes in his career, going 51-of-56. Visit the NFL Hub for all of our Week 2 NFL content and see more NFL Player Prop Picks on our Pro Picks page",
+        "As always, shop around for these Week 2 NFL Player Props.Lines are as of 6:30 p.m.ET on Friday, September 18 and are from DraftKings.Here are my favorite Week 2 NFL Player Prop Bets: Caleb Douglas (MIA) Over 38.5 Receiving Yards (-109) Perhaps last week was a fluke, as Douglas, the rookie wideout from Texas Tech, had five catches for 94 yards, but it’s pretty clear that he’s high up on the pecking order.The Dolphins had 56 offensive snaps and Douglas was out there for 51 of them.Only Malik Washington (55) had more snaps outside of the offensive linemen and QB Malik Willis."
+      ],
+      "favicon": "https://platform.yep.com/app/favicon?domain=vsin.com&key=6cbf4966e1fce1e46f22e6c5a968e414e14ab4f54e7d87a9dcbd009e3198d1f0"
     }
   ],
-  "response_time_ms": 471.65,
+  "response_time_ms": 364.64,
   "api_cost": {
     "cost": 0.004,
     "details": "(4/1000)"
   },
   "balance": {
-    "before": "6.0080",
-    "after": 6.004
+    "before": "6.0040",
+    "after": 6
   }
 }

@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-06T04:30:19.647Z",
+  "generatedAt": "2026-10-06T06:35:44.977Z",
   "inputArticleCount": 20,
   "includedArticleCount": 2,
   "excludedArticleCount": 18,
@@ -83,10 +83,6 @@
       "week": 1
     },
     {
-      "url": "https://www.sportsgamblingpodcast.com/2026/09/29/2026-nfl-week-4-best-bets-and-a-parlay-that-pays/",
-      "week": 4
-    },
-    {
       "url": "https://www.rotowire.com/cfl/article/cfl-betting-cfl-bets-and-player-props-for-week-12-129094",
       "title": "CFL Betting: CFL Bets and Player Props for Week 12 | RotoWire",
       "week": 12
@@ -139,6 +135,11 @@
     {
       "url": "https://sports.yahoo.com/articles/week-2-gambling-preview-bet-000000201.html",
       "title": "Week 2 gambling preview: Bet on George Pickens, plus other picks - Yahoo Sports",
+      "week": 2
+    },
+    {
+      "url": "https://vsin.com/nfl/nfl-player-prop-bets-for-week-2-from-adam-burke/",
+      "title": "Expert NFL Player Prop Bets for Week 2",
       "week": 2
     }
   ],
