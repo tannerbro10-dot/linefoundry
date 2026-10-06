@@ -1,33 +1,13 @@
 {
   "success": true,
-  "generatedAt": "2026-10-06T16:32:20.221Z",
+  "generatedAt": "2026-10-06T18:32:18.042Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 3,
-  "excludedArticleCount": 17,
+  "includedArticleCount": 2,
+  "excludedArticleCount": 18,
   "extractionFailureCount": 0,
-  "propCount": 5,
-  "publishedWeek3SignalCount": 5,
+  "propCount": 3,
+  "publishedWeek3SignalCount": 3,
   "props": [
-    {
-      "player": "Case Keenum",
-      "market": "Interceptions",
-      "side": "OVER",
-      "line": 0.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.cbssports.com/betting/news/eagles-vs-bears-picks-player-props-experts-best-bets-for-monday-night-football-in-nfl-week-3/"
-      }
-    },
-    {
-      "player": "Dontayvion Wicks",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 41.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.cbssports.com/betting/news/eagles-vs-bears-picks-player-props-experts-best-bets-for-monday-night-football-in-nfl-week-3/"
-      }
-    },
     {
       "player": "Jacoby Brissett",
       "market": "Passing Yards",
@@ -61,11 +41,6 @@
   ],
   "includedArticles": [
     {
-      "url": "https://www.cbssports.com/betting/news/eagles-vs-bears-picks-player-props-experts-best-bets-for-monday-night-football-in-nfl-week-3/",
-      "title": "Eagles vs. Bears picks, player props: Expert's best bets for Monday Night Football in NFL Week 3 - CBS Sports",
-      "week": 3
-    },
-    {
       "url": "https://www.si.com/nfl/cardinals/onsi/san-francisco-49ers-arizona-cardinals-week-3-expert-prop-bets-spread-pick",
       "title": "49ers vs Cardinals Week 3: Expert Prop Bets, Spread Pick",
       "week": 3
@@ -77,6 +52,11 @@
     }
   ],
   "excludedArticles": [
+    {
+      "url": "https://www.cbssports.com/betting/news/nfl-player-props-week-4-2026-best-bets-picks-sundays-nfl-games-patrick-mahomes-jahmyr-gibbs/",
+      "title": "NFL Player Props Week 3 2026: Best Prop Bets for Sunday - CBS Sports",
+      "week": 4
+    },
     {
       "url": "https://www.cbssports.com/nfl/news/nfl-week-4-player-prop-bets/",
       "title": "NFL Week 4 player prop bets, odds: Raiders' Brock Bowers among best anytime TD bets - CBS Sports",
@@ -103,14 +83,14 @@
       "week": 1
     },
     {
-      "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-odds-picks-predictions/",
-      "title": "Week 5 NFL Player Prop Odds & Picks: Lines & Best Bets",
-      "week": 5
-    },
-    {
       "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-totals-moneyline-parlays-props-bets/",
       "title": "NFL expert picks, odds, predictions, player props, betting guide for Week 1 - CBS Sports",
       "week": 1
+    },
+    {
+      "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-odds-picks-predictions/",
+      "title": "Week 5 NFL Player Prop Odds & Picks: Lines & Best Bets",
+      "week": 5
     },
     {
       "url": "https://www.sportsbettingdime.com/news/nfl/nfl-week-2-player-props-picks-best-bets-predictions-all-30-teams/",
