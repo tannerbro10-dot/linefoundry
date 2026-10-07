@@ -1,14 +1,30 @@
 {
   "success": true,
-  "generatedAt": "2026-10-07T00:40:20.182Z",
+  "generatedAt": "2026-10-07T02:30:01.040Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 1,
-  "excludedArticleCount": 19,
+  "includedArticleCount": 2,
+  "excludedArticleCount": 18,
   "extractionFailureCount": 0,
-  "propCount": 0,
-  "publishedWeek3SignalCount": 0,
-  "props": [],
+  "propCount": 1,
+  "publishedWeek3SignalCount": 1,
+  "props": [
+    {
+      "player": "has gone",
+      "market": "Passing Yards",
+      "side": "OVER",
+      "line": 239.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.sportsbettingdime.com/news/nfl/best-week-3-player-props-expert/"
+      }
+    }
+  ],
   "includedArticles": [
+    {
+      "url": "https://www.sportsbettingdime.com/news/nfl/best-week-3-player-props-expert/",
+      "title": "Best Week 3 NFL Player Props - Expert Is 5-1 Using This Method",
+      "week": 3
+    },
     {
       "url": "https://www.sportsline.com/insiders/nfl-picks-stefon-diggs-prop-among-sportsline-expert-propbetguys-best-bets-for-week-3-of-2026-season/",
       "title": "NFL picks: Stefon Diggs prop among SportsLine expert PropBetGuy&#x27;s best bets for Week 3 of 2026 season - SportsLine.com",
@@ -105,11 +121,6 @@
       "url": "https://www.thelines.com/nfl/player-props/tnf-week-1-nfl-parlay-picks-player-props-best-49ers-vs-rams-bets/",
       "title": "TNF NFL Parlay Picks & Player Props For Rams vs. 49ers",
       "week": 1
-    },
-    {
-      "url": "https://www.rotowire.com/cfl/article/cfl-betting-cfl-bets-and-player-props-for-week-12-129094",
-      "title": "CFL Betting: CFL Bets and Player Props for Week 12 | RotoWire",
-      "week": 12
     }
   ],
   "extractionFailures": []
