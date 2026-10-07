@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "c8d03181b7892b8a4f9a0abc36112900",
+  "request_id": "2ceebe44e5c36b9a53401e15dfd139c5",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -29,6 +29,18 @@
         "In the Chiefs' first game against an excellent Broncos defense, he rushed for 23 yards. In Week 2 against the Colts, he rushed for 17 yards in an overtime win."
       ],
       "favicon": "https://platform.yep.com/app/favicon?domain=www.foxsports.com&key=c732155f966297350c701fea846c30db05fc0a377eb9c3490eaf3674bc160d70"
+    },
+    {
+      "url": "https://www.cbssports.com/betting/news/2026-week-4-nfl-odds-picks-best-bets-predictions-experts-backing-seahawks-raiders-broncos-on-sunday/",
+      "title": "2026 Week 4 NFL odds, picks, best bets, predictions: Experts backing Seahawks, Raiders, Broncos on Sunday",
+      "description": "SportsLine's experts have revealed their Week 4 NFL picks and best bets for Sunday",
+      "published_date": "2026-10-04T19:20:52.000Z",
+      "highlights": [
+        "2026 Week 4 NFL odds, picks, best bets, predictions: Experts backing Seahawks, Raiders, Broncos on Sunday The Week 4 NFL schedule features an intriguing late-afternoon window, including 49ers vs.Broncos, Raiders vs.Chiefs and Seahawks vs.Chargers.",
+        "Week 4 NFL best bets (odds subject to change): Raiders (+4.5) vs.Chiefs Broncos (+3) vs. 49ers Seahawks (-6.5) vs.Chargers Combining the experts' three picks into a Week 4 NFL parlay would result in a payout of +613 (risk $100 to win $613).Bet it now at FanDuel Sportsbook and get up to $250 in bonus bets: Raiders (+4.5) vs.",
+        "Want more Week 4 NFL picks? You've seen some Week 4 NFL best bets for Sunday.Now, get against the spread, total and money line picks for every NFL game here, all from the team of experts and model that's simulated every game 10,000 times."
+      ],
+      "favicon": "https://platform.yep.com/app/favicon?domain=www.cbssports.com&key=62f83a14c8ef581e1570ef2347c0a0b566503b5cbab389dabf5e5fdf5462a1e1"
     },
     {
       "url": "https://www.bettingpros.com/articles/best-nfl-player-props-picks-cardinals-vs-giants-week-4-2026/",
@@ -199,18 +211,6 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.sharpfootballanalysis.com&key=f8c04cad4d707e81c512c671c9abf80faef1595d274f6203113b55fddcc27d7b"
     },
     {
-      "url": "https://www.cbssports.com/betting/news/week-4-nfl-anytime-touchdown-scorer-picks-odds-josh-allen-travis-kelce-derrick-henry-sunday/",
-      "title": "Week 4 NFL anytime touchdown scorer picks, odds: Target Josh Allen, Travis Kelce, Derrick Henry on Sunday",
-      "description": "Here are our favorite picks to find the end zone on Sunday in NFL Week 4",
-      "published_date": "2026-10-04T16:10:33.000Z",
-      "highlights": [
-        "Week 4 NFL anytime touchdown scorer picks, odds: Target Josh Allen, Travis Kelce, Derrick Henry on Sunday NFL player prop betting is a popular bet type for football fans, and that includes NFL anytime touchdown scorer picks, which you can make at the best betting apps.Target NFL anytime TDs today from games like Chiefs vs.Raiders and Lions vs.Panthers.",
-        "NFL Week 4 anytime touchdown scorer props: Derrick Henry vs.Titans (-230) Bills QB Josh Allen vs.Patriots (-130) Jaguars WR Parker Washington vs.Bengals (+140) Chiefs TE Travis Kelce vs.Raiders (+150) Derrick Henry anytime TD (-230) Henry is ageless, and he's off to a stellar start to 2026 with six rushing scores, which is tied for the NFL lead.",
-        "Trevor Lawrence will surely be looking his way in a potentially juicy matchup. Make NFL touchdown scorer picks of your own at FanDuel and get up to $250 in bonus bets: Travis Kelce anytime TD (+150) Kelce is a future Hall of Famer who is still doing great things in Year 14."
-      ],
-      "favicon": "https://platform.yep.com/app/favicon?domain=www.cbssports.com&key=62f83a14c8ef581e1570ef2347c0a0b566503b5cbab389dabf5e5fdf5462a1e1"
-    },
-    {
       "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/",
       "title": "Expert NFL Picks: Week 3 best bets, predictions, and player props from Zachary Cohen",
       "description": "We’ve analyzed every matchup on the Week 3 slate to deliver the smartest bets and sharpest edges on sides, totals, and props.",
@@ -247,13 +247,13 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.sportsbettingdime.com&key=0da67c3d9d95a27223a7489260c712874d94544a0dff536d8a478208bbbd08cc"
     }
   ],
-  "response_time_ms": 529.28,
+  "response_time_ms": 558.65,
   "api_cost": {
     "cost": 0.004,
     "details": "(4/1000)"
   },
   "balance": {
-    "before": "5.9320",
-    "after": 5.928
+    "before": "5.9280",
+    "after": 5.924
   }
 }
