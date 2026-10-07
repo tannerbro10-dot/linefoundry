@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-07T16:33:32.205Z",
+  "generatedAt": "2026-10-07T18:34:28.584Z",
   "inputArticleCount": 20,
   "includedArticleCount": 3,
   "excludedArticleCount": 17,
@@ -98,6 +98,11 @@
   ],
   "excludedArticles": [
     {
+      "url": "https://www.cbssports.com/betting/news/nfl-player-props-week-4-2026-best-bets-picks-sundays-nfl-games-patrick-mahomes-jahmyr-gibbs/",
+      "title": "NFL Player Props Week 3 2026: Best Prop Bets for Sunday - CBS Sports",
+      "week": 4
+    },
+    {
       "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-4-best-bets-expert-picks-rams-eagles-chiefs-raiders",
       "title": "2026 NFL Week 4 Best Bets, Expert Picks: Back Rams To Bounce Back At Eagles | FOX Sports",
       "week": 4
@@ -108,24 +113,14 @@
       "week": 4
     },
     {
-      "url": "https://www.cbssports.com/betting/news/2026-week-4-nfl-odds-picks-best-bets-predictions-experts-backing-seahawks-raiders-broncos-on-sunday/",
-      "title": "2026 Week 4 NFL odds, picks, best bets, predictions: Experts backing Seahawks, Raiders, Broncos on Sunday - CBS Sports",
+      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-4-picks-best-bets-every-game-wills-wagers",
+      "title": "2026 NFL Week 4 Picks: Best Bets For Every Game — Will&#x27;s Wagers | FOX Sports",
       "week": 4
     },
     {
       "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-divisional-round-2026/",
       "title": "NFL Player Prop Picks for Divisional Round: Expert Player Prop Bets Today",
       "week": 5
-    },
-    {
-      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-4-picks-best-bets-every-game-wills-wagers",
-      "title": "2026 NFL Week 4 Picks: Best Bets For Every Game — Will&#x27;s Wagers | FOX Sports",
-      "week": 4
-    },
-    {
-      "url": "https://www.cbssports.com/betting/news/nfl-picks-michael-wilson-prop-among-sportsline-experts-best-bets-for-week-18/",
-      "title": "Michael Wilson among expert's best Week 18 NFL player prop bets - CBS Sports",
-      "week": 18
     },
     {
       "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
@@ -171,6 +166,11 @@
       "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
       "title": "Week 1 NFL Player Props: Best Prop Bets & Predictions",
       "week": 1
+    },
+    {
+      "url": "https://www.cbssports.com/betting/news/week-4-nfl-anytime-touchdown-scorer-picks-odds-josh-allen-travis-kelce-derrick-henry-sunday/",
+      "title": "Week 4 NFL anytime touchdown scorer picks, odds: Target Josh Allen, Travis Kelce, Derrick Henry on Sunday - CBS Sports",
+      "week": 4
     },
     {
       "url": "https://sports.betmgm.com/en/blog/nfl/expert-picks-week-1-2026-bm16/",
