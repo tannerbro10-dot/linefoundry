@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-10-07T10:30:58.109Z",
+  "refreshedAt": "2026-10-07T12:38:06.682Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -503,6 +503,18 @@
       "sourceId": "ariel-epstein-hardrock-week2",
       "week": 2,
       "note": "Hard Rock Bet Week 2 player prop."
+    },
+    {
+      "id": "has-gone-passing-yards-over-239-5-yep-w3",
+      "player": "has gone",
+      "market": "Passing Yards",
+      "side": "OVER",
+      "line": 239.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.sportsbettingdime.com/news/nfl/best-week-3-player-props-expert/"
     },
     {
       "id": "he-has-also-gone-rushing-yards-over-85-5-yep-w3",
