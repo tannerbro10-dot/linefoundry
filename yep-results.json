@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "0fd12b30bbf02f55cf9884457ef8a84d",
+  "request_id": "6144b4894589d2f00b8aef080dd5e0f9",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -139,6 +139,18 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.sportsline.com&key=6d499bb51a7b70ae76dc3d38db0615df3f998204c415cac935a08dbfeb69295d"
     },
     {
+      "url": "https://www.si.com/betting/falcons-vs-saints-best-nfl-prop-bets-for-monday-night-football-in-week-4-bet-on-bijan-robinson-2026",
+      "title": "Falcons vs. Saints Best NFL Prop Bets for Monday Night Football in Week 4 (Bet on Bijan Robinson)",
+      "description": "Breaking down the best prop bets for the Atlanta Falcons vs. New Orleans Saints matchup on Monday night.",
+      "published_date": "2026-10-05T00:00:00.000Z",
+      "highlights": [
+        "Falcons vs.Saints Best NFL Prop Bets for Monday Night Football in Week 4 (Bet on Bijan Robinson) Breaking down the best prop bets for the Atlanta Falcons vs.New Orleans Saints matchup on Monday night.",
+        "I think this line is far too low on Monday night. Drake London OVER 5.5 Receptions (-148) In this week’s edition of his Player Prop Countdown – where SI Betting’s Iain MacMillan picks his 10-best props of the week – he ranked this Drake London play at No.",
+        "I've narrowed things down to my top three plays on Monday Night, including a prop for Robinson, who put on a huge performance in Week 3.Best NFL Prop Bets for Falcons vs."
+      ],
+      "favicon": "https://platform.yep.com/app/favicon?domain=www.si.com&key=124c930ebfffd31871299a674e7699e5013877e6a95b10f739ebb721e49644f8"
+    },
+    {
       "url": "https://www.cbssports.com/nfl/news/nfl-picks-this-week-vegas-odds-2026-wild-card-expert-predictions-spread-parlay-player-props/",
       "title": "NFL picks this week, Vegas odds: 2026 Wild Card expert predictions against the spread, parlay, and props",
       "description": "SportsLine's top NFL experts reveal their NFL picks, NFL predictions, NFL betting tips, and NFL best bets for Wild Card Weekend 2026",
@@ -233,27 +245,15 @@
         "I’m diving into the matchups to uncover the best player prop to bet on for each roster this weekend. Top NFL Week 2 Player Prop Picks and Best Bets Relying on volume projections, red zone efficiency, and underlying trends is the most effective way to identify high-probability outcomes."
       ],
       "favicon": "https://platform.yep.com/app/favicon?domain=www.sportsbettingdime.com&key=0da67c3d9d95a27223a7489260c712874d94544a0dff536d8a478208bbbd08cc"
-    },
-    {
-      "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-mnf-saints-vs-falcons-week-4-bm16/",
-      "title": "2 Best NFL Player Props for MNF: Saints vs Falcons",
-      "description": "Get two player prop bets today for Saints vs Falcons on MNF in Week 4 based on NFL odds from the BetMGM online sportsbook.",
-      "published_date": "2026-10-03T00:00:00.000Z",
-      "highlights": [
-        "Beyond side, total and moneyline markets, bettors also have access to myriad player props. Below, I’ve outlined my best player prop predictions for the showcase based on NFL odds Saints vs Falcons Predictions: MNF Player Props Devaughn Vele Over 44.5 Receiving Yards (-115) For as strong as Atlanta looked on offense last week, the corner group remains highly concerning.Until A.J.",
-        "It leads me to predict that, even at a high price, Shough clears this line for a second straight game. Related Articles Super Bowl Odds 2026: Rams Stay at +650 After Week 4 Win NFL Public Betting Data & Trends for Week 4 MNF NFL Against the Spread (ATS) Records & Standings NFL MVP Odds 2026: Josh Allen Falls to +250 After Week 4 The content provided in this blog is intended for entertainment purposes only.",
-        "Accordingly, I predict Vele clears a relatively low number. Tyler Shough Over 1.5 Passing Touchdowns (-135) In a similar vein to the Vele prop, my confidence in Shough stems from his performances against bad secondaries.Albeit in garbage time, he blitzed the Lions secondary for three touchdowns in Week 1.Last week against the Raiders, the second-year quarterback tossed four touchdown passes."
-      ],
-      "favicon": "https://platform.yep.com/app/favicon?domain=sports.betmgm.com&key=0e79552ce8f6c540bad8581c216120f8e8bd80d47be37c2894e5586ffd3dfa89"
     }
   ],
-  "response_time_ms": 466.6,
+  "response_time_ms": 1971.03,
   "api_cost": {
     "cost": 0.004,
     "details": "(4/1000)"
   },
   "balance": {
-    "before": "5.9400",
-    "after": 5.936
+    "before": "5.9360",
+    "after": 5.932
   }
 }
