@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "a9d32678b6423f82dfd0f5fb9c24b192",
+  "request_id": "39f05745e55282a6e8eaebfd573f2842",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -41,18 +41,6 @@
         "In the Chiefs' first game against an excellent Broncos defense, he rushed for 23 yards. In Week 2 against the Colts, he rushed for 17 yards in an overtime win."
       ],
       "favicon": "https://platform.yep.com/app/favicon?domain=www.foxsports.com&key=c732155f966297350c701fea846c30db05fc0a377eb9c3490eaf3674bc160d70"
-    },
-    {
-      "url": "https://www.dimers.com/nfl/news/nfl-week-4-betting-guide-model-backed-picks-top-player-props-and-sharp-pick-ems",
-      "title": "NFL Week 4 betting guide: Model backed picks, top player props and sharp Pick 'Ems",
-      "description": "Unlock data-driven NFL Week 4 best bets. Powered by Dimers Pro analytics to spot the sharpest prop edges and top Pick 'Em value.",
-      "published_date": "2026-09-29T00:00:00.000Z",
-      "highlights": [
-        "Updated: September 29, 2026, 1:02 PM ET | First published: September 29, 2026, 12:58 PM ET Unlock data-driven NFL Week 4 best bets.Powered by Dimers Pro analytics to spot the sharpest prop edges and top Pick 'Em value.",
-        "Bet on NFL in 2026 with Dimers Pro Every single player, team and betting insight in this article comes straight from Dimers Pro, your go-to resource for the NFL season.",
-        "The Dimers prediction model continues its hot run, picking up on the mispriced market line on the Bills ✅ pic.twitter.com/gycDCNa17d — Dimers (@dimerscom) September 27, 2026 All season long, whether you're betting game lines with our best NFL bets , hunting a touchdown edge in our NFL player props , digging into our NFL player projections hub, or tracking Super Bowl fut"
-      ],
-      "favicon": "https://platform.yep.com/app/favicon?domain=www.dimers.com&key=11d22ce09f937f5424b51629eaea70e5796d2bb21aad061b359102d466059f39"
     },
     {
       "url": "https://www.cbssports.com/nfl/news/nfl-week-4-picks-our-experts-predictions/",
@@ -211,6 +199,18 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.sportsbettingdime.com&key=0da67c3d9d95a27223a7489260c712874d94544a0dff536d8a478208bbbd08cc"
     },
     {
+      "url": "https://www.si.com/betting/broncos-vs-49ers-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-4-01m3yg2hgg26",
+      "title": "Broncos vs. 49ers Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 4",
+      "description": "Breaking down the best player props to bet on for NFL Week 4 action between the Denver Broncos and San Francisco 49ers.",
+      "published_date": "2026-10-04T00:00:00.000Z",
+      "highlights": [
+        "The 49ers also beat the Rams this year and have since cruised past the Miami Dolphins and Arizona Cardinals. You can find my best bet for this game in this week's edition of the Road to 272 Bets In this article, we're focusing on prop bets.Let's dive into a few of my favorites.",
+        "He doesn't get many touches, but head coach Kyle Shanahan loves to draw up ways to get him the ball, especially when the team is in the opponent's red zone. \"Juice\" has already scored once this season, doing so in Week 2 against the Dolphins.",
+        "Let's bet on him to do it again at +650.Follow Iain on X and Instagram You can check out all of Iain's bets here!Unlock $100 in bonus bets — all without a promo code for DraftKings Sign up and place a $5 bet and you will receive $150 in bonus bets no matter what.Odds refresh periodically and are subject to change."
+      ],
+      "favicon": "https://platform.yep.com/app/favicon?domain=www.si.com&key=124c930ebfffd31871299a674e7699e5013877e6a95b10f739ebb721e49644f8"
+    },
+    {
       "url": "https://www.sportsline.com/insiders/nfl-week-1-score-predictions-expert-reveals-game-picks-for-the-2026-opening-week/",
       "title": "NFL Week 1 score predictions: Expert reveals game picks for the 2026 opening week - SportsLine.com",
       "description": "SportsLine expert Eric Cohen reveals his NFL score predictions for all 16 games in Week 1 of the 2026 NFL season",
@@ -247,13 +247,13 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.thelines.com&key=28a8cb6768770ed7e4de8ee869ddb6dea7186d3a296467368a61bc9d4f601d45"
     }
   ],
-  "response_time_ms": 398.68,
+  "response_time_ms": 411.15,
   "api_cost": {
     "cost": 0.004,
     "details": "(4/1000)"
   },
   "balance": {
-    "before": "5.9600",
-    "after": 5.956
+    "before": "5.9560",
+    "after": 5.952
   }
 }
