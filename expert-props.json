@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-07T12:38:06.682Z",
+  "generatedAt": "2026-10-07T14:31:27.267Z",
   "inputArticleCount": 20,
   "includedArticleCount": 3,
   "excludedArticleCount": 17,
@@ -98,16 +98,6 @@
   ],
   "excludedArticles": [
     {
-      "url": "https://www.cbssports.com/betting/news/nfl-player-props-week-4-2026-best-bets-picks-sundays-nfl-games-patrick-mahomes-jahmyr-gibbs/",
-      "title": "NFL Player Props Week 3 2026: Best Prop Bets for Sunday - CBS Sports",
-      "week": 4
-    },
-    {
-      "url": "https://www.cbssports.com/nfl/news/nfl-week-4-player-prop-bets/",
-      "title": "NFL Week 4 player prop bets, odds: Raiders' Brock Bowers among best anytime TD bets - CBS Sports",
-      "week": 4
-    },
-    {
       "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-4-best-bets-expert-picks-rams-eagles-chiefs-raiders",
       "title": "2026 NFL Week 4 Best Bets, Expert Picks: Back Rams To Bounce Back At Eagles | FOX Sports",
       "week": 4
@@ -118,14 +108,24 @@
       "week": 4
     },
     {
-      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-4-picks-best-bets-every-game-wills-wagers",
-      "title": "2026 NFL Week 4 Picks: Best Bets For Every Game — Will&#x27;s Wagers | FOX Sports",
+      "url": "https://www.cbssports.com/betting/news/2026-week-4-nfl-odds-picks-best-bets-predictions-experts-backing-seahawks-raiders-broncos-on-sunday/",
+      "title": "2026 Week 4 NFL odds, picks, best bets, predictions: Experts backing Seahawks, Raiders, Broncos on Sunday - CBS Sports",
       "week": 4
     },
     {
       "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-divisional-round-2026/",
       "title": "NFL Player Prop Picks for Divisional Round: Expert Player Prop Bets Today",
       "week": 5
+    },
+    {
+      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-4-picks-best-bets-every-game-wills-wagers",
+      "title": "2026 NFL Week 4 Picks: Best Bets For Every Game — Will&#x27;s Wagers | FOX Sports",
+      "week": 4
+    },
+    {
+      "url": "https://www.cbssports.com/betting/news/nfl-picks-michael-wilson-prop-among-sportsline-experts-best-bets-for-week-18/",
+      "title": "Michael Wilson among expert's best Week 18 NFL player prop bets - CBS Sports",
+      "week": 18
     },
     {
       "url": "https://www.bettingpros.com/articles/nfl-thursday-night-football-player-props-bets-lions-vs-bills-week-2-2026/",
