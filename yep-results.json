@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "cb91a11beff62c7faf81b55c33af206b",
+  "request_id": "b0f8efa8488f68fe161aa20c8a78b3b8",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -139,18 +139,6 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.sportsline.com&key=6d499bb51a7b70ae76dc3d38db0615df3f998204c415cac935a08dbfeb69295d"
     },
     {
-      "url": "https://www.si.com/betting/falcons-vs-saints-best-nfl-prop-bets-for-monday-night-football-in-week-4-bet-on-bijan-robinson-2026",
-      "title": "Falcons vs. Saints Best NFL Prop Bets for Monday Night Football in Week 4 (Bet on Bijan Robinson)",
-      "description": "Breaking down the best prop bets for the Atlanta Falcons vs. New Orleans Saints matchup on Monday night.",
-      "published_date": "2026-10-05T00:00:00.000Z",
-      "highlights": [
-        "Falcons vs.Saints Best NFL Prop Bets for Monday Night Football in Week 4 (Bet on Bijan Robinson) Breaking down the best prop bets for the Atlanta Falcons vs.New Orleans Saints matchup on Monday night.",
-        "I think this line is far too low on Monday night. Drake London OVER 5.5 Receptions (-148) In this week’s edition of his Player Prop Countdown – where SI Betting’s Iain MacMillan picks his 10-best props of the week – he ranked this Drake London play at No.",
-        "I've narrowed things down to my top three plays on Monday Night, including a prop for Robinson, who put on a huge performance in Week 3.Best NFL Prop Bets for Falcons vs."
-      ],
-      "favicon": "https://platform.yep.com/app/favicon?domain=www.si.com&key=124c930ebfffd31871299a674e7699e5013877e6a95b10f739ebb721e49644f8"
-    },
-    {
       "url": "https://www.sportsbettingdime.com/news/nfl/best-props-to-bet-week-4/",
       "title": "Best NFL Props to Bet for Week 4 - Exploiting Lines That Don't Match Production",
       "description": "See the 3 wide receivers who have outperformed their receiving over/unders for Week 4, making them the best NFL player props to bet.",
@@ -245,15 +233,27 @@
         "I’m diving into the matchups to uncover the best player prop to bet on for each roster this weekend. Top NFL Week 2 Player Prop Picks and Best Bets Relying on volume projections, red zone efficiency, and underlying trends is the most effective way to identify high-probability outcomes."
       ],
       "favicon": "https://platform.yep.com/app/favicon?domain=www.sportsbettingdime.com&key=0da67c3d9d95a27223a7489260c712874d94544a0dff536d8a478208bbbd08cc"
+    },
+    {
+      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-3-best-bets-expert-picks-back-buccaneers-bounce-back",
+      "title": "2026 NFL Week 3 Best Bets, Expert Picks: Back Tampa Bay To Cover Against Vikings",
+      "description": "Find out why Geoff Schwartz is backing the Bucs to bounce back against the Vikings and why he's taking the Under in the Titans-Giants tilt.",
+      "published_date": "2026-09-25T19:49:00.000Z",
+      "highlights": [
+        "My feeling is that the Buccaneers will bounce back this week against the Vikings.Despite how bleak it looks in Tampa Bay, I'm willing to make that bet.It also looks bad in New York for the Giants and also meh for the Titans, which is why I can't trust those offenses.Let's dive into how I'm wagering on NFL Week 3.This page may contain affiliate links to legal sports betting partners.",
+        "Can Baker Mayfield lead his Bucs to a win in Week 3? (Getty Images) However, this is the perfect spot to wager on them.All the players and staff know what happens if they go to 0-3.The season is done.Since the NFL expanded to 14 playoff teams in 2020, only a single team has made the playoffs after starting 0-3, and it won’t be the Bucs if it does happen.",
+        "New York's defensive line, on the other hand, should torture the Titans' offensive line.It is going to force Cam Ward into mistakes and make him uncomfortable.The Titans are only 26th in yards per play, and they scored 10 points against the Jets in Week 1 and only 20 against Philly."
+      ],
+      "favicon": "https://platform.yep.com/app/favicon?domain=www.foxsports.com&key=c732155f966297350c701fea846c30db05fc0a377eb9c3490eaf3674bc160d70"
     }
   ],
-  "response_time_ms": 433.42,
+  "response_time_ms": 485.93,
   "api_cost": {
     "cost": 0.004,
     "details": "(4/1000)"
   },
   "balance": {
-    "before": "5.9040",
-    "after": 5.9
+    "before": "5.9000",
+    "after": 5.896
   }
 }
