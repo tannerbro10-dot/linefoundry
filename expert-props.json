@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-08T20:32:13.249Z",
+  "generatedAt": "2026-10-08T22:29:52.910Z",
   "inputArticleCount": 20,
   "includedArticleCount": 1,
   "excludedArticleCount": 19,
@@ -128,11 +128,6 @@
       "week": 2
     },
     {
-      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-3-best-bets-expert-picks-back-buccaneers-bounce-back",
-      "title": "2026 NFL Week 3 Best Bets, Expert Picks: Back Tampa Bay To Cover Against Vikings | FOX Sports",
-      "week": 3
-    },
-    {
       "url": "https://www.thelines.com/nfl/player-props/tnf-week-1-nfl-parlay-picks-player-props-best-49ers-vs-rams-bets/",
       "title": "TNF NFL Parlay Picks & Player Props For Rams vs. 49ers",
       "week": 1
@@ -158,19 +153,24 @@
       "week": 2
     },
     {
-      "url": "https://www.bettingpros.com/articles/nfl-week-2-confidence-pool-picks-predictions-2026/",
-      "title": "NFL Week 2 Confidence Pool Picks & Predictions (2026) | BettingPros",
-      "week": 2
-    },
-    {
-      "url": "https://www.bettingpros.com/nfl//",
-      "title": "NFL Betting Picks, Odds & Player Props | BettingPros",
-      "week": null
-    },
-    {
       "url": "https://www.actionnetwork.com/nfl/player-props-for-nfl-week-2-aaron-rodgers-jeremiyah-love",
       "title": "",
       "week": 2
+    },
+    {
+      "url": "https://www.actionnetwork.com/news/best-nfl-prop-bets-today-steelers-vs-browns-prediction-best-nfl-player-props-anytime-td-scorer-tnf-best-bets",
+      "title": "",
+      "week": null
+    },
+    {
+      "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
+      "title": "",
+      "week": 1
+    },
+    {
+      "url": "https://www.actionnetwork.com/nfl/player-props-for-nfl-week-1-baker-mayfield-deshaun-watson-more",
+      "title": "",
+      "week": 1
     }
   ],
   "extractionFailures": []
