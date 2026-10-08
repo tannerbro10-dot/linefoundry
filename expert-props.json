@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-08T06:37:22.917Z",
+  "generatedAt": "2026-10-08T08:32:56.885Z",
   "inputArticleCount": 20,
   "includedArticleCount": 3,
   "excludedArticleCount": 17,
@@ -108,6 +108,11 @@
       "week": 4
     },
     {
+      "url": "https://www.cbssports.com/betting/news/2026-week-4-nfl-odds-picks-best-bets-predictions-experts-backing-seahawks-raiders-broncos-on-sunday/",
+      "title": "2026 Week 4 NFL odds, picks, best bets, predictions: Experts backing Seahawks, Raiders, Broncos on Sunday - CBS Sports",
+      "week": 4
+    },
+    {
       "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-4-picks-best-bets-every-game-wills-wagers",
       "title": "2026 NFL Week 4 Picks: Best Bets For Every Game — Will&#x27;s Wagers | FOX Sports",
       "week": 4
@@ -138,6 +143,11 @@
       "week": 1
     },
     {
+      "url": "https://www.si.com/betting/falcons-vs-saints-best-nfl-prop-bets-for-monday-night-football-in-week-4-bet-on-bijan-robinson-2026",
+      "title": "Falcons vs. Saints Best NFL Prop Bets for Monday Night Football in Week 4 (Bet on Bijan Robinson)",
+      "week": 4
+    },
+    {
       "url": "https://www.sportsbettingdime.com/news/nfl/best-props-to-bet-week-4/",
       "title": "Best NFL Props to Bet for Week 4 - Exploiting Lines That Don&#039;t Match Production",
       "week": 4
@@ -158,11 +168,6 @@
       "week": 5
     },
     {
-      "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-totals-moneyline-parlays-props-bets/",
-      "title": "NFL expert picks, odds, predictions, player props, betting guide for Week 1 - CBS Sports",
-      "week": 1
-    },
-    {
       "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
       "title": "Week 1 NFL Player Props: Best Prop Bets & Predictions",
       "week": 1
@@ -176,11 +181,6 @@
       "url": "https://www.sportsbettingdime.com/news/nfl/nfl-week-2-player-props-picks-best-bets-predictions-all-30-teams/",
       "title": "NFL Week 2 Player Props Picks: Best Bets and Predictions",
       "week": 2
-    },
-    {
-      "url": "https://www.si.com/betting/broncos-vs-49ers-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-4-01m3yg2hgg26",
-      "title": "Broncos vs. 49ers Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 4",
-      "week": 4
     }
   ],
   "extractionFailures": []
