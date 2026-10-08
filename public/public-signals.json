@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-10-08T12:38:10.241Z",
+  "refreshedAt": "2026-10-08T14:34:17.763Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -515,18 +515,6 @@
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
       "url": "https://www.cbssports.com/betting/news/nfl-picks-today-best-bets-week-3-2026-expert-predictions-spread-total-money-line-parlays-player-props/"
-    },
-    {
-      "id": "has-gone-passing-yards-over-239-5-yep-w3",
-      "player": "has gone",
-      "market": "Passing Yards",
-      "side": "OVER",
-      "line": 239.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.sportsbettingdime.com/news/nfl/best-week-3-player-props-expert/"
     }
   ]
 }
