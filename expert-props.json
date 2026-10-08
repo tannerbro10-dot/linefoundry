@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-08T18:34:25.479Z",
+  "generatedAt": "2026-10-08T20:32:13.249Z",
   "inputArticleCount": 20,
   "includedArticleCount": 1,
   "excludedArticleCount": 19,
@@ -128,19 +128,19 @@
       "week": 2
     },
     {
+      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-3-best-bets-expert-picks-back-buccaneers-bounce-back",
+      "title": "2026 NFL Week 3 Best Bets, Expert Picks: Back Tampa Bay To Cover Against Vikings | FOX Sports",
+      "week": 3
+    },
+    {
       "url": "https://www.thelines.com/nfl/player-props/tnf-week-1-nfl-parlay-picks-player-props-best-49ers-vs-rams-bets/",
       "title": "TNF NFL Parlay Picks & Player Props For Rams vs. 49ers",
       "week": 1
     },
     {
-      "url": "https://www.bettingpros.com/articles/best-nfl-player-props-monday-night-football-giants-vs-rams-2026/",
-      "title": "Best NFL Player Props: Monday Night Football (Giants vs. Rams) | BettingPros",
+      "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-bills-vs-lions-week-2-bm16/",
+      "title": "2 Best NFL Player Props for TNF: Bills vs Lions | BetMGM",
       "week": 2
-    },
-    {
-      "url": "https://www.sportsbettingdime.com/news/nfl/best-props-to-bet-week-4/",
-      "title": "Best NFL Props to Bet for Week 4 - Exploiting Lines That Don&#039;t Match Production",
-      "week": 4
     },
     {
       "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
@@ -168,9 +168,9 @@
       "week": null
     },
     {
-      "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
+      "url": "https://www.actionnetwork.com/nfl/player-props-for-nfl-week-2-aaron-rodgers-jeremiyah-love",
       "title": "",
-      "week": 1
+      "week": 2
     }
   ],
   "extractionFailures": []
