@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-10-09T02:28:45.683Z",
+  "refreshedAt": "2026-10-09T04:32:12.836Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -575,6 +575,54 @@
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
       "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
+    },
+    {
+      "id": "draftkings-sportsbook-james-cook-rushing-yards-under-78-5-yep-w3",
+      "player": "DraftKings Sportsbook James Cook",
+      "market": "Rushing Yards",
+      "side": "UNDER",
+      "line": 78.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.si.com/betting/best-nfl-prop-bets-today-for-week-3-bet-on-lamar-jackson-to-torch-cowboys-defense-01m3cqa02qrb"
+    },
+    {
+      "id": "lamar-jackson-passing-yards-over-240-5-yep-w3",
+      "player": "Lamar Jackson",
+      "market": "Passing Yards",
+      "side": "OVER",
+      "line": 240.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.si.com/betting/best-nfl-prop-bets-today-for-week-3-bet-on-lamar-jackson-to-torch-cowboys-defense-01m3cqa02qrb"
+    },
+    {
+      "id": "james-cook-rushing-yards-under-78-5-yep-w3",
+      "player": "James Cook",
+      "market": "Rushing Yards",
+      "side": "UNDER",
+      "line": 78.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.si.com/betting/best-nfl-prop-bets-today-for-week-3-bet-on-lamar-jackson-to-torch-cowboys-defense-01m3cqa02qrb"
+    },
+    {
+      "id": "he-has-gone-rushing-yards-over-83-5-yep-w3",
+      "player": "He has gone",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 83.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.si.com/betting/best-nfl-prop-bets-today-for-week-3-bet-on-lamar-jackson-to-torch-cowboys-defense-01m3cqa02qrb"
     }
   ]
 }
