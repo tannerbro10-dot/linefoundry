@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-10-09T14:34:48.826Z",
+  "refreshedAt": "2026-10-09T16:31:13.357Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -505,76 +505,64 @@
       "note": "Hard Rock Bet Week 2 player prop."
     },
     {
-      "id": "he-has-also-gone-rushing-yards-over-85-5-yep-w3",
-      "player": "He has also gone",
-      "market": "Rushing Yards",
-      "side": "OVER",
-      "line": 85.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
-    },
-    {
-      "id": "best-bets-kyle-pitts-receiving-yards-over-35-5-yep-w3",
-      "player": "Best Bets Kyle Pitts",
+      "id": "tyler-allgeier-receiving-yards-under-33-5-yep-w3",
+      "player": "Tyler Allgeier",
       "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 35.5,
+      "side": "UNDER",
+      "line": 33.5,
       "analyst": "Unknown Analyst",
       "sourceId": "yep-unknown",
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
+      "url": "https://www.fantasylife.com/articles/betting/nfl-player-props-for-week-3-geno-smith-tyler-allgeier-more"
     },
     {
-      "id": "justin-herbert-passing-yards-over-219-5-yep-w3",
-      "player": "Justin Herbert",
+      "id": "draftkings-sportsbook-james-cook-rushing-yards-under-78-5-yep-w3",
+      "player": "DraftKings Sportsbook James Cook",
+      "market": "Rushing Yards",
+      "side": "UNDER",
+      "line": 78.5,
+      "analyst": "Unknown Analyst",
+      "sourceId": "yep-unknown",
+      "week": 3,
+      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
+      "url": "https://www.si.com/betting/best-nfl-prop-bets-today-for-week-3-bet-on-lamar-jackson-to-torch-cowboys-defense-01m3cqa02qrb"
+    },
+    {
+      "id": "lamar-jackson-passing-yards-over-240-5-yep-w3",
+      "player": "Lamar Jackson",
       "market": "Passing Yards",
       "side": "OVER",
-      "line": 219.5,
+      "line": 240.5,
       "analyst": "Unknown Analyst",
       "sourceId": "yep-unknown",
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
+      "url": "https://www.si.com/betting/best-nfl-prop-bets-today-for-week-3-bet-on-lamar-jackson-to-torch-cowboys-defense-01m3cqa02qrb"
     },
     {
-      "id": "titans-wentz-passing-yards-over-224-5-yep-w3",
-      "player": "Titans Wentz",
-      "market": "Passing Yards",
-      "side": "OVER",
-      "line": 224.5,
+      "id": "james-cook-rushing-yards-under-78-5-yep-w3",
+      "player": "James Cook",
+      "market": "Rushing Yards",
+      "side": "UNDER",
+      "line": 78.5,
       "analyst": "Unknown Analyst",
       "sourceId": "yep-unknown",
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
+      "url": "https://www.si.com/betting/best-nfl-prop-bets-today-for-week-3-bet-on-lamar-jackson-to-torch-cowboys-defense-01m3cqa02qrb"
     },
     {
-      "id": "jaguars-knox-receiving-yards-over-12-5-yep-w3",
-      "player": "Jaguars Knox",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 12.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
-    },
-    {
-      "id": "packers-love-rushing-yards-over-35-5-yep-w3",
-      "player": "Packers Love",
+      "id": "he-has-gone-rushing-yards-over-83-5-yep-w3",
+      "player": "He has gone",
       "market": "Rushing Yards",
       "side": "OVER",
-      "line": 35.5,
+      "line": 83.5,
       "analyst": "Unknown Analyst",
       "sourceId": "yep-unknown",
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
+      "url": "https://www.si.com/betting/best-nfl-prop-bets-today-for-week-3-bet-on-lamar-jackson-to-torch-cowboys-defense-01m3cqa02qrb"
     }
   ]
 }

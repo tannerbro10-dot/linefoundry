@@ -1,78 +1,73 @@
 {
   "success": true,
-  "generatedAt": "2026-10-09T14:34:48.826Z",
+  "generatedAt": "2026-10-09T16:31:13.358Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 1,
-  "excludedArticleCount": 19,
+  "includedArticleCount": 2,
+  "excludedArticleCount": 18,
   "extractionFailureCount": 0,
-  "propCount": 6,
-  "publishedWeek3SignalCount": 6,
+  "propCount": 5,
+  "publishedWeek3SignalCount": 5,
   "props": [
     {
-      "player": "He has also gone",
-      "market": "Rushing Yards",
-      "side": "OVER",
-      "line": 85.5,
-      "week": 3,
-      "source": {
-        "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
-      }
-    },
-    {
-      "player": "Best Bets Kyle Pitts",
+      "player": "Tyler Allgeier",
       "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 35.5,
+      "side": "UNDER",
+      "line": 33.5,
       "week": 3,
       "source": {
-        "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
+        "url": "https://www.fantasylife.com/articles/betting/nfl-player-props-for-week-3-geno-smith-tyler-allgeier-more"
       }
     },
     {
-      "player": "Justin Herbert",
+      "player": "DraftKings Sportsbook James Cook",
+      "market": "Rushing Yards",
+      "side": "UNDER",
+      "line": 78.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.si.com/betting/best-nfl-prop-bets-today-for-week-3-bet-on-lamar-jackson-to-torch-cowboys-defense-01m3cqa02qrb"
+      }
+    },
+    {
+      "player": "Lamar Jackson",
       "market": "Passing Yards",
       "side": "OVER",
-      "line": 219.5,
+      "line": 240.5,
       "week": 3,
       "source": {
-        "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
+        "url": "https://www.si.com/betting/best-nfl-prop-bets-today-for-week-3-bet-on-lamar-jackson-to-torch-cowboys-defense-01m3cqa02qrb"
       }
     },
     {
-      "player": "Titans Wentz",
-      "market": "Passing Yards",
-      "side": "OVER",
-      "line": 224.5,
+      "player": "James Cook",
+      "market": "Rushing Yards",
+      "side": "UNDER",
+      "line": 78.5,
       "week": 3,
       "source": {
-        "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
+        "url": "https://www.si.com/betting/best-nfl-prop-bets-today-for-week-3-bet-on-lamar-jackson-to-torch-cowboys-defense-01m3cqa02qrb"
       }
     },
     {
-      "player": "Jaguars Knox",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 12.5,
-      "week": 3,
-      "source": {
-        "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
-      }
-    },
-    {
-      "player": "Packers Love",
+      "player": "He has gone",
       "market": "Rushing Yards",
       "side": "OVER",
-      "line": 35.5,
+      "line": 83.5,
       "week": 3,
       "source": {
-        "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
+        "url": "https://www.si.com/betting/best-nfl-prop-bets-today-for-week-3-bet-on-lamar-jackson-to-torch-cowboys-defense-01m3cqa02qrb"
       }
     }
   ],
   "includedArticles": [
     {
-      "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/",
-      "title": "Expert NFL Week 3 Picks: Best Bets, Totals, & Props",
+      "url": "https://www.fantasylife.com/articles/betting/nfl-player-props-for-week-3-geno-smith-tyler-allgeier-more",
+      "title": "NFL Player Props For Week 3: Geno Smith, Tyler Allgeier & More",
+      "week": 3
+    },
+    {
+      "url": "https://www.si.com/betting/best-nfl-prop-bets-today-for-week-3-bet-on-lamar-jackson-to-torch-cowboys-defense-01m3cqa02qrb",
+      "title": "Best NFL Prop Bets Today for Week 3 (Bet on Lamar Jackson to Torch Cowboys' Defense)",
       "week": 3
     }
   ],
@@ -95,6 +90,11 @@
     {
       "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-totals-moneyline-parlays-props-bets/",
       "title": "NFL expert picks, odds, predictions, player props, betting guide for Week 1 - CBS Sports",
+      "week": 1
+    },
+    {
+      "url": "https://bleacherreport.com/articles/25497230-bleacher-reports-expert-week-1-2026-nfl-picks",
+      "title": "Bleacher Report&#x27;s Expert Week 1 2026 NFL Picks",
       "week": 1
     },
     {
@@ -123,8 +123,8 @@
       "week": 2
     },
     {
-      "url": "https://www.thelines.com/nfl/player-props/tnf-week-1-nfl-parlay-picks-player-props-best-49ers-vs-rams-bets/",
-      "title": "TNF NFL Parlay Picks & Player Props For Rams vs. 49ers",
+      "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
+      "title": "Week 1 NFL Player Props: Best Prop Bets & Predictions",
       "week": 1
     },
     {
@@ -148,29 +148,19 @@
       "week": 2
     },
     {
+      "url": "https://www.fantasylife.com/articles/betting/lions-vs-bills-picks-odds-predictions-and-player-props-week-2",
+      "title": "Lions vs Bills Picks, Odds, Predictions, and Player Props for TNF Week 2",
+      "week": 2
+    },
+    {
       "url": "https://www.bettingpros.com/articles/nfl-week-2-confidence-pool-picks-predictions-2026/",
       "title": "NFL Week 2 Confidence Pool Picks & Predictions (2026) | BettingPros",
       "week": 2
     },
     {
-      "url": "https://www.bettingpros.com/nfl//",
-      "title": "NFL Betting Picks, Odds & Player Props | BettingPros",
-      "week": null
-    },
-    {
-      "url": "https://www.actionnetwork.com/news/best-nfl-prop-bets-today-steelers-vs-browns-prediction-best-nfl-player-props-anytime-td-scorer-tnf-best-bets",
-      "title": "",
-      "week": null
-    },
-    {
-      "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
-      "title": "",
-      "week": 1
-    },
-    {
-      "url": "https://www.actionnetwork.com/nfl/player-props-for-nfl-week-1-baker-mayfield-deshaun-watson-more",
-      "title": "",
-      "week": 1
+      "url": "https://www.fantasylife.com/articles/betting/nfl-player-props-for-week-2-garrett-wilson-primed-for-takeoff",
+      "title": "NFL Player Props For Week 2: Garrett Wilson Primed For Takeoff",
+      "week": 2
     }
   ],
   "extractionFailures": []
