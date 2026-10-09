@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-09T20:28:53.172Z",
+  "generatedAt": "2026-10-09T22:30:04.710Z",
   "inputArticleCount": 20,
   "includedArticleCount": 1,
   "excludedArticleCount": 19,
@@ -98,11 +98,6 @@
       "week": 1
     },
     {
-      "url": "https://bleacherreport.com/articles/25497230-bleacher-reports-expert-week-1-2026-nfl-picks",
-      "title": "Bleacher Report&#x27;s Expert Week 1 2026 NFL Picks",
-      "week": 1
-    },
-    {
       "url": "https://www.cbssports.com/betting/news/saints-vs-falcons-picks-player-props-experts-best-bets-for-nfl-week-4-monday-night-football/",
       "title": "Saints vs. Falcons picks, player props: Expert's best bets for NFL Week 4 Monday Night Football - CBS Sports",
       "week": 4
@@ -128,14 +123,14 @@
       "week": 2
     },
     {
-      "url": "https://www.thelines.com/nfl/player-props/tnf-week-1-nfl-parlay-picks-player-props-best-49ers-vs-rams-bets/",
-      "title": "TNF NFL Parlay Picks & Player Props For Rams vs. 49ers",
+      "url": "https://www.sportsbookreview.com/picks/nfl/cowboys-vs-giants-player-prop-bets-week-1-2026/",
+      "title": "Cowboys vs. Giants Player Props & Best Bets | NFL Week 1 Prop Bets",
       "week": 1
     },
     {
-      "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-bills-vs-lions-week-2-bm16/",
-      "title": "2 Best NFL Player Props for TNF: Bills vs Lions | BetMGM",
-      "week": 2
+      "url": "https://www.thelines.com/nfl/player-props/tnf-week-1-nfl-parlay-picks-player-props-best-49ers-vs-rams-bets/",
+      "title": "TNF NFL Parlay Picks & Player Props For Rams vs. 49ers",
+      "week": 1
     },
     {
       "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
@@ -155,6 +150,11 @@
     {
       "url": "https://dknetwork.draftkings.com/2026/09/17/lions-vs-bills-nfl-player-prop-bets-and-picks-for-thursday-night-football/",
       "title": "Lions vs. Bills NFL Player Prop Bets and Picks for Thursday Night Football",
+      "week": 2
+    },
+    {
+      "url": "https://www.actionnetwork.com/nfl/player-props-for-nfl-week-2-aaron-rodgers-jeremiyah-love",
+      "title": "",
       "week": 2
     },
     {
