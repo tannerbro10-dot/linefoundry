@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-09T06:37:16.328Z",
+  "generatedAt": "2026-10-09T08:32:49.763Z",
   "inputArticleCount": 20,
   "includedArticleCount": 1,
   "excludedArticleCount": 19,
@@ -133,6 +133,11 @@
       "week": 1
     },
     {
+      "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-bills-vs-lions-week-2-bm16/",
+      "title": "2 Best NFL Player Props for TNF: Bills vs Lions | BetMGM",
+      "week": 2
+    },
+    {
       "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
       "title": "NFL Player Props | DraftKings Sportsbook",
       "week": 1
@@ -153,22 +158,17 @@
       "week": 2
     },
     {
-      "url": "https://www.bettingpros.com/nfl//",
-      "title": "NFL Betting Picks, Odds & Player Props | BettingPros",
-      "week": null
-    },
-    {
-      "url": "https://www.actionnetwork.com/nfl/player-props-for-nfl-week-2-aaron-rodgers-jeremiyah-love",
-      "title": "",
-      "week": 2
-    },
-    {
       "url": "https://www.actionnetwork.com/news/best-nfl-prop-bets-today-steelers-vs-browns-prediction-best-nfl-player-props-anytime-td-scorer-tnf-best-bets",
       "title": "",
       "week": null
     },
     {
       "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
+      "title": "",
+      "week": 1
+    },
+    {
+      "url": "https://www.actionnetwork.com/nfl/player-props-for-nfl-week-1-baker-mayfield-deshaun-watson-more",
       "title": "",
       "week": 1
     }
