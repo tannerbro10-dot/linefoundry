@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-09T12:34:47.235Z",
+  "generatedAt": "2026-10-09T14:34:48.826Z",
   "inputArticleCount": 20,
   "includedArticleCount": 1,
   "excludedArticleCount": 19,
@@ -98,11 +98,6 @@
       "week": 1
     },
     {
-      "url": "https://bleacherreport.com/articles/25497230-bleacher-reports-expert-week-1-2026-nfl-picks",
-      "title": "Bleacher Report&#x27;s Expert Week 1 2026 NFL Picks",
-      "week": 1
-    },
-    {
       "url": "https://www.cbssports.com/betting/news/saints-vs-falcons-picks-player-props-experts-best-bets-for-nfl-week-4-monday-night-football/",
       "title": "Saints vs. Falcons picks, player props: Expert's best bets for NFL Week 4 Monday Night Football - CBS Sports",
       "week": 4
@@ -158,9 +153,9 @@
       "week": 2
     },
     {
-      "url": "https://www.actionnetwork.com/nfl/player-props-for-nfl-week-2-aaron-rodgers-jeremiyah-love",
-      "title": "",
-      "week": 2
+      "url": "https://www.bettingpros.com/nfl//",
+      "title": "NFL Betting Picks, Odds & Player Props | BettingPros",
+      "week": null
     },
     {
       "url": "https://www.actionnetwork.com/news/best-nfl-prop-bets-today-steelers-vs-browns-prediction-best-nfl-player-props-anytime-td-scorer-tnf-best-bets",
@@ -169,6 +164,11 @@
     },
     {
       "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
+      "title": "",
+      "week": 1
+    },
+    {
+      "url": "https://www.actionnetwork.com/nfl/player-props-for-nfl-week-1-baker-mayfield-deshaun-watson-more",
       "title": "",
       "week": 1
     }
