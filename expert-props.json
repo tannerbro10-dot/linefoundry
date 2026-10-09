@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-09T00:42:26.148Z",
+  "generatedAt": "2026-10-09T02:28:45.683Z",
   "inputArticleCount": 20,
   "includedArticleCount": 1,
   "excludedArticleCount": 19,
@@ -158,17 +158,17 @@
       "week": null
     },
     {
-      "url": "https://www.actionnetwork.com/nfl/player-props-for-nfl-week-2-aaron-rodgers-jeremiyah-love",
-      "title": "",
-      "week": 2
-    },
-    {
       "url": "https://www.actionnetwork.com/news/best-nfl-prop-bets-today-steelers-vs-browns-prediction-best-nfl-player-props-anytime-td-scorer-tnf-best-bets",
       "title": "",
       "week": null
     },
     {
       "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
+      "title": "",
+      "week": 1
+    },
+    {
+      "url": "https://www.actionnetwork.com/nfl/player-props-for-nfl-week-1-baker-mayfield-deshaun-watson-more",
       "title": "",
       "week": 1
     }
