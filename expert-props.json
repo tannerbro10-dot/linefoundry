@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-08T22:29:52.910Z",
+  "generatedAt": "2026-10-09T00:42:26.148Z",
   "inputArticleCount": 20,
   "includedArticleCount": 1,
   "excludedArticleCount": 19,
@@ -103,14 +103,14 @@
       "week": 1
     },
     {
+      "url": "https://www.cbssports.com/betting/news/saints-vs-falcons-picks-player-props-experts-best-bets-for-nfl-week-4-monday-night-football/",
+      "title": "Saints vs. Falcons picks, player props: Expert's best bets for NFL Week 4 Monday Night Football - CBS Sports",
+      "week": 4
+    },
+    {
       "url": "https://www.cbssports.com/nfl/news/nfl-picks-this-week-vegas-odds-2026-wild-card-expert-predictions-spread-parlay-player-props/",
       "title": "NFL picks this week, Vegas odds: 2026 Wild Card expert predictions against the spread, parlay, and props - CBS Sports",
       "week": 10
-    },
-    {
-      "url": "https://www.cbssports.com/nfl/news/nfl-picks-vegas-odds-2026-divisional-round-expert-predictions-spread-parlay-player-props-best-bets-sunday/",
-      "title": "NFL picks this week, Vegas odds: 2026 divisional round expert predictions against the spread, parlay and props - CBS Sports",
-      "week": 5
     },
     {
       "url": "https://dknetwork.draftkings.com/2026/09/13/nfl-player-prop-bets-week-1/",
@@ -133,11 +133,6 @@
       "week": 1
     },
     {
-      "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-bills-vs-lions-week-2-bm16/",
-      "title": "2 Best NFL Player Props for TNF: Bills vs Lions | BetMGM",
-      "week": 2
-    },
-    {
       "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
       "title": "NFL Player Props | DraftKings Sportsbook",
       "week": 1
@@ -153,6 +148,16 @@
       "week": 2
     },
     {
+      "url": "https://www.bettingpros.com/articles/nfl-week-2-confidence-pool-picks-predictions-2026/",
+      "title": "NFL Week 2 Confidence Pool Picks & Predictions (2026) | BettingPros",
+      "week": 2
+    },
+    {
+      "url": "https://www.bettingpros.com/nfl//",
+      "title": "NFL Betting Picks, Odds & Player Props | BettingPros",
+      "week": null
+    },
+    {
       "url": "https://www.actionnetwork.com/nfl/player-props-for-nfl-week-2-aaron-rodgers-jeremiyah-love",
       "title": "",
       "week": 2
@@ -164,11 +169,6 @@
     },
     {
       "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
-      "title": "",
-      "week": 1
-    },
-    {
-      "url": "https://www.actionnetwork.com/nfl/player-props-for-nfl-week-1-baker-mayfield-deshaun-watson-more",
       "title": "",
       "week": 1
     }
