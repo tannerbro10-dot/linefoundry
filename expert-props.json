@@ -1,23 +1,13 @@
 {
   "success": true,
-  "generatedAt": "2026-10-09T16:31:13.358Z",
+  "generatedAt": "2026-10-09T18:32:21.449Z",
   "inputArticleCount": 20,
   "includedArticleCount": 2,
   "excludedArticleCount": 18,
   "extractionFailureCount": 0,
-  "propCount": 5,
-  "publishedWeek3SignalCount": 5,
+  "propCount": 4,
+  "publishedWeek3SignalCount": 4,
   "props": [
-    {
-      "player": "Tyler Allgeier",
-      "market": "Receiving Yards",
-      "side": "UNDER",
-      "line": 33.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.fantasylife.com/articles/betting/nfl-player-props-for-week-3-geno-smith-tyler-allgeier-more"
-      }
-    },
     {
       "player": "DraftKings Sportsbook James Cook",
       "market": "Rushing Yards",
@@ -61,8 +51,8 @@
   ],
   "includedArticles": [
     {
-      "url": "https://www.fantasylife.com/articles/betting/nfl-player-props-for-week-3-geno-smith-tyler-allgeier-more",
-      "title": "NFL Player Props For Week 3: Geno Smith, Tyler Allgeier & More",
+      "url": "https://www.sportsline.com/insiders/nfl-picks-stefon-diggs-prop-among-sportsline-expert-propbetguys-best-bets-for-week-3-of-2026-season/",
+      "title": "NFL picks: Stefon Diggs prop among SportsLine expert PropBetGuy&#x27;s best bets for Week 3 of 2026 season - SportsLine.com",
       "week": 3
     },
     {
@@ -123,8 +113,8 @@
       "week": 2
     },
     {
-      "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
-      "title": "Week 1 NFL Player Props: Best Prop Bets & Predictions",
+      "url": "https://www.thelines.com/nfl/player-props/tnf-week-1-nfl-parlay-picks-player-props-best-49ers-vs-rams-bets/",
+      "title": "TNF NFL Parlay Picks & Player Props For Rams vs. 49ers",
       "week": 1
     },
     {
@@ -148,8 +138,8 @@
       "week": 2
     },
     {
-      "url": "https://www.fantasylife.com/articles/betting/lions-vs-bills-picks-odds-predictions-and-player-props-week-2",
-      "title": "Lions vs Bills Picks, Odds, Predictions, and Player Props for TNF Week 2",
+      "url": "https://www.bettingpros.com/articles/best-nfl-player-props-picks-for-week-2-2026/",
+      "title": "Best NFL Player Props & Picks for Week 2 (2026) | BettingPros",
       "week": 2
     },
     {
@@ -158,9 +148,9 @@
       "week": 2
     },
     {
-      "url": "https://www.fantasylife.com/articles/betting/nfl-player-props-for-week-2-garrett-wilson-primed-for-takeoff",
-      "title": "NFL Player Props For Week 2: Garrett Wilson Primed For Takeoff",
-      "week": 2
+      "url": "https://www.bettingpros.com/nfl//",
+      "title": "NFL Betting Picks, Odds & Player Props | BettingPros",
+      "week": null
     }
   ],
   "extractionFailures": []

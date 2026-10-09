@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-10-09T16:31:13.357Z",
+  "refreshedAt": "2026-10-09T18:32:21.448Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -503,18 +503,6 @@
       "sourceId": "ariel-epstein-hardrock-week2",
       "week": 2,
       "note": "Hard Rock Bet Week 2 player prop."
-    },
-    {
-      "id": "tyler-allgeier-receiving-yards-under-33-5-yep-w3",
-      "player": "Tyler Allgeier",
-      "market": "Receiving Yards",
-      "side": "UNDER",
-      "line": 33.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.fantasylife.com/articles/betting/nfl-player-props-for-week-3-geno-smith-tyler-allgeier-more"
     },
     {
       "id": "draftkings-sportsbook-james-cook-rushing-yards-under-78-5-yep-w3",
