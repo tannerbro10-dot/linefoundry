@@ -1,115 +1,14 @@
 {
   "success": true,
-  "generatedAt": "2026-10-10T10:27:50.104Z",
-  "inputArticleCount": 20,
+  "generatedAt": "2026-10-10T12:33:09.229Z",
+  "inputArticleCount": 0,
   "includedArticleCount": 0,
-  "excludedArticleCount": 20,
+  "excludedArticleCount": 0,
   "extractionFailureCount": 0,
   "propCount": 0,
   "publishedWeek3SignalCount": 0,
   "props": [],
   "includedArticles": [],
-  "excludedArticles": [
-    {
-      "url": "https://www.cbssports.com/betting/news/nfl-player-props-week-4-2026-best-bets-picks-sundays-nfl-games-patrick-mahomes-jahmyr-gibbs/",
-      "title": "NFL Player Props Week 3 2026: Best Prop Bets for Sunday - CBS Sports",
-      "week": 4
-    },
-    {
-      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-4-best-bets-expert-picks-rams-eagles-chiefs-raiders",
-      "title": "2026 NFL Week 4 Best Bets, Expert Picks: Back Rams To Bounce Back At Eagles | FOX Sports",
-      "week": 4
-    },
-    {
-      "url": "https://www.cbssports.com/betting/news/panthers-vs-lions-picks-prediction-player-props-experts-nfl-week-4-best-bets-for-sunday-night-football/",
-      "title": "Panthers vs. Lions picks, prediction, player props: Expert's NFL Week 4 best bets for Sunday Night Football - CBS Sports",
-      "week": 4
-    },
-    {
-      "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-totals-moneyline-parlays-props-bets/",
-      "title": "NFL expert picks, odds, predictions, player props, betting guide for Week 1 - CBS Sports",
-      "week": 1
-    },
-    {
-      "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
-      "title": "Week 1 NFL Player Props: Best Prop Bets & Predictions",
-      "week": 1
-    },
-    {
-      "url": "https://www.cbssports.com/betting/news/saints-vs-falcons-picks-player-props-experts-best-bets-for-nfl-week-4-monday-night-football/",
-      "title": "Saints vs. Falcons picks, player props: Expert's best bets for NFL Week 4 Monday Night Football - CBS Sports",
-      "week": 4
-    },
-    {
-      "url": "https://www.cbssports.com/nfl/news/nfl-picks-this-week-vegas-odds-2026-wild-card-expert-predictions-spread-parlay-player-props/",
-      "title": "NFL picks this week, Vegas odds: 2026 Wild Card expert predictions against the spread, parlay, and props - CBS Sports",
-      "week": 10
-    },
-    {
-      "url": "https://dknetwork.draftkings.com/2026/09/13/nfl-player-prop-bets-week-1/",
-      "title": "Best NFL Player Prop Bets for Week 1",
-      "week": 1
-    },
-    {
-      "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-odds-picks-predictions/",
-      "title": "Week 5 NFL Player Prop Odds & Picks: Lines & Best Bets",
-      "week": 5
-    },
-    {
-      "url": "https://www.sportsbettingdime.com/news/nfl/nfl-week-2-player-props-picks-best-bets-predictions-all-30-teams/",
-      "title": "NFL Week 2 Player Props Picks: Best Bets and Predictions",
-      "week": 2
-    },
-    {
-      "url": "https://www.sportsbookreview.com/picks/nfl/cowboys-vs-giants-player-prop-bets-week-1-2026/",
-      "title": "Cowboys vs. Giants Player Props & Best Bets | NFL Week 1 Prop Bets",
-      "week": 1
-    },
-    {
-      "url": "https://www.thelines.com/nfl/player-props/tnf-week-1-nfl-parlay-picks-player-props-best-49ers-vs-rams-bets/",
-      "title": "TNF NFL Parlay Picks & Player Props For Rams vs. 49ers",
-      "week": 1
-    },
-    {
-      "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
-      "title": "NFL Player Props | DraftKings Sportsbook",
-      "week": 1
-    },
-    {
-      "url": "https://www.bettingpros.com/articles/nfl-player-props-bets-patriots-vs-seahawks-wednesday/",
-      "title": "NFL Player Props & Bets: Patriots vs. Seahawks (Wednesday) | BettingPros",
-      "week": null
-    },
-    {
-      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-2-best-bets-expert-picks-back-commanders-cover-cowboys",
-      "title": "2026 NFL Week 2 Best Bets, Expert Picks: Back Commanders To Cover At Cowboys | FOX Sports",
-      "week": 2
-    },
-    {
-      "url": "https://dknetwork.draftkings.com/2026/09/17/lions-vs-bills-nfl-player-prop-bets-and-picks-for-thursday-night-football/",
-      "title": "Lions vs. Bills NFL Player Prop Bets and Picks for Thursday Night Football",
-      "week": 2
-    },
-    {
-      "url": "https://www.bettingpros.com/articles/nfl-week-2-confidence-pool-picks-predictions-2026/",
-      "title": "NFL Week 2 Confidence Pool Picks & Predictions (2026) | BettingPros",
-      "week": 2
-    },
-    {
-      "url": "https://www.actionnetwork.com/news/best-nfl-prop-bets-today-steelers-vs-browns-prediction-best-nfl-player-props-anytime-td-scorer-tnf-best-bets",
-      "title": "",
-      "week": null
-    },
-    {
-      "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
-      "title": "",
-      "week": 1
-    },
-    {
-      "url": "https://www.actionnetwork.com/nfl/player-props-for-nfl-week-1-baker-mayfield-deshaun-watson-more",
-      "title": "",
-      "week": 1
-    }
-  ],
+  "excludedArticles": [],
   "extractionFailures": []
 }
