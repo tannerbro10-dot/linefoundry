@@ -1,81 +1,14 @@
 {
   "success": true,
-  "generatedAt": "2026-10-10T04:30:13.460Z",
+  "generatedAt": "2026-10-10T06:34:18.099Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 1,
-  "excludedArticleCount": 19,
+  "includedArticleCount": 0,
+  "excludedArticleCount": 20,
   "extractionFailureCount": 0,
-  "propCount": 6,
-  "publishedWeek3SignalCount": 6,
-  "props": [
-    {
-      "player": "He has also gone",
-      "market": "Rushing Yards",
-      "side": "OVER",
-      "line": 85.5,
-      "week": 3,
-      "source": {
-        "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
-      }
-    },
-    {
-      "player": "Best Bets Kyle Pitts",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 35.5,
-      "week": 3,
-      "source": {
-        "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
-      }
-    },
-    {
-      "player": "Justin Herbert",
-      "market": "Passing Yards",
-      "side": "OVER",
-      "line": 219.5,
-      "week": 3,
-      "source": {
-        "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
-      }
-    },
-    {
-      "player": "Titans Wentz",
-      "market": "Passing Yards",
-      "side": "OVER",
-      "line": 224.5,
-      "week": 3,
-      "source": {
-        "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
-      }
-    },
-    {
-      "player": "Jaguars Knox",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 12.5,
-      "week": 3,
-      "source": {
-        "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
-      }
-    },
-    {
-      "player": "Packers Love",
-      "market": "Rushing Yards",
-      "side": "OVER",
-      "line": 35.5,
-      "week": 3,
-      "source": {
-        "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
-      }
-    }
-  ],
-  "includedArticles": [
-    {
-      "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/",
-      "title": "Expert NFL Week 3 Picks: Best Bets, Totals, & Props",
-      "week": 3
-    }
-  ],
+  "propCount": 0,
+  "publishedWeek3SignalCount": 0,
+  "props": [],
+  "includedArticles": [],
   "excludedArticles": [
     {
       "url": "https://www.cbssports.com/betting/news/nfl-player-props-week-4-2026-best-bets-picks-sundays-nfl-games-patrick-mahomes-jahmyr-gibbs/",
@@ -89,11 +22,17 @@
     },
     {
       "url": "https://www.cbssports.com/betting/news/panthers-vs-lions-picks-prediction-player-props-experts-nfl-week-4-best-bets-for-sunday-night-football/",
+      "title": "Panthers vs. Lions picks, prediction, player props: Expert's NFL Week 4 best bets for Sunday Night Football - CBS Sports",
       "week": 4
     },
     {
       "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-totals-moneyline-parlays-props-bets/",
       "title": "NFL expert picks, odds, predictions, player props, betting guide for Week 1 - CBS Sports",
+      "week": 1
+    },
+    {
+      "url": "https://bleacherreport.com/articles/25497230-bleacher-reports-expert-week-1-2026-nfl-picks",
+      "title": "Bleacher Report&#x27;s Expert Week 1 2026 NFL Picks",
       "week": 1
     },
     {
@@ -127,11 +66,6 @@
       "week": 2
     },
     {
-      "url": "https://www.sportsbookreview.com/picks/nfl/cowboys-vs-giants-player-prop-bets-week-1-2026/",
-      "title": "Cowboys vs. Giants Player Props & Best Bets | NFL Week 1 Prop Bets",
-      "week": 1
-    },
-    {
       "url": "https://www.thelines.com/nfl/player-props/tnf-week-1-nfl-parlay-picks-player-props-best-49ers-vs-rams-bets/",
       "title": "TNF NFL Parlay Picks & Player Props For Rams vs. 49ers",
       "week": 1
@@ -157,13 +91,18 @@
       "week": 2
     },
     {
+      "url": "https://www.bettingpros.com/articles/best-nfl-player-props-picks-for-week-2-2026/",
+      "title": "Best NFL Player Props & Picks for Week 2 (2026) | BettingPros",
+      "week": 2
+    },
+    {
       "url": "https://www.bettingpros.com/articles/nfl-week-2-confidence-pool-picks-predictions-2026/",
       "title": "NFL Week 2 Confidence Pool Picks & Predictions (2026) | BettingPros",
       "week": 2
     },
     {
-      "url": "https://www.actionnetwork.com/news/best-nfl-prop-bets-today-steelers-vs-browns-prediction-best-nfl-player-props-anytime-td-scorer-tnf-best-bets",
-      "title": "",
+      "url": "https://www.bettingpros.com/nfl//",
+      "title": "NFL Betting Picks, Odds & Player Props | BettingPros",
       "week": null
     },
     {
