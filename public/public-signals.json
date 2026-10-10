@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-10-10T02:29:43.608Z",
+  "refreshedAt": "2026-10-10T04:30:13.460Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -575,42 +575,6 @@
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
       "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
-    },
-    {
-      "id": "tony-pollard-rushing-yards-over-48-5-yep-w3",
-      "player": "Tony Pollard",
-      "market": "Rushing Yards",
-      "side": "OVER",
-      "line": 48.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-3-2026/"
-    },
-    {
-      "id": "pat-freiermuth-receiving-yards-over-36-5-yep-w3",
-      "player": "Pat Freiermuth",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 36.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-3-2026/"
-    },
-    {
-      "id": "oronde-gadsden-receiving-yards-over-35-5-yep-w3",
-      "player": "Oronde Gadsden",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 35.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-3-2026/"
     }
   ]
 }

@@ -1,12 +1,12 @@
 {
   "success": true,
-  "generatedAt": "2026-10-10T02:29:43.608Z",
+  "generatedAt": "2026-10-10T04:30:13.460Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 2,
-  "excludedArticleCount": 18,
+  "includedArticleCount": 1,
+  "excludedArticleCount": 19,
   "extractionFailureCount": 0,
-  "propCount": 9,
-  "publishedWeek3SignalCount": 9,
+  "propCount": 6,
+  "publishedWeek3SignalCount": 6,
   "props": [
     {
       "player": "He has also gone",
@@ -67,47 +67,12 @@
       "source": {
         "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
       }
-    },
-    {
-      "player": "Tony Pollard",
-      "market": "Rushing Yards",
-      "side": "OVER",
-      "line": 48.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-3-2026/"
-      }
-    },
-    {
-      "player": "Pat Freiermuth",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 36.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-3-2026/"
-      }
-    },
-    {
-      "player": "Oronde Gadsden",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 35.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-3-2026/"
-      }
     }
   ],
   "includedArticles": [
     {
       "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/",
       "title": "Expert NFL Week 3 Picks: Best Bets, Totals, & Props",
-      "week": 3
-    },
-    {
-      "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-3-2026/",
-      "title": "Week 3 NFL Player Props: Best Prop Bets & Predictions",
       "week": 3
     }
   ],
@@ -124,12 +89,16 @@
     },
     {
       "url": "https://www.cbssports.com/betting/news/panthers-vs-lions-picks-prediction-player-props-experts-nfl-week-4-best-bets-for-sunday-night-football/",
-      "title": "Panthers vs. Lions picks, prediction, player props: Expert's NFL Week 4 best bets for Sunday Night Football - CBS Sports",
       "week": 4
     },
     {
       "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-totals-moneyline-parlays-props-bets/",
       "title": "NFL expert picks, odds, predictions, player props, betting guide for Week 1 - CBS Sports",
+      "week": 1
+    },
+    {
+      "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
+      "title": "Week 1 NFL Player Props: Best Prop Bets & Predictions",
       "week": 1
     },
     {
@@ -193,14 +162,14 @@
       "week": 2
     },
     {
-      "url": "https://www.bettingpros.com/nfl//",
-      "title": "NFL Betting Picks, Odds & Player Props | BettingPros",
-      "week": null
-    },
-    {
       "url": "https://www.actionnetwork.com/news/best-nfl-prop-bets-today-steelers-vs-browns-prediction-best-nfl-player-props-anytime-td-scorer-tnf-best-bets",
       "title": "",
       "week": null
+    },
+    {
+      "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
+      "title": "",
+      "week": 1
     }
   ],
   "extractionFailures": []
