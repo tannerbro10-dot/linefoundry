@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "ce0bea27a4963ad660d3262d14df1a1a",
+  "request_id": "29b726e0d9dd848ded0ef38d13c6d882",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -75,16 +75,6 @@
         "The NFL, however, is a strength for the site as SportsLine currently has five total experts who are on NFL runs that have returned $1,000 or more for $100 players and one who has returned more than $1,500. Anybody following their NFL betting picks at sportsbooks and on betting sites could have seen strong returns. Now, with the Wild Card Weekend NFL schedule quickly approaching, SportsLine's top NFL experts are already locking in their picks. Go to SportsLine to see them all now Top Wild Card Weekend NFL expert picks from Doug Kralstein Better known as 'Prop Bet Guy,' Kralstein specializes in player props, and since joining SportsLine in 2024, he is up 112 units on his NFL player props. He enters NFL Wild Card Sunday on another strong run, going 55-37 (+1212) on his past 92 NFL player prop picks. This week, he is backing Eagles RB Saquon Barkley over 18.5 carries (-122) against the 49ers on Sunday."
       ],
       "favicon": "https://platform.yep.com/app/favicon?domain=www.cbssports.com&key=62f83a14c8ef581e1570ef2347c0a0b566503b5cbab389dabf5e5fdf5462a1e1"
-    },
-    {
-      "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/",
-      "title": "Expert NFL Picks: Week 3 best bets, predictions, and player props from Zachary Cohen",
-      "description": "We’ve analyzed every matchup on the Week 3 slate to deliver the smartest bets and sharpest edges on sides, totals, and props.",
-      "published_date": "2026-09-23T00:00:00.000Z",
-      "highlights": [
-        "It’s time for Week 3 of the 2026 NFL season. I strongly suggest you check out the Week 3 NFL Betting Hub , where you’ll find all of the features and picks from my talented co-workers. On top of that, we never stop pumping out good NFL content on our live shows That’s the beauty of being a subscriber. As a company, we’re relentless in our effort to get you prepared for these games. With that out of the way, let’s get into the fun stuff. Keep reading for my Week 3 NFL best bets and Week 3 NFL player props. MORE: Check out our Pro Picks page for NFL best bets from all of our analysts New England Patriots at Jacksonville Jaguars – 1:00 pm ET The Jaguars are coming off a loss last week, but there’s no shame in losing to the Broncos. That was a meeting between two teams that can easily work themselves deep into the AFC playoffs. Denver just so happened to be the home team."
-      ],
-      "favicon": "https://platform.yep.com/app/favicon?domain=vsin.com&key=6cbf4966e1fce1e46f22e6c5a968e414e14ab4f54e7d87a9dcbd009e3198d1f0"
     },
     {
       "url": "https://dknetwork.draftkings.com/2026/09/13/nfl-player-prop-bets-week-1/",
@@ -177,6 +167,16 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=dknetwork.draftkings.com&key=e2a1d1255285e29468c20b22206f7a01bf3090a0964f58844fedf2a578751606"
     },
     {
+      "url": "https://www.bettingpros.com/articles/nfl-week-2-confidence-pool-picks-predictions-2026/",
+      "title": "NFL Week 2 Confidence Pool Picks & Predictions (2026)",
+      "description": "In Week 1, we finished with a 9-5 record and earned 95 confidence points in ESPN’s Pick ’em challenge. That puts us in 23,820th place. Let’s try to improve on that ranking in Week 2. Below are my NFL Week 2 confidence pool picks. More NFL Betting Advice NFL Prop Bet Cheat Sheet Expert NFL Game […]",
+      "published_date": "2026-09-16T14:16:20.000Z",
+      "highlights": [
+        "(4) Bengals | Bengals vs. Texans Both teams reached 30+ points in Week 1. However, this game will likely be more low-scoring. The Bengals have the more reliable offense right now. (5) Jets | Packers vs. Jets The Packers couldn’t protect Jordan Love last weekend. In addition, the running game was far from excellent without Josh Jacobs. Meanwhile, the Jets looked like a competent squad against the Titans and tackled extremely well. I’ll take my chances with the home team. (6) Vikings vs. Bears | Vikings vs. Bears I’m not betting on Carson Wentz to be a top-tier quarterback throughout the season. I will bet on Caleb Williams, though. (7) Panthers | Panthers vs. Falcons Carolina’s offense has improved a lot over the last couple of seasons. That’ll be the difference. (8) Bills | Lions vs. Bills"
+      ],
+      "favicon": "https://platform.yep.com/app/favicon?domain=www.bettingpros.com&key=146fad4e75d01205980a465997361d82d8bd198e7757b8cdd7a3a2096d0a5aee"
+    },
+    {
       "url": "https://www.actionnetwork.com/news/best-nfl-prop-bets-today-steelers-vs-browns-prediction-best-nfl-player-props-anytime-td-scorer-tnf-best-bets",
       "title": "Best NFL Prop Bets Today | Steelers vs Browns Prediction: Best NFL Player Props, Anytime TD Scorer (TNF Best Bets)",
       "description": "Best NFL prop bets today: our Steelers vs Browns prediction breaks down anytime TD scorer predictions, rushing props, and the best NFL player props from 10 real Polymarket trades. Use code ACTION for a $50 trading bonus.",
@@ -207,13 +207,13 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.actionnetwork.com&key=4c0e69d458973bd5b4959696e2b2d51814b5484db99c817b2a7d45f7ef6c3ea9"
     }
   ],
-  "response_time_ms": 405.66,
+  "response_time_ms": 487.87,
   "api_cost": {
     "cost": 0.004,
     "details": "(4/1000)"
   },
   "balance": {
-    "before": "5.8080",
-    "after": 5.804
+    "before": "5.8040",
+    "after": 5.8
   }
 }

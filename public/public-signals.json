@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-10-10T08:28:53.541Z",
+  "refreshedAt": "2026-10-10T10:27:50.104Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -503,78 +503,6 @@
       "sourceId": "ariel-epstein-hardrock-week2",
       "week": 2,
       "note": "Hard Rock Bet Week 2 player prop."
-    },
-    {
-      "id": "he-has-also-gone-rushing-yards-over-85-5-yep-w3",
-      "player": "He has also gone",
-      "market": "Rushing Yards",
-      "side": "OVER",
-      "line": 85.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
-    },
-    {
-      "id": "best-bets-kyle-pitts-receiving-yards-over-35-5-yep-w3",
-      "player": "Best Bets Kyle Pitts",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 35.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
-    },
-    {
-      "id": "justin-herbert-passing-yards-over-219-5-yep-w3",
-      "player": "Justin Herbert",
-      "market": "Passing Yards",
-      "side": "OVER",
-      "line": 219.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
-    },
-    {
-      "id": "titans-wentz-passing-yards-over-224-5-yep-w3",
-      "player": "Titans Wentz",
-      "market": "Passing Yards",
-      "side": "OVER",
-      "line": 224.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
-    },
-    {
-      "id": "jaguars-knox-receiving-yards-over-12-5-yep-w3",
-      "player": "Jaguars Knox",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 12.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
-    },
-    {
-      "id": "packers-love-rushing-yards-over-35-5-yep-w3",
-      "player": "Packers Love",
-      "market": "Rushing Yards",
-      "side": "OVER",
-      "line": 35.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
     }
   ]
 }
