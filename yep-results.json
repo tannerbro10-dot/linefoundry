@@ -1,12 +1,12 @@
 {
   "success": true,
-  "request_id": "06a054e9328ba601679dbc33f43f1ca6",
+  "request_id": "a212ca0965241c305fafc85157f089a7",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
   "location": "US",
   "results": [],
-  "response_time_ms": 903.36,
+  "response_time_ms": 924.69,
   "api_cost": {
     "cost": 0,
     "details": "0"
