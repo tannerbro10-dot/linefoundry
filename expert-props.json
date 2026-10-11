@@ -1,14 +1,287 @@
 {
   "success": true,
-  "generatedAt": "2026-10-11T12:34:28.884Z",
-  "inputArticleCount": 0,
-  "includedArticleCount": 0,
-  "excludedArticleCount": 0,
+  "generatedAt": "2026-10-11T14:29:17.479Z",
+  "inputArticleCount": 20,
+  "includedArticleCount": 2,
+  "excludedArticleCount": 18,
   "extractionFailureCount": 0,
-  "propCount": 0,
-  "publishedWeek3SignalCount": 0,
-  "props": [],
-  "includedArticles": [],
-  "excludedArticles": [],
+  "propCount": 17,
+  "publishedWeek3SignalCount": 17,
+  "props": [
+    {
+      "player": "He has also gone",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 85.5,
+      "week": 3,
+      "source": {
+        "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
+      }
+    },
+    {
+      "player": "Best Bets Kyle Pitts",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 35.5,
+      "week": 3,
+      "source": {
+        "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
+      }
+    },
+    {
+      "player": "Justin Herbert",
+      "market": "Passing Yards",
+      "side": "OVER",
+      "line": 219.5,
+      "week": 3,
+      "source": {
+        "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
+      }
+    },
+    {
+      "player": "Titans Wentz",
+      "market": "Passing Yards",
+      "side": "OVER",
+      "line": 224.5,
+      "week": 3,
+      "source": {
+        "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
+      }
+    },
+    {
+      "player": "Jaguars Knox",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 12.5,
+      "week": 3,
+      "source": {
+        "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
+      }
+    },
+    {
+      "player": "Packers Love",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 35.5,
+      "week": 3,
+      "source": {
+        "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/"
+      }
+    },
+    {
+      "player": "Tony Pollard",
+      "market": "Rushing Attempts",
+      "side": "UNDER",
+      "line": 11.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Rhamondre Stevenson",
+      "market": "Rushing Attempts",
+      "side": "OVER",
+      "line": 12.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Justin Jefferson",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 79.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Cooper Rush",
+      "market": "Passing Yards",
+      "side": "UNDER",
+      "line": 181.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Breece Hall",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 65.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Derrick Henry",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 92.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Chris Godwin",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 42.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Quentin Johnston",
+      "market": "Receptions",
+      "side": "OVER",
+      "line": 3.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Jaxon Smith-Njigba",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 81.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Christian McCaffrey",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 60.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "CeeDee Lamb",
+      "market": "Receptions",
+      "side": "OVER",
+      "line": 5.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    }
+  ],
+  "includedArticles": [
+    {
+      "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/",
+      "title": "Expert NFL Week 3 Picks: Best Bets, Totals, & Props",
+      "week": 3
+    },
+    {
+      "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/",
+      "title": "Sunday NFL Bets: Week 2 expert picks, odds, and player props - Mile High Sports",
+      "week": 3
+    }
+  ],
+  "excludedArticles": [
+    {
+      "url": "https://www.cbssports.com/betting/news/nfl-player-props-week-4-2026-best-bets-picks-sundays-nfl-games-patrick-mahomes-jahmyr-gibbs/",
+      "title": "NFL Player Props Week 3 2026: Best Prop Bets for Sunday - CBS Sports",
+      "week": 4
+    },
+    {
+      "url": "https://www.cbssports.com/betting/news/panthers-vs-lions-picks-prediction-player-props-experts-nfl-week-4-best-bets-for-sunday-night-football/",
+      "title": "Panthers vs. Lions picks, prediction, player props: Expert's NFL Week 4 best bets for Sunday Night Football - CBS Sports",
+      "week": 4
+    },
+    {
+      "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-totals-moneyline-parlays-props-bets/",
+      "title": "NFL expert picks, odds, predictions, player props, betting guide for Week 1 - CBS Sports",
+      "week": 1
+    },
+    {
+      "url": "https://bleacherreport.com/articles/25497230-bleacher-reports-expert-week-1-2026-nfl-picks",
+      "title": "Bleacher Report&#x27;s Expert Week 1 2026 NFL Picks",
+      "week": 1
+    },
+    {
+      "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
+      "title": "Week 1 NFL Player Props: Best Prop Bets & Predictions",
+      "week": 1
+    },
+    {
+      "url": "https://www.cbssports.com/betting/news/saints-vs-falcons-picks-player-props-experts-best-bets-for-nfl-week-4-monday-night-football/",
+      "title": "Saints vs. Falcons picks, player props: Expert's best bets for NFL Week 4 Monday Night Football - CBS Sports",
+      "week": 4
+    },
+    {
+      "url": "https://www.cbssports.com/nfl/news/nfl-picks-this-week-vegas-odds-2026-wild-card-expert-predictions-spread-parlay-player-props/",
+      "title": "NFL picks this week, Vegas odds: 2026 Wild Card expert predictions against the spread, parlay, and props - CBS Sports",
+      "week": 10
+    },
+    {
+      "url": "https://dknetwork.draftkings.com/2026/09/13/nfl-player-prop-bets-week-1/",
+      "title": "Best NFL Player Prop Bets for Week 1",
+      "week": 1
+    },
+    {
+      "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-odds-picks-predictions/",
+      "title": "Week 5 NFL Player Prop Odds & Picks: Lines & Best Bets",
+      "week": 5
+    },
+    {
+      "url": "https://www.sportsbettingdime.com/news/nfl/nfl-week-2-player-props-picks-best-bets-predictions-all-30-teams/",
+      "title": "NFL Week 2 Player Props Picks: Best Bets and Predictions",
+      "week": 2
+    },
+    {
+      "url": "https://www.masslive.com/betting/2026/09/data-projections-show-the-best-player-prop-bets-on-draftkings-ahead-of-nfl-week-3.html",
+      "title": "Data projections show the best player prop bets on DraftKings ahead of NFL Week 3 - masslive.com",
+      "week": 3
+    },
+    {
+      "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
+      "title": "NFL Player Props | DraftKings Sportsbook",
+      "week": 1
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Tbiu-dtM0AU",
+      "title": "- YouTube",
+      "week": null
+    },
+    {
+      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-2-best-bets-expert-picks-back-commanders-cover-cowboys",
+      "title": "2026 NFL Week 2 Best Bets, Expert Picks: Back Commanders To Cover At Cowboys | FOX Sports",
+      "week": 2
+    },
+    {
+      "url": "https://dknetwork.draftkings.com/2026/09/17/lions-vs-bills-nfl-player-prop-bets-and-picks-for-thursday-night-football/",
+      "title": "Lions vs. Bills NFL Player Prop Bets and Picks for Thursday Night Football",
+      "week": 2
+    },
+    {
+      "url": "https://www.syracuse.com/betting/2026/09/experts-release-last-giants-vs-rams-predictions-best-bets-for-week-2-monday-night-football-matthew-stafford-leads-props.html",
+      "title": "Experts release last Giants vs. Rams predictions, best bets for Week 2 Monday Night Football; Matthew Stafford leads props - syracuse.com",
+      "week": 2
+    },
+    {
+      "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
+      "title": "",
+      "week": 1
+    },
+    {
+      "url": "https://www.actionnetwork.com/nfl/player-props-for-nfl-week-1-baker-mayfield-deshaun-watson-more",
+      "title": "",
+      "week": 1
+    }
+  ],
   "extractionFailures": []
 }
