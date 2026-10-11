@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "7552d3212ae52cc079dfcb43f41ce783",
+  "request_id": "78f6a9dc05f564aa124a9d98d7034ec4",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -247,13 +247,13 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=www.actionnetwork.com&key=4c0e69d458973bd5b4959696e2b2d51814b5484db99c817b2a7d45f7ef6c3ea9"
     }
   ],
-  "response_time_ms": 592.21,
+  "response_time_ms": 612.94,
   "api_cost": {
     "cost": 0.004,
     "details": "(4/1000)"
   },
   "balance": {
-    "before": "5.7880",
-    "after": 5.784
+    "before": "5.7840",
+    "after": 5.78
   }
 }
