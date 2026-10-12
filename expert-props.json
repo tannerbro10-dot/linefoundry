@@ -1,9 +1,9 @@
 {
   "success": true,
-  "generatedAt": "2026-10-12T20:32:28.317Z",
+  "generatedAt": "2026-10-12T22:29:45.083Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 2,
-  "excludedArticleCount": 18,
+  "includedArticleCount": 3,
+  "excludedArticleCount": 17,
   "extractionFailureCount": 0,
   "propCount": 7,
   "publishedWeek3SignalCount": 7,
@@ -81,6 +81,11 @@
   ],
   "includedArticles": [
     {
+      "url": "https://www.sportsline.com/insiders/nfl-picks-stefon-diggs-prop-among-sportsline-expert-propbetguys-best-bets-for-week-3-of-2026-season/",
+      "title": "NFL picks: Stefon Diggs prop among SportsLine expert PropBetGuy&#x27;s best bets for Week 3 of 2026 season - SportsLine.com",
+      "week": 3
+    },
+    {
       "url": "https://vsin.com/nfl/expert-nfl-picks-week-3-best-bets-predictions-and-player-props-from-zachary-cohen/",
       "title": "Expert NFL Week 3 Picks: Best Bets, Totals, & Props",
       "week": 3
@@ -113,11 +118,6 @@
       "week": null
     },
     {
-      "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-picks-week-1-2026/",
-      "title": "Week 1 NFL Player Props: Best Prop Bets & Predictions",
-      "week": 1
-    },
-    {
       "url": "https://www.cbssports.com/betting/news/saints-vs-falcons-picks-player-props-experts-best-bets-for-nfl-week-4-monday-night-football/",
       "title": "Saints vs. Falcons picks, player props: Expert's best bets for NFL Week 4 Monday Night Football - CBS Sports",
       "week": 4
@@ -148,14 +148,14 @@
       "week": 2
     },
     {
-      "url": "https://www.thelines.com/nfl/player-props/tnf-week-1-nfl-parlay-picks-player-props-best-49ers-vs-rams-bets/",
-      "title": "TNF NFL Parlay Picks & Player Props For Rams vs. 49ers",
-      "week": 1
-    },
-    {
       "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
       "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
       "week": 7
+    },
+    {
+      "url": "https://www.sportsbettingdime.com/news/nfl/raiders-vs-saints-anytime-td-picks-player-props/",
+      "title": "Raiders vs Saints Anytime TD Picks & Player Props",
+      "week": 6
     },
     {
       "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
@@ -163,12 +163,13 @@
       "week": 1
     },
     {
-      "url": "https://www.bleachernation.com/picks/2026/10/08/player-prop-bets-for-jets-vs-browns-october-11-2026/",
-      "week": null
-    },
-    {
       "url": "https://www.thelines.com/nfl/player-props/snf-week-2-nfl-parlay-picks-player-props-best-chiefs-vs-colts-bets/",
       "title": "SNF Week 2 NFL Parlay Picks & Player Props: Chiefs vs. Colts",
+      "week": 2
+    },
+    {
+      "url": "https://dknetwork.draftkings.com/2026/09/17/lions-vs-bills-nfl-player-prop-bets-and-picks-for-thursday-night-football/",
+      "title": "Lions vs. Bills NFL Player Prop Bets and Picks for Thursday Night Football",
       "week": 2
     },
     {
