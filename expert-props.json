@@ -1,9 +1,9 @@
 {
   "success": true,
-  "generatedAt": "2026-10-11T22:29:17.054Z",
+  "generatedAt": "2026-10-12T00:42:20.323Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 3,
-  "excludedArticleCount": 17,
+  "includedArticleCount": 4,
+  "excludedArticleCount": 16,
   "extractionFailureCount": 0,
   "propCount": 11,
   "publishedWeek3SignalCount": 11,
@@ -126,6 +126,11 @@
       "week": 3
     },
     {
+      "url": "https://www.bettingpros.com/articles/nfl-week-3-picks-predictions-best-early-parlays-2026/",
+      "title": "NFL Week 3 Picks & Predictions: Best Early Parlays (2026) | BettingPros",
+      "week": 3
+    },
+    {
       "url": "https://www.fantasylife.com/articles/betting/nfl-player-props-for-week-3-geno-smith-tyler-allgeier-more",
       "title": "NFL Player Props For Week 3: Geno Smith, Tyler Allgeier & More",
       "week": 3
@@ -181,11 +186,6 @@
       "url": "https://www.sportsbettingdime.com/news/nfl/nfl-week-2-player-props-picks-best-bets-predictions-all-30-teams/",
       "title": "NFL Week 2 Player Props Picks: Best Bets and Predictions",
       "week": 2
-    },
-    {
-      "url": "https://www.thelines.com/nfl/player-props/tnf-week-1-nfl-parlay-picks-player-props-best-49ers-vs-rams-bets/",
-      "title": "TNF NFL Parlay Picks & Player Props For Rams vs. 49ers",
-      "week": 1
     },
     {
       "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
