@@ -1,12 +1,12 @@
 {
   "success": true,
-  "generatedAt": "2026-10-12T16:32:19.477Z",
+  "generatedAt": "2026-10-12T18:35:12.175Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 2,
-  "excludedArticleCount": 18,
+  "includedArticleCount": 3,
+  "excludedArticleCount": 17,
   "extractionFailureCount": 0,
-  "propCount": 7,
-  "publishedWeek3SignalCount": 7,
+  "propCount": 11,
+  "publishedWeek3SignalCount": 11,
   "props": [
     {
       "player": "He has also gone",
@@ -77,6 +77,46 @@
       "source": {
         "url": "https://www.fantasylife.com/articles/betting/nfl-player-props-for-week-3-geno-smith-tyler-allgeier-more"
       }
+    },
+    {
+      "player": "DraftKings Sportsbook James Cook",
+      "market": "Rushing Yards",
+      "side": "UNDER",
+      "line": 78.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.si.com/betting/best-nfl-prop-bets-today-for-week-3-bet-on-lamar-jackson-to-torch-cowboys-defense-01m3cqa02qrb"
+      }
+    },
+    {
+      "player": "Lamar Jackson",
+      "market": "Passing Yards",
+      "side": "OVER",
+      "line": 240.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.si.com/betting/best-nfl-prop-bets-today-for-week-3-bet-on-lamar-jackson-to-torch-cowboys-defense-01m3cqa02qrb"
+      }
+    },
+    {
+      "player": "James Cook",
+      "market": "Rushing Yards",
+      "side": "UNDER",
+      "line": 78.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.si.com/betting/best-nfl-prop-bets-today-for-week-3-bet-on-lamar-jackson-to-torch-cowboys-defense-01m3cqa02qrb"
+      }
+    },
+    {
+      "player": "He has gone",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 83.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.si.com/betting/best-nfl-prop-bets-today-for-week-3-bet-on-lamar-jackson-to-torch-cowboys-defense-01m3cqa02qrb"
+      }
     }
   ],
   "includedArticles": [
@@ -88,6 +128,11 @@
     {
       "url": "https://www.fantasylife.com/articles/betting/nfl-player-props-for-week-3-geno-smith-tyler-allgeier-more",
       "title": "NFL Player Props For Week 3: Geno Smith, Tyler Allgeier & More",
+      "week": 3
+    },
+    {
+      "url": "https://www.si.com/betting/best-nfl-prop-bets-today-for-week-3-bet-on-lamar-jackson-to-torch-cowboys-defense-01m3cqa02qrb",
+      "title": "Best NFL Prop Bets Today for Week 3 (Bet on Lamar Jackson to Torch Cowboys' Defense)",
       "week": 3
     }
   ],
@@ -128,11 +173,6 @@
       "week": 1
     },
     {
-      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-5-picks-best-bets-every-game-wills-wagers",
-      "title": "2026 NFL Week 5 Picks: Best Bets For Every Game — Will&#x27;s Wagers | FOX Sports",
-      "week": 5
-    },
-    {
       "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-odds-picks-predictions/",
       "title": "Week 5 NFL Player Prop Odds & Picks: Lines & Best Bets",
       "week": 5
@@ -143,9 +183,9 @@
       "week": 2
     },
     {
-      "url": "https://www.fantasylife.com/articles/betting/buffalo-bills-vs-new-england-patriots-picks-odds-player-props-an",
-      "title": "Buffalo Bills vs. New England Patriots Picks, Odds, Player Props and Predictions for Week 4",
-      "week": 4
+      "url": "https://www.thelines.com/nfl/player-props/tnf-week-1-nfl-parlay-picks-player-props-best-49ers-vs-rams-bets/",
+      "title": "TNF NFL Parlay Picks & Player Props For Rams vs. 49ers",
+      "week": 1
     },
     {
       "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
@@ -153,19 +193,19 @@
       "week": 7
     },
     {
-      "url": "https://www.sportsbettingdime.com/news/nfl/raiders-vs-saints-anytime-td-picks-player-props/",
-      "title": "Raiders vs Saints Anytime TD Picks & Player Props",
-      "week": 6
-    },
-    {
       "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
       "title": "NFL Player Props | DraftKings Sportsbook",
       "week": 1
     },
     {
-      "url": "https://www.espn.com/espn/betting/story/_/id/50107426/week-5-nfl-odds-props-best-bets-sunday-games",
-      "title": "",
-      "week": 5
+      "url": "https://www.thelines.com/nfl/player-props/snf-week-2-nfl-parlay-picks-player-props-best-chiefs-vs-colts-bets/",
+      "title": "SNF Week 2 NFL Parlay Picks & Player Props: Chiefs vs. Colts",
+      "week": 2
+    },
+    {
+      "url": "https://www.bettingpros.com/articles/nfl-player-props-bets-patriots-vs-seahawks-wednesday/",
+      "title": "NFL Player Props & Bets: Patriots vs. Seahawks (Wednesday) | BettingPros",
+      "week": 7
     },
     {
       "url": "https://www.youtube.com/watch?v=fsFxTk9rsxw",
@@ -173,14 +213,14 @@
       "week": null
     },
     {
-      "url": "https://milehighsports.com/sunday-nfl-bets-week-1-expert-picks-odds-and-player-props/",
-      "title": "Sunday NFL Bets: Week 1 expert picks, odds, and player props - Mile High Sports",
-      "week": 1
-    },
-    {
       "url": "https://www.rotoballer.com/nfl-week-5-best-bets-top-player-props-on-prophetx/1959708",
       "title": "NFL Week 5 Best Bets: Top Player Props on ProphetX",
       "week": 5
+    },
+    {
+      "url": "https://www.si.com/betting/jets-vs-bears-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-4-wager-on-wilson",
+      "title": "Jets vs. Bears Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 4 (Wager on Wilson)",
+      "week": 4
     }
   ],
   "extractionFailures": []
