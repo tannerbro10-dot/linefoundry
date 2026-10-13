@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-13T12:41:00.697Z",
+  "generatedAt": "2026-10-13T14:36:18.618Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -46,14 +46,23 @@
       "week": 5
     },
     {
-      "url": "https://www.cbssports.com/betting/news/2026-nfl-draft-prop-picks-expert-locks-in-best-bets-predictions-including-epic-30-1-pick/",
-      "title": "2026 NFL Draft prop picks: Expert locks in best bets and predictions, including epic 30-1 pick - CBS Sports",
-      "week": null
-    },
-    {
       "url": "https://www.sportsline.com/insiders/nfl-odds-lines-spreads-2026-week-4-picks-predictions-from-proven-model/",
       "title": "NFL odds, lines, spreads: 2026 Week 4 picks, predictions from proven model - SportsLine.com",
       "week": 4
+    },
+    {
+      "url": "https://athlonsports.com/nfl/best-nfl-picks-predictions-against-the-spread-week-4-2026",
+      "week": 4
+    },
+    {
+      "url": "https://www.cbssports.com/betting/news/saints-vs-falcons-picks-player-props-experts-best-bets-for-nfl-week-4-monday-night-football/",
+      "title": "Saints vs. Falcons picks, player props: Expert's best bets for NFL Week 4 Monday Night Football - CBS Sports",
+      "week": 4
+    },
+    {
+      "url": "https://www.sportsline.com/insiders/nfl-week-1-score-predictions-expert-reveals-game-picks-for-the-2026-opening-week/",
+      "title": "NFL Week 1 score predictions: Expert reveals game picks for the 2026 opening week - SportsLine.com",
+      "week": 1
     },
     {
       "url": "https://www.sportsline.com/insiders/nfl-survivor-pool-week-4-2026-pick-from-advanced-computer-model/",
@@ -71,6 +80,11 @@
       "week": 2
     },
     {
+      "url": "https://www.sportsline.com/insiders/2026-nfl-week-4-odds-score-predictions-sportsline-ai-reveals-picks-for-every-game/",
+      "title": "2026 NFL Week 4 odds, score predictions: SportsLine AI reveals picks for every game - SportsLine.com",
+      "week": 4
+    },
+    {
       "url": "https://vsin.com/nfl/expert-nfl-picks-week-2-best-bets-predictions-and-player-props-from-zachary-cohen/",
       "title": "Expert NFL Week 2 Picks: Best Bets, Totals, & Props",
       "week": 2
@@ -78,7 +92,7 @@
     {
       "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
       "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
-      "week": 10
+      "week": 6
     },
     {
       "url": "https://www.sportsline.com/insiders/nfl-odds-lines-spreads-2026-week-4-picks-predictions-from-proven-model-5-way-parlay-pays-nearly-23-1/",
@@ -94,21 +108,6 @@
       "url": "https://www.rotowire.com/football/article/nfl-picks-and-props-for-week-5-sunday-slate-140265",
       "title": "NFL Picks and Props for Week 5 Sunday Slate | RotoWire",
       "week": 5
-    },
-    {
-      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-2-best-bets-expert-picks-back-commanders-cover-cowboys",
-      "title": "2026 NFL Week 2 Best Bets, Expert Picks: Back Commanders To Cover At Cowboys | FOX Sports",
-      "week": 2
-    },
-    {
-      "url": "https://www.espn.com/espn/betting/story/_/id/50107426/week-5-nfl-odds-props-best-bets-sunday-games",
-      "title": "",
-      "week": 5
-    },
-    {
-      "url": "https://www.si.com/betting/jets-vs-bears-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-4-wager-on-wilson",
-      "title": "Jets vs. Bears Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 4 (Wager on Wilson)",
-      "week": 4
     }
   ],
   "extractionFailures": []
