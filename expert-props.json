@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-13T14:36:18.618Z",
+  "generatedAt": "2026-10-13T16:33:49.560Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -46,6 +46,11 @@
       "week": 5
     },
     {
+      "url": "https://www.cbssports.com/betting/news/2026-nfl-draft-prop-picks-expert-locks-in-best-bets-predictions-including-epic-30-1-pick/",
+      "title": "2026 NFL Draft prop picks: Expert locks in best bets and predictions, including epic 30-1 pick - CBS Sports",
+      "week": 7
+    },
+    {
       "url": "https://www.sportsline.com/insiders/nfl-odds-lines-spreads-2026-week-4-picks-predictions-from-proven-model/",
       "title": "NFL odds, lines, spreads: 2026 Week 4 picks, predictions from proven model - SportsLine.com",
       "week": 4
@@ -55,14 +60,9 @@
       "week": 4
     },
     {
-      "url": "https://www.cbssports.com/betting/news/saints-vs-falcons-picks-player-props-experts-best-bets-for-nfl-week-4-monday-night-football/",
-      "title": "Saints vs. Falcons picks, player props: Expert's best bets for NFL Week 4 Monday Night Football - CBS Sports",
-      "week": 4
-    },
-    {
-      "url": "https://www.sportsline.com/insiders/nfl-week-1-score-predictions-expert-reveals-game-picks-for-the-2026-opening-week/",
-      "title": "NFL Week 1 score predictions: Expert reveals game picks for the 2026 opening week - SportsLine.com",
-      "week": 1
+      "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-cowboys-vs-buccaneers-week-5-bm16/",
+      "title": "2 Best NFL Player Props for TNF: Cowboys vs Buccaneers | BetMGM",
+      "week": 5
     },
     {
       "url": "https://www.sportsline.com/insiders/nfl-survivor-pool-week-4-2026-pick-from-advanced-computer-model/",
@@ -71,8 +71,8 @@
     },
     {
       "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-odds-picks-predictions/",
-      "title": "Week 5 NFL Player Prop Odds & Picks: Lines & Best Bets",
-      "week": 5
+      "title": "Week 6 NFL Player Prop Odds & Picks: Lines & Best Bets",
+      "week": 6
     },
     {
       "url": "https://www.sportsbettingdime.com/news/nfl/nfl-week-2-player-props-picks-best-bets-predictions-all-30-teams/",
@@ -105,9 +105,9 @@
       "week": 1
     },
     {
-      "url": "https://www.rotowire.com/football/article/nfl-picks-and-props-for-week-5-sunday-slate-140265",
-      "title": "NFL Picks and Props for Week 5 Sunday Slate | RotoWire",
-      "week": 5
+      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-2-best-bets-expert-picks-back-commanders-cover-cowboys",
+      "title": "2026 NFL Week 2 Best Bets, Expert Picks: Back Commanders To Cover At Cowboys | FOX Sports",
+      "week": 2
     }
   ],
   "extractionFailures": []
