@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-14T11:51:21.199Z",
+  "generatedAt": "2026-10-14T17:10:05.399Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -51,11 +51,6 @@
       "week": 5
     },
     {
-      "url": "https://www.cbssports.com/betting/news/2026-nfl-draft-prop-picks-expert-locks-in-best-bets-predictions-including-epic-30-1-pick/",
-      "title": "2026 NFL Draft prop picks: Expert locks in best bets and predictions, including epic 30-1 pick - CBS Sports",
-      "week": 7
-    },
-    {
       "url": "https://www.sportsline.com/insiders/nfl-odds-lines-spreads-2026-week-4-picks-predictions-from-proven-model/",
       "title": "NFL odds, lines, spreads: 2026 Week 4 picks, predictions from proven model - SportsLine.com",
       "week": 4
@@ -63,6 +58,11 @@
     {
       "url": "https://athlonsports.com/nfl/best-nfl-picks-predictions-against-the-spread-week-4-2026",
       "week": 4
+    },
+    {
+      "url": "https://www.cbssports.com/nfl/news/nfl-picks-this-week-vegas-odds-2026-wild-card-expert-predictions-spread-parlay-player-props/",
+      "title": "NFL picks this week, Vegas odds: 2026 Wild Card expert predictions against the spread, parlay, and props - CBS Sports",
+      "week": 10
     },
     {
       "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-odds-picks-predictions/",
@@ -75,14 +75,14 @@
       "week": 2
     },
     {
-      "url": "https://www.sportsline.com/insiders/2026-nfl-week-4-odds-score-predictions-sportsline-ai-reveals-picks-for-every-game/",
-      "title": "2026 NFL Week 4 odds, score predictions: SportsLine AI reveals picks for every game - SportsLine.com",
-      "week": 4
-    },
-    {
       "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
       "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
       "week": 6
+    },
+    {
+      "url": "https://www.espn.com/espn/betting/story/_/id/50053878/week-4-nfl-odds-spreads-lines-props-best-bets-sunday-football-games",
+      "title": "",
+      "week": 4
     },
     {
       "url": "https://www.sportsline.com/insiders/nfl-odds-lines-spreads-2026-week-4-picks-predictions-from-proven-model-5-way-parlay-pays-nearly-23-1/",
@@ -95,11 +95,6 @@
       "week": 1
     },
     {
-      "url": "https://www.rotowire.com/football/article/nfl-picks-and-props-for-week-5-sunday-slate-140265",
-      "title": "NFL Picks and Props for Week 5 Sunday Slate | RotoWire",
-      "week": 5
-    },
-    {
       "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-2-best-bets-expert-picks-back-commanders-cover-cowboys",
       "title": "2026 NFL Week 2 Best Bets, Expert Picks: Back Commanders To Cover At Cowboys | FOX Sports",
       "week": 2
@@ -108,6 +103,11 @@
       "url": "https://www.espn.com/espn/betting/story/_/id/50107426/week-5-nfl-odds-props-best-bets-sunday-games",
       "title": "",
       "week": 5
+    },
+    {
+      "url": "https://www.si.com/betting/jets-vs-bears-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-4-wager-on-wilson",
+      "title": "Jets vs. Bears Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 4 (Wager on Wilson)",
+      "week": 4
     }
   ],
   "extractionFailures": []
