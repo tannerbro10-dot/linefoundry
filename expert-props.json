@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-15T07:26:05.762Z",
+  "generatedAt": "2026-10-15T13:25:44.125Z",
   "inputArticleCount": 20,
   "includedArticleCount": 1,
   "excludedArticleCount": 19,
@@ -160,7 +160,7 @@
     {
       "url": "https://www.cbssports.com/betting/news/2026-nfl-draft-prop-picks-expert-locks-in-best-bets-predictions-including-epic-30-1-pick/",
       "title": "2026 NFL Draft prop picks: Expert locks in best bets and predictions, including epic 30-1 pick - CBS Sports",
-      "week": 7
+      "week": 6
     },
     {
       "url": "https://www.rotoballer.com/nfl-betting-picks-week-5-player-props-and-parlays-for-monday-night-football-2026/1961911",
@@ -173,24 +173,23 @@
       "week": 4
     },
     {
+      "url": "https://www.si.com/nfl/bills/onsi/betting-week-5-four-bills-player-props-monday-night-back-josh-allen-james-cook-vs-rams",
+      "title": "Four Bills' Player Prop Bets for Monday Night: Back Josh Allen, James Cook vs. Rams",
+      "week": 5
+    },
+    {
       "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-odds-picks-predictions/",
       "title": "Week 6 NFL Player Prop Odds & Picks: Lines & Best Bets",
       "week": 6
     },
     {
-      "url": "https://www.sportsbettingdime.com/news/nfl/nfl-week-2-player-props-picks-best-bets-predictions-all-30-teams/",
-      "title": "NFL Week 2 Player Props Picks: Best Bets and Predictions",
-      "week": 2
-    },
-    {
       "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
       "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
-      "week": 6
+      "week": 7
     },
     {
-      "url": "https://www.sportsbettingdime.com/news/nfl/best-props-to-bet-week-4/",
-      "title": "Best NFL Props to Bet for Week 4 - Exploiting Lines That Don&#039;t Match Production",
-      "week": 4
+      "url": "https://www.bleachernation.com/picks/2026/10/08/player-prop-bets-for-jets-vs-browns-october-11-2026/",
+      "week": null
     },
     {
       "url": "https://www.espn.com/espn/betting/story/_/id/50053878/week-4-nfl-odds-spreads-lines-props-best-bets-sunday-football-games",
@@ -203,13 +202,13 @@
       "week": 1
     },
     {
-      "url": "https://www.actionnetwork.com/nfl/nfl-week-4-player-props-sean-koerner-best-bets-for-sunday",
-      "title": "",
-      "week": 4
-    },
-    {
       "url": "https://www.espn.com/espn/betting/story/_/id/50107426/week-5-nfl-odds-props-best-bets-sunday-games",
       "title": "",
+      "week": 5
+    },
+    {
+      "url": "https://www.rotoballer.com/nfl-week-5-best-bets-top-player-props-on-prophetx/1959708",
+      "title": "NFL Week 5 Best Bets: Top Player Props on ProphetX",
       "week": 5
     },
     {
