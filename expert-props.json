@@ -1,14 +1,131 @@
 {
   "success": true,
-  "generatedAt": "2026-10-14T21:40:50.223Z",
+  "generatedAt": "2026-10-15T00:31:21.869Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 0,
-  "excludedArticleCount": 20,
+  "includedArticleCount": 1,
+  "excludedArticleCount": 19,
   "extractionFailureCount": 0,
-  "propCount": 0,
-  "publishedWeek3SignalCount": 0,
-  "props": [],
-  "includedArticles": [],
+  "propCount": 11,
+  "publishedWeek3SignalCount": 11,
+  "props": [
+    {
+      "player": "Tony Pollard",
+      "market": "Rushing Attempts",
+      "side": "UNDER",
+      "line": 11.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Rhamondre Stevenson",
+      "market": "Rushing Attempts",
+      "side": "OVER",
+      "line": 12.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Justin Jefferson",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 79.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Cooper Rush",
+      "market": "Passing Yards",
+      "side": "UNDER",
+      "line": 181.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Breece Hall",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 65.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Derrick Henry",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 92.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Chris Godwin",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 42.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Quentin Johnston",
+      "market": "Receptions",
+      "side": "OVER",
+      "line": 3.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Jaxon Smith-Njigba",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 81.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Christian McCaffrey",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 60.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "CeeDee Lamb",
+      "market": "Receptions",
+      "side": "OVER",
+      "line": 5.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    }
+  ],
+  "includedArticles": [
+    {
+      "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/",
+      "title": "Sunday NFL Bets: Week 2 expert picks, odds, and player props - Mile High Sports",
+      "week": 3
+    }
+  ],
   "excludedArticles": [
     {
       "url": "https://www.cbssports.com/betting/news/nfl-player-props-week-4-2026-best-bets-picks-sundays-nfl-games-patrick-mahomes-jahmyr-gibbs/",
@@ -46,9 +163,23 @@
       "week": 7
     },
     {
+      "url": "https://www.rotoballer.com/nfl-betting-picks-week-5-player-props-and-parlays-for-monday-night-football-2026/1961911",
+      "title": "NFL Betting Picks: Week 5 Player Props and Parlays for Monday Night Football (2026)",
+      "week": 5
+    },
+    {
+      "url": "https://athlonsports.com/nfl/best-nfl-picks-predictions-against-the-spread-week-4-2026",
+      "week": 4
+    },
+    {
       "url": "https://www.cbssports.com/betting/news/saints-vs-falcons-picks-player-props-experts-best-bets-for-nfl-week-4-monday-night-football/",
       "title": "Saints vs. Falcons picks, player props: Expert's best bets for NFL Week 4 Monday Night Football - CBS Sports",
       "week": 4
+    },
+    {
+      "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-cowboys-vs-buccaneers-week-5-bm16/",
+      "title": "2 Best NFL Player Props for TNF: Cowboys vs Buccaneers | BetMGM",
+      "week": 5
     },
     {
       "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-odds-picks-predictions/",
@@ -66,10 +197,6 @@
       "week": 6
     },
     {
-      "url": "https://www.bleachernation.com/picks/2026/10/08/player-prop-bets-for-jets-vs-browns-october-11-2026/",
-      "week": null
-    },
-    {
       "url": "https://www.espn.com/espn/betting/story/_/id/50053878/week-4-nfl-odds-spreads-lines-props-best-bets-sunday-football-games",
       "title": "",
       "week": 4
@@ -80,23 +207,8 @@
       "week": 1
     },
     {
-      "url": "https://www.actionnetwork.com/nfl/nfl-week-4-player-props-sean-koerner-best-bets-for-sunday",
-      "title": "",
-      "week": 4
-    },
-    {
       "url": "https://www.espn.com/espn/betting/story/_/id/50107426/week-5-nfl-odds-props-best-bets-sunday-games",
       "title": "",
-      "week": 5
-    },
-    {
-      "url": "https://www.youtube.com/watch?v=fsFxTk9rsxw",
-      "title": "- YouTube",
-      "week": null
-    },
-    {
-      "url": "https://www.rotoballer.com/nfl-week-5-best-bets-top-player-props-on-prophetx/1959708",
-      "title": "NFL Week 5 Best Bets: Top Player Props on ProphetX",
       "week": 5
     },
     {
