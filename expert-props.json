@@ -1,13 +1,33 @@
 {
   "success": true,
-  "generatedAt": "2026-10-15T13:25:44.125Z",
+  "generatedAt": "2026-10-15T18:17:46.672Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 1,
-  "excludedArticleCount": 19,
+  "includedArticleCount": 2,
+  "excludedArticleCount": 18,
   "extractionFailureCount": 0,
-  "propCount": 11,
-  "publishedWeek3SignalCount": 11,
+  "propCount": 13,
+  "publishedWeek3SignalCount": 13,
   "props": [
+    {
+      "player": "Case Keenum",
+      "market": "Interceptions",
+      "side": "OVER",
+      "line": 0.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.cbssports.com/betting/news/eagles-vs-bears-picks-player-props-experts-best-bets-for-monday-night-football-in-nfl-week-3/"
+      }
+    },
+    {
+      "player": "Dontayvion Wicks",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 41.5,
+      "week": 3,
+      "source": {
+        "url": "https://www.cbssports.com/betting/news/eagles-vs-bears-picks-player-props-experts-best-bets-for-monday-night-football-in-nfl-week-3/"
+      }
+    },
     {
       "player": "Tony Pollard",
       "market": "Rushing Attempts",
@@ -121,6 +141,11 @@
   ],
   "includedArticles": [
     {
+      "url": "https://www.cbssports.com/betting/news/eagles-vs-bears-picks-player-props-experts-best-bets-for-monday-night-football-in-nfl-week-3/",
+      "title": "Eagles vs. Bears picks, player props: Expert's best bets for Monday Night Football in NFL Week 3 - CBS Sports",
+      "week": 3
+    },
+    {
       "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/",
       "title": "Sunday NFL Bets: Week 2 expert picks, odds, and player props - Mile High Sports",
       "week": 3
@@ -166,11 +191,6 @@
       "url": "https://www.rotoballer.com/nfl-betting-picks-week-5-player-props-and-parlays-for-monday-night-football-2026/1961911",
       "title": "NFL Betting Picks: Week 5 Player Props and Parlays for Monday Night Football (2026)",
       "week": 5
-    },
-    {
-      "url": "https://www.cbssports.com/betting/news/saints-vs-falcons-picks-player-props-experts-best-bets-for-nfl-week-4-monday-night-football/",
-      "title": "Saints vs. Falcons picks, player props: Expert's best bets for NFL Week 4 Monday Night Football - CBS Sports",
-      "week": 4
     },
     {
       "url": "https://www.si.com/nfl/bills/onsi/betting-week-5-four-bills-player-props-monday-night-back-josh-allen-james-cook-vs-rams",
@@ -219,7 +239,7 @@
     {
       "url": "https://sports.yahoo.com/articles/2026-nfl-draft-predictions-best-131800061.html",
       "title": "2026 NFL Draft Round 4 Predictions & Best Bets: Nussmeier Lands in the Big Apple - Yahoo Sports",
-      "week": 5
+      "week": 6
     }
   ],
   "extractionFailures": []
