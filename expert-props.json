@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-16T16:38:59.070Z",
+  "generatedAt": "2026-10-16T21:07:15.919Z",
   "inputArticleCount": 20,
   "includedArticleCount": 1,
   "excludedArticleCount": 19,
@@ -83,9 +83,23 @@
       "week": 4
     },
     {
+      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-5-picks-best-bets-every-game-wills-wagers",
+      "title": "2026 NFL Week 5 Picks: Best Bets For Every Game — Will&#x27;s Wagers | FOX Sports",
+      "week": 5
+    },
+    {
+      "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-odds-picks-predictions/",
+      "title": "Week 6 NFL Player Prop Odds & Picks: Lines & Best Bets",
+      "week": 6
+    },
+    {
       "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
       "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
       "week": 7
+    },
+    {
+      "url": "https://www.bleachernation.com/picks/2026/10/08/player-prop-bets-for-jets-vs-browns-october-11-2026/",
+      "week": null
     },
     {
       "url": "https://www.espn.com/espn/betting/story/_/id/50053878/week-4-nfl-odds-spreads-lines-props-best-bets-sunday-football-games",
@@ -98,39 +112,24 @@
       "week": 1
     },
     {
-      "url": "https://www.actionnetwork.com/nfl/nfl-week-4-player-props-sean-koerner-best-bets-for-sunday",
-      "title": "",
-      "week": 4
-    },
-    {
       "url": "https://www.espn.com/espn/betting/story/_/id/50107426/week-5-nfl-odds-props-best-bets-sunday-games",
       "title": "",
       "week": 5
     },
     {
-      "url": "https://www.actionnetwork.com/nfl/nfl-props-week-1-daniel-jones-dandre-swift-braelon-allen-more",
-      "title": "",
-      "week": 1
-    },
-    {
-      "url": "https://www.actionnetwork.com/nfl/nfl-week-4-sunday-mega-preview-brandon-anderson-picks-props-same-game-parlays",
-      "title": "",
-      "week": 4
-    },
-    {
-      "url": "https://www.actionnetwork.com/news/best-nfl-prop-bets-today-bucs-vs-cowboys-prediction-best-nfl-player-props-anytime-td-scorer-tnf-best-bets",
-      "title": "",
+      "url": "https://www.youtube.com/watch?v=fsFxTk9rsxw",
+      "title": "- YouTube",
       "week": null
     },
     {
-      "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
-      "title": "",
-      "week": 1
+      "url": "https://www.si.com/betting/jets-vs-bears-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-4-wager-on-wilson",
+      "title": "Jets vs. Bears Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 4 (Wager on Wilson)",
+      "week": 4
     },
     {
       "url": "https://sports.yahoo.com/articles/2026-nfl-draft-predictions-best-131800061.html",
       "title": "2026 NFL Draft Round 4 Predictions & Best Bets: Nussmeier Lands in the Big Apple - Yahoo Sports",
-      "week": 5
+      "week": 7
     }
   ],
   "extractionFailures": []
