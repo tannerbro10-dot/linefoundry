@@ -1,7 +1,7 @@
 {
   "week": 1,
   "season": 2026,
-  "refreshedAt": "2026-10-16T11:23:00.789Z",
+  "refreshedAt": "2026-10-16T16:38:59.069Z",
   "sources": [
     {
       "id": "erich-richter-nypost",
@@ -527,138 +527,6 @@
       "week": 3,
       "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
       "url": "https://www.cbssports.com/betting/news/eagles-vs-bears-picks-player-props-experts-best-bets-for-monday-night-football-in-nfl-week-3/"
-    },
-    {
-      "id": "tony-pollard-rushing-attempts-under-11-5-yep-w3",
-      "player": "Tony Pollard",
-      "market": "Rushing Attempts",
-      "side": "UNDER",
-      "line": 11.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
-    },
-    {
-      "id": "rhamondre-stevenson-rushing-attempts-over-12-5-yep-w3",
-      "player": "Rhamondre Stevenson",
-      "market": "Rushing Attempts",
-      "side": "OVER",
-      "line": 12.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
-    },
-    {
-      "id": "justin-jefferson-receiving-yards-over-79-5-yep-w3",
-      "player": "Justin Jefferson",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 79.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
-    },
-    {
-      "id": "cooper-rush-passing-yards-under-181-5-yep-w3",
-      "player": "Cooper Rush",
-      "market": "Passing Yards",
-      "side": "UNDER",
-      "line": 181.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
-    },
-    {
-      "id": "breece-hall-rushing-yards-over-65-5-yep-w3",
-      "player": "Breece Hall",
-      "market": "Rushing Yards",
-      "side": "OVER",
-      "line": 65.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
-    },
-    {
-      "id": "derrick-henry-rushing-yards-over-92-5-yep-w3",
-      "player": "Derrick Henry",
-      "market": "Rushing Yards",
-      "side": "OVER",
-      "line": 92.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
-    },
-    {
-      "id": "chris-godwin-receiving-yards-over-42-5-yep-w3",
-      "player": "Chris Godwin",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 42.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
-    },
-    {
-      "id": "quentin-johnston-receptions-over-3-5-yep-w3",
-      "player": "Quentin Johnston",
-      "market": "Receptions",
-      "side": "OVER",
-      "line": 3.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
-    },
-    {
-      "id": "jaxon-smith-njigba-receiving-yards-over-81-5-yep-w3",
-      "player": "Jaxon Smith-Njigba",
-      "market": "Receiving Yards",
-      "side": "OVER",
-      "line": 81.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
-    },
-    {
-      "id": "christian-mccaffrey-rushing-yards-over-60-5-yep-w3",
-      "player": "Christian McCaffrey",
-      "market": "Rushing Yards",
-      "side": "OVER",
-      "line": 60.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
-    },
-    {
-      "id": "ceedee-lamb-receptions-over-5-5-yep-w3",
-      "player": "CeeDee Lamb",
-      "market": "Receptions",
-      "side": "OVER",
-      "line": 5.5,
-      "analyst": "Unknown Analyst",
-      "sourceId": "yep-unknown",
-      "week": 3,
-      "note": "Yep-discovered Week 3 expert prop from Yep-discovered source.",
-      "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
     }
   ]
 }
