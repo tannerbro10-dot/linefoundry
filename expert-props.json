@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-17T06:56:57.382Z",
+  "generatedAt": "2026-10-17T12:11:18.440Z",
   "inputArticleCount": 20,
   "includedArticleCount": 2,
   "excludedArticleCount": 18,
@@ -210,7 +210,7 @@
     {
       "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
       "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
-      "week": 7
+      "week": 6
     },
     {
       "url": "https://www.espn.com/espn/betting/story/_/id/50053878/week-4-nfl-odds-spreads-lines-props-best-bets-sunday-football-games",
@@ -228,9 +228,9 @@
       "week": 5
     },
     {
-      "url": "https://www.youtube.com/watch?v=fsFxTk9rsxw",
-      "title": "- YouTube",
-      "week": null
+      "url": "https://www.dimers.com/nfl/props",
+      "title": "Best NFL Player Props Today & NFL Prop Bets",
+      "week": 6
     },
     {
       "url": "https://www.si.com/betting/jets-vs-bears-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-4-wager-on-wilson",
@@ -240,7 +240,7 @@
     {
       "url": "https://sports.yahoo.com/articles/2026-nfl-draft-predictions-best-131800061.html",
       "title": "2026 NFL Draft Round 4 Predictions & Best Bets: Nussmeier Lands in the Big Apple - Yahoo Sports",
-      "week": 5
+      "week": 6
     }
   ],
   "extractionFailures": []
