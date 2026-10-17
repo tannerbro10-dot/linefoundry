@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "07e3f2052759031e018fee9db6194f07",
+  "request_id": "70d89806259b0c9434a5562e2e9f2787",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -247,13 +247,13 @@
       "favicon": "https://platform.yep.com/app/favicon?domain=milehighsports.com&key=8235d9352f90a5ccf12469b985f070c9cc85c6ddba1d493585347de991c4d490"
     }
   ],
-  "response_time_ms": 560.44,
+  "response_time_ms": 562.06,
   "api_cost": {
     "cost": 0.004,
     "details": "(4/1000)"
   },
   "balance": {
-    "before": "5.6360",
-    "after": 5.632
+    "before": "5.6320",
+    "after": 5.628
   }
 }
