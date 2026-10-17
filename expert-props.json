@@ -1,12 +1,12 @@
 {
   "success": true,
-  "generatedAt": "2026-10-16T21:07:15.919Z",
+  "generatedAt": "2026-10-17T00:28:43.219Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 1,
-  "excludedArticleCount": 19,
+  "includedArticleCount": 2,
+  "excludedArticleCount": 18,
   "extractionFailureCount": 0,
-  "propCount": 2,
-  "publishedWeek3SignalCount": 2,
+  "propCount": 13,
+  "publishedWeek3SignalCount": 13,
   "props": [
     {
       "player": "Case Keenum",
@@ -27,12 +27,127 @@
       "source": {
         "url": "https://www.cbssports.com/betting/news/eagles-vs-bears-picks-player-props-experts-best-bets-for-monday-night-football-in-nfl-week-3/"
       }
+    },
+    {
+      "player": "Tony Pollard",
+      "market": "Rushing Attempts",
+      "side": "UNDER",
+      "line": 11.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Rhamondre Stevenson",
+      "market": "Rushing Attempts",
+      "side": "OVER",
+      "line": 12.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Justin Jefferson",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 79.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Cooper Rush",
+      "market": "Passing Yards",
+      "side": "UNDER",
+      "line": 181.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Breece Hall",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 65.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Derrick Henry",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 92.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Chris Godwin",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 42.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Quentin Johnston",
+      "market": "Receptions",
+      "side": "OVER",
+      "line": 3.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Jaxon Smith-Njigba",
+      "market": "Receiving Yards",
+      "side": "OVER",
+      "line": 81.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "Christian McCaffrey",
+      "market": "Rushing Yards",
+      "side": "OVER",
+      "line": 60.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
+    },
+    {
+      "player": "CeeDee Lamb",
+      "market": "Receptions",
+      "side": "OVER",
+      "line": 5.5,
+      "week": 3,
+      "source": {
+        "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/"
+      }
     }
   ],
   "includedArticles": [
     {
       "url": "https://www.cbssports.com/betting/news/eagles-vs-bears-picks-player-props-experts-best-bets-for-monday-night-football-in-nfl-week-3/",
       "title": "Eagles vs. Bears picks, player props: Expert's best bets for Monday Night Football in NFL Week 3 - CBS Sports",
+      "week": 3
+    },
+    {
+      "url": "https://milehighsports.com/sunday-nfl-bets-week-3-expert-picks-odds-and-player-props/",
+      "title": "Sunday NFL Bets: Week 2 expert picks, odds, and player props - Mile High Sports",
       "week": 3
     }
   ],
@@ -58,6 +173,11 @@
       "week": 1
     },
     {
+      "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-wild-card-weekend-2026/",
+      "title": "NFL Player Prop Picks for Wild Card Weekend: Expert Player Prop Bets",
+      "week": 6
+    },
+    {
       "url": "https://www.rotoballer.com/week-5-nfl-props-best-player-prop-bets-2026/1961726",
       "title": "Week 5 NFL Props: Best Player Prop Bets (2026)",
       "week": 5
@@ -71,11 +191,6 @@
       "url": "https://www.rotoballer.com/nfl-betting-picks-week-5-player-props-and-parlays-for-monday-night-football-2026/1961911",
       "title": "NFL Betting Picks: Week 5 Player Props and Parlays for Monday Night Football (2026)",
       "week": 5
-    },
-    {
-      "url": "https://www.sportsline.com/insiders/nfl-longshot-parlay-get-sportslines-top-2026-nfl-week-4-picks-best-bets-for-shot-at-huge-return/",
-      "title": "NFL longshot parlay: Get SportsLine&#x27;s top 2026 NFL Week 4 picks, best bets for shot at huge return - SportsLine.com",
-      "week": 4
     },
     {
       "url": "https://www.dimers.com/nfl/news/nfl-week-4-betting-guide-model-backed-picks-top-player-props-and-sharp-pick-ems",
@@ -98,10 +213,6 @@
       "week": 7
     },
     {
-      "url": "https://www.bleachernation.com/picks/2026/10/08/player-prop-bets-for-jets-vs-browns-october-11-2026/",
-      "week": null
-    },
-    {
       "url": "https://www.espn.com/espn/betting/story/_/id/50053878/week-4-nfl-odds-spreads-lines-props-best-bets-sunday-football-games",
       "title": "",
       "week": 4
@@ -112,14 +223,14 @@
       "week": 1
     },
     {
+      "url": "https://www.dimers.com/nfl/props",
+      "title": "Best NFL Player Props Today & NFL Prop Bets",
+      "week": 6
+    },
+    {
       "url": "https://www.espn.com/espn/betting/story/_/id/50107426/week-5-nfl-odds-props-best-bets-sunday-games",
       "title": "",
       "week": 5
-    },
-    {
-      "url": "https://www.youtube.com/watch?v=fsFxTk9rsxw",
-      "title": "- YouTube",
-      "week": null
     },
     {
       "url": "https://www.si.com/betting/jets-vs-bears-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-4-wager-on-wilson",
@@ -129,7 +240,7 @@
     {
       "url": "https://sports.yahoo.com/articles/2026-nfl-draft-predictions-best-131800061.html",
       "title": "2026 NFL Draft Round 4 Predictions & Best Bets: Nussmeier Lands in the Big Apple - Yahoo Sports",
-      "week": 7
+      "week": 5
     }
   ],
   "extractionFailures": []
