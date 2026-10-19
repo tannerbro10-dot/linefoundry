@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-19T13:13:09.435Z",
+  "generatedAt": "2026-10-19T19:56:12.218Z",
   "inputArticleCount": 20,
   "includedArticleCount": 1,
   "excludedArticleCount": 19,
@@ -43,6 +43,11 @@
       "week": 4
     },
     {
+      "url": "https://www.sportsline.com/insiders/nfl-picks-darren-waller-prop-among-sportsline-expert-propbetguys-best-bets-for-week-4-of-2026-season/",
+      "title": "NFL picks: Darren Waller prop among SportsLine expert PropBetGuy&#x27;s best bets for Week 4 of 2026 season - SportsLine.com",
+      "week": 4
+    },
+    {
       "url": "https://www.cbssports.com/betting/news/panthers-vs-lions-picks-prediction-player-props-experts-nfl-week-4-best-bets-for-sunday-night-football/",
       "title": "Panthers vs. Lions picks, prediction, player props: Expert's NFL Week 4 best bets for Sunday Night Football - CBS Sports",
       "week": 4
@@ -60,7 +65,7 @@
     {
       "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-wild-card-weekend-2026/",
       "title": "NFL Player Prop Picks for Wild Card Weekend: Expert Player Prop Bets",
-      "week": 7
+      "week": 6
     },
     {
       "url": "https://www.rotoballer.com/week-5-nfl-props-best-player-prop-bets-2026/1961726",
@@ -75,7 +80,7 @@
     {
       "url": "https://www.cbssports.com/betting/news/2026-nfl-draft-prop-picks-expert-locks-in-best-bets-predictions-including-epic-30-1-pick/",
       "title": "2026 NFL Draft prop picks: Expert locks in best bets and predictions, including epic 30-1 pick - CBS Sports",
-      "week": 6
+      "week": null
     },
     {
       "url": "https://www.4for4.com/2026/w6/week-6-nfl-player-props-best-player-props-bet-ryan-noonan",
@@ -88,13 +93,18 @@
       "week": 5
     },
     {
+      "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-week-18-2026/",
+      "title": "NFL Player Props Today | Best Week 18 Player Prop Bets & Expert Picks",
+      "week": 18
+    },
+    {
       "url": "https://www.wagertalk.com/news/nfl/player-props-week-4-best-qb-rb-wr-touchdown-prop-picks/",
       "week": 4
     },
     {
       "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
       "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
-      "week": null
+      "week": 8
     },
     {
       "url": "https://www.espn.com/espn/betting/story/_/id/50053878/week-4-nfl-odds-spreads-lines-props-best-bets-sunday-football-games",
@@ -119,16 +129,6 @@
     {
       "url": "https://www.dimers.com/nfl/props",
       "title": "Best NFL Player Props Today & NFL Prop Bets",
-      "week": 6
-    },
-    {
-      "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
-      "title": "",
-      "week": 1
-    },
-    {
-      "url": "https://sports.yahoo.com/articles/2026-nfl-draft-predictions-best-131800061.html",
-      "title": "2026 NFL Draft Round 4 Predictions & Best Bets: Nussmeier Lands in the Big Apple - Yahoo Sports",
       "week": 6
     }
   ],
