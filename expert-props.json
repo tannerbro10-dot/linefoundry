@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-19T23:40:43.833Z",
+  "generatedAt": "2026-10-20T04:49:42.684Z",
   "inputArticleCount": 20,
   "includedArticleCount": 1,
   "excludedArticleCount": 19,
@@ -63,11 +63,6 @@
       "week": 1
     },
     {
-      "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-wild-card-weekend-2026/",
-      "title": "NFL Player Prop Picks for Wild Card Weekend: Expert Player Prop Bets",
-      "week": 6
-    },
-    {
       "url": "https://www.rotoballer.com/week-5-nfl-props-best-player-prop-bets-2026/1961726",
       "title": "Week 5 NFL Props: Best Player Prop Bets (2026)",
       "week": 5
@@ -99,6 +94,7 @@
     },
     {
       "url": "https://www.wagertalk.com/news/nfl/player-props-week-4-best-qb-rb-wr-touchdown-prop-picks/",
+      "title": "NFL Player Props Week 4: Best QB, RB, WR & Touchdown Prop Picks",
       "week": 4
     },
     {
@@ -122,6 +118,11 @@
       "week": 1
     },
     {
+      "url": "https://www.si.com/betting/texans-vs-jaguars-best-prop-bets-for-nfl-london-game-in-week-6-bet-on-cj-stroud-2026",
+      "title": "Texans vs. Jaguars Best Prop Bets for NFL London Game in Week 6 (Bet on C.J. Stroud)",
+      "week": 6
+    },
+    {
       "url": "https://www.espn.com/espn/betting/story/_/id/50107426/week-5-nfl-odds-props-best-bets-sunday-games",
       "title": "",
       "week": 5
@@ -129,7 +130,7 @@
     {
       "url": "https://www.dimers.com/nfl/props",
       "title": "Best NFL Player Props Today & NFL Prop Bets",
-      "week": 6
+      "week": 7
     }
   ],
   "extractionFailures": []
