@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-20T17:02:46.539Z",
+  "generatedAt": "2026-10-20T21:36:48.809Z",
   "inputArticleCount": 20,
   "includedArticleCount": 1,
   "excludedArticleCount": 19,
@@ -75,22 +75,12 @@
     {
       "url": "https://www.cbssports.com/betting/news/2026-nfl-draft-prop-picks-expert-locks-in-best-bets-predictions-including-epic-30-1-pick/",
       "title": "2026 NFL Draft prop picks: Expert locks in best bets and predictions, including epic 30-1 pick - CBS Sports",
-      "week": 8
-    },
-    {
-      "url": "https://www.4for4.com/2026/w6/week-6-nfl-player-props-best-player-props-bet-ryan-noonan",
-      "title": "Week 6 NFL Player Props: Best Player Props to Bet from Ryan Noonan | 4for4",
-      "week": 6
+      "week": null
     },
     {
       "url": "https://www.rotoballer.com/nfl-betting-picks-week-5-player-props-and-parlays-for-monday-night-football-2026/1961911",
       "title": "NFL Betting Picks: Week 5 Player Props and Parlays for Monday Night Football (2026)",
       "week": 5
-    },
-    {
-      "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-week-18-2026/",
-      "title": "NFL Player Props Today | Best Week 18 Player Prop Bets & Expert Picks",
-      "week": 18
     },
     {
       "url": "https://www.wagertalk.com/news/nfl/player-props-week-4-best-qb-rb-wr-touchdown-prop-picks/",
@@ -100,7 +90,7 @@
     {
       "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
       "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
-      "week": 8
+      "week": 7
     },
     {
       "url": "https://www.espn.com/espn/betting/story/_/id/50053878/week-4-nfl-odds-spreads-lines-props-best-bets-sunday-football-games",
@@ -128,9 +118,19 @@
       "week": 7
     },
     {
+      "url": "https://www.actionnetwork.com/nfl/nfl-week-4-sunday-mega-preview-brandon-anderson-picks-props-same-game-parlays",
+      "title": "",
+      "week": 4
+    },
+    {
       "url": "https://www.actionnetwork.com/news/best-nfl-prop-bets-today-bills-vs-rams-prediction-best-nfl-player-props-anytime-td-scorer-mnf-best-bets",
       "title": "",
       "week": null
+    },
+    {
+      "url": "https://www.actionnetwork.com/nfl/nfl-player-props-week-1-sept-13",
+      "title": "",
+      "week": 1
     }
   ],
   "extractionFailures": []
