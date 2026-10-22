@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-21T07:38:46.091Z",
+  "generatedAt": "2026-10-22T17:09:54.288Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -21,6 +21,11 @@
       "week": 4
     },
     {
+      "url": "https://www.cbssports.com/nfl/betting/nfl-picks-against-the-spread-week-4-2026-expert-ats-picks-predictions-prop-bets-for-sunday-oct-4/",
+      "title": "NFL Week 4 Predictions: Expert Picks for Every Game - CBS Sports",
+      "week": 4
+    },
+    {
       "url": "https://www.cbssports.com/betting/news/panthers-vs-lions-picks-prediction-player-props-experts-nfl-week-4-best-bets-for-sunday-night-football/",
       "title": "Panthers vs. Lions picks, prediction, player props: Expert's NFL Week 4 best bets for Sunday Night Football - CBS Sports",
       "week": 4
@@ -38,7 +43,7 @@
     {
       "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-wild-card-weekend-2026/",
       "title": "NFL Player Prop Picks for Wild Card Weekend: Expert Player Prop Bets",
-      "week": 6
+      "week": 7
     },
     {
       "url": "https://www.rotoballer.com/week-5-nfl-props-best-player-prop-bets-2026/1961726",
@@ -51,24 +56,9 @@
       "week": 4
     },
     {
-      "url": "https://www.cbssports.com/betting/news/2026-nfl-draft-prop-picks-expert-locks-in-best-bets-predictions-including-epic-30-1-pick/",
-      "title": "2026 NFL Draft prop picks: Expert locks in best bets and predictions, including epic 30-1 pick - CBS Sports",
-      "week": null
-    },
-    {
       "url": "https://www.4for4.com/2026/w6/week-6-nfl-player-props-best-player-props-bet-ryan-noonan",
       "title": "Week 6 NFL Player Props: Best Player Props to Bet from Ryan Noonan | 4for4",
       "week": 6
-    },
-    {
-      "url": "https://www.rotoballer.com/nfl-betting-picks-week-5-player-props-and-parlays-for-monday-night-football-2026/1961911",
-      "title": "NFL Betting Picks: Week 5 Player Props and Parlays for Monday Night Football (2026)",
-      "week": 5
-    },
-    {
-      "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-week-18-2026/",
-      "title": "NFL Player Props Today | Best Week 18 Player Prop Bets & Expert Picks",
-      "week": 18
     },
     {
       "url": "https://www.wagertalk.com/news/nfl/player-props-week-4-best-qb-rb-wr-touchdown-prop-picks/",
@@ -78,7 +68,7 @@
     {
       "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
       "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
-      "week": 7
+      "week": 8
     },
     {
       "url": "https://www.espn.com/espn/betting/story/_/id/50053878/week-4-nfl-odds-spreads-lines-props-best-bets-sunday-football-games",
@@ -96,9 +86,9 @@
       "week": 1
     },
     {
-      "url": "https://www.espn.com/espn/betting/story/_/id/50107426/week-5-nfl-odds-props-best-bets-sunday-games",
-      "title": "",
-      "week": 5
+      "url": "https://www.si.com/betting/texans-vs-jaguars-best-prop-bets-for-nfl-london-game-in-week-6-bet-on-cj-stroud-2026",
+      "title": "Texans vs. Jaguars Best Prop Bets for NFL London Game in Week 6 (Bet on C.J. Stroud)",
+      "week": 6
     },
     {
       "url": "https://www.dimers.com/nfl/props",
@@ -106,9 +96,19 @@
       "week": 7
     },
     {
-      "url": "https://www.actionnetwork.com/news/best-nfl-prop-bets-today-bills-vs-rams-prediction-best-nfl-player-props-anytime-td-scorer-mnf-best-bets",
-      "title": "",
-      "week": null
+      "url": "https://www.si.com/betting/jets-vs-patriots-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-6-01m51dpnb0yy",
+      "title": "Jets vs. Patriots Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 6",
+      "week": 6
+    },
+    {
+      "url": "https://www.si.com/betting/jets-vs-bears-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-4-wager-on-wilson",
+      "title": "Jets vs. Bears Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 4 (Wager on Wilson)",
+      "week": 4
+    },
+    {
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-1-fade-caleb-williams-in-bears-opening-game",
+      "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 1 (Fade Caleb Williams in Bears' Opening Game)",
+      "week": 1
     }
   ],
   "extractionFailures": []
