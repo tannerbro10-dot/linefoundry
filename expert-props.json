@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-23T18:20:39.754Z",
+  "generatedAt": "2026-10-23T23:08:23.800Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -41,14 +41,14 @@
       "week": 1
     },
     {
+      "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-wild-card-weekend-2026/",
+      "title": "NFL Player Prop Picks for Wild Card Weekend: Expert Player Prop Bets",
+      "week": 7
+    },
+    {
       "url": "https://www.rotoballer.com/week-5-nfl-props-best-player-prop-bets-2026/1961726",
       "title": "Week 5 NFL Props: Best Player Prop Bets (2026)",
       "week": 5
-    },
-    {
-      "url": "https://sportsbook.draftkings.com/page/nfl-odds-week-4",
-      "title": "NFL Week 4 Odds & Betting Lines | DraftKings Sportsbook",
-      "week": 4
     },
     {
       "url": "https://www.dimers.com/nfl/news/nfl-week-4-betting-guide-model-backed-picks-top-player-props-and-sharp-pick-ems",
@@ -108,7 +108,7 @@
     {
       "url": "https://sports.yahoo.com/articles/2026-nfl-draft-predictions-best-131800061.html",
       "title": "2026 NFL Draft Round 4 Predictions & Best Bets: Nussmeier Lands in the Big Apple - Yahoo Sports",
-      "week": 6
+      "week": 7
     }
   ],
   "extractionFailures": []
