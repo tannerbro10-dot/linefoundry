@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-22T21:35:05.143Z",
+  "generatedAt": "2026-10-23T00:39:57.242Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -39,11 +39,6 @@
       "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-totals-moneyline-parlays-props-bets/",
       "title": "NFL expert picks, odds, predictions, player props, betting guide for Week 1 - CBS Sports",
       "week": 1
-    },
-    {
-      "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-wild-card-weekend-2026/",
-      "title": "NFL Player Prop Picks for Wild Card Weekend: Expert Player Prop Bets",
-      "week": 7
     },
     {
       "url": "https://www.rotoballer.com/week-5-nfl-props-best-player-prop-bets-2026/1961726",
@@ -109,6 +104,11 @@
       "url": "https://sports.yahoo.com/articles/2026-nfl-draft-predictions-best-131800061.html",
       "title": "2026 NFL Draft Round 4 Predictions & Best Bets: Nussmeier Lands in the Big Apple - Yahoo Sports",
       "week": 6
+    },
+    {
+      "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-wild-card-weekend-2026/",
+      "title": "NFL Player Prop Picks for Wild Card Weekend: Expert Player Prop Bets",
+      "week": 7
     }
   ],
   "extractionFailures": []
