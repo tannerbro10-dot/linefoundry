@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-24T18:47:27.041Z",
+  "generatedAt": "2026-10-24T22:28:18.661Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -51,6 +51,11 @@
       "week": 5
     },
     {
+      "url": "https://sportsbook.draftkings.com/page/nfl-odds-week-4",
+      "title": "NFL Week 4 Odds & Betting Lines | DraftKings Sportsbook",
+      "week": 4
+    },
+    {
       "url": "https://www.4for4.com/2026/w6/week-6-nfl-player-props-best-player-props-bet-ryan-noonan",
       "title": "Week 6 NFL Player Props: Best Player Props to Bet from Ryan Noonan | 4for4",
       "week": 6
@@ -81,11 +86,6 @@
       "week": 4
     },
     {
-      "url": "https://www.actionnetwork.com/nfl/nfl-week-4-player-props-sean-koerner-best-bets-for-sunday",
-      "title": "",
-      "week": 4
-    },
-    {
       "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
       "title": "NFL Player Props | DraftKings Sportsbook",
       "week": 1
@@ -106,9 +106,9 @@
       "week": 6
     },
     {
-      "url": "https://www.dimers.com/nfl/props",
-      "title": "Best NFL Player Props Today & NFL Prop Bets",
-      "week": 7
+      "url": "https://www.si.com/betting/jets-vs-patriots-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-6-01m51dpnb0yy",
+      "title": "Jets vs. Patriots Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 6",
+      "week": 6
     }
   ],
   "extractionFailures": []
