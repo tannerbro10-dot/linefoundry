@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-24T10:59:04.635Z",
+  "generatedAt": "2026-10-24T15:56:25.258Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -56,6 +56,11 @@
       "week": 4
     },
     {
+      "url": "https://www.4for4.com/2026/w6/week-6-nfl-player-props-best-player-props-bet-ryan-noonan",
+      "title": "Week 6 NFL Player Props: Best Player Props to Bet from Ryan Noonan | 4for4",
+      "week": 6
+    },
+    {
       "url": "https://www.si.com/betting/falcons-vs-saints-best-nfl-prop-bets-for-monday-night-football-in-week-4-bet-on-bijan-robinson-2026",
       "title": "Falcons vs. Saints Best NFL Prop Bets for Monday Night Football in Week 4 (Bet on Bijan Robinson)",
       "week": 4
@@ -68,7 +73,7 @@
     {
       "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
       "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
-      "week": null
+      "week": 7
     },
     {
       "url": "https://sports.yahoo.com/articles/best-chicago-bears-player-prop-141912185.html",
@@ -104,11 +109,6 @@
       "url": "https://www.si.com/betting/texans-vs-jaguars-best-prop-bets-for-nfl-london-game-in-week-6-bet-on-cj-stroud-2026",
       "title": "Texans vs. Jaguars Best Prop Bets for NFL London Game in Week 6 (Bet on C.J. Stroud)",
       "week": 6
-    },
-    {
-      "url": "https://www.dimers.com/nfl/props",
-      "title": "Best NFL Player Props Today & NFL Prop Bets",
-      "week": 7
     }
   ],
   "extractionFailures": []
