@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-24T15:56:25.258Z",
+  "generatedAt": "2026-10-24T18:47:27.041Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -49,11 +49,6 @@
       "url": "https://www.rotoballer.com/week-5-nfl-props-best-player-prop-bets-2026/1961726",
       "title": "Week 5 NFL Props: Best Player Prop Bets (2026)",
       "week": 5
-    },
-    {
-      "url": "https://sportsbook.draftkings.com/page/nfl-odds-week-4",
-      "title": "NFL Week 4 Odds & Betting Lines | DraftKings Sportsbook",
-      "week": 4
     },
     {
       "url": "https://www.4for4.com/2026/w6/week-6-nfl-player-props-best-player-props-bet-ryan-noonan",
@@ -109,6 +104,11 @@
       "url": "https://www.si.com/betting/texans-vs-jaguars-best-prop-bets-for-nfl-london-game-in-week-6-bet-on-cj-stroud-2026",
       "title": "Texans vs. Jaguars Best Prop Bets for NFL London Game in Week 6 (Bet on C.J. Stroud)",
       "week": 6
+    },
+    {
+      "url": "https://www.dimers.com/nfl/props",
+      "title": "Best NFL Player Props Today & NFL Prop Bets",
+      "week": 7
     }
   ],
   "extractionFailures": []
