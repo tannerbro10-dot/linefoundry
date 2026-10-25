@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-25T11:27:03.818Z",
+  "generatedAt": "2026-10-25T16:17:21.099Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -13,11 +13,6 @@
     {
       "url": "https://www.cbssports.com/nfl/news/nfl-week-4-player-prop-bets/",
       "title": "NFL Week 4 player prop bets, odds: Raiders' Brock Bowers among best anytime TD bets - CBS Sports",
-      "week": 4
-    },
-    {
-      "url": "https://www.cbssports.com/betting/news/nfl-player-props-week-4-2026-best-bets-picks-sundays-nfl-games-patrick-mahomes-jahmyr-gibbs/",
-      "title": "NFL Player Props Week 3 2026: Best Prop Bets for Sunday - CBS Sports",
       "week": 4
     },
     {
@@ -39,6 +34,11 @@
       "url": "https://www.cbssports.com/betting/news/nfl-picks-today-odds-lines-week-1-2026-expert-predictions-spread-totals-moneyline-parlays-props-bets/",
       "title": "NFL expert picks, odds, predictions, player props, betting guide for Week 1 - CBS Sports",
       "week": 1
+    },
+    {
+      "url": "https://www.cbssports.com/betting/news/week-4-nfl-betting-guide-player-props-spreads-predictions-parlay-dfs-fantasy-football-picks/",
+      "title": "Week 4 NFL betting guide, expert picks, player props, DFS, fantasy football rankings - CBS Sports",
+      "week": 4
     },
     {
       "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-wild-card-weekend-2026/",
@@ -71,6 +71,11 @@
       "week": 7
     },
     {
+      "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-week-18-2026/",
+      "title": "NFL Player Props Today | Best Week 18 Player Prop Bets & Expert Picks",
+      "week": 18
+    },
+    {
       "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
       "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
       "week": 7
@@ -98,11 +103,6 @@
     {
       "url": "https://www.si.com/betting/texans-vs-jaguars-best-prop-bets-for-nfl-london-game-in-week-6-bet-on-cj-stroud-2026",
       "title": "Texans vs. Jaguars Best Prop Bets for NFL London Game in Week 6 (Bet on C.J. Stroud)",
-      "week": 6
-    },
-    {
-      "url": "https://www.si.com/betting/jets-vs-patriots-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-6-01m51dpnb0yy",
-      "title": "Jets vs. Patriots Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 6",
       "week": 6
     },
     {
