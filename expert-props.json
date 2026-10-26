@@ -1,20 +1,14 @@
 {
   "success": true,
-  "generatedAt": "2026-10-26T15:11:27.044Z",
+  "generatedAt": "2026-10-26T21:00:47.027Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 1,
-  "excludedArticleCount": 19,
+  "includedArticleCount": 0,
+  "excludedArticleCount": 20,
   "extractionFailureCount": 0,
   "propCount": 0,
   "publishedWeek3SignalCount": 0,
   "props": [],
-  "includedArticles": [
-    {
-      "url": "https://www.sportsline.com/insiders/nfl-picks-stefon-diggs-prop-among-sportsline-expert-propbetguys-best-bets-for-week-3-of-2026-season/",
-      "title": "NFL picks: Stefon Diggs prop among SportsLine expert PropBetGuy&#x27;s best bets for Week 3 of 2026 season - SportsLine.com",
-      "week": 3
-    }
-  ],
+  "includedArticles": [],
   "excludedArticles": [
     {
       "url": "https://www.cbssports.com/nfl/news/nfl-week-4-player-prop-bets/",
@@ -32,13 +26,13 @@
       "week": 4
     },
     {
-      "url": "https://www.cbssports.com/nfl/betting/nfl-picks-against-the-spread-week-4-2026-expert-ats-picks-predictions-prop-bets-for-sunday-oct-4/",
-      "title": "NFL Week 4 Predictions: Expert Picks for Every Game - CBS Sports",
+      "url": "https://www.cbssports.com/betting/news/nfl-player-props-week-4-2026-best-bets-picks-sundays-nfl-games-patrick-mahomes-jahmyr-gibbs/",
+      "title": "NFL Player Props Week 3 2026: Best Prop Bets for Sunday - CBS Sports",
       "week": 4
     },
     {
-      "url": "https://www.cbssports.com/betting/news/will-brinsons-nfl-week-4-best-bets-odds-player-props-anytime-touchdown-scorers-from-expert-on-sunday-games/",
-      "title": "Will Brinson's NFL Week 4 best bets: Odds, player props, anytime touchdown scorers from expert on Sunday games - CBS Sports",
+      "url": "https://www.cbssports.com/nfl/betting/nfl-picks-against-the-spread-week-4-2026-expert-ats-picks-predictions-prop-bets-for-sunday-oct-4/",
+      "title": "NFL Week 4 Predictions: Expert Picks for Every Game - CBS Sports",
       "week": 4
     },
     {
@@ -54,11 +48,6 @@
     {
       "url": "https://vsin.com/nfl/expert-nfl-picks-week-4-best-bets-predictions-and-player-props-from-zachary-cohen/",
       "title": "Expert NFL Week 4 Picks: Best Bets, Totals, & Props",
-      "week": 4
-    },
-    {
-      "url": "https://sportsbook.draftkings.com/page/nfl-odds-week-4",
-      "title": "NFL Week 4 Odds & Betting Lines | DraftKings Sportsbook",
       "week": 4
     },
     {
@@ -82,11 +71,6 @@
       "week": 4
     },
     {
-      "url": "https://www.si.com/betting/falcons-vs-saints-best-nfl-prop-bets-for-monday-night-football-in-week-4-bet-on-bijan-robinson-2026",
-      "title": "Falcons vs. Saints Best NFL Prop Bets for Monday Night Football in Week 4 (Bet on Bijan Robinson)",
-      "week": 4
-    },
-    {
       "url": "https://www.dimers.com/nfl/props",
       "title": "Best NFL Player Props Today & NFL Prop Bets",
       "week": 7
@@ -99,7 +83,7 @@
     {
       "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
       "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
-      "week": 8
+      "week": null
     },
     {
       "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-1-fade-caleb-williams-in-bears-opening-game",
@@ -107,9 +91,24 @@
       "week": 1
     },
     {
+      "url": "https://www.si.com/betting/buccaneers-vs-panthers-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-7-2026",
+      "title": "Buccaneers vs. Panthers Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 7",
+      "week": 7
+    },
+    {
       "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-week-18-2026/",
       "title": "NFL Player Props Today | Best Week 18 Player Prop Bets & Expert Picks",
       "week": 18
+    },
+    {
+      "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
+      "title": "NFL Player Props | DraftKings Sportsbook",
+      "week": 1
+    },
+    {
+      "url": "https://sports.yahoo.com/articles/2026-nfl-draft-predictions-best-131800061.html",
+      "title": "2026 NFL Draft Round 4 Predictions & Best Bets: Nussmeier Lands in the Big Apple - Yahoo Sports",
+      "week": 7
     }
   ],
   "extractionFailures": []
