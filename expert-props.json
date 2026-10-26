@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-26T00:22:48.153Z",
+  "generatedAt": "2026-10-26T07:47:20.795Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -56,9 +56,9 @@
       "week": 4
     },
     {
-      "url": "https://www.4for4.com/2026/w6/week-6-nfl-player-props-best-player-props-bet-ryan-noonan",
-      "title": "Week 6 NFL Player Props: Best Player Props to Bet from Ryan Noonan | 4for4",
-      "week": 6
+      "url": "https://www.4for4.com/2026/w7/week-7-nfl-player-props-best-player-props-bet-ryan-noonan",
+      "title": "Week 7 NFL Player Props: Best Player Props to Bet from Ryan Noonan | 4for4",
+      "week": 7
     },
     {
       "url": "https://www.si.com/betting/falcons-vs-saints-best-nfl-prop-bets-for-monday-night-football-in-week-4-bet-on-bijan-robinson-2026",
@@ -101,14 +101,14 @@
       "week": 6
     },
     {
-      "url": "https://www.si.com/betting/jets-vs-patriots-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-6-01m51dpnb0yy",
-      "title": "Jets vs. Patriots Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 6",
-      "week": 6
-    },
-    {
       "url": "https://www.dimers.com/nfl/props",
       "title": "Best NFL Player Props Today & NFL Prop Bets",
       "week": 7
+    },
+    {
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-1-fade-caleb-williams-in-bears-opening-game",
+      "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 1 (Fade Caleb Williams in Bears' Opening Game)",
+      "week": 1
     }
   ],
   "extractionFailures": []
