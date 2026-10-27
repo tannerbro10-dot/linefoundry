@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-27T07:51:18.058Z",
+  "generatedAt": "2026-10-27T14:30:46.451Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -68,11 +68,16 @@
     {
       "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-wild-card-weekend-2026/",
       "title": "NFL Player Prop Picks for Wild Card Weekend: Expert Player Prop Bets",
-      "week": 7
+      "week": 8
     },
     {
       "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-4-01m3t8gbj8bj",
       "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 4",
+      "week": 4
+    },
+    {
+      "url": "https://www.si.com/betting/falcons-vs-saints-best-nfl-prop-bets-for-monday-night-football-in-week-4-bet-on-bijan-robinson-2026",
+      "title": "Falcons vs. Saints Best NFL Prop Bets for Monday Night Football in Week 4 (Bet on Bijan Robinson)",
       "week": 4
     },
     {
@@ -83,7 +88,7 @@
     {
       "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
       "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
-      "week": null
+      "week": 8
     },
     {
       "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-7-believe-in-bo-nix-01m5h0ed56mq",
@@ -96,11 +101,6 @@
       "week": 1
     },
     {
-      "url": "https://www.si.com/betting/buccaneers-vs-panthers-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-7-2026",
-      "title": "Buccaneers vs. Panthers Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 7",
-      "week": 7
-    },
-    {
       "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
       "title": "NFL Player Props | DraftKings Sportsbook",
       "week": 1
@@ -108,7 +108,7 @@
     {
       "url": "https://sports.yahoo.com/articles/2026-nfl-draft-predictions-best-131800061.html",
       "title": "2026 NFL Draft Round 4 Predictions & Best Bets: Nussmeier Lands in the Big Apple - Yahoo Sports",
-      "week": 7
+      "week": 8
     }
   ],
   "extractionFailures": []
