@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-10-28T01:20:53.145Z",
+  "generatedAt": "2026-10-28T08:30:16.504Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -41,13 +41,13 @@
       "week": 7
     },
     {
-      "url": "https://www.espn.com/espn/betting/story/_/id/50053878/week-4-nfl-odds-spreads-lines-props-best-bets-sunday-football-games",
-      "title": "",
+      "url": "https://vsin.com/nfl/expert-nfl-picks-week-4-best-bets-predictions-and-player-props-from-zachary-cohen/",
+      "title": "Expert NFL Week 4 Picks: Best Bets, Totals, & Props",
       "week": 4
     },
     {
-      "url": "https://vsin.com/nfl/expert-nfl-picks-week-4-best-bets-predictions-and-player-props-from-zachary-cohen/",
-      "title": "Expert NFL Week 4 Picks: Best Bets, Totals, & Props",
+      "url": "https://www.espn.com/espn/betting/story/_/id/50053878/week-4-nfl-odds-spreads-lines-props-best-bets-sunday-football-games",
+      "title": "",
       "week": 4
     },
     {
@@ -76,11 +76,6 @@
       "week": 4
     },
     {
-      "url": "https://www.si.com/betting/falcons-vs-saints-best-nfl-prop-bets-for-monday-night-football-in-week-4-bet-on-bijan-robinson-2026",
-      "title": "Falcons vs. Saints Best NFL Prop Bets for Monday Night Football in Week 4 (Bet on Bijan Robinson)",
-      "week": 4
-    },
-    {
       "url": "https://www.dimers.com/nfl/props",
       "title": "Best NFL Player Props Today & NFL Prop Bets",
       "week": 8
@@ -96,19 +91,24 @@
       "week": 1
     },
     {
+      "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-week-18-2026/",
+      "title": "NFL Player Props Today | Best Week 18 Player Prop Bets & Expert Picks",
+      "week": 18
+    },
+    {
       "url": "https://www.si.com/betting/buccaneers-vs-panthers-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-7-2026",
       "title": "Buccaneers vs. Panthers Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 7",
+      "week": 7
+    },
+    {
+      "url": "https://www.si.com/betting/bengals-vs-ravens-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-7-01m5k3y0q9ew",
+      "title": "Bengals vs. Ravens Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 7",
       "week": 7
     },
     {
       "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
       "title": "NFL Player Props | DraftKings Sportsbook",
       "week": 1
-    },
-    {
-      "url": "https://sports.yahoo.com/articles/2026-nfl-draft-predictions-best-131800061.html",
-      "title": "2026 NFL Draft Round 4 Predictions & Best Bets: Nussmeier Lands in the Big Apple - Yahoo Sports",
-      "week": 8
     }
   ],
   "extractionFailures": []
