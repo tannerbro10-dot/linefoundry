@@ -1,20 +1,14 @@
 {
   "success": true,
-  "generatedAt": "2026-11-02T05:59:54.902Z",
+  "generatedAt": "2026-11-02T15:49:53.371Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 1,
-  "excludedArticleCount": 19,
+  "includedArticleCount": 0,
+  "excludedArticleCount": 20,
   "extractionFailureCount": 0,
   "propCount": 0,
   "publishedWeek3SignalCount": 0,
   "props": [],
-  "includedArticles": [
-    {
-      "url": "https://www.sportsline.com/insiders/nfl-picks-stefon-diggs-prop-among-sportsline-expert-propbetguys-best-bets-for-week-3-of-2026-season/",
-      "title": "NFL picks: Stefon Diggs prop among SportsLine expert PropBetGuy&#x27;s best bets for Week 3 of 2026 season - SportsLine.com",
-      "week": 3
-    }
-  ],
+  "includedArticles": [],
   "excludedArticles": [
     {
       "url": "https://www.cbssports.com/nfl/news/nfl-week-4-player-prop-bets/",
@@ -47,18 +41,8 @@
       "week": 8
     },
     {
-      "url": "https://www.sportsbookreview.com/picks/nfl/player-props-week-4-2026/",
-      "title": "NFL Player Props for Week 4 | Best O/U Prop Bets & TD Picks This Week",
-      "week": 4
-    },
-    {
       "url": "https://www.wagertalk.com/news/nfl/player-props-week-4-best-qb-rb-wr-touchdown-prop-picks/",
       "title": "NFL Player Props Week 4: Best QB, RB, WR & Touchdown Prop Picks",
-      "week": 4
-    },
-    {
-      "url": "https://www.espn.com/espn/betting/story/_/id/50053878/week-4-nfl-odds-spreads-lines-props-best-bets-sunday-football-games",
-      "title": "",
       "week": 4
     },
     {
@@ -67,39 +51,14 @@
       "week": 4
     },
     {
-      "url": "https://sportsbook.draftkings.com/page/nfl-odds-week-4",
-      "title": "NFL Week 4 Odds & Betting Lines | DraftKings Sportsbook",
-      "week": 4
-    },
-    {
-      "url": "https://www.rotoballer.com/week-5-nfl-props-best-player-prop-bets-2026/1961726",
-      "title": "Week 5 NFL Props: Best Player Prop Bets (2026)",
-      "week": 5
-    },
-    {
-      "url": "https://www.dimers.com/nfl/news/nfl-week-4-betting-guide-model-backed-picks-top-player-props-and-sharp-pick-ems",
-      "title": "NFL Week 4 betting guide: Model backed picks, top player props and sharp Pick 'Ems",
-      "week": 4
-    },
-    {
-      "url": "https://www.si.com/betting/broncos-vs-49ers-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-4-01m3yg2hgg26",
-      "title": "Broncos vs. 49ers Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 4",
-      "week": 4
-    },
-    {
-      "url": "https://www.si.com/betting/chiefs-vs-raiders-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-4-01m3yh62pr06",
-      "title": "Chiefs vs. Raiders Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 4",
+      "url": "https://www.espn.com/espn/betting/story/_/id/50053878/week-4-nfl-odds-spreads-lines-props-best-bets-sunday-football-games",
+      "title": "",
       "week": 4
     },
     {
       "url": "https://www.si.com/betting/best-nfl-prop-bets-today-for-week-4-bet-on-david-montgomery-in-battle-of-texas-01m3yp8gw213",
       "title": "Best NFL Prop Bets Today for Week 4 (Bet on David Montgomery in Battle of Texas)",
       "week": 4
-    },
-    {
-      "url": "https://www.rotoballer.com/nfl-betting-picks-player-props-and-parlays-for-thursday-night-football-2026-8/1976033",
-      "title": "NFL Betting Picks: Player Props and Parlays for Thursday Night Football (2026)",
-      "week": 8
     },
     {
       "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-wild-card-weekend-2026/",
@@ -110,6 +69,46 @@
       "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-4-01m3t8gbj8bj",
       "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 4",
       "week": 4
+    },
+    {
+      "url": "https://www.rotoballer.com/week-8-nfl-props-best-player-prop-bets-2026/1979238",
+      "title": "Week 8 NFL Props: Best Player Prop Bets (2026)",
+      "week": 8
+    },
+    {
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-8-how-to-bet-on-trevor-lawrence-01m640ym92kd",
+      "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 8 (How to Bet on Trevor Lawrence)",
+      "week": 8
+    },
+    {
+      "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
+      "title": "NFL Player Props | DraftKings Sportsbook",
+      "week": 1
+    },
+    {
+      "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
+      "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
+      "week": null
+    },
+    {
+      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-1-fade-caleb-williams-in-bears-opening-game",
+      "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 1 (Fade Caleb Williams in Bears' Opening Game)",
+      "week": 1
+    },
+    {
+      "url": "https://www.si.com/betting/panthers-vs-packers-best-nfl-prop-bets-for-thursday-night-football-in-week-8-bet-on-bryce-young",
+      "title": "Panthers vs. Packers Best NFL Prop Bets for Thursday Night Football in Week 8 (Bet on Bryce Young)",
+      "week": 8
+    },
+    {
+      "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-week-18-2026/",
+      "title": "NFL Player Props Today | Best Week 18 Player Prop Bets & Expert Picks",
+      "week": 18
+    },
+    {
+      "url": "https://www.dimers.com/nfl/props",
+      "title": "Best NFL Player Props Today & NFL Prop Bets",
+      "week": 8
     }
   ],
   "extractionFailures": []
