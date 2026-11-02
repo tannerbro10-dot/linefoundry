@@ -1,14 +1,20 @@
 {
   "success": true,
-  "generatedAt": "2026-11-01T23:35:13.645Z",
+  "generatedAt": "2026-11-02T05:59:54.902Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 0,
-  "excludedArticleCount": 20,
+  "includedArticleCount": 1,
+  "excludedArticleCount": 19,
   "extractionFailureCount": 0,
   "propCount": 0,
   "publishedWeek3SignalCount": 0,
   "props": [],
-  "includedArticles": [],
+  "includedArticles": [
+    {
+      "url": "https://www.sportsline.com/insiders/nfl-picks-stefon-diggs-prop-among-sportsline-expert-propbetguys-best-bets-for-week-3-of-2026-season/",
+      "title": "NFL picks: Stefon Diggs prop among SportsLine expert PropBetGuy&#x27;s best bets for Week 3 of 2026 season - SportsLine.com",
+      "week": 3
+    }
+  ],
   "excludedArticles": [
     {
       "url": "https://www.cbssports.com/nfl/news/nfl-week-4-player-prop-bets/",
@@ -26,28 +32,38 @@
       "week": 4
     },
     {
+      "url": "https://www.cbssports.com/betting/news/nfl-player-props-week-4-2026-best-bets-picks-sundays-nfl-games-patrick-mahomes-jahmyr-gibbs/",
+      "title": "NFL Player Props Week 3 2026: Best Prop Bets for Sunday - CBS Sports",
+      "week": 4
+    },
+    {
       "url": "https://www.cbssports.com/nfl/betting/nfl-picks-against-the-spread-week-4-2026-expert-ats-picks-predictions-prop-bets-for-sunday-oct-4/",
       "title": "NFL Week 4 Predictions: Expert Picks for Every Game - CBS Sports",
       "week": 4
     },
     {
-      "url": "https://www.cbssports.com/betting/news/will-brinsons-nfl-week-4-best-bets-odds-player-props-anytime-touchdown-scorers-from-expert-on-sunday-games/",
-      "title": "Will Brinson's NFL Week 4 best bets: Odds, player props, anytime touchdown scorers from expert on Sunday games - CBS Sports",
+      "url": "https://www.4for4.com/2026/w8/week-8-nfl-player-props-best-player-props-bet-ryan-noonan",
+      "title": "Week 8 NFL Player Props: Best Player Props to Bet from Ryan Noonan | 4for4",
+      "week": 8
+    },
+    {
+      "url": "https://www.sportsbookreview.com/picks/nfl/player-props-week-4-2026/",
+      "title": "NFL Player Props for Week 4 | Best O/U Prop Bets & TD Picks This Week",
       "week": 4
     },
     {
-      "url": "https://www.4for4.com/2026/w7/week-7-nfl-player-props-best-player-props-bet-ryan-noonan",
-      "title": "Week 7 NFL Player Props: Best Player Props to Bet from Ryan Noonan | 4for4",
-      "week": 7
-    },
-    {
-      "url": "https://vsin.com/nfl/expert-nfl-picks-week-4-best-bets-predictions-and-player-props-from-zachary-cohen/",
-      "title": "Expert NFL Week 4 Picks: Best Bets, Totals, & Props",
+      "url": "https://www.wagertalk.com/news/nfl/player-props-week-4-best-qb-rb-wr-touchdown-prop-picks/",
+      "title": "NFL Player Props Week 4: Best QB, RB, WR & Touchdown Prop Picks",
       "week": 4
     },
     {
       "url": "https://www.espn.com/espn/betting/story/_/id/50053878/week-4-nfl-odds-spreads-lines-props-best-bets-sunday-football-games",
       "title": "",
+      "week": 4
+    },
+    {
+      "url": "https://vsin.com/nfl/expert-nfl-picks-week-4-best-bets-predictions-and-player-props-from-zachary-cohen/",
+      "title": "Expert NFL Week 4 Picks: Best Bets, Totals, & Props",
       "week": 4
     },
     {
@@ -61,9 +77,29 @@
       "week": 5
     },
     {
+      "url": "https://www.dimers.com/nfl/news/nfl-week-4-betting-guide-model-backed-picks-top-player-props-and-sharp-pick-ems",
+      "title": "NFL Week 4 betting guide: Model backed picks, top player props and sharp Pick 'Ems",
+      "week": 4
+    },
+    {
+      "url": "https://www.si.com/betting/broncos-vs-49ers-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-4-01m3yg2hgg26",
+      "title": "Broncos vs. 49ers Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 4",
+      "week": 4
+    },
+    {
+      "url": "https://www.si.com/betting/chiefs-vs-raiders-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-4-01m3yh62pr06",
+      "title": "Chiefs vs. Raiders Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 4",
+      "week": 4
+    },
+    {
       "url": "https://www.si.com/betting/best-nfl-prop-bets-today-for-week-4-bet-on-david-montgomery-in-battle-of-texas-01m3yp8gw213",
       "title": "Best NFL Prop Bets Today for Week 4 (Bet on David Montgomery in Battle of Texas)",
       "week": 4
+    },
+    {
+      "url": "https://www.rotoballer.com/nfl-betting-picks-player-props-and-parlays-for-thursday-night-football-2026-8/1976033",
+      "title": "NFL Betting Picks: Player Props and Parlays for Thursday Night Football (2026)",
+      "week": 8
     },
     {
       "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-wild-card-weekend-2026/",
@@ -74,41 +110,6 @@
       "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-4-01m3t8gbj8bj",
       "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 4",
       "week": 4
-    },
-    {
-      "url": "https://www.dimers.com/nfl/props",
-      "title": "Best NFL Player Props Today & NFL Prop Bets",
-      "week": 8
-    },
-    {
-      "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
-      "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
-      "week": 8
-    },
-    {
-      "url": "https://www.si.com/betting/player-prop-countdown-top-10-nfl-player-props-for-week-1-fade-caleb-williams-in-bears-opening-game",
-      "title": "Player Prop Countdown: Top 10 NFL Player Props for Week 1 (Fade Caleb Williams in Bears' Opening Game)",
-      "week": 1
-    },
-    {
-      "url": "https://www.sportsbookreview.com/picks/nfl/player-prop-bets-week-18-2026/",
-      "title": "NFL Player Props Today | Best Week 18 Player Prop Bets & Expert Picks",
-      "week": 18
-    },
-    {
-      "url": "https://www.si.com/betting/buccaneers-vs-panthers-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-7-2026",
-      "title": "Buccaneers vs. Panthers Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 7",
-      "week": 7
-    },
-    {
-      "url": "https://sportsbook.draftkings.com/page/nfl-player-props",
-      "title": "NFL Player Props | DraftKings Sportsbook",
-      "week": 1
-    },
-    {
-      "url": "https://www.si.com/betting/bengals-vs-ravens-best-nfl-prop-bets-and-anytime-touchdown-scorer-picks-for-nfl-week-7-01m5k3y0q9ew",
-      "title": "Bengals vs. Ravens Best NFL Prop Bets and Anytime Touchdown Scorer Picks for NFL Week 7",
-      "week": 7
     }
   ],
   "extractionFailures": []
