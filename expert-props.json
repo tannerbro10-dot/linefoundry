@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-11-05T18:00:24.434Z",
+  "generatedAt": "2026-11-06T06:42:35.195Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -66,6 +66,11 @@
       "week": 8
     },
     {
+      "url": "https://sports.betmgm.com/en/blog/nfl/jets-chiefs-prediction-odds-player-prop-bets-picks-week-9-jaa/",
+      "title": "Jets vs Chiefs Prediction, Odds & Best Prop Bets: NFL, Week 9",
+      "week": 9
+    },
+    {
       "url": "https://sports.betmgm.com/en/blog/nfl/broncos-panthers-prediction-odds-player-prop-bets-picks-week-9-jaa/",
       "title": "Broncos vs Panthers Prediction, Odds & Best Prop Bets: NFL, Week 9",
       "week": 9
@@ -91,24 +96,19 @@
       "week": 1
     },
     {
-      "url": "https://www.bettingpros.com/articles/best-nfl-player-props-thursday-night-football-panthers-vs-packers-week-8-2026/",
-      "title": "Best NFL Player Props: Thursday Night Football (Panthers vs. Packers) | BettingPros",
-      "week": 8
-    },
-    {
       "url": "https://dknetwork.draftkings.com/2026/10/12/bills-at-rams-nfl-player-prop-bets-for-monday-night-football/",
       "title": "Bills at Rams NFL Player Prop Bets for Monday Night Football",
       "week": 5
     },
     {
-      "url": "https://www.bettingpros.com/articles/nfl-monday-night-football-player-props-picks-bears-vs-seahawks/",
-      "title": "NFL Monday Night Football Player Props & Picks: Bears vs. Seahawks | BettingPros",
-      "week": 8
-    },
-    {
       "url": "https://www.sportsbettingdime.com/news/nfl/week-6-player-prop-picks-mispriced-lines/",
       "title": "Week 6 NFL Player Prop Picks: Bet These Mispriced Lines Before They&#039;re Corrected",
       "week": 6
+    },
+    {
+      "url": "https://www.bettingpros.com/articles/nfl-monday-night-football-player-props-picks-bears-vs-seahawks/",
+      "title": "NFL Monday Night Football Player Props & Picks: Bears vs. Seahawks | BettingPros",
+      "week": 8
     }
   ],
   "extractionFailures": []
