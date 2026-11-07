@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-11-07T16:25:15.696Z",
+  "generatedAt": "2026-11-07T21:49:29.479Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -71,11 +71,6 @@
       "week": 9
     },
     {
-      "url": "https://sports.betmgm.com/en/blog/nfl/jets-chiefs-prediction-odds-player-prop-bets-picks-week-9-jaa/",
-      "title": "Jets vs Chiefs Prediction, Odds & Best Prop Bets: NFL, Week 9",
-      "week": 9
-    },
-    {
       "url": "https://sports.betmgm.com/en/blog/nfl/patriots-bills-prediction-odds-player-prop-bets-picks-week-4-jaa/",
       "title": "Patriots vs Bills Prediction, Odds & Best Prop Bets: NFL, Week 4",
       "week": 4
@@ -83,6 +78,11 @@
     {
       "url": "https://sports.betmgm.com/en/blog/nfl/buccaneers-bears-prediction-odds-player-prop-bets-picks-week-9-jaa/",
       "title": "Buccaneers vs Bears Prediction, Odds & Best Prop Bets: NFL, Week 9",
+      "week": 9
+    },
+    {
+      "url": "https://sports.betmgm.com/en/blog/nfl/bills-vikings-prediction-odds-player-prop-bets-picks-week-9-jaa/",
+      "title": "Bills vs Vikings Prediction, Odds & Best Prop Bets: NFL, Week 9",
       "week": 9
     },
     {
