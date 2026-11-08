@@ -1,31 +1,14 @@
 {
   "success": true,
-  "generatedAt": "2026-11-08T08:58:45.395Z",
+  "generatedAt": "2026-11-08T16:39:44.853Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 1,
-  "excludedArticleCount": 19,
+  "includedArticleCount": 0,
+  "excludedArticleCount": 20,
   "extractionFailureCount": 0,
-  "propCount": 1,
-  "publishedWeek3SignalCount": 1,
-  "props": [
-    {
-      "player": "has gone",
-      "market": "Passing Yards",
-      "side": "OVER",
-      "line": 239.5,
-      "week": 3,
-      "source": {
-        "url": "https://www.sportsbettingdime.com/news/nfl/best-week-3-player-props-expert/"
-      }
-    }
-  ],
-  "includedArticles": [
-    {
-      "url": "https://www.sportsbettingdime.com/news/nfl/best-week-3-player-props-expert/",
-      "title": "Best Week 3 NFL Player Props - Expert Is 5-1 Using This Method",
-      "week": 3
-    }
-  ],
+  "propCount": 0,
+  "publishedWeek3SignalCount": 0,
+  "props": [],
+  "includedArticles": [],
   "excludedArticles": [
     {
       "url": "https://dknetwork.draftkings.com/2026/10/11/raiders-vs-patriots-nfl-player-prop-bets-for-week-5/",
@@ -53,11 +36,6 @@
       "week": 4
     },
     {
-      "url": "https://vsin.com/nfl/nfl-player-prop-bets-for-week-5-from-adam-burke/",
-      "title": "Expert NFL Player Prop Bets for Week 5",
-      "week": 5
-    },
-    {
       "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-4-picks-best-bets-every-game-wills-wagers",
       "title": "2026 NFL Week 4 Picks: Best Bets For Every Game — Will&#x27;s Wagers | FOX Sports",
       "week": 4
@@ -66,6 +44,11 @@
       "url": "https://www.nbcsports.com/betting/nfl/news/2026-nfl-week-8-best-bets-picks-predictions-player-props-odds-lions-vs-vikings-chiefs-vs-broncos",
       "title": "2026 NFL Week 8 Best Bets, Picks, Predictions, Player Props, Odds: Lions vs Vikings, Chiefs vs Broncos - NBC Sports",
       "week": 8
+    },
+    {
+      "url": "https://sports.betmgm.com/en/blog/nfl/cardinals-giants-prediction-odds-player-prop-bets-picks-week-4-jaa/",
+      "title": "Cardinals vs Giants Prediction, Odds & Best Prop Bets: NFL, Week 4",
+      "week": 4
     },
     {
       "url": "https://www.dimers.com/nfl/news/nfl-week-4-betting-guide-model-backed-picks-top-player-props-and-sharp-pick-ems",
@@ -83,9 +66,14 @@
       "week": 9
     },
     {
-      "url": "https://sports.betmgm.com/en/blog/nfl/jets-chiefs-prediction-odds-player-prop-bets-picks-week-9-jaa/",
-      "title": "Jets vs Chiefs Prediction, Odds & Best Prop Bets: NFL, Week 9",
-      "week": 9
+      "url": "https://sports.betmgm.com/en/blog/nfl/patriots-bills-prediction-odds-player-prop-bets-picks-week-4-jaa/",
+      "title": "Patriots vs Bills Prediction, Odds & Best Prop Bets: NFL, Week 4",
+      "week": 4
+    },
+    {
+      "url": "https://dknetwork.draftkings.com/2026/09/27/chargers-vs-bills-nfl-player-prop-bets/",
+      "title": "Chargers vs. Bills NFL Player Prop Bets for Week 3",
+      "week": 3
     },
     {
       "url": "https://sports.betmgm.com/en/blog/nfl/buccaneers-bears-prediction-odds-player-prop-bets-picks-week-9-jaa/",
@@ -98,18 +86,8 @@
       "week": null
     },
     {
-      "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-cowboys-vs-buccaneers-week-5-bm16/",
-      "title": "2 Best NFL Player Props for TNF: Cowboys vs Buccaneers | BetMGM",
-      "week": 5
-    },
-    {
       "url": "https://www.sportsgamblingpodcast.com/2026/11/06/nfl-prop-bets-week-9-ep-2723/",
       "week": 9
-    },
-    {
-      "url": "https://dknetwork.draftkings.com/2026/09/27/chargers-vs-bills-nfl-player-prop-bets/",
-      "title": "Chargers vs. Bills NFL Player Prop Bets for Week 3",
-      "week": 3
     },
     {
       "url": "https://dknetwork.draftkings.com/2026/09/13/nfl-player-prop-bets-week-1/",
@@ -117,9 +95,18 @@
       "week": 1
     },
     {
+      "url": "https://www.sportsgamblingpodcast.com/2026/11/06/football-pick-of-the-day-november-6th-nfl-week-9-prop-bet/",
+      "week": 9
+    },
+    {
       "url": "https://dknetwork.draftkings.com/2026/10/12/bills-at-rams-nfl-player-prop-bets-for-monday-night-football/",
       "title": "Bills at Rams NFL Player Prop Bets for Monday Night Football",
       "week": 5
+    },
+    {
+      "url": "https://www.sportsbettingdime.com/news/nfl/week-6-player-prop-picks-mispriced-lines/",
+      "title": "Week 6 NFL Player Prop Picks: Bet These Mispriced Lines Before They&#039;re Corrected",
+      "week": 6
     }
   ],
   "extractionFailures": []
