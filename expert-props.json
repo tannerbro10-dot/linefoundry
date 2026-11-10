@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-11-10T04:06:26.911Z",
+  "generatedAt": "2026-11-10T12:38:26.962Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -51,6 +51,11 @@
       "week": 4
     },
     {
+      "url": "https://sports.betmgm.com/en/blog/nfl/vikings-lions-prediction-odds-player-prop-bets-picks-week-8-jaa/",
+      "title": "Vikings vs Lions Prediction, Odds & Best Prop Bets: NFL, Week 8",
+      "week": 8
+    },
+    {
       "url": "https://dknetwork.draftkings.com/2026/09/27/chargers-vs-bills-nfl-player-prop-bets/",
       "title": "Chargers vs. Bills NFL Player Prop Bets for Week 3",
       "week": 3
@@ -61,18 +66,8 @@
       "week": 9
     },
     {
-      "url": "https://www.fantasypoints.com/nfl/articles/2026/brolleys-best-bets-2026-week-9",
-      "title": "Brolley&#x27;s Best Bets: 2026 Week 9 | Fantasy Points",
-      "week": 9
-    },
-    {
       "url": "https://sports.betmgm.com/en/blog/nfl/buccaneers-bears-prediction-odds-player-prop-bets-picks-week-9-jaa/",
       "title": "Buccaneers vs Bears Prediction, Odds & Best Prop Bets: NFL, Week 9",
-      "week": 9
-    },
-    {
-      "url": "https://sports.betmgm.com/en/blog/nfl/bills-vikings-prediction-odds-player-prop-bets-picks-week-9-jaa/",
-      "title": "Bills vs Vikings Prediction, Odds & Best Prop Bets: NFL, Week 9",
       "week": 9
     },
     {
@@ -81,13 +76,13 @@
       "week": 5
     },
     {
-      "url": "https://www.nbcsports.com/betting/nfl/news/2026-nfl-week-9-best-bets-picks-predictions-player-props-odds-bears-vs-buccaneers-bills-vs-vikings",
-      "title": "2026 NFL Week 9 Best Bets, Picks, Predictions, Player Props, Odds: Bears vs Buccaneers, Bills vs Vikings - NBC Sports",
+      "url": "https://sports.betmgm.com/en/blog/nfl/bills-vikings-prediction-odds-player-prop-bets-picks-week-9-jaa/",
+      "title": "Bills vs Vikings Prediction, Odds & Best Prop Bets: NFL, Week 9",
       "week": 9
     },
     {
-      "url": "https://dknetwork.draftkings.com/sport/nfl/picks/page/3/",
-      "title": "NFL Sports Betting Picks | Page 3 of 219 | DraftKings Network",
+      "url": "https://www.nbcsports.com/betting/nfl/news/2026-nfl-week-9-best-bets-picks-predictions-player-props-odds-bears-vs-buccaneers-bills-vs-vikings",
+      "title": "2026 NFL Week 9 Best Bets, Picks, Predictions, Player Props, Odds: Bears vs Buccaneers, Bills vs Vikings - NBC Sports",
       "week": 9
     },
     {
@@ -100,13 +95,19 @@
       "week": 9
     },
     {
-      "url": "https://www.sportsgamblingpodcast.com/2026/11/06/football-pick-of-the-day-november-6th-nfl-week-9-prop-bet/",
-      "week": 9
+      "url": "https://dknetwork.draftkings.com/2026/10/12/bills-at-rams-nfl-player-prop-bets-for-monday-night-football/",
+      "title": "Bills at Rams NFL Player Prop Bets for Monday Night Football",
+      "week": 5
     },
     {
-      "url": "https://www.bettingpros.com/articles/nfl-betting-primer-picks-predictions-week-6-2026/",
-      "title": "NFL Betting Primer, Picks & Predictions: Week 6 (2026) | BettingPros",
+      "url": "https://www.sportsbettingdime.com/news/nfl/week-6-player-prop-picks-mispriced-lines/",
+      "title": "Week 6 NFL Player Prop Picks: Bet These Mispriced Lines Before They&#039;re Corrected",
       "week": 6
+    },
+    {
+      "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
+      "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
+      "week": null
     }
   ],
   "extractionFailures": []
