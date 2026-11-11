@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-11-11T01:55:42.184Z",
+  "generatedAt": "2026-11-11T09:24:18.537Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -41,14 +41,14 @@
       "week": 4
     },
     {
-      "url": "https://www.nbcsports.com/betting/nfl/news/2026-nfl-week-8-best-bets-picks-predictions-player-props-odds-lions-vs-vikings-chiefs-vs-broncos",
-      "title": "2026 NFL Week 8 Best Bets, Picks, Predictions, Player Props, Odds: Lions vs Vikings, Chiefs vs Broncos - NBC Sports",
-      "week": 8
-    },
-    {
       "url": "https://www.dimers.com/nfl/news/nfl-week-4-betting-guide-model-backed-picks-top-player-props-and-sharp-pick-ems",
       "title": "NFL Week 4 betting guide: Model backed picks, top player props and sharp Pick 'Ems",
       "week": 4
+    },
+    {
+      "url": "https://www.nbcsports.com/betting/nfl/news/2026-nfl-week-8-best-bets-picks-predictions-player-props-odds-lions-vs-vikings-chiefs-vs-broncos",
+      "title": "2026 NFL Week 8 Best Bets, Picks, Predictions, Player Props, Odds: Lions vs Vikings, Chiefs vs Broncos - NBC Sports",
+      "week": 8
     },
     {
       "url": "https://sports.betmgm.com/en/blog/nfl/vikings-lions-prediction-odds-player-prop-bets-picks-week-8-jaa/",
@@ -61,19 +61,23 @@
       "week": 3
     },
     {
+      "url": "https://sports.betmgm.com/en/blog/nfl/broncos-panthers-prediction-odds-player-prop-bets-picks-week-9-jaa/",
+      "title": "Broncos vs Panthers Prediction, Odds & Best Prop Bets: NFL, Week 9",
+      "week": 9
+    },
+    {
+      "url": "https://www.foxsports.com/stories/nfl/2026-super-bowl-betting-guide",
+      "title": "2026 Super Bowl Betting Guide: How to Bet, Fun Props, Expert Picks, and More | FOX Sports",
+      "week": 10
+    },
+    {
       "url": "https://sports.betmgm.com/en/blog/nfl/buccaneers-bears-prediction-odds-player-prop-bets-picks-week-9-jaa/",
       "title": "Buccaneers vs Bears Prediction, Odds & Best Prop Bets: NFL, Week 9",
       "week": 9
     },
     {
       "url": "https://www.bleachernation.com/picks/2026/11/07/josh-allen-player-props-week-9-anytime-td-props-and-odds-vs-the-vikings/",
-      "title": "Josh Allen Player Props Week 9: Anytime TD Props and Odds vs. the Vikings - Bleacher Nation",
       "week": 9
-    },
-    {
-      "url": "https://sports.betmgm.com/en/blog/nfl/2-best-nfl-player-prop-bets-tnf-cowboys-vs-buccaneers-week-5-bm16/",
-      "title": "2 Best NFL Player Props for TNF: Cowboys vs Buccaneers | BetMGM",
-      "week": 5
     },
     {
       "url": "https://sports.betmgm.com/en/blog/nfl/bills-vikings-prediction-odds-player-prop-bets-picks-week-9-jaa/",
@@ -91,10 +95,6 @@
       "week": 1
     },
     {
-      "url": "https://www.sportsgamblingpodcast.com/2026/11/06/nfl-prop-bets-week-9-ep-2723/",
-      "week": 9
-    },
-    {
       "url": "https://dknetwork.draftkings.com/2026/10/12/bills-at-rams-nfl-player-prop-bets-for-monday-night-football/",
       "title": "Bills at Rams NFL Player Prop Bets for Monday Night Football",
       "week": 5
@@ -105,9 +105,8 @@
       "week": 6
     },
     {
-      "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
-      "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
-      "week": 11
+      "url": "https://www.sportsgamblingpodcast.com/2026/11/06/nfl-prop-bets-week-9-ep-2723/",
+      "week": 9
     }
   ],
   "extractionFailures": []
