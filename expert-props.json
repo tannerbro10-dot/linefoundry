@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-11-10T20:49:04.646Z",
+  "generatedAt": "2026-11-11T01:55:42.184Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -61,11 +61,6 @@
       "week": 3
     },
     {
-      "url": "https://www.foxsports.com/stories/nfl/2026-super-bowl-betting-guide",
-      "title": "2026 Super Bowl Betting Guide: How to Bet, Fun Props, Expert Picks, and More | FOX Sports",
-      "week": 9
-    },
-    {
       "url": "https://sports.betmgm.com/en/blog/nfl/buccaneers-bears-prediction-odds-player-prop-bets-picks-week-9-jaa/",
       "title": "Buccaneers vs Bears Prediction, Odds & Best Prop Bets: NFL, Week 9",
       "week": 9
@@ -108,6 +103,11 @@
       "url": "https://www.sportsbettingdime.com/news/nfl/week-6-player-prop-picks-mispriced-lines/",
       "title": "Week 6 NFL Player Prop Picks: Bet These Mispriced Lines Before They&#039;re Corrected",
       "week": 6
+    },
+    {
+      "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
+      "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
+      "week": 11
     }
   ],
   "extractionFailures": []
