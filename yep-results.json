@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "6f9d3834-5525-4738-851e-d0c28bd01671",
+  "request_id": "2815fdd2-a5d4-4d35-9a62-d9f9ec04fcb1",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -70,6 +70,15 @@
       "highlights": []
     },
     {
+      "url": "https://sports.betmgm.com/en/blog/nfl/panthers-saints-prediction-odds-player-prop-bets-picks-week-10-jaa/",
+      "title": "Panthers vs Saints Prediction, Odds & Best Prop Bets – NFL, Week 10",
+      "description": "Saints vs Panthers prediction & odds for this Week 10 game. Plus best bets & picks for receiving & rushing player props, 1st TD scorer & more.",
+      "published_date": "2026-11-10",
+      "domain": "betmgm.com",
+      "content_type": "Article",
+      "highlights": []
+    },
+    {
       "url": "https://www.dimers.com/nfl/news/nfl-week-4-betting-guide-model-backed-picks-top-player-props-and-sharp-pick-ems",
       "title": "NFL Week 4 betting guide: Model backed picks, top player props and sharp Pick 'Ems",
       "description": "Unlock data-driven NFL Week 4 best bets. Powered by Dimers Pro analytics to spot the sharpest prop edges and top Pick 'Em value.",
@@ -106,15 +115,6 @@
       "highlights": []
     },
     {
-      "url": "https://dknetwork.draftkings.com/sport/nfl/picks/page/3/",
-      "title": "NFL Sports Betting Picks",
-      "description": "NFL Sports Betting Picks\nExpert NFL betting picks, odds and predictions from the DraftKings Network team, updated as the lines move.\n Jaguars vs. Ravens NFL Player Prop Bets and Picks for Thursday Nig",
-      "published_date": "2026-10-07",
-      "domain": "draftkings.com",
-      "content_type": "Listing_Collection",
-      "highlights": []
-    },
-    {
       "url": "https://dknetwork.draftkings.com/2026/09/13/nfl-player-prop-bets-week-1/",
       "title": "Best NFL Player Prop Bets for Week 1",
       "description": "Blake Krass breaks down his favorite player prop bets to consider for the Week 1 NFL slate on DraftKings Sportsbook.",
@@ -124,11 +124,11 @@
       "highlights": []
     },
     {
-      "url": "https://www.nbcsports.com/betting/nfl/news/2026-nfl-week-9-best-bets-picks-predictions-player-props-odds-bears-vs-buccaneers-bills-vs-vikings",
-      "title": "2026 NFL Week 9 Best Bets, Picks, Predictions, Player Props, Odds: Bears vs Buccaneers, Bills vs Vikings",
-      "description": "NBC Sports' Vaughn Dalzell breaks down his best bets in the NFL for Week 9!",
-      "published_date": "2026-11-08",
-      "domain": "nbcsports.com",
+      "url": "https://dknetwork.draftkings.com/2026/10/12/bills-at-rams-nfl-player-prop-bets-for-monday-night-football/",
+      "title": "Bills at Rams NFL Player Prop Bets for Monday Night Football",
+      "description": "Sean Barnard provides the top player prop bets for the NFL's Week 5 Monday Night Football matchup between the Buffalo Bills and the Los Angeles Rams.",
+      "published_date": "2026-10-12",
+      "domain": "draftkings.com",
       "content_type": "Article",
       "highlights": []
     },
@@ -142,11 +142,11 @@
       "highlights": []
     },
     {
-      "url": "https://www.bettingpros.com/articles/nfl-betting-primer-picks-predictions-week-6-2026/",
-      "title": "NFL Betting Primer, Picks & Predictions: Week 6 (2026)",
-      "description": "Welcome back to yet another edition of Andrew Erickson’s NFL Betting Primer powered by BettingPros. My Week 5 betting card finished 7-4 (4-2 on sides/totals and 3-2 on player props), marking five straight weeks in the black. Over five weeks, the official plays went 7-4, 6-5, 6-4, 6-5 and 7-4. We are 32-22 overall for […]",
-      "published_date": "2026-10-17",
-      "domain": "bettingpros.com",
+      "url": "https://www.nbcsports.com/betting/nfl/news/2026-nfl-week-9-best-bets-picks-predictions-player-props-odds-bears-vs-buccaneers-bills-vs-vikings",
+      "title": "2026 NFL Week 9 Best Bets, Picks, Predictions, Player Props, Odds: Bears vs Buccaneers, Bills vs Vikings",
+      "description": "NBC Sports' Vaughn Dalzell breaks down his best bets in the NFL for Week 9!",
+      "published_date": "2026-11-08",
+      "domain": "nbcsports.com",
       "content_type": "Article",
       "highlights": []
     },
@@ -187,13 +187,13 @@
       "highlights": []
     }
   ],
-  "response_time_ms": 302,
+  "response_time_ms": 280,
   "api_cost": {
     "cost": 0.004,
     "details": "Search API request"
   },
   "balance": {
-    "before": 5.26,
-    "after": 5.256
+    "before": 5.256,
+    "after": 5.252
   }
 }
