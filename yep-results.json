@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "b5398129-d70b-41be-965f-4096870e162c",
+  "request_id": "6f9d3834-5525-4738-851e-d0c28bd01671",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -30,15 +30,6 @@
       "description": "NFL Week 9 Monday Night Football: Bills vs. Vikings best player props. Targeting three players in passing, rushing, and ATDS markets.",
       "published_date": "2026-11-09",
       "domain": "bettingpros.com",
-      "content_type": "Article",
-      "highlights": []
-    },
-    {
-      "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-odds-picks-predictions/",
-      "title": "Week 8 NFL Player Prop Odds & Picks: Lines & Best Bets",
-      "description": "Compare NFL player prop odds across five sportsbooks, then get Josh Shepardson's and Curtis Hirsch's best bets for this week. Lines update all week.",
-      "published_date": "2026-09-06",
-      "domain": "sharpfootballanalysis.com",
       "content_type": "Article",
       "highlights": []
     },
@@ -115,6 +106,15 @@
       "highlights": []
     },
     {
+      "url": "https://dknetwork.draftkings.com/sport/nfl/picks/page/3/",
+      "title": "NFL Sports Betting Picks",
+      "description": "NFL Sports Betting Picks\nExpert NFL betting picks, odds and predictions from the DraftKings Network team, updated as the lines move.\n Jaguars vs. Ravens NFL Player Prop Bets and Picks for Thursday Nig",
+      "published_date": "2026-10-07",
+      "domain": "draftkings.com",
+      "content_type": "Listing_Collection",
+      "highlights": []
+    },
+    {
       "url": "https://dknetwork.draftkings.com/2026/09/13/nfl-player-prop-bets-week-1/",
       "title": "Best NFL Player Prop Bets for Week 1",
       "description": "Blake Krass breaks down his favorite player prop bets to consider for the Week 1 NFL slate on DraftKings Sportsbook.",
@@ -133,20 +133,20 @@
       "highlights": []
     },
     {
-      "url": "https://dknetwork.draftkings.com/2026/10/12/bills-at-rams-nfl-player-prop-bets-for-monday-night-football/",
-      "title": "Bills at Rams NFL Player Prop Bets for Monday Night Football",
-      "description": "Sean Barnard provides the top player prop bets for the NFL's Week 5 Monday Night Football matchup between the Buffalo Bills and the Los Angeles Rams.",
-      "published_date": "2026-10-12",
-      "domain": "draftkings.com",
-      "content_type": "Article",
-      "highlights": []
-    },
-    {
       "url": "https://www.sportsbettingdime.com/news/nfl/week-6-player-prop-picks-mispriced-lines/",
       "title": "Week 6 NFL Player Prop Picks: Bet These Mispriced Lines Before They're Corrected",
       "description": "Get to these early mispriced lines on NFL player prop markets for Week 6 before money starts to correct them!",
       "published_date": "2026-10-14",
       "domain": "sportsbettingdime.com",
+      "content_type": "Article",
+      "highlights": []
+    },
+    {
+      "url": "https://www.bettingpros.com/articles/nfl-betting-primer-picks-predictions-week-6-2026/",
+      "title": "NFL Betting Primer, Picks & Predictions: Week 6 (2026)",
+      "description": "Welcome back to yet another edition of Andrew Erickson’s NFL Betting Primer powered by BettingPros. My Week 5 betting card finished 7-4 (4-2 on sides/totals and 3-2 on player props), marking five straight weeks in the black. Over five weeks, the official plays went 7-4, 6-5, 6-4, 6-5 and 7-4. We are 32-22 overall for […]",
+      "published_date": "2026-10-17",
+      "domain": "bettingpros.com",
       "content_type": "Article",
       "highlights": []
     },
@@ -169,15 +169,6 @@
       "highlights": []
     },
     {
-      "url": "https://www.fantasypros.com/2026/01/nfl-wild-card-weekend-player-props-bets/",
-      "title": "NFL Player Props, Bets, Odds, Picks & Predictions (2025)",
-      "description": "View the best player props and bets for this week's slate with our NFL Prop Bet Cheat Sheet. Here are our top NFL player prop bet picks.",
-      "published_date": "2026-01-01",
-      "domain": "fantasypros.com",
-      "content_type": "Article",
-      "highlights": []
-    },
-    {
       "url": "https://www.espn.com/espn/betting/story/_/id/50107426/week-5-nfl-odds-props-best-bets-sunday-games",
       "title": "NFL Week 5 betting guide: Analysis, best bets, TD predictions for Sunday",
       "description": "Our experts dive into the odds and player props for Week 5 and offer their betting tips and favorite plays.",
@@ -185,15 +176,24 @@
       "domain": "espn.com",
       "content_type": "Article",
       "highlights": []
+    },
+    {
+      "url": "https://www.bettingpros.com/articles/nfl-monday-night-football-player-props-picks-bears-vs-seahawks/",
+      "title": "NFL Monday Night Football Player Props & Picks: Bears vs. Seahawks",
+      "description": "NFL Week 8 Monday Night Football: Bears vs. Seahawks best player props. Targeting three players in passing, rushing, and ATDS markets.",
+      "published_date": "2026-11-02",
+      "domain": "bettingpros.com",
+      "content_type": "Article",
+      "highlights": []
     }
   ],
-  "response_time_ms": 274,
+  "response_time_ms": 302,
   "api_cost": {
     "cost": 0.004,
     "details": "Search API request"
   },
   "balance": {
-    "before": 5.264,
-    "after": 5.26
+    "before": 5.26,
+    "after": 5.256
   }
 }
