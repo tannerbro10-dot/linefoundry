@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "de08845b-4371-4848-adbc-77f4dc08c8bc",
+  "request_id": "3695eb40-3ff3-416f-9de8-ce8e5c3a6573",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -25,20 +25,20 @@
       "highlights": []
     },
     {
-      "url": "https://www.bettingpros.com/articles/nfl-monday-night-football-player-props-picks-bills-vs-vikings-2026/",
-      "title": "NFL Monday Night Football Player Props & Picks: Bills vs. Vikings",
-      "description": "NFL Week 9 Monday Night Football: Bills vs. Vikings best player props. Targeting three players in passing, rushing, and ATDS markets.",
-      "published_date": "2026-11-09",
-      "domain": "bettingpros.com",
-      "content_type": "Article",
-      "highlights": []
-    },
-    {
       "url": "https://www.wagertalk.com/news/nfl/player-props-week-4-best-qb-rb-wr-touchdown-prop-picks/",
       "title": "NFL Player Props Week 4: Best QB, RB, WR & Touchdown Prop Picks",
       "description": "Get the best NFL player props for Week 4, including expert quarterback, running back, wide receiver and touchdown prop picks, odds and betting analysis.",
       "published_date": "2026-10-02",
       "domain": "wagertalk.com",
+      "content_type": "Article",
+      "highlights": []
+    },
+    {
+      "url": "https://www.bettingpros.com/articles/nfl-monday-night-football-player-props-picks-bills-vs-vikings-2026/",
+      "title": "NFL Monday Night Football Player Props & Picks: Bills vs. Vikings",
+      "description": "NFL Week 9 Monday Night Football: Bills vs. Vikings best player props. Targeting three players in passing, rushing, and ATDS markets.",
+      "published_date": "2026-11-09",
+      "domain": "bettingpros.com",
       "content_type": "Article",
       "highlights": []
     },
@@ -70,6 +70,15 @@
       "highlights": []
     },
     {
+      "url": "https://sports.betmgm.com/en/blog/nfl/bills-jets-prediction-odds-player-prop-bets-picks-week-10-jaa/",
+      "title": "Bills vs Jets Prediction, Odds & Best Prop Bets – NFL, Week 10",
+      "description": "Jets vs Bills prediction & odds for this Week 10 game. Plus best bets & picks for receiving & rushing player props, 1st TD scorer & more.",
+      "published_date": "2026-11-10",
+      "domain": "betmgm.com",
+      "content_type": "Article",
+      "highlights": []
+    },
+    {
       "url": "https://www.dimers.com/nfl/news/nfl-week-4-betting-guide-model-backed-picks-top-player-props-and-sharp-pick-ems",
       "title": "NFL Week 4 betting guide: Model backed picks, top player props and sharp Pick 'Ems",
       "description": "Unlock data-driven NFL Week 4 best bets. Powered by Dimers Pro analytics to spot the sharpest prop edges and top Pick 'Em value.",
@@ -79,20 +88,20 @@
       "highlights": []
     },
     {
+      "url": "https://sports.betmgm.com/en/blog/nfl/panthers-saints-prediction-odds-player-prop-bets-picks-week-10-jaa/",
+      "title": "Panthers vs Saints Prediction, Odds & Best Prop Bets – NFL, Week 10",
+      "description": "Saints vs Panthers prediction & odds for this Week 10 game. Plus best bets & picks for receiving & rushing player props, 1st TD scorer & more.",
+      "published_date": "2026-11-10",
+      "domain": "betmgm.com",
+      "content_type": "Article",
+      "highlights": []
+    },
+    {
       "url": "https://www.nbcsports.com/betting/nfl/news/2026-nfl-week-8-best-bets-picks-predictions-player-props-odds-lions-vs-vikings-chiefs-vs-broncos",
       "title": "2026 NFL Week 8 Best Bets, Picks, Predictions, Player Props, Odds: Lions vs Vikings, Chiefs vs Broncos",
       "description": "Vaughn Dalzell breaks down his best bets in the NFL for Week 8!",
       "published_date": "2026-11-01",
       "domain": "nbcsports.com",
-      "content_type": "Article",
-      "highlights": []
-    },
-    {
-      "url": "https://sports.betmgm.com/en/blog/nfl/patriots-lions-prediction-odds-player-prop-bets-picks-week-10-jaa/",
-      "title": "Patriots vs Lions Prediction, Odds & Best Prop Bets – NFL, Week 10",
-      "description": "Lions vs Patriots prediction & odds for this Week 10 game. Plus best bets & picks for receiving & rushing player props, 1st TD scorer & more.",
-      "published_date": "2026-11-10",
-      "domain": "betmgm.com",
       "content_type": "Article",
       "highlights": []
     },
@@ -176,24 +185,15 @@
       "domain": "sportsgamblingpodcast.com",
       "content_type": "Article",
       "highlights": []
-    },
-    {
-      "url": "https://www.espn.com/espn/betting/story/_/id/50107426/week-5-nfl-odds-props-best-bets-sunday-games",
-      "title": "NFL Week 5 betting guide: Analysis, best bets, TD predictions for Sunday",
-      "description": "Our experts dive into the odds and player props for Week 5 and offer their betting tips and favorite plays.",
-      "published_date": "2026-10-09",
-      "domain": "espn.com",
-      "content_type": "Article",
-      "highlights": []
     }
   ],
-  "response_time_ms": 293,
+  "response_time_ms": 321,
   "api_cost": {
     "cost": 0.004,
     "details": "Search API request"
   },
   "balance": {
-    "before": 5.24,
-    "after": 5.236
+    "before": 5.236,
+    "after": 5.232
   }
 }
