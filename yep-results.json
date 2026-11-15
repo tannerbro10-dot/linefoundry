@@ -1,6 +1,6 @@
 {
   "success": true,
-  "request_id": "3695eb40-3ff3-416f-9de8-ce8e5c3a6573",
+  "request_id": "4dd278c4-e3f9-42d6-af7f-2b3ff441cd30",
   "query": "NFL player prop bets expert picks Week 4 2026",
   "type": "highlights",
   "language": "en",
@@ -61,6 +61,15 @@
       "highlights": []
     },
     {
+      "url": "https://www.bettingpros.com/articles/nfl-week-4-confidence-pool-picks-predictions-2026/",
+      "title": "NFL Week 4 Confidence Pool Picks & Predictions (2026)",
+      "description": "The first three weeks of the NFL have been wild. For the first time in over five years, we’ve got a losing record through the first three weeks. I’m ready to adjust and get back over .500. Below are my NFL Week 4 confidence pool picks. More NFL Betting Advice NFL Prop Bet Cheat Sheet Expert [...]",
+      "published_date": "2026-09-30",
+      "domain": "bettingpros.com",
+      "content_type": "Article",
+      "highlights": []
+    },
+    {
       "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-4-picks-best-bets-every-game-wills-wagers",
       "title": "2026 NFL Week 4 Picks: Best Bets For Every Game — Will's Wagers",
       "description": "Will Hill is back with his best bet for every NFL Week 4 game.",
@@ -79,15 +88,6 @@
       "highlights": []
     },
     {
-      "url": "https://www.dimers.com/nfl/news/nfl-week-4-betting-guide-model-backed-picks-top-player-props-and-sharp-pick-ems",
-      "title": "NFL Week 4 betting guide: Model backed picks, top player props and sharp Pick 'Ems",
-      "description": "Unlock data-driven NFL Week 4 best bets. Powered by Dimers Pro analytics to spot the sharpest prop edges and top Pick 'Em value.",
-      "published_date": "2026-09-29",
-      "domain": "dimers.com",
-      "content_type": "Article",
-      "highlights": []
-    },
-    {
       "url": "https://sports.betmgm.com/en/blog/nfl/panthers-saints-prediction-odds-player-prop-bets-picks-week-10-jaa/",
       "title": "Panthers vs Saints Prediction, Odds & Best Prop Bets – NFL, Week 10",
       "description": "Saints vs Panthers prediction & odds for this Week 10 game. Plus best bets & picks for receiving & rushing player props, 1st TD scorer & more.",
@@ -102,6 +102,15 @@
       "description": "Vaughn Dalzell breaks down his best bets in the NFL for Week 8!",
       "published_date": "2026-11-01",
       "domain": "nbcsports.com",
+      "content_type": "Article",
+      "highlights": []
+    },
+    {
+      "url": "https://sports.betmgm.com/en/blog/nfl/patriots-lions-prediction-odds-player-prop-bets-picks-week-10-jaa/",
+      "title": "Patriots vs Lions Prediction, Odds & Best Prop Bets – NFL, Week 10",
+      "description": "Lions vs Patriots prediction & odds for this Week 10 game. Plus best bets & picks for receiving & rushing player props, 1st TD scorer & more.",
+      "published_date": "2026-11-10",
+      "domain": "betmgm.com",
       "content_type": "Article",
       "highlights": []
     },
@@ -176,24 +185,15 @@
       "domain": "bettingpros.com",
       "content_type": "Article",
       "highlights": []
-    },
-    {
-      "url": "https://www.sportsgamblingpodcast.com/2026/11/06/nfl-prop-bets-week-9-ep-2723/",
-      "title": "NFL Prop Bets Week 9 (Ep. 2723)",
-      "description": "NFL Prop Bets Week 9 brings props on Greg Dulcich, Chuba Hubbard and Jonathan Taylor, plus ladders and a 712-1 Degen play.",
-      "published_date": "2026-11-06",
-      "domain": "sportsgamblingpodcast.com",
-      "content_type": "Article",
-      "highlights": []
     }
   ],
-  "response_time_ms": 321,
+  "response_time_ms": 358,
   "api_cost": {
     "cost": 0.004,
     "details": "Search API request"
   },
   "balance": {
-    "before": 5.236,
-    "after": 5.232
+    "before": 5.232,
+    "after": 5.228
   }
 }

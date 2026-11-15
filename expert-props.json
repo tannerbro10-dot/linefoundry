@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-11-14T20:42:57.148Z",
+  "generatedAt": "2026-11-15T01:54:36.656Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -41,6 +41,11 @@
       "week": 4
     },
     {
+      "url": "https://www.bettingpros.com/articles/nfl-week-4-confidence-pool-picks-predictions-2026/",
+      "title": "NFL Week 4 Confidence Pool Picks & Predictions (2026) | BettingPros",
+      "week": 4
+    },
+    {
       "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-4-picks-best-bets-every-game-wills-wagers",
       "title": "2026 NFL Week 4 Picks: Best Bets For Every Game — Will&#x27;s Wagers | FOX Sports",
       "week": 4
@@ -49,11 +54,6 @@
       "url": "https://sports.betmgm.com/en/blog/nfl/bills-jets-prediction-odds-player-prop-bets-picks-week-10-jaa/",
       "title": "Bills vs Jets Prediction, Odds & Best Prop Bets: NFL, Week 10",
       "week": 10
-    },
-    {
-      "url": "https://www.dimers.com/nfl/news/nfl-week-4-betting-guide-model-backed-picks-top-player-props-and-sharp-pick-ems",
-      "title": "NFL Week 4 betting guide: Model backed picks, top player props and sharp Pick 'Ems",
-      "week": 4
     },
     {
       "url": "https://sports.betmgm.com/en/blog/nfl/panthers-saints-prediction-odds-player-prop-bets-picks-week-10-jaa/",
@@ -66,6 +66,11 @@
       "week": 8
     },
     {
+      "url": "https://sports.betmgm.com/en/blog/nfl/patriots-lions-prediction-odds-player-prop-bets-picks-week-10-jaa/",
+      "title": "Patriots vs Lions Prediction, Odds & Best Prop Bets: NFL, Week 10",
+      "week": 10
+    },
+    {
       "url": "https://dknetwork.draftkings.com/2026/09/27/chargers-vs-bills-nfl-player-prop-bets/",
       "title": "Chargers vs. Bills NFL Player Prop Bets for Week 3",
       "week": 3
@@ -73,7 +78,7 @@
     {
       "url": "https://www.foxsports.com/stories/nfl/2026-super-bowl-betting-guide",
       "title": "2026 Super Bowl Betting Guide: How to Bet, Fun Props, Expert Picks, and More | FOX Sports",
-      "week": 10
+      "week": null
     },
     {
       "url": "https://sports.betmgm.com/en/blog/nfl/chargers-ravens-prediction-odds-player-prop-bets-picks-week-10-jaa/",
@@ -104,10 +109,6 @@
       "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
       "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
       "week": 10
-    },
-    {
-      "url": "https://www.sportsgamblingpodcast.com/2026/11/06/nfl-prop-bets-week-9-ep-2723/",
-      "week": 9
     }
   ],
   "extractionFailures": []
