@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-11-16T18:31:40.834Z",
+  "generatedAt": "2026-11-17T02:55:30.933Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -11,13 +11,18 @@
   "includedArticles": [],
   "excludedArticles": [
     {
+      "url": "https://dknetwork.draftkings.com/2026/10/11/raiders-vs-patriots-nfl-player-prop-bets-for-week-5/",
+      "title": "Raiders vs. Patriots NFL Player Prop Bets for Week 5",
+      "week": 5
+    },
+    {
       "url": "https://www.wagertalk.com/news/nfl/player-props-week-4-best-qb-rb-wr-touchdown-prop-picks/",
       "title": "NFL Player Props Week 4: Best QB, RB, WR & Touchdown Prop Picks",
       "week": 4
     },
     {
       "url": "https://www.espn.com/espn/betting/story/_/id/50053878/week-4-nfl-odds-spreads-lines-props-best-bets-sunday-football-games",
-      "title": "",
+      "title": "Week 4 NFL best bets, analysis, game picks and props - ESPN",
       "week": 4
     },
     {
@@ -41,11 +46,6 @@
       "week": 4
     },
     {
-      "url": "https://sports.betmgm.com/en/blog/nfl/steelers-bengals-prediction-odds-player-prop-bets-picks-week-10-jaa/",
-      "title": "Steelers vs Bengals Prediction, Odds & Best Prop Bets: NFL, Week 10",
-      "week": 10
-    },
-    {
       "url": "https://sports.betmgm.com/en/blog/nfl/bills-jets-prediction-odds-player-prop-bets-picks-week-10-jaa/",
       "title": "Bills vs Jets Prediction, Odds & Best Prop Bets: NFL, Week 10",
       "week": 10
@@ -56,34 +56,24 @@
       "week": 8
     },
     {
-      "url": "https://sports.betmgm.com/en/blog/nfl/texans-browns-prediction-odds-player-prop-bets-picks-week-10-jaa/",
-      "title": "Texans vs Browns Prediction, Odds & Best Prop Bets: NFL, Week 10",
-      "week": 10
-    },
-    {
-      "url": "https://sports.betmgm.com/en/blog/nfl/panthers-saints-prediction-odds-player-prop-bets-picks-week-10-jaa/",
-      "title": "Panthers vs Saints Prediction, Odds & Best Prop Bets: NFL, Week 10",
-      "week": 10
-    },
-    {
       "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-10-best-bets-expert-picks",
       "title": "2026 NFL Week 10 Best Bets, Expert Picks: Back Vikings in Kirk Cousins’ Return | FOX Sports",
       "week": 10
     },
     {
       "url": "https://www.espn.com/espn/betting/story/_/id/50463729/week-10-nfl-odds-touchdown-props-best-bets-sunday-games",
-      "title": "",
+      "title": "Week 10 NFL best bets, analysis, game picks and props - ESPN",
       "week": 10
     },
     {
-      "url": "https://sports.betmgm.com/en/blog/nfl/patriots-lions-prediction-odds-player-prop-bets-picks-week-10-jaa/",
-      "title": "Patriots vs Lions Prediction, Odds & Best Prop Bets: NFL, Week 10",
-      "week": 10
+      "url": "https://dknetwork.draftkings.com/2026/09/27/chargers-vs-bills-nfl-player-prop-bets/",
+      "title": "Chargers vs. Bills NFL Player Prop Bets for Week 3",
+      "week": 3
     },
     {
       "url": "https://www.foxsports.com/stories/nfl/2026-super-bowl-betting-guide",
       "title": "2026 Super Bowl Betting Guide: How to Bet, Fun Props, Expert Picks, and More | FOX Sports",
-      "week": null
+      "week": 10
     },
     {
       "url": "https://www.bettingpros.com/articles/best-nfl-player-props-picks-patriots-vs-lions-week-10-2026/",
@@ -96,6 +86,16 @@
       "week": 10
     },
     {
+      "url": "https://dknetwork.draftkings.com/sport/nfl/picks/page/3/",
+      "title": "NFL Sports Betting Picks | Page 3 of 222 | DraftKings Network",
+      "week": 10
+    },
+    {
+      "url": "https://dknetwork.draftkings.com/2026/10/12/bills-at-rams-nfl-player-prop-bets-for-monday-night-football/",
+      "title": "Bills at Rams NFL Player Prop Bets for Monday Night Football",
+      "week": 5
+    },
+    {
       "url": "https://www.nbcsports.com/betting/nfl/news/2026-nfl-week-10-best-bets-picks-predictions-player-props-odds-lions-vs-patriots-steelers-vs-bengals",
       "title": "2026 NFL Week 10 Best Bets, Picks, Predictions, Player Props, Odds: Lions vs Patriots, Steelers vs Bengals - NBC Sports",
       "week": 10
@@ -106,9 +106,9 @@
       "week": 10
     },
     {
-      "url": "https://www.nbcsports.com/betting/nfl/news/2026-nfl-week-9-best-bets-picks-predictions-player-props-odds-bears-vs-buccaneers-bills-vs-vikings",
-      "title": "2026 NFL Week 9 Best Bets, Picks, Predictions, Player Props, Odds: Bears vs Buccaneers, Bills vs Vikings - NBC Sports",
-      "week": 9
+      "url": "https://www.bettingpros.com/articles/best-nfl-player-props-thursday-night-football-panthers-vs-packers-week-8-2026/",
+      "title": "Best NFL Player Props: Thursday Night Football (Panthers vs. Packers) | BettingPros",
+      "week": 8
     }
   ],
   "extractionFailures": []
