@@ -1,20 +1,14 @@
 {
   "success": true,
-  "generatedAt": "2026-11-19T00:22:02.150Z",
+  "generatedAt": "2026-11-19T10:19:29.923Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 1,
-  "excludedArticleCount": 19,
+  "includedArticleCount": 0,
+  "excludedArticleCount": 20,
   "extractionFailureCount": 0,
   "propCount": 0,
   "publishedWeek3SignalCount": 0,
   "props": [],
-  "includedArticles": [
-    {
-      "url": "https://www.bettingpros.com/articles/best-nfl-player-props-of-week-3-sunday-2026/",
-      "title": "Best NFL Player Props of Week 3: Sunday (2026) | BettingPros",
-      "week": 3
-    }
-  ],
+  "includedArticles": [],
   "excludedArticles": [
     {
       "url": "https://www.espn.com/espn/betting/story/_/id/50053878/week-4-nfl-odds-spreads-lines-props-best-bets-sunday-football-games",
@@ -47,9 +41,9 @@
       "week": 10
     },
     {
-      "url": "https://www.bettingpros.com/picks/prizepicks/nfl/",
-      "title": "Best NFL PrizePicks Player Prop Bets Today (11/19/2026) | BettingPros",
-      "week": null
+      "url": "https://www.fantasypros.com/2026/01/nfl-wild-card-weekend-player-props-bets/",
+      "title": "NFL Player Props, Bets, Odds, Picks & Predictions (2025)",
+      "week": 11
     },
     {
       "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
@@ -57,14 +51,19 @@
       "week": 12
     },
     {
-      "url": "https://www.espn.com/espn/betting/story/_/id/50298047/nfl-week-8-odds-betting-tips-bears-seahawks-preview",
-      "title": "",
-      "week": 8
+      "url": "https://www.bettingpros.com/picks/prizepicks/nfl/",
+      "title": "Best NFL PrizePicks Player Prop Bets Today (11/19/2026) | BettingPros",
+      "week": null
     },
     {
       "url": "https://www.foxsports.com/stories/nfl/2026-super-bowl-betting-guide",
       "title": "2026 Super Bowl Betting Guide: How to Bet, Fun Props, Expert Picks, and More | FOX Sports",
       "week": 11
+    },
+    {
+      "url": "https://www.espn.com/espn/betting/story/_/id/50298047/nfl-week-8-odds-betting-tips-bears-seahawks-preview",
+      "title": "",
+      "week": 8
     },
     {
       "url": "https://www.bettingpros.com/articles/nfl-monday-night-football-player-props-picks-bills-vs-vikings-2026/",
@@ -87,14 +86,14 @@
       "week": 8
     },
     {
-      "url": "https://www.nbcsports.com/betting/nfl/news/2026-nfl-week-8-best-bets-picks-predictions-player-props-odds-lions-vs-vikings-chiefs-vs-broncos",
-      "title": "2026 NFL Week 8 Best Bets, Picks, Predictions, Player Props, Odds: Lions vs Vikings, Chiefs vs Broncos - NBC Sports",
-      "week": 8
-    },
-    {
       "url": "https://www.espn.com/espn/betting/story/_/id/50107426/week-5-nfl-odds-props-best-bets-sunday-games",
       "title": "",
       "week": 5
+    },
+    {
+      "url": "https://www.nbcsports.com/betting/nfl/news/2026-nfl-week-8-best-bets-picks-predictions-player-props-odds-lions-vs-vikings-chiefs-vs-broncos",
+      "title": "2026 NFL Week 8 Best Bets, Picks, Predictions, Player Props, Odds: Lions vs Vikings, Chiefs vs Broncos - NBC Sports",
+      "week": 8
     },
     {
       "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-10-best-bets-expert-picks",
@@ -102,14 +101,14 @@
       "week": 10
     },
     {
+      "url": "https://www.bettingpros.com/articles/best-nfl-player-props-picks-patriots-vs-lions-week-10-2026/",
+      "title": "Best NFL Player Props & Picks: Patriots vs. Lions (Week 10) | BettingPros",
+      "week": 10
+    },
+    {
       "url": "https://dknetwork.draftkings.com/2026/10/11/raiders-vs-patriots-nfl-player-prop-bets-for-week-5/",
       "title": "Raiders vs. Patriots NFL Player Prop Bets for Week 5",
       "week": 5
-    },
-    {
-      "url": "https://dknetwork.draftkings.com/2026/09/17/lions-vs-bills-nfl-player-prop-bets-and-picks-for-thursday-night-football/",
-      "title": "Lions vs. Bills NFL Player Prop Bets and Picks for Thursday Night Football",
-      "week": 2
     }
   ],
   "extractionFailures": []
