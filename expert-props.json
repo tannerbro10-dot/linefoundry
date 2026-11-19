@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-11-19T10:19:29.923Z",
+  "generatedAt": "2026-11-19T20:35:53.489Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -41,14 +41,14 @@
       "week": 10
     },
     {
-      "url": "https://www.fantasypros.com/2026/01/nfl-wild-card-weekend-player-props-bets/",
-      "title": "NFL Player Props, Bets, Odds, Picks & Predictions (2025)",
-      "week": 11
+      "url": "https://www.dimers.com/props",
+      "title": "Best Prop Bets Today & Player Props for All Sports",
+      "week": 12
     },
     {
       "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
       "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
-      "week": 12
+      "week": null
     },
     {
       "url": "https://www.bettingpros.com/picks/prizepicks/nfl/",
@@ -66,9 +66,9 @@
       "week": 8
     },
     {
-      "url": "https://www.bettingpros.com/articles/nfl-monday-night-football-player-props-picks-bills-vs-vikings-2026/",
-      "title": "NFL Monday Night Football Player Props & Picks: Bills vs. Vikings | BettingPros",
-      "week": 9
+      "url": "https://www.dimers.com/nfl/props",
+      "title": "Best NFL Player Props Today & NFL Prop Bets",
+      "week": 11
     },
     {
       "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-odds-picks-predictions/",
@@ -91,6 +91,11 @@
       "week": 5
     },
     {
+      "url": "https://www.sportsbettingdime.com/news/nfl/early-nfl-props-week-11-cook-mccaffrey-2026/",
+      "title": "Early NFL Player Props for Week 11: Cook, McCaffrey & More",
+      "week": 11
+    },
+    {
       "url": "https://www.nbcsports.com/betting/nfl/news/2026-nfl-week-8-best-bets-picks-predictions-player-props-odds-lions-vs-vikings-chiefs-vs-broncos",
       "title": "2026 NFL Week 8 Best Bets, Picks, Predictions, Player Props, Odds: Lions vs Vikings, Chiefs vs Broncos - NBC Sports",
       "week": 8
@@ -98,11 +103,6 @@
     {
       "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-10-best-bets-expert-picks",
       "title": "2026 NFL Week 10 Best Bets, Expert Picks: Back Vikings in Kirk Cousins’ Return | FOX Sports",
-      "week": 10
-    },
-    {
-      "url": "https://www.bettingpros.com/articles/best-nfl-player-props-picks-patriots-vs-lions-week-10-2026/",
-      "title": "Best NFL Player Props & Picks: Patriots vs. Lions (Week 10) | BettingPros",
       "week": 10
     },
     {
