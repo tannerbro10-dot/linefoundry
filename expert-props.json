@@ -1,20 +1,14 @@
 {
   "success": true,
-  "generatedAt": "2026-11-25T14:20:42.698Z",
+  "generatedAt": "2026-11-26T00:19:49.888Z",
   "inputArticleCount": 20,
-  "includedArticleCount": 1,
-  "excludedArticleCount": 19,
+  "includedArticleCount": 0,
+  "excludedArticleCount": 20,
   "extractionFailureCount": 0,
   "propCount": 0,
   "publishedWeek3SignalCount": 0,
   "props": [],
-  "includedArticles": [
-    {
-      "url": "https://www.bettingpros.com/articles/best-nfl-player-props-of-week-3-sunday-2026/",
-      "title": "Best NFL Player Props of Week 3: Sunday (2026) | BettingPros",
-      "week": 3
-    }
-  ],
+  "includedArticles": [],
   "excludedArticles": [
     {
       "url": "https://www.wagertalk.com/news/nfl/player-props-week-4-best-qb-rb-wr-touchdown-prop-picks/",
@@ -32,6 +26,11 @@
       "week": 4
     },
     {
+      "url": "https://www.dimers.com/props",
+      "title": "Best Prop Bets Today & Player Props for All Sports",
+      "week": null
+    },
+    {
       "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-4-picks-best-bets-every-game-wills-wagers",
       "title": "2026 NFL Week 4 Picks: Best Bets For Every Game — Will&#x27;s Wagers | FOX Sports",
       "week": 4
@@ -44,7 +43,12 @@
     {
       "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
       "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
-      "week": null
+      "week": 12
+    },
+    {
+      "url": "https://www.espn.com/nfl/story/_/id/50563331/week-11-most-gain-lose-2026-season-pickens-mccarthy",
+      "title": "",
+      "week": 11
     },
     {
       "url": "https://www.sportsbettingdime.com/news/nfl/week-10-nfl-player-props-picks-best-bets-predictions-every-team/",
@@ -57,19 +61,14 @@
       "week": 11
     },
     {
-      "url": "https://www.espn.com/espn/betting/story/_/id/50298047/nfl-week-8-odds-betting-tips-bears-seahawks-preview",
-      "title": "",
-      "week": 8
-    },
-    {
-      "url": "https://www.bettingpros.com/articles/nfl-monday-night-betting-primer-picks-player-prop-bets-wildcard-weekend/",
-      "title": "NFL Monday Night Betting Primer Picks & Player Prop Bets (Wild Card Weekend) | BettingPros",
-      "week": 18
-    },
-    {
       "url": "https://www.espn.com/espn/betting/story/_/id/50463729/week-10-nfl-odds-touchdown-props-best-bets-sunday-games",
       "title": "",
       "week": 10
+    },
+    {
+      "url": "https://www.espn.com/espn/betting/story/_/id/50298047/nfl-week-8-odds-betting-tips-bears-seahawks-preview",
+      "title": "",
+      "week": 8
     },
     {
       "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-odds-picks-predictions/",
@@ -97,11 +96,6 @@
       "week": 12
     },
     {
-      "url": "https://www.nbcsports.com/betting/nfl/news/2026-nfl-combine-best-bets-40-yard-dash",
-      "title": "2026 NFL Combine 40-yard dash odds, best bets: Expert picks, predictions including Sadiq and Woods - NBC Sports",
-      "week": null
-    },
-    {
       "url": "https://www.espn.com/nfl/story/_/id/50521728/week-11-predictions-upsets-fantasy-sleepers-stats-2026",
       "title": "",
       "week": 11
@@ -110,6 +104,11 @@
       "url": "https://www.sportsbettingdime.com/news/nfl/early-nfl-props-week-11-cook-mccaffrey-2026/",
       "title": "Early NFL Player Props for Week 11: Cook, McCaffrey & More",
       "week": 11
+    },
+    {
+      "url": "https://www.dimers.com/nfl/best-bets",
+      "title": "NFL Best Bets Today & +EV Picks",
+      "week": 12
     }
   ],
   "extractionFailures": []
