@@ -1,6 +1,6 @@
 {
   "success": true,
-  "generatedAt": "2026-11-27T04:14:28.585Z",
+  "generatedAt": "2026-11-27T13:53:58.083Z",
   "inputArticleCount": 20,
   "includedArticleCount": 0,
   "excludedArticleCount": 20,
@@ -11,19 +11,14 @@
   "includedArticles": [],
   "excludedArticles": [
     {
-      "url": "https://www.espn.com/espn/betting/story/_/id/50053878/week-4-nfl-odds-spreads-lines-props-best-bets-sunday-football-games",
-      "title": "",
-      "week": 4
-    },
-    {
       "url": "https://vsin.com/nfl/expert-nfl-picks-week-4-best-bets-predictions-and-player-props-from-zachary-cohen/",
       "title": "Expert NFL Week 4 Picks: Best Bets, Totals, & Props",
       "week": 4
     },
     {
-      "url": "https://www.dimers.com/props",
-      "title": "Best Prop Bets Today & Player Props for All Sports",
-      "week": null
+      "url": "https://www.espn.com/espn/betting/story/_/id/50053878/week-4-nfl-odds-spreads-lines-props-best-bets-sunday-football-games",
+      "title": "",
+      "week": 4
     },
     {
       "url": "https://www.fantasypros.com/2026/01/nfl-wild-card-weekend-player-props-bets/",
@@ -36,14 +31,29 @@
       "week": 4
     },
     {
+      "url": "https://dknetwork.draftkings.com/sport/nfl/picks/",
+      "title": "NFL Sports Betting Picks | DraftKings Network",
+      "week": 12
+    },
+    {
       "url": "https://www.bettingpros.com/articles/top-nfl-draft-prop-bets-expert-picks-best-bets-2026/",
       "title": "Top NFL Draft Prop Bets: Expert Picks & Best Bets (2026) | BettingPros",
-      "week": 12
+      "week": 13
     },
     {
       "url": "https://www.espn.com/nfl/story/_/id/50563331/week-11-most-gain-lose-2026-season-pickens-mccarthy",
       "title": "",
       "week": 11
+    },
+    {
+      "url": "https://www.foxsports.com/stories/nfl/2026-super-bowl-betting-guide",
+      "title": "2026 Super Bowl Betting Guide: How to Bet, Fun Props, Expert Picks, and More | FOX Sports",
+      "week": null
+    },
+    {
+      "url": "https://www.espn.com/espn/betting/story/_/id/50298047/nfl-week-8-odds-betting-tips-bears-seahawks-preview",
+      "title": "",
+      "week": 8
     },
     {
       "url": "https://www.sportsgamblingpodcast.com/2026/11/24/nfl-week-12-weekday-games-thanksgiving-player-props-11-24-26-nfl-bets-player-props-and-predictions-the-propcast-ep-592/",
@@ -55,23 +65,18 @@
       "week": 10
     },
     {
-      "url": "https://www.sportsbettingdime.com/news/nfl/week-10-nfl-player-props-picks-best-bets-predictions-every-team/",
-      "title": "Week 10 NFL Player Props Picks: Best Bets & Predictions for Every Team",
-      "week": 10
-    },
-    {
       "url": "https://www.sharpfootballanalysis.com/betting/nfl-player-props-odds-picks-predictions/",
       "title": "Week 12 NFL Player Prop Odds & Picks: Lines & Best Bets",
       "week": 12
     },
     {
-      "url": "https://www.bettingpros.com/articles/best-nfl-player-props-picks-jaguars-vs-jets-week-11-2026/",
-      "title": "Best NFL Player Props & Picks: Jaguars vs. Jets (Week 11) | BettingPros",
-      "week": 11
+      "url": "https://www.sportsbettingdime.com/news/nfl/week-10-nfl-player-props-picks-best-bets-predictions-every-team/",
+      "title": "Week 10 NFL Player Props Picks: Best Bets & Predictions for Every Team",
+      "week": 10
     },
     {
-      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-11-best-bets-expert-picks-bucs-live-touchdown-underdogs",
-      "title": "2026 NFL Week 11 Best Bets, Expert Picks: Bucs Are Live As Touchdown Underdogs | FOX Sports",
+      "url": "https://www.bettingpros.com/articles/best-nfl-player-props-picks-jaguars-vs-jets-week-11-2026/",
+      "title": "Best NFL Player Props & Picks: Jaguars vs. Jets (Week 11) | BettingPros",
       "week": 11
     },
     {
@@ -80,22 +85,17 @@
       "week": 10
     },
     {
+      "url": "https://www.foxsports.com/stories/nfl/2026-nfl-week-11-best-bets-expert-picks-bucs-live-touchdown-underdogs",
+      "title": "2026 NFL Week 11 Best Bets, Expert Picks: Bucs Are Live As Touchdown Underdogs | FOX Sports",
+      "week": 11
+    },
+    {
       "url": "https://www.sportsgamblingpodcast.com/2026/11/23/football-pick-of-the-day-november-23rd-nfl-week-11-prop-bet/",
       "week": 11
     },
     {
-      "url": "https://www.dimers.com/nfl/props",
-      "title": "Best NFL Player Props Today & NFL Prop Bets",
-      "week": 12
-    },
-    {
-      "url": "https://www.dimers.com/nfl/best-bets",
-      "title": "NFL Best Bets Today & +EV Picks",
-      "week": 12
-    },
-    {
-      "url": "https://www.nbcsports.com/betting/nfl/news/2026-nfl-week-11-best-bets-picks-predictions-player-props-odds-vikings-vs-49ers-bears-chiefs-more",
-      "title": "2026 NFL Week 11 Best Bets, Picks, Predictions, Player Props, Odds: Vikings vs 49ers, Bears, Chiefs, More! - NBC Sports",
+      "url": "https://www.sportsbettingdime.com/news/nfl/early-nfl-props-week-11-cook-mccaffrey-2026/",
+      "title": "Early NFL Player Props for Week 11: Cook, McCaffrey & More",
       "week": 11
     },
     {
@@ -104,9 +104,9 @@
       "week": 3
     },
     {
-      "url": "https://www.nbcsports.com/betting/nfl/news/2026-nfl-week-8-best-bets-picks-predictions-player-props-odds-lions-vs-vikings-chiefs-vs-broncos",
-      "title": "2026 NFL Week 8 Best Bets, Picks, Predictions, Player Props, Odds: Lions vs Vikings, Chiefs vs Broncos - NBC Sports",
-      "week": 8
+      "url": "https://www.nbcsports.com/betting/nfl/news/2026-nfl-week-11-best-bets-picks-predictions-player-props-odds-vikings-vs-49ers-bears-chiefs-more",
+      "title": "2026 NFL Week 11 Best Bets, Picks, Predictions, Player Props, Odds: Vikings vs 49ers, Bears, Chiefs, More! - NBC Sports",
+      "week": 11
     }
   ],
   "extractionFailures": []
